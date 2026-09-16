@@ -96,6 +96,26 @@ describe("søkerangering", () => {
     expect(slugs("noyaktighet")).toContain("noyaktighet");
   });
 
+  it("finner sammensatte begreper skrevet med mellomrom", () => {
+    expect(slugs("standard avvik")[0]).toBe("standardavvik");
+    expect(slugs("intern standard")[0]).toBe("internstandard");
+    expect(slugs("måle usikkerhet")[0]).toBe("maleusikkerhet");
+    expect(slugs("matrise effekt")[0]).toBe("matriseeffekt");
+    expect(slugs("deteksjons grense")[0]).toBe("deteksjonsgrense");
+  });
+
+  it("beholder bøyningstoleranse og æ/ø/å i sammensetninger med mellomrom", () => {
+    expect(slugs("standard avviket")).toContain("standardavvik");
+    expect(slugs("male usikkerheten")).toContain("maleusikkerhet");
+    expect(slugs("blind prøver")).toContain("blindprove");
+  });
+
+  it("endrer ikke rangeringen for flerordssøk som ikke er sammensetninger", () => {
+    // «Riktighet, presisjon og nøyaktighet» treffer fortsatt på ordene hver for seg.
+    const hit = search("riktighet presisjon", entries).find((h) => h.slug === "noyaktighet");
+    expect(hit?.reason).toBe("tittel");
+  });
+
   it("er case-insensitivt", () => {
     expect(slugs("PRESISJON")).toEqual(slugs("presisjon"));
   });

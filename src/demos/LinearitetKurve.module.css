@@ -6,8 +6,13 @@
 .svg {
   width: 100%;
   display: block;
+}
+
+/* Treffflata rundt toppunktet: usynlig, men stor nok for finger og mus. */
+.dragHandle {
   touch-action: none;
   cursor: ns-resize;
+  pointer-events: all;
 }
 
 .residuals {

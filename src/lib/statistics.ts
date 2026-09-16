@@ -36,3 +36,28 @@ export const clamp = (value: number, min: number, max: number) =>
 /** Norsk tallformat: komma som desimalskilletegn. */
 export const comma = (value: number, decimals: number) =>
   value.toFixed(decimals).replace(".", ",");
+
+/** Gjennomsnittet av en måleserie. */
+export function mean(values: number[]): number {
+  if (values.length === 0) return Number.NaN;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+/**
+ * Utvalgsstandardavviket s, altså med n − 1 frihetsgrader. Det er dette
+ * standardavviket laboratoriet regner ut fra en måleserie.
+ */
+export function sampleStandardDeviation(values: number[]): number {
+  const n = values.length;
+  if (n < 2) return Number.NaN;
+  const average = mean(values);
+  const sumOfSquares = values.reduce((sum, value) => sum + (value - average) ** 2, 0);
+  return Math.sqrt(sumOfSquares / (n - 1));
+}
+
+/** Relativt standardavvik i prosent: s / x̄ · 100. */
+export function relativeStandardDeviation(values: number[]): number {
+  const average = mean(values);
+  if (average === 0) return Number.NaN;
+  return (sampleStandardDeviation(values) / average) * 100;
+}

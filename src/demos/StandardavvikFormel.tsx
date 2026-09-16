@@ -1,4 +1,5 @@
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { comma, mean, relativeStandardDeviation, sampleStandardDeviation } from "@/lib/statistics";
 import shared from "./demos.module.css";
 import styles from "./StandardavvikFormel.module.css";
 
@@ -21,11 +22,24 @@ const TERMS = [
   },
 ];
 
-const MEASUREMENTS = [10.2, 10.4, 10.1, 10.5, 10.3, 10.3];
-const BAR_HEIGHTS = [34, 66, 18, 82, 50, 50];
+/** Måleserien er den eneste kilden: alle tallene under regnes ut av den. */
+export const MEASUREMENTS = [10.2, 10.4, 10.1, 10.5, 10.3, 10.3];
+
+/** Søylehøydene skalerer serien inn i plottflata, med litt luft i hver ende. */
+const LOWEST = Math.min(...MEASUREMENTS);
+const HIGHEST = Math.max(...MEASUREMENTS);
+
+function barHeight(value: number): number {
+  if (HIGHEST === LOWEST) return 50;
+  return 18 + ((value - LOWEST) / (HIGHEST - LOWEST)) * 64;
+}
 
 /** Uttrykket er begrepet: hvert ledd har en grunn til å være der. */
 export default function StandardavvikFormel() {
+  const average = mean(MEASUREMENTS);
+  const standardDeviation = sampleStandardDeviation(MEASUREMENTS);
+  const rsd = relativeStandardDeviation(MEASUREMENTS);
+
   return (
     <DemonstrationFrame
       kind="formel"
@@ -59,15 +73,22 @@ export default function StandardavvikFormel() {
 
       <div className={`${shared.rule} ${styles.example}`}>
         <p className={shared.caption}>
-          Seks målinger: {MEASUREMENTS.map((value) => value.toFixed(1).replace(".", ",")).join(" · ")}{" "}
+          {MEASUREMENTS.length} målinger: {MEASUREMENTS.map((value) => comma(value, 1)).join(" · ")}{" "}
           mg/L
         </p>
         <div className={styles.bars} aria-hidden="true">
-          {BAR_HEIGHTS.map((height, index) => (
-            <div key={index} className={styles.bar} style={{ height: `${height}%` }} />
+          {MEASUREMENTS.map((value, index) => (
+            <div
+              key={index}
+              className={styles.bar}
+              style={{ height: `${barHeight(value)}%` }}
+            />
           ))}
         </div>
-        <p className={styles.result}>x̄ = 10,30 mg/L &nbsp; s = 0,15 mg/L &nbsp; RSD = 1,4 %</p>
+        <p className={styles.result}>
+          x̄ = {comma(average, 2)} mg/L &nbsp; s = {comma(standardDeviation, 2)} mg/L &nbsp; RSD ={" "}
+          {comma(rsd, 1)} %
+        </p>
       </div>
     </DemonstrationFrame>
   );

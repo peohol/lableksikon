@@ -53,27 +53,7 @@ export default function LinearitetKurve() {
     >
       <div className={shared.split}>
         <div className={styles.plot}>
-          <svg
-            ref={svgRef}
-            viewBox="0 0 420 300"
-            aria-hidden="true"
-            className={styles.svg}
-            onPointerDown={(event) => {
-              dragging.current = true;
-              event.currentTarget.setPointerCapture(event.pointerId);
-              bendFromPointer(event.clientY);
-            }}
-            onPointerMove={(event) => {
-              if (dragging.current) bendFromPointer(event.clientY);
-            }}
-            onPointerUp={(event) => {
-              dragging.current = false;
-              event.currentTarget.releasePointerCapture(event.pointerId);
-            }}
-            onPointerCancel={() => {
-              dragging.current = false;
-            }}
-          >
+          <svg ref={svgRef} viewBox="0 0 420 300" aria-hidden="true" className={styles.svg}>
             <line x1="52" y1="252" x2="404" y2="252" className="svg-axis" />
             <line x1="52" y1="252" x2="52" y2="24" className="svg-axis" />
             <text
@@ -116,6 +96,36 @@ export default function LinearitetKurve() {
               r="14"
               className="series-ink-stroke"
               strokeWidth="1.5"
+            />
+            {/* Bare selve toppunktet kan dras. Den usynlige sirkelen gir en
+                treffflate som er stor nok for finger og mus; resten av grafen
+                reagerer ikke på pekeren. Slideren under gjør det samme fra
+                tastaturet. */}
+            <circle
+              data-drag-handle=""
+              cx={X_POSITIONS[5]}
+              cy={(ys[5] as number).toFixed(1)}
+              r="26"
+              fill="transparent"
+              className={styles.dragHandle}
+              onPointerDown={(event) => {
+                dragging.current = true;
+                event.currentTarget.setPointerCapture?.(event.pointerId);
+                bendFromPointer(event.clientY);
+              }}
+              onPointerMove={(event) => {
+                if (dragging.current) bendFromPointer(event.clientY);
+              }}
+              onPointerUp={(event) => {
+                dragging.current = false;
+                event.currentTarget.releasePointerCapture?.(event.pointerId);
+              }}
+              onPointerCancel={() => {
+                dragging.current = false;
+              }}
+              onLostPointerCapture={() => {
+                dragging.current = false;
+              }}
             />
             <text
               x={(X_POSITIONS[5] as number) - 46}

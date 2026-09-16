@@ -141,6 +141,32 @@ describe("HeaderSearch", () => {
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
   });
 
+  it("teller viste treff, ikke bare totalen, når det er flere enn plassen tillater", async () => {
+    const user = userEvent.setup();
+    render(<HeaderSearch entries={entries} termCount={entries.length} />);
+    // «e» finnes i alle begrepene, så lista kappes på åtte.
+    await user.type(screen.getByRole("combobox", { name: "Søk etter begrep" }), "e");
+    const options = screen.getAllByRole("option");
+    expect(options.length).toBe(8);
+    expect(screen.getByRole("status")).toHaveTextContent(
+      `${entries.length} treff — viser de 8 mest relevante`,
+    );
+  });
+
+  it("annonserer treffantallet én gang, fra et live-område som alltid finnes", async () => {
+    const user = userEvent.setup();
+    render(<HeaderSearch entries={entries} termCount={entries.length} />);
+    const status = screen.getByRole("status");
+    expect(status).toBeInTheDocument();
+    expect(status).toHaveTextContent("");
+
+    await user.type(screen.getByRole("combobox", { name: "Søk etter begrep" }), "blind");
+    expect(status).toHaveTextContent("1 treff");
+    // Den synlige telleren er en duplikat og skal ikke leses opp i tillegg.
+    const announced = screen.getAllByText("1 treff").filter((node) => !node.closest("[aria-hidden='true']"));
+    expect(announced).toHaveLength(1);
+  });
+
   it("viser treffårsak for indirekte treff", async () => {
     const user = userEvent.setup();
     render(<HeaderSearch entries={entries} termCount={entries.length} />);

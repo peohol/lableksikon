@@ -30,6 +30,7 @@ export function HeaderSearch({
   const hits = trimmed.length > 0 ? search(query, entries) : [];
   const shown = hits.slice(0, MAX_DROPDOWN_HITS);
   const open = trimmed.length > 0;
+  const countLabel = resultCountLabel(hits.length, shown.length);
 
   const goToTerm = (slug: string) => {
     setQuery("");
@@ -87,10 +88,16 @@ export function HeaderSearch({
         autoComplete="off"
         className={`${styles.input} ${styles.inputCompact}`}
       />
+      {/* Live-området ligger alltid i DOM-en, slik at teksten faktisk leses opp
+          når den endrer seg. Den synlige telleren i dropdownen er derfor ren
+          tekst — ellers ville treffet blitt annonsert to ganger. */}
+      <p role="status" className="visually-hidden">
+        {open ? countLabel : ""}
+      </p>
       {open ? (
         <div className={styles.dropdown}>
-          <div className={styles.dropdownCount}>
-            {resultCountLabel(hits.length, hits.length)}
+          <div className={styles.dropdownCount} aria-hidden="true">
+            {countLabel}
           </div>
           <ul id={listId} role="listbox" aria-label="Søketreff" style={{ margin: 0, padding: 0 }}>
             {shown.map((hit, index) => (

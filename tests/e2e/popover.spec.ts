@@ -34,10 +34,14 @@ test.describe("begrepslenker og forhåndsvisning", () => {
     await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 
-  test("kortet blir en bottom sheet på smal skjerm", async ({ page }) => {
+  test("kortet blir en bottom sheet på smal skjerm", async ({ page, hasTouch }) => {
     await page.setViewportSize({ width: 375, height: 780 });
     await page.goto("/begrep/presisjon");
-    await page.getByRole("link", { name: "måleusikkerhet", exact: true }).click();
+    // Kortet åpnes slik profilen tilsier: hover med peker, trykk på touch.
+    // Et klikk med peker ville navigert videre i stedet.
+    const link = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    if (hasTouch) await link.tap();
+    else await link.hover();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
     const box = await dialog.boundingBox();

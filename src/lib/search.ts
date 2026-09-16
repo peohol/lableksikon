@@ -65,7 +65,20 @@ export function indexEntry(entry: SearchEntry): IndexedEntry {
 const everyQueryTokenMatches = (queryTokens: string[], tokens: string[]): boolean =>
   queryTokens.every((queryToken) => tokens.some((token) => tokenMatches(queryToken, token)));
 
-function match(entry: IndexedEntry, query: string, queryTokens: string[]): SearchHit | undefined {
+/**
+ * Norske sammensetninger skrives ofte feilaktig med mellomrom («standard
+ * avvik»). Derfor prøves også ordene satt sammen, på samme nivå som resten —
+ * rangeringen er uendret.
+ */
+const compactForm = (queryTokens: string[]): string | undefined =>
+  queryTokens.length > 1 ? queryTokens.join("") : undefined;
+
+function match(
+  entry: IndexedEntry,
+  query: string,
+  queryTokens: string[],
+  compact: string | undefined,
+): SearchHit | undefined {
   const base = {
     slug: entry.slug,
     title: entry.title,
@@ -77,26 +90,42 @@ function match(entry: IndexedEntry, query: string, queryTokens: string[]): Searc
   const firstTitleToken = entry.titleTokens[0];
   if (
     entry.normTitle.startsWith(query) ||
+    (compact !== undefined && entry.normTitle.startsWith(compact)) ||
     (queryTokens.length === 1 &&
       firstTitleToken !== undefined &&
-      tokenMatches(queryTokens[0] as string, firstTitleToken))
+      tokenMatches(queryTokens[0] as string, firstTitleToken)) ||
+    (compact !== undefined &&
+      firstTitleToken !== undefined &&
+      tokenMatches(compact, firstTitleToken))
   ) {
     return { ...base, reason: "tittel-start" };
   }
 
-  if (entry.normTitle.includes(query) || everyQueryTokenMatches(queryTokens, entry.titleTokens)) {
+  if (
+    entry.normTitle.includes(query) ||
+    (compact !== undefined && entry.normTitle.includes(compact)) ||
+    everyQueryTokenMatches(queryTokens, entry.titleTokens) ||
+    (compact !== undefined && everyQueryTokenMatches([compact], entry.titleTokens))
+  ) {
     return { ...base, reason: "tittel" };
   }
 
   for (const alias of entry.normAliases) {
-    if (alias.text.includes(query) || everyQueryTokenMatches(queryTokens, alias.tokens)) {
+    if (
+      alias.text.includes(query) ||
+      (compact !== undefined && alias.text.includes(compact)) ||
+      everyQueryTokenMatches(queryTokens, alias.tokens) ||
+      (compact !== undefined && everyQueryTokenMatches([compact], alias.tokens))
+    ) {
       return { ...base, reason: "alias", matchedAlias: alias.source };
     }
   }
 
   if (
     entry.normDefinition.includes(query) ||
-    everyQueryTokenMatches(queryTokens, entry.definitionTokens)
+    (compact !== undefined && entry.normDefinition.includes(compact)) ||
+    everyQueryTokenMatches(queryTokens, entry.definitionTokens) ||
+    (compact !== undefined && everyQueryTokenMatches([compact], entry.definitionTokens))
   ) {
     return { ...base, reason: "definisjon" };
   }
@@ -113,11 +142,12 @@ export function search(query: string, entries: SearchEntry[]): SearchHit[] {
   if (normalized.length === 0) return [];
   const queryTokens = tokenize(query);
   if (queryTokens.length === 0) return [];
+  const compact = compactForm(queryTokens);
 
   const hits: SearchHit[] = [];
   for (const entry of entries) {
     const indexed = "normTitle" in entry ? (entry as IndexedEntry) : indexEntry(entry);
-    const hit = match(indexed, normalized, queryTokens);
+    const hit = match(indexed, normalized, queryTokens, compact);
     if (hit) hits.push(hit);
   }
 

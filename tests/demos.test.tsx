@@ -14,9 +14,28 @@ import BlindproveTyper from "@/demos/BlindproveTyper";
 import RiktighetSkiver from "@/demos/RiktighetSkiver";
 import StandardavvikFormel from "@/demos/StandardavvikFormel";
 import OpplosningTopper from "@/demos/OpplosningTopper";
-import { fitLine } from "@/lib/statistics";
+import StandardavvikFormelDemo, { MEASUREMENTS } from "@/demos/StandardavvikFormel";
+import {
+  comma,
+  fitLine,
+  mean,
+  relativeStandardDeviation,
+  sampleStandardDeviation,
+} from "@/lib/statistics";
 
 describe("regnefunksjoner", () => {
+  it("regner ut gjennomsnitt, utvalgsstandardavvik og RSD", () => {
+    const values = [10.2, 10.4, 10.1, 10.5, 10.3, 10.3];
+    expect(mean(values)).toBeCloseTo(10.3, 10);
+    expect(sampleStandardDeviation(values)).toBeCloseTo(0.1414213562, 8);
+    expect(relativeStandardDeviation(values)).toBeCloseTo(1.3730229, 6);
+  });
+
+  it("bruker n − 1, ikke n", () => {
+    // Populasjonsvarianten ville gitt 0,129 for den samme serien.
+    expect(sampleStandardDeviation([10.2, 10.4, 10.1, 10.5, 10.3, 10.3])).toBeGreaterThan(0.13);
+  });
+
   it("tilpasser en rett linje uten avvik", () => {
     const fit = fitLine([0, 1, 2, 3]);
     expect(fit.slope).toBeCloseTo(1);
@@ -129,6 +148,28 @@ describe("interaktive demonstrasjoner", () => {
     expect(screen.getByText(/Tydelig metning/)).toBeInTheDocument();
   });
 
+  it("linearitet: bare toppunktet kan dras, ikke resten av grafen", () => {
+    const { container } = render(<LinearitetKurve />);
+    const svg = container.querySelector("svg") as SVGSVGElement;
+    const handle = container.querySelector("[data-drag-handle]") as SVGCircleElement;
+    expect(handle).toBeInTheDocument();
+
+    // Trefflata er romsligere enn selve punktet, for finger og mus.
+    expect(Number(handle.getAttribute("r"))).toBeGreaterThanOrEqual(20);
+
+    // Dragging et vilkårlig sted i grafen skal ikke endre kurven.
+    fireEvent.pointerDown(svg, { clientY: 260 });
+    fireEvent.pointerMove(svg, { clientY: 40 });
+    fireEvent.pointerUp(svg, { clientY: 40 });
+    expect(screen.getByText(/Punktene ligger på linja/)).toBeInTheDocument();
+
+    // Dragging i selve punktet skal endre den.
+    fireEvent.pointerDown(handle, { clientY: 260 });
+    fireEvent.pointerMove(handle, { clientY: 260 });
+    fireEvent.pointerUp(handle, { clientY: 260 });
+    expect(screen.getByText(/Tydelig metning/)).toBeInTheDocument();
+  });
+
   it("oppløsning: slideren styrer R og konklusjonen", () => {
     render(<OpplosningTopper />);
     const slider = screen.getByRole("slider", { name: "Avstand mellom toppene" });
@@ -151,6 +192,29 @@ describe("statiske demonstrasjoner", () => {
     render(<RiktighetSkiver />);
     expect(screen.getByText("Presis, men ikke riktig")).toBeInTheDocument();
     expect(screen.getByText("Nøyaktig")).toBeInTheDocument();
+  });
+
+  it("viser statistikk som er regnet ut av måleserien, ikke hardkodet", () => {
+    render(<StandardavvikFormelDemo />);
+    // Endres måleserien, skal tallene under følge med av seg selv.
+    const expected =
+      `x̄ = ${comma(mean(MEASUREMENTS), 2)} mg/L` +
+      `\u00a0 s = ${comma(sampleStandardDeviation(MEASUREMENTS), 2)} mg/L` +
+      `\u00a0 RSD = ${comma(relativeStandardDeviation(MEASUREMENTS), 1)} %`;
+    const result = screen.getByText(/^x̄ =/);
+    expect(result.textContent?.replace(/\s+/g, " ").trim()).toBe(
+      expected.replace(/\s+/g, " ").trim(),
+    );
+    // Og verdiene skal være de riktige for akkurat denne serien.
+    expect(result).toHaveTextContent("x̄ = 10,30 mg/L");
+    expect(result).toHaveTextContent("s = 0,14 mg/L");
+    expect(result).toHaveTextContent("RSD = 1,4 %");
+  });
+
+  it("viser like mange søyler som målinger", () => {
+    const { container } = render(<StandardavvikFormelDemo />);
+    const bars = container.querySelectorAll("[class*='bars'] > div");
+    expect(bars.length).toBe(MEASUREMENTS.length);
   });
 
   it("standardavvik forklarer hvert ledd i formelen og har tekstalternativ", () => {
