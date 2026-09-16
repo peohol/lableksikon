@@ -77,5 +77,8 @@ kvalitetssikret.
 
 Appen er en ren statisk Next.js-app uten database, innlogging eller backend.
 Den bygges med `npm run build` og kan deployes til Vercel uten videre
-konfigurasjon. Sett `NEXT_PUBLIC_SITE_URL` til produksjonsdomenet, slik at
-metadata, sitemap og robots peker riktig.
+konfigurasjon; `vercel.json` sier hvilket rammeverk prosjektet bruker.
+
+Adressen i metadata, sitemap og robots hentes automatisk fra Vercels
+produksjonsdomene. Får nettstedet et eget domene, settes `NEXT_PUBLIC_SITE_URL`
+til det.

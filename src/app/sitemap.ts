@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { orderedTerms, publishedCategories } from "@/content";
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://lableksion.vercel.app";
+import { siteUrl as baseUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

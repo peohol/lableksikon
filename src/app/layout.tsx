@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { Header } from "@/components/Header";
 import { SkipLink } from "@/components/SkipLink";
 import { buildSearchIndex } from "@/lib/search-index";
+import { siteUrl } from "@/lib/site";
 import { orderedTerms } from "@/content";
 
 import "./globals.css";
@@ -29,9 +30,7 @@ const plexSans = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://lableksion.vercel.app",
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Lableksion — begrepene i analytisk kjemi, forklart",
     template: "%s — Lableksion",
