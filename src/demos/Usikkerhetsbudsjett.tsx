@@ -7,11 +7,16 @@ import { Chip, ChipGroup, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./Usikkerhetsbudsjett.module.css";
 
-/** Bidragene i budsjettet, i prosent. Tallene er pedagogiske, ikke fasit. */
+/**
+ * Bidragene i budsjettet, i prosent. Tallene er pedagogiske, ikke fasit, men
+ * de er valgt slik at alle tre konklusjonene faktisk kan nås: uten bidrag,
+ * trygt under grensa, og — når opparbeidingen tas med — et intervall som
+ * krysser den. Det lille bidraget er med for å vise at det nesten ikke teller.
+ */
 const CONTRIBUTIONS = [
-  { name: "Repeterbarhet", percent: 2.5 },
-  { name: "Kalibreringskurve", percent: 3.2 },
-  { name: "Pipettering", percent: 1.8 },
+  { name: "Repeterbarhet", percent: 4.0 },
+  { name: "Kalibreringskurve", percent: 4.5 },
+  { name: "Opparbeiding", percent: 13.0 },
   { name: "Temperatur", percent: 0.9 },
 ];
 

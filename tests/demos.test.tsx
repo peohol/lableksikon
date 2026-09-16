@@ -54,11 +54,35 @@ describe("interaktive demonstrasjoner", () => {
   it("usikkerhet: chips har aria-pressed og endrer intervallet", async () => {
     const user = userEvent.setup();
     render(<Usikkerhetsbudsjett />);
-    const chip = screen.getByRole("button", { name: /Pipettering/ });
+    const chip = screen.getByRole("button", { name: /Opparbeiding/ });
     expect(chip).toHaveAttribute("aria-pressed", "false");
     await user.click(chip);
     expect(chip).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByText(/utvidet usikkerhet, k = 2/)).toBeInTheDocument();
+  });
+
+  it("usikkerhet: alle tre konklusjonene kan faktisk nås", async () => {
+    const user = userEvent.setup();
+    render(<Usikkerhetsbudsjett />);
+    const chip = (name: RegExp) => screen.getByRole("button", { name });
+
+    // Utgangstilstand: intervallet ligger trygt under grenseverdien.
+    expect(screen.getByText(/Hele intervallet ligger under/)).toBeInTheDocument();
+
+    // Med opparbeidingen med krysser intervallet grensa.
+    await user.click(chip(/Opparbeiding/));
+    expect(screen.getByText(/krysser grenseverdien/)).toBeInTheDocument();
+
+    // Det minste bidraget endrer ikke konklusjonen — poenget med kvadratisk sum.
+    await user.click(chip(/Temperatur/));
+    expect(screen.getByText(/krysser grenseverdien/)).toBeInTheDocument();
+
+    // Uten bidrag i det hele tatt finnes ingen slark.
+    await user.click(chip(/Opparbeiding/));
+    await user.click(chip(/Temperatur/));
+    await user.click(chip(/Repeterbarhet/));
+    await user.click(chip(/Kalibreringskurve/));
+    expect(screen.getByText(/et punkt uten slark/)).toBeInTheDocument();
   });
 
   it("internstandard: før og etter endrer signalene, men ikke forholdet", async () => {

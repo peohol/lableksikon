@@ -10,7 +10,8 @@ dashboard eller en kursplattform.
 
 ## Kjøre appen lokalt
 
-Krever Node 20.9 eller nyere.
+Krever Node 22.22 eller nyere (eller Node 24.15 og nyere). Testverktøyet setter
+den grensen; selve appen bygger også på eldre Node.
 
 ```bash
 npm install
