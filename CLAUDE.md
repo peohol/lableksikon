@@ -1,48 +1,242 @@
-# Lableksion — repo-regler
+## Purpose
 
-Pedagogisk oppslagsverk for begreper i analytisk kjemi. Next.js (App Router),
-TypeScript, CSS Modules, statisk generert, driftet på Vercel.
+This file contains only durable, repository-wide instructions that are useful in almost every Claude Code session.
 
-## Designkilde
+Treat it as a concise operating manual, not as project documentation, memory, a changelog, or a work log.
 
-`design_handoff_lableksion/README.md` er **normativ** for produkt, UX,
-designsystem, responsivitet og tilgjengelighet. `Lableksion.dc.html` og
-`Designsystem.dc.html` i samme mappe er visuelle referanser.
-`Lableksion konsepter.dc.html` er historikk — forkastede konsepter er ikke
-designretning.
+## Keep this file small
 
-Handoff-filene skal ikke endres eller slettes. De er prototyper: de skal ikke
-gjøres om til produksjonskode og `support.js` skal ikke brukes som runtime.
+Protect this file from gradual growth.
 
-Avvik fra handoffen gjøres bare når en regel i kapittel 5 (tilgjengelighet)
-eller gyldig HTML/ARIA krever det, og skal kommenteres i koden der det skjer.
+- Keep `CLAUDE.md` comfortably below 200 lines. Prefer substantially less.
+- Before adding a rule, ask: **Would removing this rule predictably cause mistakes in future sessions?** If not, do not add it.
+- Prefer replacing, merging, or shortening existing rules over appending new ones.
+- Remove obsolete or redundant instructions whenever this file is edited.
+- Never add information merely because it may be useful someday.
+- Do not copy session notes or auto-memory into this file.
 
-## Varige regler
+Never store here:
 
-- **Ingen nye designtokens.** Farger, typografi, spacing, radier og skygger
-  ligger i `src/styles/tokens.css` og kommer fra handoffens kapittel 1. Nye
-  verdier krever at handoffen oppdateres først.
-- **Definisjonen finnes ett sted.** Hvert begrep har én post under
-  `src/content/terms/`. Søk, lister, popover og begrepsside leser derfra.
-  Begrepslenker i tekst refererer til slug: `[synlig tekst](begrep:slug)`.
-- **Ingen offentlig «ufullstendig begrep»-tilstand.** Et begrep publiseres
-  først når definisjon, enkel forklaring, demonstrasjon og dybde er på plass.
-  Alt annet ligger i `src/content/drafts.ts` og skal aldri nå den offentlige
-  appen.
-- **Demonstrasjoner deler ytre ramme, ikke indre layout.** Felles er
-  `DemonstrationFrame`, primitivene i `src/demos/primitives.tsx`, typografien
-  og tilgjengeligheten. Pedagogikken bestemmes av begrepet.
-- **Alt som kan dras skal også kunne styres fra tastaturet.** Hard regel.
-- **Ingen database, innlogging eller CMS** uten at et konkret behov krever det.
+- completed work or implementation history
+- changelogs or progress logs
+- temporary TODOs
+- debugging history
+- issue or PR summaries
+- detailed API or library documentation
+- tutorials or long explanations
+- file-by-file descriptions of the repository
+- information easily discovered from the code
+- information that changes frequently
+- standard programming practices Claude already knows
 
-## Arbeidsmåte
+Put information where it belongs:
 
-- Repo-eier er ikke utvikler. Tekniske veivalg — rammeverk, biblioteker,
-  mappestruktur, testoppsett — tas av kodeagenten uten å spørre. Spør bare om
-  ting som krever eierens konto, hemmeligheter eller en visuell vurdering.
-- Kjør `npm run check` (lint, typecheck, enhetstester, produksjonsbuild) før du
-  er ferdig. E2E: `npm run test:e2e`.
-- Nytt begrep: lag `src/content/terms/<slug>.ts`, registrer det i
-  `src/content/terms/index.ts`, legg demonstrasjonen i `src/demos/` og id-en i
-  `src/demos/ids.ts` + `src/demos/registry.tsx`. Innholdsvalidering kjører ved
-  modullasting og stopper bygget ved feil.
+- path-specific rules → `.claude/rules/` with appropriate `paths`
+- reusable task-specific workflows → skills
+- human-facing project documentation → `README.md` or `docs/`
+- temporary work/status → issue, PR, or current conversation
+- implementation history → git
+- secrets → the appropriate secret/environment-variable store, never documentation
+
+Do not create new documentation, planning, status, or log files unless they have a clear durable purpose for humans or are explicitly requested.
+
+## Project: Lableksion
+
+An encyclopedia of analytical-chemistry concepts. Next.js (App Router),
+TypeScript, CSS Modules, statically generated, hosted on Vercel.
+
+`design_handoff_lableksion/README.md` is the **normative** specification for
+product, UX, design system, responsiveness and accessibility. The `.dc.html`
+files beside it are visual references and prototypes: never edit or delete
+them, never turn them into production code, and never use `support.js` at
+runtime. Deviate from the handoff only where its accessibility chapter or valid
+HTML/ARIA requires it, and say so in a code comment where it happens.
+
+Detailed design and content rules live in `.claude/rules/`. Run `npm run check`
+before finishing; `npm run test:e2e` for the browser tests.
+
+## Repository owner
+
+Assume the repository owner is the product owner, **not a programmer or system developer**. Communicate with the owner in Norwegian Bokmål.
+
+Assume minimal knowledge of:
+
+- programming
+- databases
+- servers
+- deployment
+- terminals and command-line tools
+- git
+- APIs
+- infrastructure
+
+Do not transfer technical work or technical decision-making to the repository owner.
+
+### Default to action
+
+If Claude can safely do something itself, Claude should do it.
+
+Do not ask the owner to:
+
+- edit files
+- run commands
+- inspect logs
+- configure code
+- choose libraries or frameworks
+- choose database structures
+- choose implementation patterns
+- choose deployment approaches
+- resolve ordinary technical trade-offs
+- perform tests Claude can perform itself
+
+Use the available repository, terminal, browser, CLI, MCP, APIs, and other tools before asking the owner to do anything.
+
+When there is a technical choice, make the choice yourself.
+
+Prefer, in order:
+
+1. existing repository conventions
+2. the simplest robust solution
+3. well-supported and conventional technology
+4. low maintenance burden
+5. security and reliability
+6. reversible changes
+7. fewer dependencies and less infrastructure
+
+Do not present several technical options and ask the owner to choose unless the choice materially changes the product itself.
+
+For small and clear tasks, implement directly. For larger, ambiguous, risky, or cross-cutting tasks, inspect the relevant code first and form a plan before editing.
+
+## When the owner may need to act
+
+For technical work, owner involvement should normally be limited to cases Claude genuinely cannot perform itself, especially:
+
+1. physically testing behaviour in a UI or on a device Claude cannot access
+2. obtaining, authorizing, or entering keys, tokens, secrets, credentials, or similar protected values
+
+The owner may also need to make genuine **product decisions** where different choices would produce meaningfully different user behaviour and the intended choice cannot reasonably be inferred.
+
+Do not ask the owner questions merely to avoid making a technical decision.
+
+### Instructions for owner-required technical actions
+
+Before asking the owner to perform a technical step involving an external service:
+
+1. Consult the service's current official documentation when possible.
+2. Verify the current names, locations, and workflow instead of relying on memory.
+3. Reduce the owner's task to the minimum necessary.
+4. Explain it step by step in ordinary language, in Norwegian Bokmål.
+5. Say exactly what to click, find, copy, paste, or enter.
+6. Avoid unexplained technical terminology.
+7. Do not ask the owner to paste secrets into chat or commit them to the repository. Prefer the service's protected secret/environment-variable interface.
+
+If current documentation cannot be verified, say so rather than presenting uncertain instructions as fact.
+
+## Implementation principles
+
+Before changing code:
+
+- inspect the relevant existing code and repository conventions
+- check the current git state
+- understand the existing behaviour before replacing it
+- look for an existing implementation pattern before introducing a new one
+
+While implementing:
+
+- make the smallest coherent change that fully solves the task
+- reuse existing abstractions and dependencies when sensible
+- avoid unrelated refactoring
+- avoid speculative generalization and premature abstractions
+- do not add dependencies when a simple existing solution is sufficient
+- keep user-facing behaviour backward-compatible unless the task requires otherwise
+- clean up temporary files and experimental code before finishing
+
+Do not create complexity merely to make the implementation appear sophisticated.
+
+## Verification
+
+Claude is responsible for verifying its own work as far as the available environment permits.
+
+After changes, run the smallest sufficient set of relevant checks, such as:
+
+- targeted tests
+- type checking
+- linting
+- build
+- existing repository-specific validation
+
+Fix failures caused by the change before finishing.
+
+Inspect the final diff for accidental or unrelated changes.
+
+If something cannot be verified without the owner, verify everything else first and then request only the specific remaining UI/device check.
+
+## External services and changing technical information
+
+For libraries, APIs, cloud services, deployment platforms, authentication providers, or other systems that may have changed:
+
+- prefer current official documentation
+- use available tools to inspect the actual configuration where possible
+- do not guess current dashboard labels, configuration keys, API behaviour, or setup procedures when they can be verified
+- do not make the owner investigate information Claude can retrieve itself
+
+## High-impact actions
+
+Do not perform an irreversible or high-impact external action unless it is clearly part of the owner's request.
+
+Examples include:
+
+- deleting production data
+- destructive database migrations
+- force-pushing shared branches
+- deleting projects or infrastructure
+- changing billing or subscriptions
+- publishing publicly
+- rotating or revoking credentials
+
+If such an action is necessary but was not clearly requested, ask for approval of the **action**, not for help deciding the technical implementation.
+
+## Communication with the repository owner
+
+Use the language the owner uses.
+
+Keep completion messages concise and non-technical.
+
+Normally explain only:
+
+1. **What changed** — at a high, everyday-language level.
+2. **What this adds or improves** for the app.
+3. **Whether the owner needs to decide anything.**
+4. **What the owner needs to do**, if anything.
+
+Do not routinely report:
+
+- filenames
+- classes or functions
+- database internals
+- implementation patterns
+- commands run
+- dependency details
+- detailed test output
+- technical debugging history
+
+Provide those details only when the owner asks for them or they are necessary to understand a problem.
+
+If no action is required from the owner, say so plainly.
+
+If work is incomplete or something could not be verified, state the remaining limitation clearly in ordinary language.
+
+## Editing CLAUDE.md
+
+Changes to this file should be rare.
+
+Add or change an instruction only when it is:
+
+- durable
+- broadly applicable across future sessions
+- not readily inferable from the repository
+- important enough that forgetting it would likely cause errors or unnecessary owner involvement
+
+When adding a project-specific instruction, integrate it into the shortest appropriate existing section rather than creating another section by default.
+
+Whenever this file grows, actively look for something to remove, consolidate, or move elsewhere.
