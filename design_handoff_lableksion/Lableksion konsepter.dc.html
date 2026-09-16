@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Gaegu:wght@400;700&display=swap"><style>
+body{margin:0;background:#f2efe8;font-family:'Patrick Hand',system-ui,sans-serif}
+a{color:#1f6f6b}a:hover{color:#164e4b}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+</style></helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Lableksion — tre strukturelt ulike konsepter (lo-fi)</span></div>
+
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Lesespalten — én vertikal akse, demoen midt i teksten</div>
+<div style="display:flex;gap:18px;align-items:flex-start">
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Forside · desktop</div>
+  <div class="dv-card" style="width:430px;height:610px;display:flex;flex-direction:column;padding:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px dashed #cfc9bd">
+      <span style="font-size:17px;color:#1a1a1a">Lableksion</span>
+      <span style="font-size:13px;color:#8d8578">om · a–å</span>
+    </div>
+    <div style="padding:52px 44px 0;display:flex;flex-direction:column;gap:10px;align-items:center">
+      <div style="font-size:15px;color:#8d8578">Slå opp et begrep i analytisk kjemi</div>
+      <div style="width:100%;border:1.5px solid #1a1a1a;border-radius:24px;padding:11px 16px;font-size:15px;color:#a39b8d;display:flex;justify-content:space-between"><span>Søk…</span><span style="color:#1f6f6b">↵</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;padding:44px 28px 0">
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:13px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding-bottom:4px">Kvalitet i måling</div>
+        <div style="font-size:14px;color:#3a3630">Presisjon</div>
+        <div style="font-size:14px;color:#3a3630">Måleusikkerhet</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:13px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding-bottom:4px">Kalibrering</div>
+        <div style="font-size:14px;color:#3a3630">Linearitet</div>
+        <div style="font-size:14px;color:#3a3630">Deteksjonsgrense</div>
+        <div style="font-size:14px;color:#3a3630">Internstandard</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <div style="font-size:13px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding-bottom:4px">Prøve og matriks</div>
+        <div style="font-size:14px;color:#3a3630">Matriseeffekt</div>
+      </div>
+    </div>
+    <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><div style="margin-top:auto;padding:14px 28px;font-size:13px;color:#b4552d">Ingen kort, ingen bilder — bare søk og en indeks. Rolig inngang.</div></sc-if>
+  </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Begrepsside · desktop</div>
+  <div class="dv-card" style="width:500px;height:610px;overflow:hidden;position:relative">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 16px;border-bottom:1px dashed #cfc9bd;font-size:12px;color:#8d8578">
+      <span>Lableksion / Kalibrering</span><span>● ○ ○ &nbsp; 1 av 3</span>
+    </div>
+    <div style="padding:22px 74px 0">
+      <div style="font-size:27px;color:#1a1a1a">Linearitet</div>
+      <div style="font-size:16px;line-height:1.45;color:#1a1a1a;margin-top:10px;padding-bottom:12px;border-bottom:1px solid #cfc9bd">Hvor godt måleresponsen følger en rett linje når konsentrasjonen øker.</div>
+      <div style="margin-top:14px;display:flex;flex-direction:column;gap:7px">
+        <div style="height:7px;background:#ddd8cf;border-radius:4px;width:100%"></div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px;width:96%"></div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px;width:62%;position:relative">
+          <span style="position:absolute;left:24%;top:-2px;width:34%;height:11px;border-bottom:2px dotted #1f6f6b"></span>
+        </div>
+      </div>
+      <div style="position:absolute;left:150px;top:190px;width:200px;border:1.5px solid #1a1a1a;background:#fff;border-radius:6px;padding:8px 10px;box-shadow:2px 3px 0 rgba(0,0,0,.12)">
+        <div style="font-size:13px;color:#1f6f6b">Kalibreringskurve</div>
+        <div style="font-size:13px;color:#3a3630;line-height:1.3">Sammenhengen mellom kjent konsentrasjon og målt signal.</div>
+      </div>
+      <div style="margin-top:62px;border-top:1px dashed #cfc9bd;padding-top:12px">
+        <div style="font-size:12px;color:#8d8578">demo</div>
+        <div style="height:104px;background:#f7f5f0;border:1.5px solid #1a1a1a;border-radius:4px;margin-top:6px;display:flex;align-items:flex-end;padding:10px;gap:4px">
+          <svg viewBox="0 0 320 84" style="width:100%;height:100%"><line x1="10" y1="74" x2="310" y2="74" stroke="#1a1a1a"></line><line x1="10" y1="74" x2="10" y2="6" stroke="#1a1a1a"></line><polyline points="20,66 70,52 120,38 170,26 220,18 270,14" fill="none" stroke="#1f6f6b" stroke-width="2"></polyline><circle cx="20" cy="66" r="3.5" fill="#1a1a1a"></circle><circle cx="70" cy="52" r="3.5" fill="#1a1a1a"></circle><circle cx="120" cy="38" r="3.5" fill="#1a1a1a"></circle><circle cx="170" cy="26" r="3.5" fill="#1a1a1a"></circle><circle cx="220" cy="20" r="3.5" fill="#1a1a1a"></circle><circle cx="270" cy="9" r="3.5" fill="#b4552d"></circle><text x="230" y="40" font-family="Patrick Hand" font-size="13" fill="#b4552d">bøyer av</text></svg>
+        </div>
+        <div style="font-size:13px;color:#8d8578;margin-top:5px">Dra øverste punkt — se når linja slutter å være rett.</div>
+      </div>
+      <div style="margin:14px 0 56px;display:flex;align-items:center;gap:7px;border:1.5px solid #cfc9bd;border-radius:5px;padding:9px 11px;font-size:14px;color:#3a3630">▸ Dybde: regresjon, residualer, R² og hvorfor R² ikke er nok</div>
+    </div>
+    <div style="position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;padding:11px 74px;border-top:1px dashed #cfc9bd;font-size:14px;color:#1f6f6b;background:#fff">
+      <span>← Presisjon</span><span>Deteksjonsgrense →</span>
+    </div>
+  </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Mobil</div>
+  <div class="dv-card" style="width:210px;height:610px;position:relative;overflow:hidden">
+    <div style="padding:12px 16px;border-bottom:1px dashed #cfc9bd;font-size:12px;color:#8d8578">☰ &nbsp; Kalibrering 1/3 &nbsp; 🔍</div>
+    <div style="padding:16px 16px 0">
+      <div style="font-size:21px;color:#1a1a1a">Linearitet</div>
+      <div style="font-size:14px;line-height:1.4;color:#1a1a1a;margin-top:8px;padding-bottom:10px;border-bottom:1px solid #cfc9bd">Hvor godt responsen følger en rett linje.</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px">
+        <div style="height:7px;background:#ddd8cf;border-radius:4px"></div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px;width:72%;border-bottom:2px dotted #1f6f6b"></div>
+      </div>
+      <div style="margin-top:10px;border:1.5px dashed #1f6f6b;border-radius:5px;padding:7px 9px;background:#f4f8f7">
+        <div style="font-size:12px;color:#1f6f6b">Kalibreringskurve</div>
+        <div style="font-size:12px;color:#3a3630;line-height:1.3">Kjent konsentrasjon mot målt signal.</div>
+      </div>
+      <div style="height:88px;background:#f7f5f0;border:1.5px solid #1a1a1a;border-radius:4px;margin-top:12px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#8d8578">demo</div>
+      <div style="margin-top:10px;border:1.5px solid #cfc9bd;border-radius:5px;padding:8px;font-size:13px;color:#3a3630">▸ Dybde</div>
+    </div>
+    <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:8px;left:12px;right:12px;font-size:12px;line-height:1.3;color:#b4552d">Touch: trykk på begrep → definisjonen skyves inn under avsnittet, ikke som popover.</div></sc-if>
+  </div>
+  </div>
+
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Demoen er siden — fast demo, tekstlagene ruller forbi</div>
+<div style="display:flex;gap:18px;align-items:flex-start">
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Forside · desktop</div>
+  <div class="dv-card" style="width:430px;height:470px;position:relative">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px dashed #cfc9bd">
+      <span style="font-size:15px;color:#1a1a1a">Lableksion</span>
+      <span style="font-size:12px;color:#a39b8d;border:1.5px solid #cfc9bd;border-radius:20px;padding:4px 12px">Søk…</span>
+    </div>
+    <div style="padding:26px 24px 0;font-size:14px;color:#8d8578">Følg veien fra prøve til svar. Hvert stopp er et begrep.</div>
+    <svg viewBox="0 0 390 300" style="width:390px;margin:6px 10px">
+      <line x1="30" y1="60" x2="360" y2="60" stroke="#1a1a1a" stroke-width="1.5"></line>
+      <circle cx="60" cy="60" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"></circle>
+      <circle cx="140" cy="60" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"></circle>
+      <circle cx="205" cy="60" r="9" fill="#1f6f6b"></circle>
+      <circle cx="270" cy="60" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"></circle>
+      <circle cx="330" cy="60" r="7" fill="#fff" stroke="#1a1a1a" stroke-width="1.5"></circle>
+      <g font-family="Patrick Hand" font-size="13" fill="#3a3630" text-anchor="middle">
+        <text x="60" y="40">Matrise-</text><text x="60" y="26">effekt</text>
+        <text x="140" y="34">Intern-</text><text x="140" y="20">standard</text>
+        <text x="205" y="34">Linearitet</text>
+        <text x="270" y="34">Presisjon</text>
+        <text x="330" y="34">Måle-</text><text x="330" y="20">usikkerhet</text>
+      </g>
+      <path d="M40 78 L40 92 L160 92 L160 78" fill="none" stroke="#cfc9bd" stroke-width="1.5"></path>
+      <path d="M180 78 L180 92 L290 92 L290 78" fill="none" stroke="#cfc9bd" stroke-width="1.5"></path>
+      <path d="M305 78 L305 92 L355 92 L355 78" fill="none" stroke="#cfc9bd" stroke-width="1.5"></path>
+      <g font-family="Patrick Hand" font-size="13" fill="#1f6f6b" text-anchor="middle">
+        <text x="100" y="110">Prøven</text><text x="235" y="110">Målingen</text><text x="330" y="110">Svaret</text>
+      </g>
+      <text x="205" y="150" font-family="Patrick Hand" font-size="14" fill="#8d8578" text-anchor="middle">Deteksjonsgrense ligger under «Målingen»</text>
+      <rect x="120" y="180" width="170" height="34" rx="17" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="4 4"></rect>
+      <text x="205" y="202" font-family="Patrick Hand" font-size="14" fill="#8d8578" text-anchor="middle">eller se alle 6 i liste</text>
+    </svg>
+    <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:10px;left:24px;right:24px;font-size:13px;color:#b4552d">Kategori = sted i arbeidsflyten, ikke pensumkapittel. Gir mening før du kan begrepene.</div></sc-if>
+  </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Begrepsside · desktop (demo fast til venstre)</div>
+  <div class="dv-card" style="width:500px;height:470px;display:flex;position:relative">
+    <div style="width:56%;border-right:1px dashed #cfc9bd;background:#f7f5f0;display:flex;flex-direction:column;position:relative">
+      <div style="padding:10px 14px;font-size:12px;color:#8d8578">Presisjon — demo</div>
+      <svg viewBox="0 0 250 250" style="width:100%;flex:1">
+        <circle cx="90" cy="105" r="62" fill="none" stroke="#cfc9bd" stroke-width="1.5"></circle>
+        <circle cx="90" cy="105" r="40" fill="none" stroke="#cfc9bd" stroke-width="1.5"></circle>
+        <circle cx="90" cy="105" r="18" fill="none" stroke="#1a1a1a" stroke-width="1.5"></circle>
+        <g fill="#1f6f6b"><circle cx="118" cy="72" r="4"></circle><circle cx="126" cy="80" r="4"></circle><circle cx="114" cy="84" r="4"></circle><circle cx="122" cy="66" r="4"></circle></g>
+        <text x="150" y="60" font-family="Patrick Hand" font-size="13" fill="#3a3630">presis,</text>
+        <text x="150" y="76" font-family="Patrick Hand" font-size="13" fill="#3a3630">ikke riktig</text>
+        <text x="20" y="200" font-family="Patrick Hand" font-size="14" fill="#8d8578">spredning ▮▮▮▮▯▯</text>
+        <rect x="20" y="212" width="200" height="22" rx="11" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect>
+        <circle cx="108" cy="223" r="9" fill="#1a1a1a"></circle>
+      </svg>
+      <div style="position:absolute;right:8px;top:50%;font-size:19px;color:#1f6f6b">›</div>
+      <div style="position:absolute;left:8px;top:50%;font-size:19px;color:#cfc9bd">‹</div>
+    </div>
+    <div style="width:44%;padding:14px 16px;display:flex;flex-direction:column;gap:11px;overflow:hidden">
+      <div style="font-size:23px;color:#1a1a1a">Presisjon</div>
+      <div style="font-size:14px;line-height:1.4;color:#1a1a1a">Hvor likt resultatet blir når du gjentar samme måling.</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="height:7px;background:#ddd8cf;border-radius:4px"></div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px"></div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px;width:70%"></div>
+      </div>
+      <div style="border-top:1px dashed #cfc9bd;padding-top:9px;font-size:13px;color:#1f6f6b">↓ ruller du videre: dybde</div>
+      <div style="display:flex;flex-direction:column;gap:6px;opacity:.45">
+        <div style="font-size:14px;color:#1a1a1a">Repeterbarhet vs. reproduserbarhet</div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px"></div>
+        <div style="height:7px;background:#ddd8cf;border-radius:4px;width:84%"></div>
+        <div style="height:26px;border:1.5px solid #cfc9bd;border-radius:4px"></div>
+      </div>
+      <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><div style="margin-top:auto;font-size:13px;line-height:1.3;color:#b4552d">Demoen bytter ikke ut — den får flere lag (s, RSD, n) når dybdeteksten ruller inn.</div></sc-if>
+    </div>
+  </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Mobil (demo festet øverst)</div>
+  <div class="dv-card" style="width:210px;height:470px;display:flex;flex-direction:column;position:relative">
+    <div style="height:170px;background:#f7f5f0;border-bottom:1.5px solid #1a1a1a;display:flex;align-items:center;justify-content:center;position:relative">
+      <svg viewBox="0 0 160 140" style="width:130px"><circle cx="80" cy="60" r="46" fill="none" stroke="#cfc9bd" stroke-width="1.5"></circle><circle cx="80" cy="60" r="26" fill="none" stroke="#cfc9bd" stroke-width="1.5"></circle><circle cx="80" cy="60" r="11" fill="none" stroke="#1a1a1a" stroke-width="1.5"></circle><g fill="#1f6f6b"><circle cx="102" cy="36" r="3.5"></circle><circle cx="108" cy="44" r="3.5"></circle><circle cx="98" cy="46" r="3.5"></circle></g><rect x="20" y="115" width="120" height="18" rx="9" fill="none" stroke="#1a1a1a" stroke-width="1.5"></rect><circle cx="70" cy="124" r="7" fill="#1a1a1a"></circle></svg>
+      <div style="position:absolute;right:6px;top:8px;font-size:11px;color:#8d8578">fast</div>
+    </div>
+    <div style="padding:13px 14px;display:flex;flex-direction:column;gap:9px">
+      <div style="font-size:19px;color:#1a1a1a">Presisjon</div>
+      <div style="font-size:13px;line-height:1.4;color:#1a1a1a">Hvor likt resultatet blir når du gjentar målingen.</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div style="height:6px;background:#ddd8cf;border-radius:3px"></div><div style="height:6px;background:#ddd8cf;border-radius:3px"></div><div style="height:6px;background:#ddd8cf;border-radius:3px;width:64%"></div></div>
+      <div style="font-size:12px;color:#1f6f6b">↓ dybde</div>
+    </div>
+    <div style="margin-top:auto;border-top:1px dashed #cfc9bd;display:flex;justify-content:space-between;padding:9px 14px;font-size:13px;color:#1f6f6b"><span>‹</span><span>Kalibrering 1/3</span><span>›</span></div>
+  </div>
+  </div>
+
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Trinnvis — ett lag av gangen, du velger hvor dypt du går</div>
+<div style="display:flex;gap:18px;align-items:flex-start">
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Forside · desktop (skriv hvor som helst for å filtrere)</div>
+  <div class="dv-card" style="width:430px;height:470px;position:relative;padding:0">
+    <div style="padding:14px 20px 0;display:flex;justify-content:space-between;align-items:baseline">
+      <span style="font-size:15px;color:#1a1a1a">Lableksion</span>
+      <span style="font-size:12px;color:#8d8578">28 begreper</span>
+    </div>
+    <div style="display:flex;gap:7px;padding:12px 20px 0;flex-wrap:wrap">
+      <span style="font-size:13px;border:1.5px solid #1a1a1a;border-radius:16px;padding:3px 11px;background:#1a1a1a;color:#fff">alle</span>
+      <span style="font-size:13px;border:1.5px solid #cfc9bd;border-radius:16px;padding:3px 11px;color:#3a3630">kvalitet</span>
+      <span style="font-size:13px;border:1.5px solid #cfc9bd;border-radius:16px;padding:3px 11px;color:#3a3630">kalibrering</span>
+      <span style="font-size:13px;border:1.5px solid #cfc9bd;border-radius:16px;padding:3px 11px;color:#3a3630">matriks</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 22px;padding:16px 20px 0">
+      <div style="display:flex;flex-direction:column">
+        <div style="font-size:12px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding:0 0 3px">D</div>
+        <div style="font-size:15px;color:#3a3630;padding:6px 0">Deteksjonsgrense</div>
+        <div style="font-size:12px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding:6px 0 3px">I</div>
+        <div style="font-size:15px;color:#3a3630;padding:6px 0">Internstandard</div>
+        <div style="font-size:12px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding:6px 0 3px">L</div>
+        <div style="font-size:15px;color:#3a3630;padding:6px 0">Linearitet</div>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div style="font-size:12px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding:0 0 3px">M</div>
+        <div style="font-size:15px;color:#3a3630;padding:6px 0">Matriseeffekt</div>
+        <div style="font-size:15px;color:#3a3630;padding:6px 0">Måleusikkerhet</div>
+        <div style="font-size:12px;color:#1f6f6b;border-bottom:1px solid #cfc9bd;padding:6px 0 3px">P</div>
+        <div style="font-size:15px;color:#3a3630;padding:6px 0">Presisjon</div>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:52px;left:20px;right:20px;border:1.5px dashed #1a1a1a;border-radius:6px;padding:8px 12px;font-size:14px;color:#8d8578;background:#fff">skriv «mat…» for å filtrere lista</div>
+    <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:12px;left:20px;right:20px;font-size:13px;color:#b4552d">Alt synlig med én gang. Ingen søkeboks å sikte på — tastetrykk filtrerer.</div></sc-if>
+  </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Begrepsside · trinn 1 av 3 (lukket)</div>
+  <div class="dv-card" style="width:330px;height:470px;position:relative;display:flex;flex-direction:column;justify-content:center;padding:0 34px">
+    <div style="position:absolute;top:10px;left:16px;right:16px;display:flex;justify-content:space-between;font-size:12px;color:#8d8578"><span>‹ Internstandard</span><span>Linearitet ›</span></div>
+    <div style="font-size:12px;color:#1f6f6b">Kalibrering · 2 av 3</div>
+    <div style="font-size:25px;color:#1a1a1a;margin-top:7px">Deteksjonsgrense</div>
+    <div style="font-size:16px;line-height:1.45;color:#1a1a1a;margin-top:10px">Den minste mengden som kan skilles sikkert fra støy.</div>
+    <div style="display:flex;flex-direction:column;gap:9px;margin-top:22px">
+      <div style="border:1.5px solid #1a1a1a;border-radius:22px;padding:9px 16px;font-size:15px;color:#1a1a1a;text-align:center">Vis meg hvordan ↓</div>
+      <div style="border:1.5px solid #cfc9bd;border-radius:22px;padding:9px 16px;font-size:15px;color:#8d8578;text-align:center">Gå dypere</div>
+    </div>
+    <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:14px;left:34px;right:34px;font-size:13px;line-height:1.3;color:#b4552d">Siden begynner tom og rolig: tittel + definisjon. Resten er ditt valg.</div></sc-if>
+  </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:7px">
+  <div style="font:400 10px system-ui;color:rgba(0,0,0,.45)">Trinn 2 åpnet · demoen virker — dra i støyen</div>
+  <div class="dv-card" style="width:350px;height:470px;position:relative;padding:16px 20px;display:flex;flex-direction:column">
+    <div style="font-size:12px;color:#8d8578">Kalibrering · 2 av 3</div>
+    <div style="font-size:21px;color:#1a1a1a;margin-top:5px">Deteksjonsgrense</div>
+    <div style="font-size:14px;line-height:1.4;color:#1a1a1a;margin-top:7px;padding-bottom:9px;border-bottom:1px solid #cfc9bd">Den minste mengden som kan skilles sikkert fra støy.</div>
+    <div style="font-size:13px;color:#8d8578;margin-top:11px">Skru opp støyen til toppen forsvinner.</div>
+    <div ref="{{ chartRef }}" style="height:110px;background:#f7f5f0;border:1.5px solid #1a1a1a;border-radius:4px;margin-top:6px;display:flex;align-items:flex-end;gap:1px;padding:6px 8px;overflow:hidden">
+      <sc-for list="{{ bars }}" as="bar" hint-placeholder-count="36"><div style="flex:1;background:#1f6f6b;height:{{ bar.h }}px;border-radius:1px"></div></sc-for>
+    </div>
+    <input type="range" min="0" max="100" value="{{ noise }}" onChange="{{ onNoise }}" style="width:100%;margin-top:11px;accent-color:#1f6f6b" />
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:#8d8578"><span>lite støy</span><span>mye støy</span></div>
+    <div style="font-size:15px;color:#b4552d;margin-top:9px;min-height:22px">{{ verdict }}</div>
+    <div style="font-size:14px;color:#3a3630;line-height:1.4;margin-top:6px">S/N = {{ snr }} — grensa settes gjerne ved S/N 3.</div>
+    <div style="margin-top:auto;border:1.5px solid #cfc9bd;border-radius:5px;padding:9px 11px;font-size:14px;color:#3a3630">▸ Gå dypere: LOD, LOQ, blankprøver, 3σ/s</div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:14px;color:#1f6f6b"><span>‹ Internstandard</span><span>Linearitet ›</span></div>
+  </div>
+  </div>
+
+</div>
+</div>
+
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Demo-inventar — seks begreper, seks ulike demotyper</div>
+<div class="dv-card" style="width:740px;padding:18px 20px">
+  <div style="font-size:14px;color:#8d8578;margin-bottom:14px">Samme ramme, svært ulikt innhold. Dette er testen på om systemet holder.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:16px;color:#1a1a1a">Presisjon</div>
+      <div style="height:96px;border:1.5px solid #1a1a1a;border-radius:4px;background:#f7f5f0;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 120 90" style="width:100%"><circle cx="40" cy="45" r="30" fill="none" stroke="#cfc9bd"></circle><circle cx="40" cy="45" r="14" fill="none" stroke="#1a1a1a"></circle><g fill="#1f6f6b"><circle cx="58" cy="30" r="3"></circle><circle cx="62" cy="36" r="3"></circle><circle cx="55" cy="37" r="3"></circle></g><circle cx="95" cy="45" r="30" fill="none" stroke="#cfc9bd"></circle><circle cx="95" cy="45" r="14" fill="none" stroke="#1a1a1a"></circle><g fill="#b4552d"><circle cx="80" cy="30" r="3"></circle><circle cx="108" cy="58" r="3"></circle><circle cx="95" cy="44" r="3"></circle></g></svg>
+      </div>
+      <div style="font-size:13px;color:#8d8578">Interaktiv: slider for spredning, to skiver side om side</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:16px;color:#1a1a1a">Linearitet</div>
+      <div style="height:96px;border:1.5px solid #1a1a1a;border-radius:4px;background:#f7f5f0;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 120 90" style="width:100%"><line x1="14" y1="76" x2="112" y2="76" stroke="#1a1a1a"></line><line x1="14" y1="76" x2="14" y2="10" stroke="#1a1a1a"></line><polyline points="22,68 44,52 66,38 88,28 106,24" fill="none" stroke="#1f6f6b" stroke-width="2"></polyline><circle cx="106" cy="24" r="4" fill="#b4552d"></circle></svg>
+      </div>
+      <div style="font-size:13px;color:#8d8578">Dra-punkt: du ødelegger linja selv og ser residualene svare</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:16px;color:#1a1a1a">Deteksjonsgrense</div>
+      <div style="height:96px;border:1.5px solid #1a1a1a;border-radius:4px;background:#f7f5f0;display:flex;align-items:flex-end;gap:1px;padding:6px 8px">
+        <div style="flex:1;background:#1f6f6b;height:12px"></div><div style="flex:1;background:#1f6f6b;height:20px"></div><div style="flex:1;background:#1f6f6b;height:9px"></div><div style="flex:1;background:#1f6f6b;height:26px"></div><div style="flex:1;background:#1f6f6b;height:62px"></div><div style="flex:1;background:#1f6f6b;height:18px"></div><div style="flex:1;background:#1f6f6b;height:11px"></div><div style="flex:1;background:#1f6f6b;height:22px"></div>
+      </div>
+      <div style="font-size:13px;color:#8d8578">Støyslider: toppen forsvinner mens du ser på</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:16px;color:#1a1a1a">Internstandard</div>
+      <div style="height:96px;border:1.5px solid #1a1a1a;border-radius:4px;background:#f7f5f0;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 120 90" style="width:100%"><rect x="20" y="24" width="18" height="46" fill="none" stroke="#1a1a1a"></rect><rect x="20" y="44" width="18" height="26" fill="#1f6f6b"></rect><rect x="52" y="24" width="18" height="46" fill="none" stroke="#1a1a1a"></rect><rect x="52" y="52" width="18" height="18" fill="#1f6f6b"></rect><rect x="52" y="34" width="18" height="18" fill="#b4552d"></rect><text x="86" y="50" font-family="Patrick Hand" font-size="13" fill="#3a3630">ratio</text><text x="86" y="64" font-family="Patrick Hand" font-size="13" fill="#3a3630">holder</text></svg>
+      </div>
+      <div style="font-size:13px;color:#8d8578">Før/etter: mist 30 % av prøven — forholdet står stille</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:16px;color:#1a1a1a">Matriseeffekt</div>
+      <div style="height:96px;border:1.5px solid #1a1a1a;border-radius:4px;background:#f7f5f0;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 120 90" style="width:100%"><line x1="14" y1="76" x2="112" y2="76" stroke="#1a1a1a"></line><polyline points="18,70 50,50 82,30 108,16" fill="none" stroke="#1f6f6b" stroke-width="2"></polyline><polyline points="18,72 50,62 82,52 108,44" fill="none" stroke="#b4552d" stroke-width="2" stroke-dasharray="4 3"></polyline><text x="60" y="88" font-family="Patrick Hand" font-size="12" fill="#8d8578">rent vs. i matriks</text></svg>
+      </div>
+      <div style="font-size:13px;color:#8d8578">Bytt matriks (vann → blod → jord) og se kurven vippe</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:16px;color:#1a1a1a">Måleusikkerhet</div>
+      <div style="height:96px;border:1.5px solid #1a1a1a;border-radius:4px;background:#f7f5f0;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 120 90" style="width:100%"><line x1="10" y1="60" x2="112" y2="60" stroke="#1a1a1a"></line><line x1="60" y1="52" x2="60" y2="68" stroke="#b4552d" stroke-width="2"></line><line x1="34" y1="40" x2="88" y2="40" stroke="#1f6f6b" stroke-width="2"></line><line x1="34" y1="34" x2="34" y2="46" stroke="#1f6f6b" stroke-width="2"></line><line x1="88" y1="34" x2="88" y2="46" stroke="#1f6f6b" stroke-width="2"></line><text x="60" y="26" font-family="Patrick Hand" font-size="12" fill="#3a3630" text-anchor="middle">grenseverdi?</text></svg>
+      </div>
+      <div style="font-size:13px;color:#8d8578">Budsjett-byggeklosser: skru på bidrag, se intervallet vokse forbi grenseverdien</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Prøv: «bygg ut <a class="dv-oid" href="#1b">1b</a> som fungerende prototype» · «slå sammen forsiden i <a class="dv-oid" href="#1c">1c</a> med begrepssiden i <a class="dv-oid" href="#1a">1a</a>» · «vis meg en fjerde retning for forsiden»</p>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Wireframe&quot;}}">
+class Component extends DCLogic {
+  state = { noise: 22 };
+  renderVals() {
+    const noise = this.state.noise;
+    const seeds = [0.42,0.81,0.13,0.67,0.29,0.94,0.55,0.07,0.73,0.36,0.88,0.21,0.61,0.48,0.97,0.15,0.79,0.33,0.58,0.05,0.86,0.44,0.69,0.11,0.92,0.26,0.63,0.38,0.75,0.18,0.83,0.51,0.09,0.71,0.31,0.65];
+    const n = seeds.length, peakAt = 17, peakH = 74;
+    const bars = seeds.map((s, i) => {
+      const d = i - peakAt;
+      const peak = peakH * Math.exp(-(d * d) / 3.2);
+      return { h: Math.max(2, Math.round(peak + s * noise * 0.62)) };
+    });
+    const noiseAmp = Math.max(2, noise * 0.62);
+    const snr = Math.max(0.4, peakH / Math.max(3, noiseAmp));
+    return {
+      notes: this.props.showNotes ?? true,
+      bars, noise,
+      snr: snr.toFixed(1),
+      verdict: snr >= 3 ? "Toppen er tydelig — over grensa." : "Nå kan du ikke lenger si sikkert at det er noe der.",
+      onNoise: (e) => this.setState({ noise: Number(e.target.value) })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

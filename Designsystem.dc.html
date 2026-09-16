@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+*{box-sizing:border-box}
+body{margin:0;background:#faf8f4;color:#1b1a17;font-family:Newsreader,Georgia,serif;-webkit-text-size-adjust:100%}
+a{color:#1f6f6b}a:hover{color:#15514e}
+:focus-visible{outline:2.5px solid #1f6f6b;outline-offset:2px}
+th,td{text-align:left;vertical-align:top;padding:9px 14px 9px 0;border-bottom:1px solid #e6e0d4}
+th{font-family:'IBM Plex Sans',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#6b6458;white-space:nowrap}
+td{font-family:Newsreader,serif;font-size:16px;line-height:1.4;color:#2f2c26}
+table{border-collapse:collapse;width:100%}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;color:#1b1a17}
+h2{font-family:Newsreader,serif;font-weight:400;font-size:clamp(24px,3.6vw,34px);line-height:1.12;letter-spacing:-.015em;margin:0 0 4px}
+h3{font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1f6f6b;margin:26px 0 10px}
+p{font-family:Newsreader,serif;font-size:17px;line-height:1.6;color:#2f2c26;margin:0 0 12px;max-width:38rem;text-wrap:pretty}
+</style></helmet>
+
+<div style="background:#faf8f4;padding-bottom:64px">
+
+<header style="max-width:64rem;margin:0 auto;padding:clamp(28px,6vw,64px) clamp(16px,4vw,40px) 0">
+  <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:#1f6f6b">Lableksion · designsystem og spesifikasjon</div>
+  <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(30px,5.6vw,46px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0;max-width:30em">Hva i prototypen er en bevisst regel, og hva er tilfeldig.</h1>
+  <p style="font-size:clamp(17px,2.2vw,19px);margin-top:14px;max-width:36em">Alt på denne siden er destillert fra <a href="Lableksion.dc.html">Lableksion.dc.html</a>, som forblir referanseprototypen. Den fullstendige spesifikasjonen med komponent- og implementasjonsdetaljer ligger i <code>design_handoff_lableksion/README.md</code>.</p>
+  <nav style="display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;padding-top:16px;border-top:1px solid #1b1a17;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px">
+    <a href="#typografi" style="text-decoration:none">Typografi</a>
+    <a href="#farger" style="text-decoration:none">Farger</a>
+    <a href="#layout" style="text-decoration:none">Spacing og layout</a>
+    <a href="#former" style="text-decoration:none">Former og states</a>
+    <a href="#komponenter" style="text-decoration:none">Komponenter</a>
+    <a href="#demo" style="text-decoration:none">Demonstrasjonsvalg</a>
+    <a href="#responsiv" style="text-decoration:none">Responsivt</a>
+    <a href="#a11y" style="text-decoration:none">Tilgjengelighet</a>
+    <a href="#handoff" style="text-decoration:none">Handoff</a>
+  </nav>
+</header>
+
+<main style="max-width:64rem;margin:0 auto;padding:0 clamp(16px,4vw,40px)">
+
+<section id="typografi" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Typografi</h2>
+  <p>To skrifter, én regel: <strong style="font-weight:600">alt som skal leses er serif, alt som skal betjenes eller merkes er sans.</strong> Tall som selv er det pedagogiske poenget settes som lesetekst.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:22px;margin-top:22px">
+    <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:18px">
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">Lesetekst</div>
+      <div style="font-family:Newsreader,serif;font-size:34px;line-height:1.1;margin-top:6px">Newsreader</div>
+      <div style="font-family:Newsreader,serif;font-size:16px;line-height:1.45;color:#2f2c26;margin-top:6px">300–600, italic 400. Titler, definisjon, brødtekst, dybde, avlesninger.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:18px">
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">Grensesnitt</div>
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:32px;line-height:1.1;margin-top:6px">IBM Plex Sans</div>
+      <div style="font-family:Newsreader,serif;font-size:16px;line-height:1.45;color:#2f2c26;margin-top:6px">400/500/600. Kickers, labels, metadata, knapper, aksetekst, input.</div>
+    </div>
+  </div>
+
+  <h3>Skala</h3>
+  <table>
+    <tr><th>Token</th><th>Størrelse</th><th>LH</th><th>Bruk</th></tr>
+    <tr><td><code>title-page</code></td><td>clamp(28, 5.4vw, 46)</td><td>1.08</td><td>begrepstittel, ls −0.018em</td></tr>
+    <tr><td><code>title-home</code></td><td>clamp(28, 5vw, 44)</td><td>1.12</td><td>forsidens h1</td></tr>
+    <tr><td><code>definition</code></td><td>clamp(18, 2.5vw, 24)</td><td>1.38</td><td>kort definisjon</td></tr>
+    <tr><td><code>body</code></td><td>clamp(17, 2.1vw, 19)</td><td>1.60</td><td>enkel forklaring</td></tr>
+    <tr><td><code>body-depth</code></td><td>17</td><td>1.62</td><td>dybdetekst, maks 38em</td></tr>
+    <tr><td><code>lead-italic</code></td><td>clamp(17, 2.2vw, 20)</td><td>1.45</td><td>kategorispørsmål, figur-etterord</td></tr>
+    <tr><td><code>list-title</code> / <code>list-def</code></td><td>19–21 / 16</td><td>1.2 / 1.45</td><td>lister og søketreff</td></tr>
+    <tr><td><code>readout</code></td><td>24–30</td><td>1.05</td><td>store tall i demonstrasjoner</td></tr>
+    <tr><td><code>ui</code> / <code>meta</code></td><td>13.5–15 / 11–13</td><td>1.4 / 1.3</td><td>kontroller / metadata</td></tr>
+    <tr><td><code>kicker</code></td><td>10–11, 600</td><td>1.0</td><td>uppercase, ls +0.09–0.11em</td></tr>
+  </table>
+
+  <h3>Hierarkiet i praksis</h3>
+  <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:clamp(16px,3vw,26px);max-width:40rem">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Kalibrering og kontroll <span style="color:#6b6458;letter-spacing:.06em">· 2 av 16</span></div>
+    <div style="font-family:Newsreader,serif;font-size:clamp(28px,5vw,42px);line-height:1.08;letter-spacing:-.018em;margin-top:6px">Deteksjonsgrense</div>
+    <div style="font-family:Newsreader,serif;font-size:clamp(18px,2.5vw,23px);line-height:1.38;margin-top:14px;padding-bottom:18px;border-bottom:1px solid #1b1a17">Den minste mengden som kan skilles sikkert fra instrumentets egen støy.</div>
+    <div style="font-family:Newsreader,serif;font-size:17.5px;line-height:1.6;color:#2f2c26;margin-top:18px">Alle instrumenter brummer litt, også når prøven er tom. Deteksjonsgrensen er hvor stort signalet må være før vi tør si at stoffet faktisk finnes i prøven — under den er riktig svar «ikke påvist», ikke «null».</div>
+    <sc-if value="{{ rationale }}" hint-placeholder-val="{{ true }}">
+      <p style="font-style:italic;color:#4a453c;font-size:16px;margin:14px 0 0">Definisjonen er den største lesetekst på siden og skilles fra forklaringen med én hårlinje. Ingen boks, ingen farge, ingen uthevet bakgrunn.</p>
+    </sc-if>
+  </div>
+  <p style="margin-top:16px">Maks tekstbredde: <strong style="font-weight:600">38rem</strong> for all lesetekst. Ingenting går bredere, uansett skjerm.</p>
+</section>
+
+<section id="farger" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Farger</h2>
+  <p>Semantiske tokens, ikke en palett. Kontrast er oppgitt mot det underlaget tokenet faktisk brukes på; all lesetekst ligger over 4.5:1.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,13rem),1fr));gap:14px;margin-top:20px">
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#faf8f4;border-bottom:1px solid #e6e0d4"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">background</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#faf8f4</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#fff;border-bottom:1px solid #e6e0d4"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">surface</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#ffffff</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#f7f5f0;border-bottom:1px solid #e6e0d4"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">surface-muted</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#f7f5f0</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#1b1a17"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">text-primary</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#1b1a17 · 15.3:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#2f2c26"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">text-body</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#2f2c26 · 11.6:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#4a453c"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">text-secondary</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#4a453c · 7.7:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#6b6458"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">text-tertiary</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#6b6458 · 5.6:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#1f6f6b"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">accent</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#1f6f6b · 5.1:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#15514e"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">accent-hover</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#15514e · 7.6:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#b4552d"></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">warning</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#b4552d · 4.6:1</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#faf8f4;display:flex;align-items:flex-end"><div style="width:100%;border-top:1px solid #e6e0d4;height:17px"></div><div style="width:100%;border-top:1px solid #d9d2c4;height:17px"></div><div style="width:100%;border-top:1px solid #c9c1b0;height:17px"></div></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">border / -strong / -input</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">#e6e0d4 · #d9d2c4 · #c9c1b0</div></div>
+    </div>
+    <div style="border:1px solid #d9d2c4;border-radius:8px;overflow:hidden">
+      <div style="height:54px;background:#faf8f4;display:flex;align-items:center;justify-content:center"><span style="display:inline-block;width:64px;height:22px;border-radius:4px;background:#fff;outline:2.5px solid #1f6f6b;outline-offset:2px"></span></div>
+      <div style="padding:10px 12px"><div style="font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600">focus</div><div style="font-family:ui-monospace,monospace;font-size:11.5px;color:#4a453c;margin-top:2px">2.5px #1f6f6b, offset 2</div></div>
+    </div>
+  </div>
+
+  <sc-if value="{{ rationale }}" hint-placeholder-val="{{ true }}">
+    <p style="font-style:italic;color:#4a453c;margin-top:18px"><strong style="font-weight:600;font-style:normal">warning er ikke en feilfarge.</strong> Den betyr «her er det noe å legge merke til faglig»: grenseverdi krysset, signal under grensa, kurve som avviker. Systemet har ingen error- eller success-farge — produktet har ingen skjemaer og ingen destruktive handlinger.</p>
+  </sc-if>
+  <p>Maks to dataserier per demonstrasjon: <code>accent</code> og <code>warning</code>, skilt også på strektype. Trengs en tredje, brukes <code>text-primary</code>. Ingen gradienter, ingen fargede tekstbakgrunner.</p>
+</section>
+
+<section id="layout" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Spacing og layout</h2>
+  <p>Skala i px: 2 · 4 · 6 · 8 · 10 · 12 · 14 · 16 · 18 · 20 · 22 · 26 · 32 · 40 · 48 · 56. Tett beslektet 6–10, innenfor komponent 12–18, mellom komponenter 20–26, mellom seksjoner 32–56. Store sprang skaleres med clamp.</p>
+
+  <h3>Bredder</h3>
+  <table>
+    <tr><th>Kontekst</th><th>Maksbredde</th></tr>
+    <tr><td>Lesespalte — all lesetekst</td><td>38rem</td></tr>
+    <tr><td>Forsiden (kategorigrid)</td><td>78rem</td></tr>
+    <tr><td>Kategoriside / A–Å</td><td>60rem / 66rem</td></tr>
+    <tr><td>Demonstrasjon, normal / bred / svært bred</td><td>38rem / 64rem / 70rem</td></tr>
+    <tr><td>Popover</td><td>308px, bottom sheet under 620px</td></tr>
+    <tr><td>Sidepadding</td><td>clamp(16px, 4vw, 40px)</td></tr>
+  </table>
+
+  <h3>Griddet som gir demonstrasjonen valgfri bredde</h3>
+  <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:16px;margin-bottom:14px">
+    <div style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,22rem) [text-end] minmax(0,1fr) [full-end];gap:10px 16px">
+      <div style="grid-column:text-start/text-end;background:#f7f5f0;border:1px solid #e6e0d4;border-radius:6px;padding:10px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#2f2c26">tekst · <code>text-start/text-end</code></div>
+      <div style="grid-column:text-start/text-end;background:#f7f5f0;border:1px solid #e6e0d4;border-radius:6px;padding:10px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#2f2c26">demonstrasjon, normal</div>
+      <div style="grid-column:full-start/full-end;justify-self:center;width:100%;background:rgba(31,111,107,.1);border:1px solid #1f6f6b;border-radius:6px;padding:10px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#1b1a17">demonstrasjon, bred · <code>full-start/full-end</code>, sentrert om samme akse</div>
+      <div style="grid-column:text-start/text-end;background:#f7f5f0;border:1px solid #e6e0d4;border-radius:6px;padding:10px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#2f2c26">dybde · forrige/neste</div>
+    </div>
+  </div>
+  <p><code>grid-template-columns: [full-start] minmax(0,1fr) [text-start] minmax(0,38rem) [text-end] minmax(0,1fr) [full-end]</code> — hele mekanismen bak «demonstrasjonen kan få stor visuell prioritet» uten at lesespalten flytter seg.</p>
+
+  <h3>Vertikal rytme</h3>
+  <p>Alle skiller er 1px linjer, aldri bokser. Tre nivåer: <code>border-ink</code> for strukturelle skiller (under definisjonen, over forrige/neste, under kategorioverskrift), <code>border</code> for radskillere, <code>border-strong</code> dashed for hjelpelinjer i grafikk.</p>
+
+  <h3>Breakpoints, definert av layoutbehov</h3>
+  <table>
+    <tr><th>Grense</th><th>Hva den utløser</th></tr>
+    <tr><td>~380px</td><td>chips og knapperader går fra én til flere rader</td></tr>
+    <tr><td>~620px</td><td>popover går fra bottom sheet til ankret kort</td></tr>
+    <tr><td>~700px</td><td>graf og avlesning kan stå side om side; lesespalten treffer 38rem</td></tr>
+    <tr><td>~900px</td><td>kategorigrid 2 → 3 spalter</td></tr>
+    <tr><td>~1100px</td><td>bred demonstrasjon blir faktisk bredere enn lesespalten</td></tr>
+  </table>
+  <p>Løst med <code>flex-wrap</code>, <code>auto-fill/minmax</code> og <code>clamp()</code> — ikke med media queries på enhetsnavn.</p>
+</section>
+
+<section id="former" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Former, overflater og states</h2>
+  <table>
+    <tr><th>Egenskap</th><th>Verdi</th><th>Bruk</th></tr>
+    <tr><td>radius-sm</td><td>6px (8px på stegkort)</td><td>plottflater, små flater</td></tr>
+    <tr><td>radius-md</td><td>10px</td><td>demonstrasjonsramme, popover, søkedropdown</td></tr>
+    <tr><td>radius-pill</td><td>22–24px</td><td>input, chips, knapper</td></tr>
+    <tr><td>border</td><td>1px solid, 1.5px når elementet er interaktivt</td><td>alle rammer</td></tr>
+    <tr><td>shadow-pop / -menu</td><td>0 12px 32px rgba(27,26,23,.18) / 0 12px 30px …15</td><td>kun popover og søkedropdown</td></tr>
+    <tr><td>focus ring</td><td>2.5px #1f6f6b, offset 2px, via <code>:focus-visible</code></td><td>alt interaktivt</td></tr>
+  </table>
+  <sc-if value="{{ rationale }}" hint-placeholder-val="{{ true }}">
+    <p style="font-style:italic;color:#4a453c;margin-top:14px">Skygge finnes bare på de to flatene som faktisk svever. Kort, rammer og seksjoner har aldri skygge — det er dette som holder siden rolig når den fylles med innhold.</p>
+  </sc-if>
+
+  <h3>States</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px">
+    <button style="font-size:13.5px;padding:11px 15px;min-height:44px;border-radius:24px;border:1.5px solid #1b1a17;background:#1b1a17;color:#fff">Primærknapp</button>
+    <button style="font-size:13.5px;padding:11px 15px;min-height:44px;border-radius:24px;border:1.5px solid #c9c1b0;background:#fff;color:#2f2c26">Sekundær</button>
+    <button style="font-size:13.5px;padding:11px 15px;min-height:44px;border-radius:24px;border:1.5px solid #1f6f6b;background:#1f6f6b;color:#fff">✓ Chip valgt</button>
+    <button style="font-size:13.5px;padding:11px 15px;min-height:44px;border-radius:24px;border:1.5px solid #c9c1b0;background:#fff;color:#2f2c26">+ Chip av</button>
+    <span style="font-family:Newsreader,serif;font-size:17px;color:#1f6f6b;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">begrepslenke</span>
+    <span style="font-family:Newsreader,serif;font-size:17px;color:#1b1a17;border-bottom:1px solid #c9c1b0">begrep i liste</span>
+  </div>
+  <p>Valgt tilstand markeres alltid med både fyll og et tegn. Disclosure bytter <code>▸</code> mot <code>▾</code> og setter <code>aria-expanded</code>.</p>
+</section>
+
+<section id="komponenter" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Komponenter</h2>
+  <p>Full beskrivelse av struktur, varianter, states og responsive regler ligger i README-ens kapittel 2. Oversikten under er inventaret.</p>
+
+  <h3>Sidekomponenter</h3>
+  <table>
+    <tr><th>Komponent</th><th>Kjerneregel</th></tr>
+    <tr><td>Header</td><td>Sticky, ordmerke + kompakt søk. Ingen annen navigasjon.</td></tr>
+    <tr><td>SearchField</td><td>To varianter: hero (forsiden, inline resultater) og compact (header, dropdown).</td></tr>
+    <tr><td>SearchResults</td><td>Rangering tittelstart → tittel → synonym → definisjon. Viser treffårsak og teller.</td></tr>
+    <tr><td>CategoryOverview / CategoryBlock</td><td>Redaksjonell rekkefølge, maks 5 begreper per blokk, antall og spørsmålslinje.</td></tr>
+    <tr><td>CategoryPage</td><td>Full liste med definisjoner. Ingen paginering, ingen filtrering.</td></tr>
+    <tr><td>AlphabeticalIndex</td><td>Sticky bokstavbar A–Å; bokstaver uten treff er ikke lenker.</td></tr>
+    <tr><td>TermListItem</td><td>compact (tittel) og detailed (kicker + tittel + definisjon).</td></tr>
+    <tr><td>TermHeader</td><td>Kategori som lenke + posisjon. Lange titler brytes, aldri ellipse.</td></tr>
+    <tr><td>Definition</td><td>Største lesetekst, hårlinje under, aldri i boks.</td></tr>
+    <tr><td>PlainLanguageExplanation</td><td>2 avsnitt, analogi først, 1–3 begrepslenker.</td></tr>
+    <tr><td>ConceptLink</td><td>Dotted underline; hover/fokus forhåndsviser, klikk navigerer.</td></tr>
+    <tr><td>ConceptPreviewPopover</td><td><code>position:fixed</code>, aldri layout shift; bottom sheet under 620px.</td></tr>
+    <tr><td>DemonstrationFrame</td><td>Fast ytre ramme med typeetikett + handlingsanvisning, fri indre layout.</td></tr>
+    <tr><td>DepthDisclosure</td><td>Én per side, lukket som standard, tittelen sier hva dybden inneholder.</td></tr>
+    <tr><td>PreviousNextNavigation</td><td>Global sirkulær rekkefølge; kategoribytte annonseres.</td></tr>
+    <tr><td>EmptySearchState</td><td>Aldri blindvei: to utveier som knapper.</td></tr>
+  </table>
+
+  <h3>Pedagogiske primitiver</h3>
+  <table>
+    <tr><th>Primitiv</th><th>Kjerneregel</th></tr>
+    <tr><td>Slider</td><td>Én parameter. <code>aria-valuetext</code> oversetter tallet til mening; endepunktetiketter i ord.</td></tr>
+    <tr><td>SegmentedChoice / chips</td><td>44px, <code>aria-pressed</code>, valgt = fyll <em>og</em> tegn.</td></tr>
+    <tr><td>StepIndicator</td><td>Steg kan velges direkte, ikke bare framover. <code>aria-current="step"</code>.</td></tr>
+    <tr><td>Verdict / feedback line</td><td>Betydning i ord, farge som forsterkning. <code>aria-live="polite"</code>, reservert høyde.</td></tr>
+    <tr><td>FormulaBlock</td><td>Formel i serif + <code>&lt;dl&gt;</code> der hvert ledd forklares.</td></tr>
+    <tr><td>ComparisonLayout</td><td>2–4 parallelle kolonner, samme figurtype og setningslengde.</td></tr>
+    <tr><td>Chart container</td><td><code>viewBox</code>, aldri fast bredde. Dra-interaksjon krever alltid tastaturekvivalent.</td></tr>
+  </table>
+  <sc-if value="{{ rationale }}" hint-placeholder-val="{{ true }}">
+    <p style="font-style:italic;color:#4a453c;margin-top:14px">Primitivene standardiserer kontroller og avlesninger, ikke demonstrasjonens indre layout. Det er et bevisst valg: et bibliotek som prøver å standardisere alle demonstrasjoner ville tvinge fagstoffet inn i én form.</p>
+  </sc-if>
+</section>
+
+<section id="demo" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Hvordan man velger demonstrasjon</h2>
+  <div style="background:#fff;border:1px solid #1b1a17;border-radius:10px;padding:clamp(16px,3vw,24px);max-width:42rem">
+    <p style="font-size:clamp(18px,2.4vw,21px);line-height:1.45;margin:0">Velg demonstrasjonen ut fra hva brukeren må forstå intuitivt. Aldri velg en UI-komponent først og press fagstoffet inn i den.</p>
+  </div>
+  <p style="margin-top:18px">Spør i denne rekkefølgen: <strong style="font-weight:600">1)</strong> Hva er misforståelsen? <strong style="font-weight:600">2)</strong> Hvilken erfaring fjerner den? <strong style="font-weight:600">3)</strong> Hvilken form gir erfaringen med minst mulig mekanikk?</p>
+  <table>
+    <tr><th>Form</th><th>Velg når</th><th>Eksempel</th></tr>
+    <tr><td>Statisk illustrasjon</td><td>begrepet er en struktur eller kategori — ingenting å skru på</td><td>Blindprøve: tre typer</td></tr>
+    <tr><td>Før/etter</td><td>poenget er at noe forblir uendret, eller at én handling har overraskende konsekvens</td><td>Internstandard: søl bort 30 %</td></tr>
+    <tr><td>Sammenligning</td><td>begrepet forveksles med naboer, og skillet er innholdet</td><td>Riktighet, presisjon, nøyaktighet</td></tr>
+    <tr><td>Slider</td><td>én parameter styrer alt, og det finnes en terskel der konklusjonen snur</td><td>Deteksjonsgrense: S/N &lt; 3</td></tr>
+    <tr><td>Manipulerbar graf</td><td>brukeren må selv ødelegge noe for å se konsekvensen</td><td>Linearitet: dra punktet</td></tr>
+    <tr><td>Stegvis prosess</td><td>rekkefølgen er innholdet; hvert steg forutsetter det forrige</td><td>Standardaddisjon: fire steg</td></tr>
+    <tr><td>Formel med forklaring</td><td>uttrykket er begrepet, og hvert ledd har en grunn</td><td>Standardavvik: fire ledd</td></tr>
+    <tr><td>Simulering</td><td>flere parametere virker sammen, og samspillet er poenget</td><td>Ikke brukt ennå</td></tr>
+  </table>
+  <p style="margin-top:14px">Grenser som gjelder alle: maks én primær interaksjon; alle tilstander har en meningsfull verdict-tekst, også utgangstilstanden; demonstrasjonen skal forstås uten dybdeteksten. Finnes ingen god demonstrasjon, er statisk illustrasjon riktig svar — ingen demonstrasjon er ikke et alternativ på en publisert side.</p>
+</section>
+
+<section id="responsiv" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Responsiv oppførsel</h2>
+  <table>
+    <tr><th>Bredde</th><th>Oppførsel</th></tr>
+    <tr><td>~320px</td><td>16px padding. Søkefeltet wrapper under ordmerket. Kategorigrid og A–Å i én spalte; bokstavbaren i tre rader med 34×40px treff. Demonstrasjoner stabler indre kolonner, grafer krymper med sitt <code>viewBox</code>, formelen ned til 26px. Popover blir bottom sheet. Forrige/neste stables. Lange navn brytes — aldri ellipse, aldri horisontal scroll.</td></tr>
+    <tr><td>360–430px</td><td>Som over, typografi et hakk opp, chips 2 per rad.</td></tr>
+    <tr><td>600–900px</td><td>Popover blir ankret kort (~620px). Graf + avlesning side om side (~700px). Kategorigrid 2 spalter. Lesespalten treffer 38rem og slutter å vokse.</td></tr>
+    <tr><td>900–1400px</td><td>Kategorigrid 3 spalter. Brede demonstrasjoner strekker seg utenfor lesespalten fra ~1100px. A–Å 3 spalter per bokstav.</td></tr>
+    <tr><td>&gt;1400px</td><td>Ingenting vokser mer. Sidene sentreres, sidepadding stopper på 40px, og det blir mye luft — det er meningen.</td></tr>
+  </table>
+  <p style="margin-top:14px">Alle beholdere som inneholder tekst eller flexbarn har <code>min-width:0</code>, og alle grid-spor er <code>minmax(0, …)</code>. Det er det som hindrer overflow ved lange ord og brede SVG-er.</p>
+</section>
+
+<section id="a11y" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Tilgjengelighet</h2>
+  <table>
+    <tr><th>Regel</th><th>Krav</th></tr>
+    <tr><td>Tastatur</td><td>Hele hovedreisen uten mus: forside → søk → resultat → begrepsside → demonstrasjon → dybde → forhåndsvisning → neste begrep. Skip-lenke først i DOM.</td></tr>
+    <tr><td>Fokus</td><td><code>:focus-visible</code> 2.5px accent, offset 2px. Aldri <code>outline:none</code> uten erstatning.</td></tr>
+    <tr><td>Treffflater</td><td>Minimum 44×44px. Sliders 30–32px høye.</td></tr>
+    <tr><td>ARIA</td><td>combobox + expanded på søk, listbox på treff, expanded på disclosure, pressed på chips, current="step" i steg, group + label på demonstrasjon og kontrollgrupper, dialog + navn på popover, haspopup på begrepslenker.</td></tr>
+    <tr><td>aria-live</td><td><code>polite</code> på alt som endrer betydning uten fokusflytting: verdict-linjer, søketeller. Ikke på tall som endres kontinuerlig under dragging.</td></tr>
+    <tr><td>Aldri bare farge</td><td>Verdict sier hva som skjer i ord; chips har tegn; dataserier skiller på strektype; inaktive bokstaver er ikke-interaktive.</td></tr>
+    <tr><td>Visualiseringer</td><td>Alt som kan dras skal også kunne styres med slider eller knapper. Hard regel.</td></tr>
+    <tr><td>Grafikk</td><td>Dekorativ SVG <code>aria-hidden</code>; betydningen finnes alltid i tekst ved siden av.</td></tr>
+    <tr><td>Bevegelse</td><td>Ingen animasjoner i dag. Innføres de, skal <code>prefers-reduced-motion: reduce</code> gi umiddelbar tilstandsendring.</td></tr>
+    <tr><td>Språk</td><td><code>lang="nb"</code>.</td></tr>
+  </table>
+</section>
+
+<section id="handoff" style="padding-top:clamp(36px,6vw,64px);scroll-margin-top:16px">
+  <h2>Handoff</h2>
+  <p>Pakken <code>design_handoff_lableksion/</code> inneholder README-en (normativ for design og låste beslutninger), referanseprototypen og konseptfilen. README-en skiller eksplisitt mellom tre ting:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:16px;margin-top:18px">
+    <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:16px">
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">1 · Låst</div>
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;margin-top:6px">Sidestruktur, lesespalte, demonstrasjonsramme, én disclosure, forsidens oppbygning, sirkulær forrige/neste, begrepslenker, tokens, søkerangering, tilgjengelighetsregler.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:16px">
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">2 · Claude Code velger</div>
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;margin-top:6px">URL-routing og history, robust popover, datadrevet begrepsmodell uten duplisering, synonym- og bøyningsmodell for søk, tastaturekvivalent for dra-interaksjon, reell 320px-testing, automatiserte a11y- og responsive tester.</div>
+    </div>
+    <div style="background:#fff;border:1px solid #d9d2c4;border-radius:10px;padding:16px">
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#b4552d">3 · Ikke fasit</div>
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;margin-top:6px">Alle definisjoner, forklaringer, dybdetekster og tall er eksempelinnhold. Begrepsutvalg, kategorinavn og kategorirekkefølge er ikke fagfellevurdert. SVG-figurene er skisser.</div>
+    </div>
+  </div>
+  <p style="margin-top:20px">Den offentlige «ufullstendig begrep»-tilstanden i prototypen er et stillas for stresstesten og skal ikke implementeres. Et begrep publiseres først når siden er komplett, og demonstrasjonen er en del av det.</p>
+</section>
+
+</main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1100,&quot;height&quot;:900},&quot;showRationale&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Dokument&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { rationale: this.props.showRationale ?? true };
+  }
+}
+
+</script>
+</body>
+</html>
