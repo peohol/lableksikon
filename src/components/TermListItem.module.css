@@ -1,0 +1,54 @@
+.detailed,
+.compact {
+  display: block;
+  min-height: 44px;
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  min-width: 0;
+}
+
+.detailed {
+  padding: 14px 2px;
+}
+
+.compact {
+  padding: 11px 2px;
+}
+
+.detailed:hover .title,
+.compact:hover .title {
+  color: var(--color-accent-hover);
+}
+
+.kicker {
+  display: block;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  display: block;
+  font-family: var(--font-reading);
+  line-height: 1.22;
+  color: var(--color-text-primary);
+  overflow-wrap: break-word;
+}
+
+.detailed .title {
+  font-size: var(--size-list-title);
+  margin-top: 3px;
+}
+
+.compact .title {
+  font-size: 17px;
+}
+
+.definition {
+  display: block;
+  font-family: var(--font-reading);
+  font-size: var(--size-list-def);
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  margin-top: 3px;
+  max-width: 52em;
+}

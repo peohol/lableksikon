@@ -1,0 +1,28 @@
+.page {
+  max-width: var(--width-reading);
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 68px) var(--page-padding) 56px;
+}
+
+.title {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: var(--size-title-section);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.body {
+  font-family: var(--font-reading);
+  font-size: var(--size-body);
+  line-height: 1.6;
+  color: var(--color-text-body);
+  margin: 14px 0 20px;
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}

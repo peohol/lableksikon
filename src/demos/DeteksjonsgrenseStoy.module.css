@@ -1,0 +1,15 @@
+.chart {
+  height: 150px;
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  padding: 8px 10px;
+  overflow: hidden;
+}
+
+.bar {
+  flex: 1;
+  background: var(--color-accent);
+  border-radius: 1px 1px 0 0;
+  min-width: 0;
+}

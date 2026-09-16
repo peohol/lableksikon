@@ -1,0 +1,83 @@
+.sliderWrap {
+  margin-top: 8px;
+}
+
+.verdict {
+  margin-top: 8px;
+}
+
+.readout {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chipMark {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  flex: 1 1 140px;
+  min-width: 0;
+}
+
+.stepButton {
+  width: 100%;
+  text-align: left;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-height: 56px;
+}
+
+.stepButton:hover {
+  border-color: var(--color-border-ink);
+}
+
+.stepCurrent {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.stepNumber {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
+}
+
+/* Litt dempet hvitt, men fortsatt over AA-kravet mot accent-fyllet. */
+.stepCurrent .stepNumber {
+  color: color-mix(in srgb, var(--color-ink-invert) 85%, var(--color-accent));
+}
+
+.stepName {
+  display: block;
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.25;
+  margin-top: 2px;
+  color: var(--color-text-body);
+}
+
+.stepCurrent .stepName {
+  color: var(--color-ink-invert);
+}

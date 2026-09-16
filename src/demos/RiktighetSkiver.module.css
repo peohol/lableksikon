@@ -1,0 +1,22 @@
+.board {
+  width: 100%;
+  max-width: 150px;
+  display: block;
+}
+
+.summary {
+  border-top: 1px solid var(--color-border);
+  margin: 14px -16px -16px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 14px 24px;
+}
+
+.summaryText {
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.4;
+  margin: 2px 0 0;
+  color: var(--color-text-primary);
+}

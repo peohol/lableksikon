@@ -1,0 +1,33 @@
+.bar {
+  position: sticky;
+  top: var(--header-height, 57px);
+  z-index: 20;
+  background: color-mix(in srgb, var(--color-background) 96%, transparent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin: 14px 0 0;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-border-ink);
+}
+
+.letter {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  min-width: 34px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--color-accent);
+}
+
+.letter:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Bokstaver uten treff er ikke lenker — lysere farge er bare forsterkning. */
+.empty {
+  color: var(--color-text-disabled);
+}

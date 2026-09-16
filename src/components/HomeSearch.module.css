@@ -1,0 +1,39 @@
+.results {
+  margin-top: 24px;
+  max-width: 44rem;
+}
+
+.count {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-ink);
+}
+
+.empty {
+  padding: 20px 2px;
+}
+
+.emptyTitle {
+  font-family: var(--font-reading);
+  font-size: 19px;
+  line-height: 1.45;
+  margin: 0 0 14px;
+}
+
+.emptyBody {
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px;
+  max-width: 40em;
+}
+
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}

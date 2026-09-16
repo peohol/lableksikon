@@ -1,0 +1,62 @@
+.link {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1.5px dotted var(--color-accent);
+  padding-bottom: 1px;
+}
+
+.link:hover {
+  color: var(--color-accent-hover);
+  border-bottom-color: var(--color-accent-hover);
+}
+
+.popover {
+  width: var(--width-popover);
+  max-width: calc(100vw - 24px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-ink);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-pop);
+  z-index: 70;
+}
+
+/* Under 620px: bottom sheet, 12px fra bunnen. */
+.sheet {
+  position: fixed;
+  left: 12px;
+  right: auto;
+  top: auto;
+  bottom: 12px;
+  width: min(calc(100vw - 24px), 420px);
+  transform: none;
+}
+
+.category {
+  margin: 0;
+}
+
+.title {
+  font-family: var(--font-reading);
+  font-size: 20px;
+  line-height: 1.18;
+  margin: 5px 0 0;
+  color: var(--color-text-primary);
+}
+
+.definition {
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-body);
+  margin: 6px 0 0;
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+}

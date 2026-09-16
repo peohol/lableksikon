@@ -1,0 +1,91 @@
+/*
+ * Felles layouthjelpere for demonstrasjonene. Den indre layouten er fri —
+ * dette er bare de mønstrene som går igjen, samlet ett sted.
+ * Alle kolonner har min-width:0 slik at ingenting tvinger horisontal scroll.
+ */
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  min-width: 0;
+}
+
+.splitCenter {
+  align-items: center;
+}
+
+.figureCol {
+  flex: 1 1 260px;
+  min-width: 195px;
+}
+
+.readingCol {
+  flex: 1 1 210px;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  align-items: baseline;
+}
+
+.rule {
+  border-top: 1px solid var(--color-border);
+  padding-top: 13px;
+  margin-top: 14px;
+}
+
+.note {
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-text-body);
+  margin: 0;
+}
+
+.caption {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
+.svg {
+  width: 100%;
+  display: block;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 18px;
+  min-width: 0;
+}
+
+.columnName {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+  color: var(--color-text-primary);
+}
+
+.columnText {
+  font-family: var(--font-reading);
+  font-size: 16.5px;
+  line-height: 1.45;
+  color: var(--color-text-body);
+  margin: 3px 0 0;
+}

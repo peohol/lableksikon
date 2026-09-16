@@ -1,0 +1,71 @@
+@import "../styles/tokens.css";
+@import "../styles/primitives.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-reading);
+  overflow-wrap: break-word;
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+button {
+  font-family: var(--font-ui);
+  color: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: var(--font-ui);
+}
+
+input[type="range"] {
+  accent-color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+svg {
+  display: block;
+}
+
+/* Systemet har ingen animasjoner i dag. Skulle noe bli lagt til, skal det
+   reduseres til umiddelbar tilstandsendring. Se handoff kapittel 5. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

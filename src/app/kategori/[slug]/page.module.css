@@ -1,0 +1,28 @@
+.page {
+  max-width: var(--width-category);
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 48px) var(--page-padding) 56px;
+}
+
+.title {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: var(--size-title-section);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 6px 0 0;
+  overflow-wrap: break-word;
+}
+
+.gloss {
+  margin: 10px 0 0;
+}
+
+.count {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 16px 0 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-ink);
+}
