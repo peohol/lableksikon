@@ -1,5 +1,3 @@
-
-
 ## Purpose
 
 This file contains only durable, repository-wide instructions that are useful in almost every Claude Code session.
@@ -227,11 +225,3 @@ Add or change an instruction only when it is:
 When adding a project-specific instruction, integrate it into the shortest appropriate existing section rather than creating another section by default.
 
 Whenever this file grows, actively look for something to remove, consolidate, or move elsewhere.
-
-Holy shiz
-
-Det er jo helt sykt mye du har gjort her
-
-nice da!
-
-Ja, det vil si - det er mye ChatGPT har gjort for meg her ![😉](https://statics.teams.cdn.office.net/evergreen-assets/personal-expressions/v2/assets/emoticons/wink/default/20_f.png "Blunker") Jeg skrev en mye kortere, dårligere og mindre teknisk versjon - Claude code gjorde den mer solid.
