@@ -1,0 +1,59 @@
+.frame {
+  margin: clamp(22px, 3.5vw, 34px) 0 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.text {
+  grid-column: text-start / text-end;
+}
+
+.wide,
+.extraWide {
+  grid-column: full-start / full-end;
+  justify-self: center;
+  width: 100%;
+}
+
+.wide {
+  max-width: var(--width-demo-wide);
+}
+
+.extraWide {
+  max-width: var(--width-demo-extra-wide);
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.caption :global(.kicker) {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.instruction {
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--color-text-tertiary);
+}
+
+.content {
+  padding: 16px;
+  min-width: 0;
+}
+
+.afterword {
+  font-size: 16px;
+  margin: 0;
+  padding: 0 16px 16px;
+}

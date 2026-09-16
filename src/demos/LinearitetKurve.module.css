@@ -1,0 +1,51 @@
+.plot {
+  flex: 1 1 300px;
+  min-width: 210px;
+}
+
+.svg {
+  width: 100%;
+  display: block;
+}
+
+/* Treffflata rundt toppunktet: usynlig, men stor nok for finger og mus. */
+.dragHandle {
+  touch-action: none;
+  cursor: ns-resize;
+  pointer-events: all;
+}
+
+.residuals {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 66px;
+  border-top: 1px dashed var(--color-border-strong);
+  border-bottom: 1px dashed var(--color-border-strong);
+  padding: 2px 0;
+  margin-top: 5px;
+}
+
+.residualColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  min-width: 0;
+}
+
+.residualUp {
+  height: 50%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.residualDown {
+  height: 50%;
+}
+
+.residualBar {
+  width: 100%;
+  background: var(--color-warning);
+}

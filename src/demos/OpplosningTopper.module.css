@@ -1,0 +1,21 @@
+.readouts {
+  gap: 16px 32px;
+}
+
+.requirement {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.requirementText {
+  font-family: var(--font-reading);
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.verdictCol {
+  flex: 1 1 260px;
+  min-width: 220px;
+}

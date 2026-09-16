@@ -1,0 +1,89 @@
+.formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-reading);
+  font-size: clamp(26px, 5.5vw, 38px);
+  line-height: 1;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+
+.equals {
+  color: var(--color-text-tertiary);
+}
+
+.root {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.radical {
+  font-size: 1.25em;
+  line-height: 0.9;
+}
+
+.fraction {
+  border-top: 1.5px solid var(--color-border-ink);
+  padding: 6px 8px 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.numerator {
+  font-size: 0.62em;
+}
+
+.denominator {
+  border-top: 1.5px solid var(--color-border-ink);
+  padding-top: 3px;
+  font-size: 0.62em;
+}
+
+.terms {
+  margin: 22px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 16px 24px;
+}
+
+.symbol {
+  font-family: var(--font-reading);
+  font-size: 21px;
+}
+
+.explanation {
+  margin: 3px 0 0;
+  font-family: var(--font-reading);
+  font-size: 16.5px;
+  line-height: 1.45;
+  color: var(--color-text-body);
+}
+
+.example {
+  margin-top: 20px;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 80px;
+  margin-top: 8px;
+}
+
+.bar {
+  flex: 1;
+  background: var(--color-accent);
+  min-width: 0;
+}
+
+.result {
+  font-family: var(--font-reading);
+  font-size: 18px;
+  margin: 10px 0 0;
+}

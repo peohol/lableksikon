@@ -1,0 +1,49 @@
+.nav {
+  grid-column: text-start / text-end;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 12px 20px;
+  margin: clamp(28px, 5vw, 48px) 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border-ink);
+}
+
+.previous,
+.next {
+  display: block;
+  padding: 8px 0;
+  min-height: 52px;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.previous {
+  text-align: left;
+}
+
+.next {
+  text-align: right;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.title {
+  display: block;
+  font-family: var(--font-reading);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--color-accent);
+  overflow-wrap: break-word;
+  margin-top: 2px;
+}
+
+.previous:hover .title,
+.next:hover .title {
+  color: var(--color-accent-hover);
+}

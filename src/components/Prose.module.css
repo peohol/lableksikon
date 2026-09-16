@@ -1,0 +1,50 @@
+.explanation,
+.depth {
+  font-family: var(--font-reading);
+  color: var(--color-text-body);
+  text-wrap: pretty;
+  min-width: 0;
+}
+
+.explanation {
+  font-size: var(--size-body);
+  line-height: 1.6;
+}
+
+.depth {
+  font-size: var(--size-body-depth);
+  line-height: 1.62;
+  max-width: 38em;
+}
+
+.paragraph {
+  margin: 0 0 14px;
+}
+
+.depth .paragraph {
+  margin: 0 0 12px;
+}
+
+.paragraph:last-child,
+.list:last-child {
+  margin-bottom: 0;
+}
+
+.heading {
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  margin: 0 0 8px;
+}
+
+.paragraph + .heading {
+  margin-top: 18px;
+}
+
+.list {
+  margin: 0 0 14px;
+  padding-left: 1.2em;
+}
+
+.list li {
+  margin-bottom: 6px;
+}

@@ -40,6 +40,21 @@ Put information where it belongs:
 
 Do not create new documentation, planning, status, or log files unless they have a clear durable purpose for humans or are explicitly requested.
 
+## Project: Lableksion
+
+An encyclopedia of analytical-chemistry concepts. Next.js (App Router),
+TypeScript, CSS Modules, statically generated, hosted on Vercel.
+
+`design_handoff_lableksion/README.md` is the **normative** specification for
+product, UX, design system, responsiveness and accessibility. The `.dc.html`
+files beside it are visual references and prototypes: never edit or delete
+them, never turn them into production code, and never use `support.js` at
+runtime. Deviate from the handoff only where its accessibility chapter or valid
+HTML/ARIA requires it, and say so in a code comment where it happens.
+
+Detailed design and content rules live in `.claude/rules/`. Run `npm run check`
+before finishing; `npm run test:e2e` for the browser tests.
+
 ## Repository owner
 
 Assume the repository owner is the product owner, **not a programmer or system developer**. Communicate with the owner in Norwegian Bokmål.

@@ -1,0 +1,21 @@
+.body {
+  margin-top: 18px;
+}
+
+.text {
+  flex: 1 1 210px;
+  min-width: 180px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.action {
+  flex: 1;
+  padding: 12px 10px;
+  min-height: 46px;
+  font-size: 14px;
+}

@@ -1,0 +1,66 @@
+.block {
+  min-width: 0;
+}
+
+.heading {
+  margin: 0;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--color-border-ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.name {
+  text-decoration: none;
+  letter-spacing: 0.11em;
+}
+
+.name:hover {
+  color: var(--color-accent-hover);
+}
+
+.count {
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.gloss {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 9px 0 12px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.termRow {
+  display: block;
+  padding: 7px 0;
+  min-height: 40px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+
+.termTitle {
+  font-family: var(--font-reading);
+  font-size: 18px;
+  line-height: 1.25;
+  border-bottom: 1px solid var(--color-border-input);
+  display: inline;
+}
+
+.termRow:hover .termTitle {
+  border-bottom-color: var(--color-accent);
+}
+
+.more {
+  font-size: 13.5px;
+  padding-top: 9px;
+  min-height: 40px;
+}

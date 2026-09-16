@@ -1,0 +1,132 @@
+.field {
+  position: relative;
+  min-width: 0;
+}
+
+.compact {
+  flex: 1 1 170px;
+  max-width: 22rem;
+}
+
+/* Under ~380px går søkefeltet til egen linje under ordmerket. */
+@media (max-width: 380px) {
+  .compact {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
+
+.hero {
+  width: 100%;
+  max-width: 34rem;
+  margin-top: clamp(22px, 4vw, 36px);
+}
+
+.label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 7px;
+}
+
+.input {
+  width: 100%;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-pill);
+}
+
+.inputCompact {
+  font-size: 15px;
+  padding: 9px 13px;
+  min-height: 40px;
+  border: 1px solid var(--color-border-input);
+}
+
+.inputHero {
+  font-size: clamp(15px, 2vw, 17px);
+  padding: 14px 18px;
+  min-height: 48px;
+  border: 1.5px solid var(--color-border-ink);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(24rem, calc(100vw - 24px));
+  max-height: min(62vh, 420px);
+  overflow: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-ink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-menu);
+  z-index: 50;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dropdownCount {
+  padding: 8px 13px;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.option {
+  display: block;
+  padding: 11px 13px;
+  min-height: 44px;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.optionActive {
+  background: var(--color-surface-muted);
+}
+
+.optionTitle {
+  display: block;
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+
+.optionMeta {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+.dropdownFooter {
+  display: block;
+  padding: 11px 13px;
+  min-height: 44px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--color-accent);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdownEmpty {
+  padding: 12px 13px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
