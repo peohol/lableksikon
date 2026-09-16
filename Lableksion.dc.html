@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap"><style>
+*{box-sizing:border-box}
+body{margin:0;background:#faf8f4;color:#1b1a17;font-family:Newsreader,Georgia,serif;-webkit-text-size-adjust:100%}
+a{color:#1f6f6b}a:hover{color:#15514e}
+button{font-family:'IBM Plex Sans',system-ui,sans-serif;cursor:pointer}
+input{font-family:'IBM Plex Sans',system-ui,sans-serif}
+input[type=range]{accent-color:#1f6f6b}
+:focus-visible{outline:2px solid #1f6f6b;outline-offset:2px}
+</style></helmet>
+
+<div style="min-height:100vh;background:#faf8f4;padding-bottom:40px">
+
+<div style="position:sticky;top:0;z-index:40;background:rgba(250,248,244,.94);backdrop-filter:blur(6px);border-bottom:1px solid #e6e0d4">
+  <div style="max-width:72rem;margin:0 auto;padding:11px clamp(16px,4vw,40px);display:flex;align-items:center;gap:16px;justify-content:space-between">
+    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;display:flex;align-items:baseline;gap:8px;color:#1b1a17">
+      <span style="font-family:Newsreader,serif;font-size:20px;font-weight:500;letter-spacing:-.01em">Lableksion</span>
+      <span style="font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">analytisk kjemi</span>
+    </button>
+    <div style="position:relative;flex:0 1 260px">
+      <input value="{{ hq }}" onInput="{{ onHq }}" placeholder="Søk" aria-label="Søk etter begrep" style="width:100%;font-size:14px;padding:7px 12px;border:1px solid #d9d2c4;border-radius:20px;background:#fff;color:#1b1a17" />
+      <sc-if value="{{ hqOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:40px;right:0;width:min(20rem,calc(100vw - 32px));background:#fff;border:1px solid #1b1a17;border-radius:8px;box-shadow:0 10px 28px rgba(27,26,23,.13);overflow:hidden;z-index:50">
+          <sc-for list="{{ hqHits }}" as="hit" hint-placeholder-count="2">
+            <button data-term="{{ hit.id }}" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #f0ebe0;padding:9px 13px">
+              <span style="font-family:Newsreader,serif;font-size:16px;color:#1b1a17">{{ hit.title }}</span>
+              <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458;margin-top:2px">{{ hit.cat }}</span>
+            </button>
+          </sc-for>
+          <sc-if value="{{ hqEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:11px 13px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:#6b6458">Ingen treff</div></sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+<sc-if value="{{ vHome }}" hint-placeholder-val="{{ true }}">
+<div style="max-width:60rem;margin:0 auto;padding:clamp(32px,7vw,76px) clamp(16px,4vw,40px) 0">
+  <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(30px,5vw,44px);line-height:1.12;letter-spacing:-.015em;margin:0;max-width:26rem">Begrepene i analytisk kjemi, forklart så enkelt som mulig.</h1>
+  <p style="font-family:Newsreader,serif;font-size:clamp(16px,2vw,19px);line-height:1.55;color:#4a453c;margin:14px 0 0;max-width:34rem;text-wrap:pretty">Hvert begrep har en kort definisjon, en hverdagslig forklaring, en demonstrasjon du kan pille på — og teknisk dybde hvis du vil ha den.</p>
+
+  <div style="margin:clamp(24px,4vw,38px) 0 0;max-width:34rem">
+    <input value="{{ q }}" onInput="{{ onQ }}" placeholder="Søk etter et begrep, for eksempel «støy» eller «kurve»" aria-label="Søk etter begrep" style="width:100%;font-size:clamp(15px,2vw,17px);padding:14px 18px;border:1.5px solid #1b1a17;border-radius:30px;background:#fff;color:#1b1a17" />
+  </div>
+
+  <sc-if value="{{ qOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="margin-top:26px;max-width:40rem;border-top:1px solid #e6e0d4">
+    <sc-for list="{{ qHits }}" as="hit" hint-placeholder-count="3">
+      <button data-term="{{ hit.id }}" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:15px 2px">
+        <span style="font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#1f6f6b">{{ hit.cat }}</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:21px;color:#1b1a17;margin-top:3px">{{ hit.title }}</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:16px;line-height:1.45;color:#4a453c;margin-top:3px">{{ hit.def }}</span>
+      </button>
+    </sc-for>
+    <sc-if value="{{ qEmpty }}" hint-placeholder-val="{{ false }}"><p style="font-family:Newsreader,serif;font-size:17px;color:#4a453c;padding:18px 2px">Ingen treff. Prøv «presisjon», «grense» eller «matriks».</p></sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ qClosed }}" hint-placeholder-val="{{ true }}">
+  <div style="margin-top:clamp(36px,6vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:clamp(28px,4vw,44px)">
+
+    <section>
+      <h2 style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1f6f6b;margin:0;padding-bottom:9px;border-bottom:1px solid #1b1a17">Kvalitet i måling</h2>
+      <p style="font-family:Newsreader,serif;font-style:italic;font-size:16px;line-height:1.45;color:#6b6458;margin:10px 0 14px">Hvor mye kan vi stole på tallet?</p>
+      <button data-term="presisjon" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;padding:0 0 13px">
+        <span style="font-family:Newsreader,serif;font-size:20px;color:#1b1a17;border-bottom:1px solid #c9c1b0">Presisjon</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:#6b6458;margin-top:3px">Hvor likt det blir hver gang</span>
+      </button>
+      <button data-term="maleusikkerhet" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;padding:0 0 13px">
+        <span style="font-family:Newsreader,serif;font-size:20px;color:#1b1a17;border-bottom:1px solid #c9c1b0">Måleusikkerhet</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:#6b6458;margin-top:3px">Hvor stort intervallet rundt svaret er</span>
+      </button>
+    </section>
+
+    <section>
+      <h2 style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1f6f6b;margin:0;padding-bottom:9px;border-bottom:1px solid #1b1a17">Kalibrering og kontroll</h2>
+      <p style="font-family:Newsreader,serif;font-style:italic;font-size:16px;line-height:1.45;color:#6b6458;margin:10px 0 14px">Hvordan blir et signal til en konsentrasjon?</p>
+      <button data-term="linearitet" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;padding:0 0 13px">
+        <span style="font-family:Newsreader,serif;font-size:20px;color:#1b1a17;border-bottom:1px solid #c9c1b0">Linearitet</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:#6b6458;margin-top:3px">Når dobbelt så mye gir dobbelt signal</span>
+      </button>
+      <button data-term="deteksjonsgrense" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;padding:0 0 13px">
+        <span style="font-family:Newsreader,serif;font-size:20px;color:#1b1a17;border-bottom:1px solid #c9c1b0">Deteksjonsgrense</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:#6b6458;margin-top:3px">Det minste vi tør si at vi ser</span>
+      </button>
+      <button data-term="internstandard" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;padding:0 0 13px">
+        <span style="font-family:Newsreader,serif;font-size:20px;color:#1b1a17;border-bottom:1px solid #c9c1b0">Internstandard</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:#6b6458;margin-top:3px">Et kjent stoff som følger prøven</span>
+      </button>
+    </section>
+
+    <section>
+      <h2 style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#1f6f6b;margin:0;padding-bottom:9px;border-bottom:1px solid #1b1a17">Prøven og omgivelsene</h2>
+      <p style="font-family:Newsreader,serif;font-style:italic;font-size:16px;line-height:1.45;color:#6b6458;margin:10px 0 14px">Hva gjør prøven med selve målingen?</p>
+      <button data-term="matriseeffekt" onClick="{{ goTerm }}" style="display:block;width:100%;text-align:left;background:none;border:0;padding:0 0 13px">
+        <span style="font-family:Newsreader,serif;font-size:20px;color:#1b1a17;border-bottom:1px solid #c9c1b0">Matriseeffekt</span>
+        <span style="display:block;font-family:Newsreader,serif;font-size:15px;line-height:1.4;color:#6b6458;margin-top:3px">Når alt det andre i prøven blander seg inn</span>
+      </button>
+    </section>
+
+  </div>
+
+  <div style="margin-top:clamp(36px,6vw,56px);border-top:1px solid #e6e0d4;padding-top:18px">
+    <button onClick="{{ toggleAll }}" style="background:none;border:0;padding:0;font-size:14px;color:#1f6f6b">Alle begreper A–Å</button>
+    <sc-if value="{{ allOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px">
+        <button data-term="deteksjonsgrense" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;font-family:Newsreader,serif;font-size:18px;color:#1b1a17">Deteksjonsgrense</button>
+        <button data-term="internstandard" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;font-family:Newsreader,serif;font-size:18px;color:#1b1a17">Internstandard</button>
+        <button data-term="linearitet" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;font-family:Newsreader,serif;font-size:18px;color:#1b1a17">Linearitet</button>
+        <button data-term="matriseeffekt" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;font-family:Newsreader,serif;font-size:18px;color:#1b1a17">Matriseeffekt</button>
+        <button data-term="maleusikkerhet" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;font-family:Newsreader,serif;font-size:18px;color:#1b1a17">Måleusikkerhet</button>
+        <button data-term="presisjon" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;font-family:Newsreader,serif;font-size:18px;color:#1b1a17">Presisjon</button>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ vPresisjon }}" hint-placeholder-val="{{ false }}">
+<article style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,40rem) [text-end] minmax(0,1fr) [full-end];padding:clamp(22px,4vw,48px) clamp(16px,4vw,40px) 0;column-gap:24px">
+  <div style="grid-column:text-start/text-end">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Kvalitet i måling · 1 av 2</div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0">Presisjon</h1>
+    <p style="font-family:Newsreader,serif;font-size:clamp(19px,2.6vw,25px);line-height:1.38;color:#1b1a17;margin:16px 0 0;padding-bottom:20px;border-bottom:1px solid #1b1a17;text-wrap:pretty">Hvor likt resultatet blir når samme prøve måles flere ganger under samme betingelser.</p>
+    <div style="font-family:Newsreader,serif;font-size:clamp(17px,2.2vw,19px);line-height:1.6;color:#2f2c26;margin-top:22px;text-wrap:pretty">
+      <p style="margin:0 0 14px">Tenk på pilkast. Presisjon handler bare om hvor tett pilene sitter samlet, ikke om de treffer blinken. Sitter alle pilene i samme hjørne av skiva, er kastet presist — og likevel feil.</p>
+      <p style="margin:0">På laben betyr det at du kan måle samme prøve seks ganger og få nesten samme tall hver gang, selv om nivået er systematisk forskjøvet. Hvor nær sannheten tallet ligger, er et annet spørsmål, og det hører til <a href="#" data-term="maleusikkerhet" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">måleusikkerhet</a>.</p>
+    </div>
+  </div>
+
+  <figure style="grid-column:text-start/text-end;margin:clamp(24px,4vw,36px) 0 0;border:1px solid #d9d2c4;border-radius:10px;background:#fff;overflow:hidden">
+    <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid #e6e0d4;font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">
+      <span>Demonstrasjon</span><span style="text-transform:none;letter-spacing:0;font-size:12px">Skru på spredningen</span>
+    </figcaption>
+    <div style="padding:18px;display:flex;flex-wrap:wrap;gap:22px;align-items:center">
+      <div style="position:relative;flex:1 1 200px;min-width:180px;max-width:280px;aspect-ratio:1">
+        <svg viewBox="0 0 200 200" style="width:100%;display:block">
+          <circle cx="100" cy="100" r="88" fill="#f7f5f0" stroke="#d9d2c4"></circle>
+          <circle cx="100" cy="100" r="58" fill="#fff" stroke="#d9d2c4"></circle>
+          <circle cx="100" cy="100" r="28" fill="#f2efe8" stroke="#1b1a17"></circle>
+          <circle cx="100" cy="100" r="3" fill="#1b1a17"></circle>
+        </svg>
+        <sc-for list="{{ shots }}" as="shot" hint-placeholder-count="6">
+          <span style="position:absolute;width:11px;height:11px;border-radius:50%;background:#1f6f6b;border:1px solid #fff;left:{{ shot.l }};top:{{ shot.t }};transform:translate(-50%,-50%)"></span>
+        </sc-for>
+      </div>
+      <div style="flex:1 1 200px;min-width:170px">
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458">Seks gjentatte målinger</div>
+        <div style="font-family:Newsreader,serif;font-size:30px;line-height:1.1;margin-top:4px">RSD {{ rsd }} %</div>
+        <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;margin-top:8px;min-height:3.2em">{{ precVerdict }}</div>
+        <input type="range" min="0" max="100" value="{{ spread }}" onInput="{{ onSpread }}" aria-label="Spredning" style="width:100%;margin-top:10px" />
+        <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458"><span>tett samlet</span><span>spredt</span></div>
+        <div style="font-family:Newsreader,serif;font-style:italic;font-size:16px;color:#6b6458;margin-top:12px">Legg merke til at klyngen aldri flytter seg inn mot blinken. Presisjon sier ingenting om det.</div>
+      </div>
+    </div>
+  </figure>
+
+  <div style="grid-column:text-start/text-end">
+    <button onClick="{{ toggleDepth }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:16px 0;margin-top:clamp(20px,3vw,30px);font-size:14px;color:#1b1a17">
+      <span style="color:#1f6f6b">{{ depthMark }}</span><span style="font-weight:500">Dybde: standardavvik, RSD og hvilken presisjon som måles</span>
+    </button>
+    <sc-if value="{{ depthOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.62;color:#2f2c26;padding:18px 0 0;text-wrap:pretty">
+        <p style="margin:0 0 12px">Presisjon tallfestes som standardavviket s for n gjentatte målinger, oftest relativt: RSD = s / x̄ · 100 %. Med få gjentak er s selv et usikkert estimat, og n = 6 er et vanlig minimum for en metodevalidering.</p>
+        <p style="margin:0 0 12px">Nivået må oppgis. Repeterbarhet er samme operatør, samme instrument, samme dag. Intermediær presisjon varierer dag og operatør innen ett laboratorium. Reproduserbarhet er mellom laboratorier, og gir alltid høyere RSD.</p>
+        <p style="margin:0">Presisjon inngår som ett av bidragene i <a href="#" data-term="maleusikkerhet" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">måleusikkerhet</a>, men dekker ikke systematisk skjevhet — den må undersøkes med referansematerialer eller gjenvinningsforsøk.</p>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin:clamp(30px,5vw,50px) 0 0;padding-top:18px;border-top:1px solid #1b1a17">
+      <button data-term="matriseeffekt" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:left;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">← Forrige · Prøven og omgivelsene</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Matriseeffekt</span>
+      </button>
+      <button data-term="maleusikkerhet" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:right;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">Neste →</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Måleusikkerhet</span>
+      </button>
+    </nav>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{ vMaleusikkerhet }}" hint-placeholder-val="{{ false }}">
+<article style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,40rem) [text-end] minmax(0,1fr) [full-end];padding:clamp(22px,4vw,48px) clamp(16px,4vw,40px) 0;column-gap:24px">
+  <div style="grid-column:text-start/text-end">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Kvalitet i måling · 2 av 2</div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0">Måleusikkerhet</h1>
+    <p style="font-family:Newsreader,serif;font-size:clamp(19px,2.6vw,25px);line-height:1.38;margin:16px 0 0;padding-bottom:20px;border-bottom:1px solid #1b1a17;text-wrap:pretty">Et intervall som angir hvor det sanne resultatet med rimelig sikkerhet ligger.</p>
+    <div style="font-family:Newsreader,serif;font-size:clamp(17px,2.2vw,19px);line-height:1.6;color:#2f2c26;margin-top:22px;text-wrap:pretty">
+      <p style="margin:0 0 14px">Når du veier deg om morgenen, tenker du kanskje «82 kilo, pluss minus en halv». Måleusikkerhet er den samme tanken, bare regnet ut systematisk i stedet for antatt.</p>
+      <p style="margin:0">Et analyseresultat er aldri ett eksakt tall. Pipettering, kalibreringskurve, temperatur og <a href="#" data-term="presisjon" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">presisjon</a> bidrar hver med sin lille bit slark. Legger du bidragene sammen, får du et intervall — og først da kan du si om resultatet faktisk ligger over eller under en grenseverdi.</p>
+    </div>
+  </div>
+
+  <figure style="grid-column:text-start/text-end;margin:clamp(24px,4vw,36px) 0 0;border:1px solid #d9d2c4;border-radius:10px;background:#fff;overflow:hidden">
+    <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid #e6e0d4;font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">
+      <span>Demonstrasjon</span><span style="text-transform:none;letter-spacing:0;font-size:12px">Bygg usikkerhetsbudsjettet</span>
+    </figcaption>
+    <div style="padding:18px">
+      <div style="font-family:Newsreader,serif;font-size:17px;color:#2f2c26">Prøven er målt til <strong style="font-weight:600">0,42 mg/kg</strong>. Grenseverdien er 0,50 mg/kg. Slå på bidragene som gjelder.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+        <button onClick="{{ tU0 }}" style="font-size:13px;padding:7px 13px;border-radius:18px;border:1.5px solid {{ u0bc }};background:{{ u0bg }};color:{{ u0fg }}">Repeterbarhet 2,5 %</button>
+        <button onClick="{{ tU1 }}" style="font-size:13px;padding:7px 13px;border-radius:18px;border:1.5px solid {{ u1bc }};background:{{ u1bg }};color:{{ u1fg }}">Kalibreringskurve 3,2 %</button>
+        <button onClick="{{ tU2 }}" style="font-size:13px;padding:7px 13px;border-radius:18px;border:1.5px solid {{ u2bc }};background:{{ u2bg }};color:{{ u2fg }}">Pipettering 1,8 %</button>
+        <button onClick="{{ tU3 }}" style="font-size:13px;padding:7px 13px;border-radius:18px;border:1.5px solid {{ u3bc }};background:{{ u3bg }};color:{{ u3fg }}">Temperatur 0,9 %</button>
+      </div>
+      <div style="margin-top:22px;position:relative;height:96px">
+        <div style="position:absolute;left:0;right:0;top:46px;height:1px;background:#d9d2c4"></div>
+        <div style="position:absolute;top:36px;height:22px;background:#1f6f6b;opacity:.22;left:{{ uLeft }};width:{{ uWidth }}"></div>
+        <div style="position:absolute;top:30px;height:34px;width:2px;background:#1b1a17;left:{{ uCenter }}"></div>
+        <div style="position:absolute;top:8px;bottom:8px;width:2px;background:#b4552d;left:{{ limitPos }}"></div>
+        <div style="position:absolute;top:0;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#b4552d;left:{{ limitPos }};transform:translateX(-50%);white-space:nowrap">grenseverdi 0,50</div>
+        <div style="position:absolute;bottom:0;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#4a453c;left:{{ uCenter }};transform:translateX(-50%);white-space:nowrap">0,42</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 26px;align-items:baseline;border-top:1px solid #e6e0d4;padding-top:13px">
+        <div style="font-family:Newsreader,serif;font-size:24px">± {{ uAbs }} mg/kg</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458">utvidet usikkerhet, k = 2 ({{ uRel }} %)</div>
+      </div>
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#b4552d;margin-top:8px;min-height:2.9em">{{ uVerdict }}</div>
+    </div>
+  </figure>
+
+  <div style="grid-column:text-start/text-end">
+    <button onClick="{{ toggleDepth }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:16px 0;margin-top:clamp(20px,3vw,30px);font-size:14px;color:#1b1a17">
+      <span style="color:#1f6f6b">{{ depthMark }}</span><span style="font-weight:500">Dybde: budsjett, kombinert usikkerhet og dekningsfaktor</span>
+    </button>
+    <sc-if value="{{ depthOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.62;color:#2f2c26;padding:18px 0 0;text-wrap:pretty">
+        <p style="margin:0 0 12px">Uavhengige bidrag kombineres kvadratisk: u_c = √(u₁² + u₂² + …). Det er derfor det største bidraget dominerer, og det er der forbedring gir effekt — å halvere et bidrag på 0,9 % endrer nesten ingenting.</p>
+        <p style="margin:0 0 12px">Utvidet usikkerhet U = k · u_c, vanligvis med k = 2, som svarer til omtrent 95 % dekning. Resultatet rapporteres som x ± U med k og dekningsnivå oppgitt.</p>
+        <p style="margin:0">Skjevhet skal korrigeres eller inngå i budsjettet, ikke ignoreres. Bidrag fra <a href="#" data-term="matriseeffekt" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">matriseeffekt</a> er ofte det vanskeligste å tallfeste, fordi det varierer fra prøve til prøve.</p>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin:clamp(30px,5vw,50px) 0 0;padding-top:18px;border-top:1px solid #1b1a17">
+      <button data-term="presisjon" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:left;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">← Forrige</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Presisjon</span>
+      </button>
+      <button data-term="linearitet" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:right;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">Neste · Kalibrering og kontroll →</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Linearitet</span>
+      </button>
+    </nav>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{ vLinearitet }}" hint-placeholder-val="{{ false }}">
+<article style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,40rem) [text-end] minmax(0,1fr) [full-end];padding:clamp(22px,4vw,48px) clamp(16px,4vw,40px) 0;column-gap:24px">
+  <div style="grid-column:text-start/text-end">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Kalibrering og kontroll · 1 av 3</div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0">Linearitet</h1>
+    <p style="font-family:Newsreader,serif;font-size:clamp(19px,2.6vw,25px);line-height:1.38;margin:16px 0 0;padding-bottom:20px;border-bottom:1px solid #1b1a17;text-wrap:pretty">Hvor godt målesignalet følger en rett linje når konsentrasjonen øker.</p>
+    <div style="font-family:Newsreader,serif;font-size:clamp(17px,2.2vw,19px);line-height:1.6;color:#2f2c26;margin-top:22px;text-wrap:pretty">
+      <p style="margin:0 0 14px">Dobler du mengden stoff, bør signalet også dobles. Er det slik i hele området du bruker, er metoden lineær der — og da kan du lese av konsentrasjonen rett fra kalibreringskurven.</p>
+      <p style="margin:0">I praksis flater kurven ofte ut i toppen. Detektoren blir mettet, og to ganske ulike høye konsentrasjoner gir nesten samme signal. Da må prøven fortynnes ned i området der linja fortsatt er rett, ellers blir høye verdier systematisk underrapportert.</p>
+    </div>
+  </div>
+
+  <figure style="grid-column:full-start/full-end;justify-self:center;width:100%;max-width:62rem;margin:clamp(24px,4vw,36px) 0 0;border:1px solid #d9d2c4;border-radius:10px;background:#fff;overflow:hidden">
+    <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid #e6e0d4;font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">
+      <span>Demonstrasjon</span><span style="text-transform:none;letter-spacing:0;font-size:12px">Dra det øverste punktet — eller bruk slideren</span>
+    </figcaption>
+    <div style="padding:18px;display:flex;flex-wrap:wrap;gap:24px">
+      <div style="flex:1 1 320px;min-width:260px">
+        <svg ref="{{ linSvg }}" onPointerDown="{{ linDown }}" viewBox="0 0 420 300" style="width:100%;display:block;touch-action:none;cursor:ns-resize">
+          <line x1="52" y1="252" x2="404" y2="252" stroke="#1b1a17"></line>
+          <line x1="52" y1="252" x2="52" y2="24" stroke="#1b1a17"></line>
+          <text x="228" y="284" font-family="IBM Plex Sans" font-size="13" fill="#6b6458" text-anchor="middle">konsentrasjon</text>
+          <text x="22" y="140" font-family="IBM Plex Sans" font-size="13" fill="#6b6458" text-anchor="middle" transform="rotate(-90 22 140)">signal</text>
+          <line x1="52" y1="{{ fitY0 }}" x2="404" y2="{{ fitY1 }}" stroke="#b4552d" stroke-width="1.5" stroke-dasharray="6 5"></line>
+          <polyline points="{{ linPoints }}" fill="none" stroke="#1f6f6b" stroke-width="2.5"></polyline>
+          <sc-for list="{{ linDots }}" as="dot" hint-placeholder-count="6">
+            <circle cx="{{ dot.x }}" cy="{{ dot.y }}" r="5" fill="#1f6f6b"></circle>
+          </sc-for>
+          <circle cx="{{ dragX }}" cy="{{ dragY }}" r="11" fill="none" stroke="#1b1a17" stroke-width="1.5"></circle>
+          <text x="{{ dragLabelX }}" y="{{ dragLabelY }}" font-family="IBM Plex Sans" font-size="12" fill="#1b1a17">dra</text>
+        </svg>
+        <input type="range" min="0" max="100" value="{{ bendPct }}" onInput="{{ onBend }}" aria-label="Avbøying av kurven" style="width:100%;margin-top:6px" />
+      </div>
+      <div style="flex:1 1 220px;min-width:200px;display:flex;flex-direction:column;gap:14px">
+        <div>
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458">Best tilpassede rette linje</div>
+          <div style="font-family:Newsreader,serif;font-size:28px;line-height:1.1;margin-top:3px">R² = {{ r2 }}</div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458;margin-bottom:5px">Residualer</div>
+          <div style="display:flex;align-items:center;gap:3px;height:66px;border-top:1px dashed #d9d2c4;border-bottom:1px dashed #d9d2c4;padding:2px 0">
+            <sc-for list="{{ resid }}" as="r" hint-placeholder-count="6">
+              <div style="flex:1;display:flex;flex-direction:column;justify-content:center;height:100%">
+                <div style="height:50%;display:flex;align-items:flex-end"><div style="width:100%;background:#b4552d;height:{{ r.up }}"></div></div>
+                <div style="height:50%"><div style="width:100%;background:#b4552d;height:{{ r.down }}"></div></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;min-height:4.4em">{{ linVerdict }}</div>
+      </div>
+    </div>
+  </figure>
+
+  <div style="grid-column:text-start/text-end">
+    <button onClick="{{ toggleDepth }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:16px 0;margin-top:clamp(20px,3vw,30px);font-size:14px;color:#1b1a17">
+      <span style="color:#1f6f6b">{{ depthMark }}</span><span style="font-weight:500">Dybde: regresjon, residualer og hvorfor R² ikke er nok</span>
+    </button>
+    <sc-if value="{{ depthOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.62;color:#2f2c26;padding:18px 0 0;text-wrap:pretty">
+        <p style="margin:0 0 12px">Kalibreringen tilpasses vanligvis med minste kvadraters metode, y = a + bx. R² sier bare hvor mye av variasjonen modellen forklarer, og en tydelig krum kurve kan fortsatt gi R² over 0,99. Derfor vurderes linearitet på residualplottet: tilfeldig spredning rundt null er greit, et systematisk buemønster er ikke.</p>
+        <p style="margin:0 0 12px">Arbeidsområdet er den delen av kurven der linjen faktisk gjelder, nedad begrenset av <a href="#" data-term="deteksjonsgrense" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">deteksjonsgrense</a> og oppad av metning.</p>
+        <p style="margin:0">Når spredningen øker med konsentrasjonen, vekter ulik varians de høye punktene for tungt; vektet regresjon (1/x eller 1/x²) gir bedre treff i nedre del av området.</p>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin:clamp(30px,5vw,50px) 0 0;padding-top:18px;border-top:1px solid #1b1a17">
+      <button data-term="maleusikkerhet" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:left;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">← Forrige · Kvalitet i måling</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Måleusikkerhet</span>
+      </button>
+      <button data-term="deteksjonsgrense" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:right;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">Neste →</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Deteksjonsgrense</span>
+      </button>
+    </nav>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{ vDeteksjonsgrense }}" hint-placeholder-val="{{ false }}">
+<article style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,40rem) [text-end] minmax(0,1fr) [full-end];padding:clamp(22px,4vw,48px) clamp(16px,4vw,40px) 0;column-gap:24px">
+  <div style="grid-column:text-start/text-end">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Kalibrering og kontroll · 2 av 3</div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0">Deteksjonsgrense</h1>
+    <p style="font-family:Newsreader,serif;font-size:clamp(19px,2.6vw,25px);line-height:1.38;margin:16px 0 0;padding-bottom:20px;border-bottom:1px solid #1b1a17;text-wrap:pretty">Den minste mengden som kan skilles sikkert fra instrumentets egen støy.</p>
+    <div style="font-family:Newsreader,serif;font-size:clamp(17px,2.2vw,19px);line-height:1.6;color:#2f2c26;margin-top:22px;text-wrap:pretty">
+      <p style="margin:0 0 14px">Alle instrumenter brummer litt, også når prøven er tom. Tenk på en samtale i et rom med vifte: normal tale hører du tydelig, en hvisking forsvinner i viftesuset — selv om hviskingen er der.</p>
+      <p style="margin:0">Deteksjonsgrensen er hvor stort signalet må være før vi tør si at stoffet faktisk finnes i prøven. Under grensa er riktig svar «ikke påvist», ikke «null». Hvor lite du kan måle henger derfor sammen med hvor rolig bakgrunnen er, ikke bare med instrumentets følsomhet.</p>
+    </div>
+  </div>
+
+  <figure style="grid-column:text-start/text-end;margin:clamp(24px,4vw,36px) 0 0;border:1px solid #d9d2c4;border-radius:10px;background:#fff;overflow:hidden">
+    <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid #e6e0d4;font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">
+      <span>Demonstrasjon</span><span style="text-transform:none;letter-spacing:0;font-size:12px">Skru opp støyen til toppen forsvinner</span>
+    </figcaption>
+    <div style="padding:18px">
+      <div style="height:150px;background:#f7f5f0;border:1px solid #e6e0d4;border-radius:6px;display:flex;align-items:flex-end;gap:1px;padding:8px 10px;overflow:hidden">
+        <sc-for list="{{ bars }}" as="bar" hint-placeholder-count="40">
+          <div style="flex:1;background:#1f6f6b;border-radius:1px 1px 0 0;height:{{ bar.h }}"></div>
+        </sc-for>
+      </div>
+      <input type="range" min="0" max="100" value="{{ noise }}" onInput="{{ onNoise }}" aria-label="Støynivå" style="width:100%;margin-top:12px" />
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458"><span>rolig bakgrunn</span><span>mye støy</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px 26px;align-items:baseline;margin-top:14px;border-top:1px solid #e6e0d4;padding-top:13px">
+        <div style="font-family:Newsreader,serif;font-size:28px;line-height:1">S/N = {{ snr }}</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458">grensa settes gjerne ved S/N = 3</div>
+      </div>
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;margin-top:8px;min-height:2.9em;color:{{ snrColor }}">{{ snrVerdict }}</div>
+    </div>
+  </figure>
+
+  <div style="grid-column:text-start/text-end">
+    <button onClick="{{ toggleDepth }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:16px 0;margin-top:clamp(20px,3vw,30px);font-size:14px;color:#1b1a17">
+      <span style="color:#1f6f6b">{{ depthMark }}</span><span style="font-weight:500">Dybde: LOD, LOQ og hvordan grensa fastsettes</span>
+    </button>
+    <sc-if value="{{ depthOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.62;color:#2f2c26;padding:18px 0 0;text-wrap:pretty">
+        <p style="margin:0 0 12px">LOD estimeres oftest fra blankprøver som x̄_blank + 3s_blank, eller fra kalibreringskurvens standardfeil: 3,3 · s_y/b. Kvantifiseringsgrensen LOQ ligger høyere, typisk 10s, fordi det er strengere å oppgi et tall enn å slå fast at noe er der.</p>
+        <p style="margin:0 0 12px">Grensene er egenskaper ved hele metoden, ikke bare instrumentet: opparbeiding, fortynning og <a href="#" data-term="matriseeffekt" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">matriseeffekt</a> flytter dem. Derfor bør de bestemmes i reell matriks, ikke i rent løsemiddel.</p>
+        <p style="margin:0">Resultater under LOQ rapporteres som «&lt; LOQ» med grensa oppgitt. Å regne videre på slike tall, for eksempel i et gjennomsnitt, gir falsk presisjon.</p>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin:clamp(30px,5vw,50px) 0 0;padding-top:18px;border-top:1px solid #1b1a17">
+      <button data-term="linearitet" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:left;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">← Forrige</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Linearitet</span>
+      </button>
+      <button data-term="internstandard" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:right;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">Neste →</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Internstandard</span>
+      </button>
+    </nav>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{ vInternstandard }}" hint-placeholder-val="{{ false }}">
+<article style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,40rem) [text-end] minmax(0,1fr) [full-end];padding:clamp(22px,4vw,48px) clamp(16px,4vw,40px) 0;column-gap:24px">
+  <div style="grid-column:text-start/text-end">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Kalibrering og kontroll · 3 av 3</div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0">Internstandard</h1>
+    <p style="font-family:Newsreader,serif;font-size:clamp(19px,2.6vw,25px);line-height:1.38;margin:16px 0 0;padding-bottom:20px;border-bottom:1px solid #1b1a17;text-wrap:pretty">Et kjent stoff som tilsettes alle prøver, slik at variasjon i behandlingen kan regnes bort.</p>
+    <div style="font-family:Newsreader,serif;font-size:clamp(17px,2.2vw,19px);line-height:1.6;color:#2f2c26;margin-top:22px;text-wrap:pretty">
+      <p style="margin:0 0 14px">Tenk at du skal måle hvor mye saft det er i et glass, men søler litt på veien til vekta. Svaret blir for lavt, og du merker det ikke. Tilsetter du en kjent mengde av et annet stoff i samme glass, søles det like mye av begge — og forholdet mellom dem står stille.</p>
+      <p style="margin:0">Internstandarden følger prøven gjennom hele opparbeidingen, og vi regner på forholdet mellom signalene i stedet for på signalet alene. Tap, fortynningsfeil og svingninger i instrumentet rammer da begge likt og faller ut av regnestykket.</p>
+    </div>
+  </div>
+
+  <figure style="grid-column:text-start/text-end;margin:clamp(24px,4vw,36px) 0 0;border:1px solid #d9d2c4;border-radius:10px;background:#fff;overflow:hidden">
+    <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid #e6e0d4;font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">
+      <span>Demonstrasjon</span><span style="text-transform:none;letter-spacing:0;font-size:12px">Før og etter tap av prøve</span>
+    </figcaption>
+    <div style="padding:18px">
+      <div style="display:flex;gap:26px;align-items:flex-end;height:180px">
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;height:100%">
+          <div style="width:100%;max-width:74px;background:#1f6f6b;border-radius:3px 3px 0 0;height:{{ isAnalyteH }}"></div>
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#4a453c;text-align:center">Stoffet<br />{{ isAnalyte }}</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;height:100%">
+          <div style="width:100%;max-width:74px;background:#b4552d;border-radius:3px 3px 0 0;height:{{ isStdH }}"></div>
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#4a453c;text-align:center">Internstandard<br />{{ isStd }}</div>
+        </div>
+        <div style="flex:1.2;border-left:1px solid #e6e0d4;padding-left:20px;align-self:stretch;display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458">Forholdet</div>
+          <div style="font-family:Newsreader,serif;font-size:34px;line-height:1.05;margin-top:2px">{{ isRatio }}</div>
+          <div style="font-family:Newsreader,serif;font-size:16px;line-height:1.4;color:#2f2c26;margin-top:6px">står uendret</div>
+        </div>
+      </div>
+      <button onClick="{{ toggleLoss }}" style="margin-top:16px;font-size:14px;padding:10px 16px;border-radius:22px;border:1.5px solid #1b1a17;background:#1b1a17;color:#fff">{{ lossLabel }}</button>
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;margin-top:10px;min-height:2.9em">{{ isVerdict }}</div>
+    </div>
+  </figure>
+
+  <div style="grid-column:text-start/text-end">
+    <button onClick="{{ toggleDepth }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:16px 0;margin-top:clamp(20px,3vw,30px);font-size:14px;color:#1b1a17">
+      <span style="color:#1f6f6b">{{ depthMark }}</span><span style="font-weight:500">Dybde: valg av internstandard og hva den ikke fikser</span>
+    </button>
+    <sc-if value="{{ depthOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.62;color:#2f2c26;padding:18px 0 0;text-wrap:pretty">
+        <p style="margin:0 0 12px">En god internstandard oppfører seg mest mulig som analytten gjennom ekstraksjon, kromatografi og ionisering, men kan måles atskilt. I massespektrometri er isotopmerkede analoger idealet, siden de har nær identisk kjemi og egen masse.</p>
+        <p style="margin:0 0 12px">Kalibreringen gjøres da på responsforholdet analytt/IS mot konsentrasjon. Tilsetningen må skje tidlig, før tapene oppstår — tilsatt til slutt korrigerer den bare for instrumentet, ikke for opparbeidingen.</p>
+        <p style="margin:0">Internstandard kompenserer for proporsjonale tap, ikke for feil som rammer bare analytten. Eluerer IS langt fra analytten, kan <a href="#" data-term="matriseeffekt" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">matriseeffekt</a> treffe de to ulikt, og korreksjonen blir da i beste fall ufullstendig.</p>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin:clamp(30px,5vw,50px) 0 0;padding-top:18px;border-top:1px solid #1b1a17">
+      <button data-term="deteksjonsgrense" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:left;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">← Forrige</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Deteksjonsgrense</span>
+      </button>
+      <button data-term="matriseeffekt" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:right;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">Neste · Prøven og omgivelsene →</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Matriseeffekt</span>
+      </button>
+    </nav>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{ vMatriseeffekt }}" hint-placeholder-val="{{ false }}">
+<article style="display:grid;grid-template-columns:[full-start] minmax(0,1fr) [text-start] minmax(0,40rem) [text-end] minmax(0,1fr) [full-end];padding:clamp(22px,4vw,48px) clamp(16px,4vw,40px) 0;column-gap:24px">
+  <div style="grid-column:text-start/text-end">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">Prøven og omgivelsene · 1 av 1</div>
+    <h1 style="font-family:Newsreader,serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.08;letter-spacing:-.018em;margin:8px 0 0">Matriseeffekt</h1>
+    <p style="font-family:Newsreader,serif;font-size:clamp(19px,2.6vw,25px);line-height:1.38;margin:16px 0 0;padding-bottom:20px;border-bottom:1px solid #1b1a17;text-wrap:pretty">Når alt det andre i prøven endrer signalet for stoffet vi måler.</p>
+    <div style="font-family:Newsreader,serif;font-size:clamp(17px,2.2vw,19px);line-height:1.6;color:#2f2c26;margin-top:22px;text-wrap:pretty">
+      <p style="margin:0 0 14px">Samme mengde salt smaker sterkere i et glass vann enn i en tykk suppe. På laben er «suppa» matriksen — blod, jord, avløpsvann — og den kan både dempe og forsterke signalet.</p>
+      <p style="margin:0">Da stemmer ikke en kalibrering laget i rent vann lenger. Kurven kan se fin ut, <a href="#" data-term="linearitet" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">lineariteten</a> kan være god, og resultatet likevel være systematisk for lavt eller for høyt. Ingenting i kurven varsler om det.</p>
+    </div>
+  </div>
+
+  <figure style="grid-column:text-start/text-end;margin:clamp(24px,4vw,36px) 0 0;border:1px solid #d9d2c4;border-radius:10px;background:#fff;overflow:hidden">
+    <figcaption style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid #e6e0d4;font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b6458">
+      <span>Demonstrasjon</span><span style="text-transform:none;letter-spacing:0;font-size:12px">Bytt matriks</span>
+    </figcaption>
+    <div style="padding:18px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button data-mx="vann" onClick="{{ setMx }}" style="font-size:13px;padding:7px 14px;border-radius:18px;border:1.5px solid {{ mx0bc }};background:{{ mx0bg }};color:{{ mx0fg }}">Rent vann</button>
+        <button data-mx="blod" onClick="{{ setMx }}" style="font-size:13px;padding:7px 14px;border-radius:18px;border:1.5px solid {{ mx1bc }};background:{{ mx1bg }};color:{{ mx1fg }}">Blodplasma</button>
+        <button data-mx="jord" onClick="{{ setMx }}" style="font-size:13px;padding:7px 14px;border-radius:18px;border:1.5px solid {{ mx2bc }};background:{{ mx2bg }};color:{{ mx2fg }}">Jordekstrakt</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:16px">
+        <div style="flex:1 1 260px;min-width:230px">
+          <svg viewBox="0 0 340 220" style="width:100%;display:block">
+            <line x1="44" y1="186" x2="326" y2="186" stroke="#1b1a17"></line>
+            <line x1="44" y1="186" x2="44" y2="18" stroke="#1b1a17"></line>
+            <line x1="44" y1="186" x2="318" y2="34" stroke="#1b1a17" stroke-width="2"></line>
+            <line x1="44" y1="186" x2="318" y2="{{ mxY }}" stroke="#b4552d" stroke-width="2" stroke-dasharray="7 5"></line>
+            <text x="318" y="28" font-family="IBM Plex Sans" font-size="12" fill="#1b1a17" text-anchor="end">kalibrering i vann</text>
+            <text x="228" y="{{ mxLabelY }}" font-family="IBM Plex Sans" font-size="12" fill="#b4552d">prøven i matriks</text>
+            <text x="185" y="212" font-family="IBM Plex Sans" font-size="12" fill="#6b6458" text-anchor="middle">konsentrasjon</text>
+          </svg>
+        </div>
+        <div style="flex:1 1 200px;min-width:190px">
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458">Signal sammenlignet med vann</div>
+          <div style="font-family:Newsreader,serif;font-size:32px;line-height:1.05;margin-top:2px">{{ mxSignal }}</div>
+          <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:#6b6458;margin-top:12px">Resultatet blir</div>
+          <div style="font-family:Newsreader,serif;font-size:24px;line-height:1.1;color:#b4552d;margin-top:2px">{{ mxBias }}</div>
+          <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.45;color:#2f2c26;margin-top:10px;min-height:4.4em">{{ mxVerdict }}</div>
+        </div>
+      </div>
+    </div>
+  </figure>
+
+  <div style="grid-column:text-start/text-end">
+    <button onClick="{{ toggleDepth }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #e6e0d4;padding:16px 0;margin-top:clamp(20px,3vw,30px);font-size:14px;color:#1b1a17">
+      <span style="color:#1f6f6b">{{ depthMark }}</span><span style="font-weight:500">Dybde: ionesuppresjon, standardaddisjon og matrikstilpasset kalibrering</span>
+    </button>
+    <sc-if value="{{ depthOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:Newsreader,serif;font-size:17px;line-height:1.62;color:#2f2c26;padding:18px 0 0;text-wrap:pretty">
+        <p style="margin:0 0 12px">I LC-MS er ionesuppresjon den vanligste formen: medeluerende komponenter konkurrerer om ladning i ionekilden og demper analyttsignalet. Effekten tallfestes ved å sammenligne respons i postkolonne-tilsatt matriks med respons i rent løsemiddel.</p>
+        <p style="margin:0 0 12px">Mottiltakene er å kalibrere i matriks, å bruke standardaddisjon i hver enkelt prøve, eller å fjerne interferentene med bedre opprensing. Isotopmerket <a href="#" data-term="internstandard" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">internstandard</a> er det mest robuste, fordi den utsettes for samme suppresjon.</p>
+        <p style="margin:0">Matriseeffekten varierer mellom prøver av samme type, og bidrar derfor både med skjevhet og med økt <a href="#" data-term="maleusikkerhet" onMouseEnter="{{ linkEnter }}" onMouseLeave="{{ linkLeave }}" onFocus="{{ linkEnter }}" onBlur="{{ linkLeave }}" onClick="{{ linkClick }}" style="color:#1f6f6b;text-decoration:none;border-bottom:1.5px dotted #1f6f6b;padding-bottom:1px">måleusikkerhet</a>.</p>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin:clamp(30px,5vw,50px) 0 0;padding-top:18px;border-top:1px solid #1b1a17">
+      <button data-term="internstandard" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:left;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">← Forrige · Kalibrering og kontroll</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Internstandard</span>
+      </button>
+      <button data-term="presisjon" onClick="{{ goTerm }}" style="background:none;border:0;padding:0;text-align:right;max-width:48%">
+        <span style="display:block;font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:#6b6458">Neste · Kvalitet i måling →</span>
+        <span style="font-family:Newsreader,serif;font-size:19px;color:#1f6f6b">Presisjon</span>
+      </button>
+    </nav>
+  </div>
+</article>
+</sc-if>
+
+<sc-if value="{{ pop }}" hint-placeholder-val="{{ false }}">
+<div data-pop="1" style="position:fixed;z-index:70;left:{{ popLeft }};top:{{ popTop }};bottom:{{ popBottom }};width:{{ popWidth }};background:#fff;border:1px solid #1b1a17;border-radius:10px;padding:14px 16px;box-shadow:0 12px 32px rgba(27,26,23,.16)">
+  <div style="font-family:'IBM Plex Sans',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#1f6f6b">{{ popCat }}</div>
+  <div style="font-family:Newsreader,serif;font-size:21px;line-height:1.15;margin-top:5px">{{ popTitle }}</div>
+  <div style="font-family:Newsreader,serif;font-size:16px;line-height:1.5;color:#2f2c26;margin-top:6px;text-wrap:pretty">{{ popDef }}</div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+    <button data-term="{{ popId }}" onClick="{{ goTerm }}" style="font-size:13px;padding:8px 14px;border-radius:20px;border:1.5px solid #1b1a17;background:#1b1a17;color:#fff">Gå til begrepet →</button>
+    <sc-if value="{{ popTouch }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ closePop }}" style="font-size:13px;padding:8px 10px;border:0;background:none;color:#6b6458">Lukk</button>
+    </sc-if>
+  </div>
+</div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+const TERMS = {
+  presisjon: { title: "Presisjon", cat: "Kvalitet i måling", def: "Hvor likt resultatet blir når samme prøve måles flere ganger under samme betingelser.", kw: "spredning gjentak rsd standardavvik pilkast repeterbarhet" },
+  maleusikkerhet: { title: "Måleusikkerhet", cat: "Kvalitet i måling", def: "Et intervall som angir hvor det sanne resultatet med rimelig sikkerhet ligger.", kw: "usikkerhet intervall budsjett k=2 utvidet grenseverdi" },
+  linearitet: { title: "Linearitet", cat: "Kalibrering og kontroll", def: "Hvor godt målesignalet følger en rett linje når konsentrasjonen øker.", kw: "kurve regresjon r2 residualer metning arbeidsområde rett linje" },
+  deteksjonsgrense: { title: "Deteksjonsgrense", cat: "Kalibrering og kontroll", def: "Den minste mengden som kan skilles sikkert fra instrumentets egen støy.", kw: "lod loq støy signal blank ikke påvist grense" },
+  internstandard: { title: "Internstandard", cat: "Kalibrering og kontroll", def: "Et kjent stoff som tilsettes alle prøver, slik at variasjon i behandlingen kan regnes bort.", kw: "is isotopmerket tilsetning forhold ratio tap opparbeiding" },
+  matriseeffekt: { title: "Matriseeffekt", cat: "Prøven og omgivelsene", def: "Når alt det andre i prøven endrer signalet for stoffet vi måler.", kw: "matriks ionesuppresjon blod jord plasma standardaddisjon suppresjon" }
+};
+const ORDER = ["presisjon", "maleusikkerhet", "linearitet", "deteksjonsgrense", "internstandard", "matriseeffekt"];
+
+class Component extends DCLogic {
+  state = {
+    view: "home", q: "", hq: "", allOpen: false, depthOpen: false, pop: null,
+    spread: 26, noise: 20, bend: 0, loss: false, mx: "vann",
+    u: [true, true, false, false]
+  };
+
+  componentDidMount() {
+    this.canHover = !window.matchMedia || window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    this._key = (e) => { if (e.key === "Escape") this.setState({ pop: null }); };
+    this._down = (e) => {
+      if (this.state.pop && !e.target.closest("[data-pop]") && !e.target.closest("[data-term]")) this.setState({ pop: null });
+      if (this._drag) return;
+    };
+    this._move = (e) => {
+      if (!this._drag || !this.svg) return;
+      const r = this.svg.getBoundingClientRect();
+      const y = ((e.clientY - r.top) / r.height) * 300;
+      const b = Math.max(0, Math.min(1, (y - 60) / 96));
+      this.setState({ bend: b });
+    };
+    this._up = () => { this._drag = false; };
+    document.addEventListener("keydown", this._key);
+    document.addEventListener("pointerdown", this._down, true);
+    window.addEventListener("pointermove", this._move);
+    window.addEventListener("pointerup", this._up);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this._key);
+    document.removeEventListener("pointerdown", this._down, true);
+    window.removeEventListener("pointermove", this._move);
+    window.removeEventListener("pointerup", this._up);
+  }
+
+  nav(id) {
+    this.setState({ view: id, pop: null, depthOpen: false, q: "", hq: "" });
+    window.scrollTo(0, 0);
+  }
+
+  fit(ys) {
+    const n = ys.length, xs = ys.map((_, i) => i);
+    const mx = (n - 1) / 2, my = ys.reduce((a, b) => a + b, 0) / n;
+    let sxy = 0, sxx = 0;
+    xs.forEach((x, i) => { sxy += (x - mx) * (ys[i] - my); sxx += (x - mx) * (x - mx); });
+    const b = sxy / sxx, a = my - b * mx;
+    const pred = xs.map((x) => a + b * x);
+    let ssr = 0, sst = 0;
+    ys.forEach((y, i) => { ssr += (y - pred[i]) ** 2; sst += (y - my) ** 2; });
+    return { a, b, pred, r2: 1 - ssr / sst };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const v = {
+      vHome: s.view === "home",
+      vPresisjon: s.view === "presisjon",
+      vMaleusikkerhet: s.view === "maleusikkerhet",
+      vLinearitet: s.view === "linearitet",
+      vDeteksjonsgrense: s.view === "deteksjonsgrense",
+      vInternstandard: s.view === "internstandard",
+      vMatriseeffekt: s.view === "matriseeffekt",
+      q: s.q, hq: s.hq, allOpen: s.allOpen, depthOpen: s.depthOpen,
+      depthMark: s.depthOpen ? "▾" : "▸",
+      goHome: () => this.nav("home"),
+      goTerm: (e) => this.nav(e.currentTarget.dataset.term),
+      onQ: (e) => this.setState({ q: e.target.value }),
+      onHq: (e) => this.setState({ hq: e.target.value }),
+      toggleAll: () => this.setState({ allOpen: !s.allOpen }),
+      toggleDepth: () => this.setState({ depthOpen: !s.depthOpen })
+    };
+
+    const search = (t) => {
+      const n = t.trim().toLowerCase();
+      if (!n) return [];
+      return ORDER.filter((id) => (TERMS[id].title + " " + TERMS[id].def + " " + TERMS[id].kw).toLowerCase().includes(n))
+        .map((id) => ({ id, title: TERMS[id].title, cat: TERMS[id].cat, def: TERMS[id].def }));
+    };
+    const qh = search(s.q), hh = search(s.hq);
+    v.qOpen = s.q.trim().length > 0;
+    v.qClosed = !v.qOpen;
+    v.qHits = qh;
+    v.qEmpty = v.qOpen && qh.length === 0;
+    v.hqOpen = s.hq.trim().length > 0;
+    v.hqHits = hh;
+    v.hqEmpty = v.hqOpen && hh.length === 0;
+
+    // term-link preview
+    const openPop = (el, touch) => {
+      const id = el.dataset.term, r = el.getBoundingClientRect();
+      const narrow = window.innerWidth < 620;
+      const w = narrow ? Math.min(window.innerWidth - 24, 420) : 304;
+      const left = narrow ? 12 : Math.max(12, Math.min(window.innerWidth - w - 12, r.left - 20));
+      const below = r.bottom + 10;
+      const place = !narrow && below + 190 > window.innerHeight;
+      this.setState({
+        pop: { id, touch, left, w, top: narrow ? null : (place ? null : below), bottomVal: narrow ? 12 : (place ? window.innerHeight - r.top + 10 : null) }
+      });
+    };
+    v.linkEnter = (e) => { if (this.canHover) openPop(e.currentTarget, false); };
+    v.linkLeave = () => { if (this.canHover && this.state.pop && !this.state.pop.touch) this.setState({ pop: null }); };
+    v.linkClick = (e) => {
+      e.preventDefault();
+      const el = e.currentTarget;
+      if (this.canHover) this.nav(el.dataset.term);
+      else if (this.state.pop && this.state.pop.id === el.dataset.term) this.setState({ pop: null });
+      else openPop(el, true);
+    };
+    v.closePop = () => this.setState({ pop: null });
+    v.pop = !!s.pop;
+    if (s.pop) {
+      const t = TERMS[s.pop.id];
+      v.popId = s.pop.id; v.popTitle = t.title; v.popDef = t.def; v.popCat = t.cat;
+      v.popTouch = s.pop.touch;
+      v.popLeft = s.pop.left + "px";
+      v.popWidth = s.pop.w + "px";
+      v.popTop = s.pop.top == null ? "auto" : s.pop.top + "px";
+      v.popBottom = s.pop.bottomVal == null ? "auto" : s.pop.bottomVal + "px";
+    }
+
+    // Presisjon
+    const seeds = [[-0.7, -0.5], [0.6, -0.8], [0.9, 0.4], [-0.4, 0.8], [0.2, -0.2], [-0.9, 0.2]];
+    const sp = s.spread, amp = 2 + sp * 0.30;
+    v.spread = sp;
+    v.shots = seeds.map(([dx, dy]) => ({
+      l: (62 + dx * amp) + "%",
+      t: (30 + dy * amp) + "%"
+    }));
+    const rsd = 0.4 + sp * 0.115;
+    v.rsd = rsd.toFixed(1).replace(".", ",");
+    v.precVerdict = rsd < 2 ? "Målingene er svært presise: gjentak gir praktisk talt samme tall." : rsd < 6 ? "Akseptabel presisjon for mange rutinemetoder." : "For dårlig presisjon: gjentak av samme prøve gir ulike svar.";
+    v.onSpread = (e) => this.setState({ spread: Number(e.target.value) });
+
+    // Måleusikkerhet
+    const contrib = [2.5, 3.2, 1.8, 0.9];
+    const uc = Math.sqrt(contrib.reduce((a, c, i) => a + (s.u[i] ? c * c : 0), 0));
+    const U = 2 * uc, res = 0.42, lim = 0.5, abs = res * U / 100;
+    const scale = (val) => ((val / 0.7) * 100) + "%";
+    v.uRel = U.toFixed(1).replace(".", ",");
+    v.uAbs = abs.toFixed(3).replace(".", ",");
+    v.uCenter = scale(res); v.limitPos = scale(lim);
+    v.uLeft = scale(Math.max(0, res - abs)); v.uWidth = ((2 * abs / 0.7) * 100) + "%";
+    v.uVerdict = uc === 0 ? "Uten bidrag er svaret et punkt uten slark — det finnes ikke i praksis." : res + abs >= lim ? "Intervallet krysser grenseverdien. Du kan ikke slå fast at prøven er under grensa." : "Hele intervallet ligger under grenseverdien. Konklusjonen holder.";
+    [0, 1, 2, 3].forEach((i) => {
+      const on = s.u[i];
+      v["u" + i + "bg"] = on ? "#1f6f6b" : "#fff";
+      v["u" + i + "bc"] = on ? "#1f6f6b" : "#d9d2c4";
+      v["u" + i + "fg"] = on ? "#fff" : "#4a453c";
+      v["tU" + i] = () => { const u = this.state.u.slice(); u[i] = !u[i]; this.setState({ u }); };
+    });
+
+    // Linearitet
+    const b = s.bend, bendAmt = [0, 1, 4, 12, 26, 46];
+    const ys = [0, 1, 2, 3, 4, 5].map((i) => 220 - 36 * i + b * bendAmt[i]);
+    const xsPx = [0, 1, 2, 3, 4, 5].map((i) => 70 + i * 64);
+    v.bendPct = Math.round(b * 100);
+    v.onBend = (e) => this.setState({ bend: Number(e.target.value) / 100 });
+    v.linPoints = xsPx.map((x, i) => x + "," + ys[i].toFixed(1)).join(" ");
+    v.linDots = xsPx.map((x, i) => ({ x, y: ys[i].toFixed(1) }));
+    v.dragX = xsPx[5]; v.dragY = ys[5].toFixed(1);
+    v.dragLabelX = xsPx[5] - 44; v.dragLabelY = (ys[5] - 2).toFixed(1);
+    const f = this.fit(ys);
+    v.fitY0 = (f.a + f.b * ((52 - 70) / 64)).toFixed(1);
+    v.fitY1 = (f.a + f.b * ((404 - 70) / 64)).toFixed(1);
+    v.r2 = f.r2.toFixed(4).replace(".", ",");
+    const maxAbs = Math.max(6, ...f.pred.map((p, i) => Math.abs(ys[i] - p)));
+    v.resid = ys.map((y, i) => {
+      const d = (y - f.pred[i]) / maxAbs * 100;
+      return { up: d < 0 ? Math.min(100, -d) + "%" : "0%", down: d > 0 ? Math.min(100, d) + "%" : "0%" };
+    });
+    v.linVerdict = b < 0.12 ? "Punktene ligger på linja, og residualene spretter tilfeldig rundt null. Metoden er lineær i dette området." : b < 0.45 ? "R² ser fortsatt fint ut, men residualene begynner å danne en bue. Det er et tidlig varsel." : "Tydelig metning i toppen. Høye prøver må fortynnes, ellers rapporteres de for lavt — selv med høy R².";
+    v.linSvg = (el) => { this.svg = el; };
+    v.linDown = (e) => { this._drag = true; this._move(e); };
+
+    // Internstandard
+    const loss = s.loss, fac = loss ? 0.7 : 1;
+    v.isAnalyteH = (62 * fac) + "%";
+    v.isStdH = (86 * fac) + "%";
+    v.isAnalyte = Math.round(620 * fac) + " enheter";
+    v.isStd = Math.round(860 * fac) + " enheter";
+    v.isRatio = "0,72";
+    v.lossLabel = loss ? "Gjenopprett prøven" : "Søl bort 30 % av prøven";
+    v.isVerdict = loss ? "Begge signalene falt med 30 %, men forholdet er uendret — og konsentrasjonen leses av forholdet. Tapet er regnet bort." : "Begge søylene er på fullt nivå. Prøv å søle bort en del av prøven.";
+    v.toggleLoss = () => this.setState({ loss: !this.state.loss });
+
+    // Matriseeffekt
+    const MX = {
+      vann: { f: 1, sig: "100 %", bias: "riktig", txt: "Referansesituasjonen: prøven oppfører seg som kalibreringsløsningene." },
+      blod: { f: 0.62, sig: "62 %", bias: "38 % for lavt", txt: "Ionesuppresjon fra fosfolipider og salter demper signalet. Kurven i vann overvurderer hva instrumentet gir i plasma." },
+      jord: { f: 1.18, sig: "118 %", bias: "18 % for høyt", txt: "Humusstoffer forsterker responsen her. Samme kalibrering gir nå for høye svar." }
+    };
+    const m = MX[s.mx];
+    v.mxSignal = m.sig; v.mxBias = m.bias; v.mxVerdict = m.txt;
+    v.mxY = (186 - (186 - 34) * m.f).toFixed(1);
+    v.mxLabelY = Math.max(16, Math.min(200, 186 - (186 - 34) * m.f - 8)).toFixed(1);
+    ["vann", "blod", "jord"].forEach((k, i) => {
+      const on = s.mx === k;
+      v["mx" + i + "bg"] = on ? "#1b1a17" : "#fff";
+      v["mx" + i + "bc"] = on ? "#1b1a17" : "#d9d2c4";
+      v["mx" + i + "fg"] = on ? "#fff" : "#4a453c";
+    });
+    v.setMx = (e) => this.setState({ mx: e.currentTarget.dataset.mx });
+
+    // Deteksjonsgrense
+    const nz = s.noise, seedsB = [0.42, 0.81, 0.13, 0.67, 0.29, 0.94, 0.55, 0.07, 0.73, 0.36, 0.88, 0.21, 0.61, 0.48, 0.97, 0.15, 0.79, 0.33, 0.58, 0.05, 0.86, 0.44, 0.69, 0.11, 0.92, 0.26, 0.63, 0.38, 0.75, 0.18, 0.83, 0.51, 0.09, 0.71, 0.31, 0.65, 0.23, 0.87, 0.41, 0.57];
+    const peakAt = 19, peakH = 100;
+    v.noise = nz;
+    v.bars = seedsB.map((sd, i) => {
+      const d = i - peakAt, peak = peakH * Math.exp(-(d * d) / 3.4);
+      return { h: Math.max(1.5, peak + sd * nz * 0.8) + "%" };
+    });
+    const namp = Math.max(2.5, nz * 0.8);
+    const snr = peakH / namp;
+    v.snr = snr.toFixed(1).replace(".", ",");
+    v.snrColor = snr >= 3 ? "#2f2c26" : "#b4552d";
+    v.snrVerdict = snr >= 10 ? "Toppen er godt over støyen. Her kan mengden også kvantifiseres." : snr >= 3 ? "Toppen kan påvises, men er for nær støyen til å tallfestes trygt." : "Nå kan du ikke lenger si sikkert at det er noe der. Svaret blir «ikke påvist».";
+    v.onNoise = (e) => this.setState({ noise: Number(e.target.value) });
+
+    return v;
+  }
+}
+
+</script>
+</body>
+</html>
