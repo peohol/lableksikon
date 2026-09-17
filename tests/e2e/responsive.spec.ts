@@ -6,11 +6,15 @@ const PATHS = [
   "/a-aa",
   "/kategori/kalibrering",
   "/kategori/prove",
+  "/kategori/statistikk",
   "/begrep/noyaktighet",
   "/begrep/kvantifiseringsgrense",
   "/begrep/matrikstilpasset",
   "/begrep/ionesuppresjon",
   "/begrep/provelagring",
+  "/begrep/konfidensintervall",
+  "/begrep/korrelasjon",
+  "/begrep/uteligger",
   "/begrep/opplosning",
 ];
 
@@ -50,7 +54,6 @@ test.describe("responsivitet", () => {
     const heading = page.getByRole("heading", { level: 1 });
     await expect(heading).toHaveText("Riktighet, presisjon og nøyaktighet");
     const box = (await heading.boundingBox())!;
-    // Tittelen bryter over flere linjer, aldri ellipse.
     expect(box.height).toBeGreaterThan(40);
     expect(await heading.evaluate((node) => getComputedStyle(node).textOverflow)).toBe("clip");
   });
