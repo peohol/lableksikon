@@ -26,4 +26,10 @@ export const SOURCES = {
     url: "https://doi.org/10.56526/2026.0005",
     note: "Praktisk veiledning for måleusikkerhet basert på intern presisjon og gjenvinning.",
   },
+  isoControlCharts: {
+    title: "ISO 7870-1:2019 — Control charts — Part 1: General guidelines",
+    organization: "ISO",
+    url: "https://www.iso.org/standard/69639.html",
+    note: "Overordnede prinsipper og begreper for kontrollkort.",
+  },
 } as const satisfies Record<string, Source>;
