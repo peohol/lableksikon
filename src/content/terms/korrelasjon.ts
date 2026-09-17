@@ -5,7 +5,7 @@ export const korrelasjon: PublishedTerm = {
   slug: "korrelasjon",
   title: "Korrelasjonskoeffisient",
   category: "statistikk",
-  definition: "Et tall mellom −1 og 1 som beskriver styrken og retningen på en lineær sammenheng mellom to størrelser.",
+  definition: "Pearsons korrelasjonskoeffisient r er et tall mellom −1 og 1 som beskriver styrken og retningen på en lineær sammenheng mellom to størrelser.",
   aliases: ["correlation coefficient", "Pearson r", "korrelasjon", "r", "samvariasjon"],
   explanation: [
     { kind: "p", text: "Pearsons r nær +1 betyr sterk positiv lineær samvariasjon, r nær −1 sterk negativ lineær samvariasjon, og r nær 0 liten lineær samvariasjon." },
