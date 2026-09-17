@@ -1,38 +1,40 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const linearitet: PublishedTerm = {
   slug: "linearitet",
   title: "Linearitet",
   category: "kalibrering",
-  definition: "Hvor godt målesignalet følger en rett linje når konsentrasjonen øker.",
+  definition: "Hvor godt målesystemets respons kan beskrives som en lineær funksjon av analyttnivået innen et angitt område.",
   aliases: ["kurve", "regresjon", "R²", "residualer", "metning", "rett linje", "kalibreringskurve"],
   explanation: [
     {
       kind: "p",
-      text: "Dobler du mengden stoff, bør signalet også dobles. Er det slik i hele området du bruker, er metoden lineær der — og da kan konsentrasjonen leses rett av kalibreringskurven.",
+      text: "Hvis signalet øker omtrent proporsjonalt når analyttnivået øker, kan sammenhengen ofte beskrives med en rett linje i det aktuelle området. Da kan en lineær kalibreringsmodell brukes til å beregne ukjente nivåer.",
     },
     {
       kind: "p",
-      text: "I praksis flater kurven ofte ut i toppen. Detektoren blir mettet, og to ganske ulike høye konsentrasjoner gir nesten samme signal. Da må prøven fortynnes ned i området der linja fortsatt er rett, ellers blir høye verdier systematisk underrapportert.",
+      text: "I praksis kan responsen bøye av ved lave eller høye nivåer, for eksempel på grunn av bakgrunnsbidrag eller metning. Da må arbeidsområdet begrenses eller en annen egnet modell brukes.",
     },
   ],
   demo: "linearitet-kurve",
   depth: {
-    title: "Dybde: regresjon, residualer og hvorfor R² ikke er nok",
+    title: "Dybde: residualer, modellvalg og hvorfor R² ikke er nok",
     blocks: [
       {
         kind: "p",
-        text: "Kalibreringen tilpasses vanligvis med minste kvadraters metode, y = a + bx. R² sier bare hvor mye av variasjonen modellen forklarer, og en tydelig krum kurve kan fortsatt gi R² over 0,99. Derfor vurderes linearitet på residualplottet: tilfeldig spredning rundt null er greit, et systematisk buemønster er ikke.",
+        text: "Et høyt R² er ikke i seg selv dokumentasjon på linearitet. Et systematisk mønster i residualene kan vise at en lineær modell er feil selv når R² ligger svært nær 1.",
       },
       {
         kind: "p",
-        text: "Arbeidsområdet er den delen av kurven der linja faktisk gjelder, nedad begrenset av [deteksjonsgrense](begrep:deteksjonsgrense) og oppad av metning.",
+        text: "Arbeidsområdet er området der metoden er dokumentert å ha egnet ytelse for formålet. Nedre grense bestemmes derfor ikke automatisk av [deteksjonsgrensen](begrep:deteksjonsgrense); for kvantitativ bruk er blant annet kvantifiseringsevne og krav til presisjon og skjevhet relevante.",
       },
       {
         kind: "p",
-        text: "Når spredningen øker med konsentrasjonen, vekter ulik varians de høye punktene for tungt; vektet regresjon (1/x eller 1/x²) gir bedre treff i nedre del av området.",
+        text: "Når variansen endrer seg med nivået, kan vektet regresjon være mer egnet enn uvektet minste kvadraters regresjon. Valg av vekting bør begrunnes ut fra data og modellens ytelse, ikke brukes mekanisk.",
       },
     ],
   },
+  sources: [SOURCES.eurachemValidation],
   status: "publisert",
 };
