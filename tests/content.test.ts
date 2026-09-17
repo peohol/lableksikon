@@ -83,6 +83,10 @@ describe("publiseringsstatus", () => {
     expect(termsInCategory("prove")).toHaveLength(9);
   });
 
+  it("har komplett kategori for statistikk og beregning", () => {
+    expect(termsInCategory("statistikk")).toHaveLength(14);
+  });
+
   it("skjuler kategorier uten publiserte begreper", () => {
     for (const category of categories) {
       const hasTerms = termsInCategory(category.slug).length > 0;
@@ -113,9 +117,10 @@ describe("global rekkefølge", () => {
     expect(neighbours?.next.category).not.toBe("kvalitet");
   });
 
-  it("krysser fra kalibrering til prøven og fra prøven til statistikk", () => {
+  it("krysser fra kalibrering til prøven, videre til statistikk og separasjon", () => {
     expect(getNeighbours("kontrollprove")?.next.slug).toBe("matriseeffekt");
-    expect(getNeighbours("provelagring")?.next.slug).toBe("standardavvik");
+    expect(getNeighbours("provelagring")?.next.slug).toBe("gjennomsnitt");
+    expect(getNeighbours("uteligger")?.next.slug).toBe("opplosning");
   });
 
   it("gir riktig posisjon i kategorien", () => {
@@ -125,7 +130,9 @@ describe("global rekkefølge", () => {
     expect(positionInCategory("kontrollprove")).toEqual({ index: 16, total: 16 });
     expect(positionInCategory("matriseeffekt")).toEqual({ index: 1, total: 9 });
     expect(positionInCategory("provelagring")).toEqual({ index: 9, total: 9 });
-    expect(positionInCategory("standardavvik")).toEqual({ index: 1, total: 1 });
+    expect(positionInCategory("gjennomsnitt")).toEqual({ index: 1, total: 14 });
+    expect(positionInCategory("standardavvik")).toEqual({ index: 4, total: 14 });
+    expect(positionInCategory("uteligger")).toEqual({ index: 14, total: 14 });
   });
 });
 
