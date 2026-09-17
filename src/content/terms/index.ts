@@ -18,11 +18,22 @@ import { validering } from "./validering";
 import { verifisering } from "./verifisering";
 import { kontrollkort } from "./kontrollkort";
 import { noyaktighet } from "./noyaktighet";
+import { kalibreringskurve } from "./kalibreringskurve";
 import { linearitet } from "./linearitet";
+import { arbeidsomrade } from "./arbeidsomrade";
 import { deteksjonsgrense } from "./deteksjonsgrense";
+import { kvantifiseringsgrense } from "./kvantifiseringsgrense";
+import { responsfaktor } from "./responsfaktor";
+import { vektet } from "./vektet";
+import { nullpunkt } from "./nullpunkt";
+import { ettpunkts } from "./ettpunkts";
+import { ekstern } from "./ekstern";
+import { matrikstilpasset } from "./matrikstilpasset";
 import { internstandard } from "./internstandard";
 import { standardaddisjon } from "./standardaddisjon";
 import { blindprove } from "./blindprove";
+import { drift } from "./drift";
+import { kontrollprove } from "./kontrollprove";
 import { matriseeffekt } from "./matriseeffekt";
 import { standardavvik } from "./standardavvik";
 import { opplosning } from "./opplosning";
@@ -49,12 +60,24 @@ export const publishedTerms: PublishedTerm[] = [
   verifisering,
   kontrollkort,
   noyaktighet,
-  // Kalibrering og kontroll
+  // Kalibrering og kontroll: fra selve kalibreringsrelasjonen via område og
+  // modellvalg til praktiske strategier og løpende seriekontroll.
+  kalibreringskurve,
   linearitet,
+  arbeidsomrade,
   deteksjonsgrense,
+  kvantifiseringsgrense,
+  responsfaktor,
+  vektet,
+  nullpunkt,
+  ettpunkts,
+  ekstern,
+  matrikstilpasset,
   internstandard,
   standardaddisjon,
   blindprove,
+  drift,
+  kontrollprove,
   // Prøven og omgivelsene
   matriseeffekt,
   // Statistikk og beregning

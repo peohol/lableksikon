@@ -75,6 +75,10 @@ describe("publiseringsstatus", () => {
     expect(counted).toBe(orderedTerms.length);
   });
 
+  it("har komplett kategori for kalibrering og kontroll", () => {
+    expect(termsInCategory("kalibrering")).toHaveLength(16);
+  });
+
   it("skjuler kategorier uten publiserte begreper", () => {
     for (const category of categories) {
       const hasTerms = termsInCategory(category.slug).length > 0;
@@ -101,13 +105,15 @@ describe("global rekkefølge", () => {
 
   it("krysser kategorigrenser etter siste kvalitetsbegrep", () => {
     const neighbours = getNeighbours("noyaktighet");
-    expect(neighbours?.next.slug).toBe("linearitet");
+    expect(neighbours?.next.slug).toBe("kalibreringskurve");
     expect(neighbours?.next.category).not.toBe("kvalitet");
   });
 
   it("gir riktig posisjon i kategorien", () => {
     expect(positionInCategory("presisjon")).toEqual({ index: 1, total: 18 });
     expect(positionInCategory("noyaktighet")).toEqual({ index: 18, total: 18 });
+    expect(positionInCategory("kalibreringskurve")).toEqual({ index: 1, total: 16 });
+    expect(positionInCategory("kontrollprove")).toEqual({ index: 16, total: 16 });
     expect(positionInCategory("standardavvik")).toEqual({ index: 1, total: 1 });
   });
 });

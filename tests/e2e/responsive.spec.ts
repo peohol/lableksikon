@@ -1,7 +1,15 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const WIDTHS = [320, 375, 390, 768, 1280, 1600];
-const PATHS = ["/", "/a-aa", "/kategori/kalibrering", "/begrep/noyaktighet", "/begrep/opplosning"];
+const PATHS = [
+  "/",
+  "/a-aa",
+  "/kategori/kalibrering",
+  "/begrep/noyaktighet",
+  "/begrep/kvantifiseringsgrense",
+  "/begrep/matrikstilpasset",
+  "/begrep/opplosning",
+];
 
 async function horizontalOverflow(page: Page) {
   return page.evaluate(() => {

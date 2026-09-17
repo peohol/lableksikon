@@ -15,8 +15,8 @@ export const standardaddisjon: PublishedTerm = {
   depth: {
     title: "Dybde: modellforutsetninger og ekstrapolasjon",
     blocks: [
-      { kind: "p", text: "I den vanlige lineære varianten tilpasses respons mot tilsatt mengde og den opprinnelige analyttmengden utledes ved ekstrapolasjon. Linearitet og likeverdige prøveporsjoner er derfor sentrale forutsetninger." },
-      { kind: "p", text: "Metoden krever flere målinger per prøve og kan gi større statistisk usikkerhet enn en godt tilpasset ekstern kalibrering. Den er særlig nyttig når responsens stigning påvirkes av den enkelte prøvens matriks." },
+      { kind: "p", text: "I den vanlige lineære varianten tilpasses respons mot tilsatt mengde og den opprinnelige analyttmengden utledes ved ekstrapolasjon. [Linearitet](begrep:linearitet) og likeverdige prøveporsjoner er derfor sentrale forutsetninger." },
+      { kind: "p", text: "Metoden krever flere målinger per prøve og kan gi større statistisk usikkerhet enn en godt tilpasset [ekstern kalibrering](begrep:ekstern). Den er særlig nyttig når responsens stigning påvirkes av den enkelte prøvens matriks." },
     ],
   },
   sources: [SOURCES.iupacStandardAddition, SOURCES.eurachem2025],

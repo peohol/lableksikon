@@ -48,6 +48,40 @@ const KontrollkortDemo = dynamic(() =>
   import("./QualityConceptDemos").then((module) => module.KontrollkortDemo),
 );
 
+const KalibreringskurveDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.KalibreringskurveDemo),
+);
+const KvantifiseringsgrenseDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.KvantifiseringsgrenseDemo),
+);
+const ResponsfaktorDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.ResponsfaktorDemo),
+);
+const ArbeidsomradeDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.ArbeidsomradeDemo),
+);
+const EttpunktskalibreringDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.EttpunktskalibreringDemo),
+);
+const VektetRegresjonDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.VektetRegresjonDemo),
+);
+const NullpunktDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.NullpunktDemo),
+);
+const DriftDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.DriftDemo),
+);
+const KontrollproveDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.KontrollproveDemo),
+);
+const EksternKalibreringDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.EksternKalibreringDemo),
+);
+const MatrikstilpassetKalibreringDemo = dynamic(() =>
+  import("./CalibrationConceptDemos").then((module) => module.MatrikstilpassetKalibreringDemo),
+);
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -73,6 +107,17 @@ const demos = {
   "internstandard-forhold": dynamic(() => import("./InternstandardForhold")),
   "standardaddisjon-steg": dynamic(() => import("./StandardaddisjonSteg")),
   "blindprove-typer": dynamic(() => import("./BlindproveTyper")),
+  "kalibreringskurve-punkter": KalibreringskurveDemo,
+  "kvantifiseringsgrense-krav": KvantifiseringsgrenseDemo,
+  "responsfaktor-forhold": ResponsfaktorDemo,
+  "arbeidsomrade-grenser": ArbeidsomradeDemo,
+  "ettpunktskalibrering-ankring": EttpunktskalibreringDemo,
+  "vektet-regresjon-vekter": VektetRegresjonDemo,
+  "nullpunkt-skjaring": NullpunktDemo,
+  "drift-tidsserie": DriftDemo,
+  "kontrollprove-vakt": KontrollproveDemo,
+  "ekstern-kalibrering-separat": EksternKalibreringDemo,
+  "matrikstilpasset-kalibrering-matriks": MatrikstilpassetKalibreringDemo,
   "matriseeffekt-matrikser": dynamic(() => import("./MatriseeffektMatrikser")),
   "standardavvik-formel": dynamic(() => import("./StandardavvikFormel")),
   "opplosning-topper": dynamic(() => import("./OpplosningTopper")),
