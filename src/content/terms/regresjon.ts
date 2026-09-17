@@ -20,6 +20,6 @@ export const regresjon: PublishedTerm = {
       { kind: "p", text: "En sterk [korrelasjon](begrep:korrelasjon) betyr ikke at én bestemt regresjonsmodell er riktig, og regresjon alene etablerer ikke årsakssammenheng." },
     ],
   },
-  sources: [SOURCES.nistLinearLeastSquares, SOURCES.iupacLeastSquares],
+  sources: [SOURCES.iupacRegressionAnalysis, SOURCES.nistLinearLeastSquares, SOURCES.iupacLeastSquares],
   status: "publisert",
 };
