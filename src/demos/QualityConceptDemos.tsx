@@ -159,7 +159,7 @@ export function SpesifisitetDemo() {
   return (
     <DemonstrationFrame
       kind="sammenligning"
-      instruction="Skilj mellom den foretrukne termen og sektoravhengig språkbruk."
+      instruction="Skill mellom det foretrukne begrepet og sektoravhengig språkbruk."
       label="Terminologien selektivitet og spesifisitet"
       afterword="IUPAC og Eurachem foretrekker selektivitet; «spesifisitet» brukes ulikt mellom fagområder."
     >
