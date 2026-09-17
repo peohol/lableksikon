@@ -1,35 +1,41 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const noyaktighet: PublishedTerm = {
   slug: "noyaktighet",
   title: "Riktighet, presisjon og nøyaktighet",
   category: "kvalitet",
   definition:
-    "Tre nærliggende begreper: presisjon er hvor samlet målingene er, riktighet er om de ligger rundt den sanne verdien, og nøyaktighet er begge egenskapene sett sammen.",
+    "Nøyaktighet beskriver hvor nær et måleresultat ligger den sanne verdien; begrepet er kvalitativt og er nært knyttet til både riktighet og presisjon.",
   aliases: ["accuracy", "trueness", "riktighet", "skjevhet", "bias", "nøyaktig"],
   explanation: [
     {
       kind: "p",
-      text: "Tre ord som ofte brukes om hverandre, men som betyr tre forskjellige ting. Pilkast igjen: presisjon er hvor tett pilene sitter, riktighet er om de sitter rundt blinken, og nøyaktighet er begge samtidig.",
+      text: "Tre ord ligger tett, men betyr ikke det samme. [Presisjon](begrep:presisjon) beskriver hvor godt gjentatte målinger stemmer overens. Riktighet beskriver hvor nær gjennomsnittet av svært mange gjentatte målinger ligger en referanseverdi. Nøyaktighet handler om hvor nær et enkelt måleresultat ligger den sanne verdien.",
     },
     {
       kind: "p",
-      text: "Skillet er praktisk, ikke pedantisk: [presisjon](begrep:presisjon) fikser du ved å gjenta og stramme opp rutinene, mens riktighet må avdekkes med referansemateriale eller ringtest. Gjentatte målinger alene avslører den aldri.",
+      text: "I praksis vurderer man ikke nøyaktighet med ett eget tall. God nøyaktighet forutsetter at både tilfeldige og systematiske feil er små. Systematiske avvik undersøkes blant annet som [skjevhet](begrep:skjevhet), mens tilfeldige variasjoner beskrives gjennom presisjon.",
     },
   ],
   demo: "riktighet-skiver",
   depth: {
-    title: "Dybde: terminologien i ISO 5725 og VIM",
+    title: "Dybde: VIM skiller mellom accuracy, trueness og precision",
     blocks: [
       {
         kind: "p",
-        text: "I ISO-terminologien er nøyaktighet (accuracy) samlebegrepet, satt sammen av riktighet (trueness) og presisjon. Dagligtalen bruker «nøyaktig» om begge deler, og det er der forvirringen oppstår.",
+        text: "VIM definerer measurement accuracy som nærhet mellom en målt verdi og en sann verdi for målestørrelsen. Accuracy er ikke en størrelse og gis derfor ikke en numerisk verdi. Begrepet er relatert til både riktighet og presisjon, men skal ikke brukes som synonym for noen av dem.",
       },
       {
         kind: "p",
-        text: "Riktighet uttrykkes som skjevhet, altså forskjellen mellom forventet middelverdi og en referanseverdi. Den kan korrigeres for, men korreksjonen har sin egen usikkerhet, som må inn i [budsjettet for måleusikkerhet](begrep:maleusikkerhet).",
+        text: "Measurement trueness er nærhet mellom gjennomsnittet av et uendelig antall gjentatte målinger og en referanseverdi. Riktighet er heller ikke en størrelse; numeriske mål på systematisk avvik uttrykkes blant annet som [skjevhet](begrep:skjevhet).",
+      },
+      {
+        kind: "p",
+        text: "Denne terminologien er viktig fordi god [presisjon](begrep:presisjon) ikke garanterer god riktighet, og god riktighet ikke garanterer liten spredning i enkeltmålinger.",
       },
     ],
   },
+  sources: [SOURCES.vim, SOURCES.eurachemValidation],
   status: "publisert",
 };
