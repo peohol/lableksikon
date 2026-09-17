@@ -4,30 +4,30 @@ test.describe("begrepslenker og forhåndsvisning", () => {
   test("hover åpner kortet, klikk navigerer (desktop)", async ({ page, hasTouch }) => {
     test.skip(hasTouch, "Gjelder pekere med hover.");
     await page.goto("/begrep/presisjon");
-    const link = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    const link = page.getByRole("link", { name: "Repeterbarhet", exact: true });
     await link.hover();
     await expect(page.getByRole("dialog")).toBeVisible();
     await link.click();
-    await expect(page).toHaveURL(/\/begrep\/maleusikkerhet$/);
+    await expect(page).toHaveURL(/\/begrep\/repeterbarhet$/);
   });
 
   test("første trykk forhåndsviser uten å navigere (touch)", async ({ page, hasTouch }) => {
     test.skip(!hasTouch, "Gjelder touch.");
     await page.goto("/begrep/presisjon");
-    const link = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    const link = page.getByRole("link", { name: "Repeterbarhet", exact: true });
     await link.tap();
     await expect(page.getByRole("dialog")).toBeVisible();
     await expect(page).toHaveURL(/\/begrep\/presisjon$/);
 
     // Kortet har en eksplisitt vei videre.
     await page.getByRole("dialog").getByRole("link", { name: /Gå til begrepet/ }).tap();
-    await expect(page).toHaveURL(/\/begrep\/maleusikkerhet$/);
+    await expect(page).toHaveURL(/\/begrep\/repeterbarhet$/);
   });
 
   test("nytt trykk på samme lenke lukker kortet (touch)", async ({ page, hasTouch }) => {
     test.skip(!hasTouch, "Gjelder touch.");
     await page.goto("/begrep/presisjon");
-    const link = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    const link = page.getByRole("link", { name: "Repeterbarhet", exact: true });
     await link.tap();
     await expect(page.getByRole("dialog")).toBeVisible();
     await link.tap();
@@ -39,7 +39,7 @@ test.describe("begrepslenker og forhåndsvisning", () => {
     await page.goto("/begrep/presisjon");
     // Kortet åpnes slik profilen tilsier: hover med peker, trykk på touch.
     // Et klikk med peker ville navigert videre i stedet.
-    const link = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    const link = page.getByRole("link", { name: "Repeterbarhet", exact: true });
     if (hasTouch) await link.tap();
     else await link.hover();
     const dialog = page.getByRole("dialog");
@@ -56,7 +56,7 @@ test.describe("begrepslenker og forhåndsvisning", () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/begrep/standardavvik");
     await page.locator("summary").click();
-    const link = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    const link = page.getByRole("link", { name: "systematisk skjevhet", exact: true });
     await link.scrollIntoViewIfNeeded();
     await link.hover();
     const dialog = page.getByRole("dialog");
@@ -71,10 +71,10 @@ test.describe("begrepslenker og forhåndsvisning", () => {
   test("bare én forhåndsvisning er åpen om gangen", async ({ page, hasTouch }) => {
     test.skip(hasTouch, "Gjelder hover.");
     await page.goto("/begrep/presisjon");
-    await page.getByRole("link", { name: "riktighet", exact: true }).hover();
+    await page.getByRole("link", { name: "Repeterbarhet", exact: true }).hover();
     await expect(page.getByRole("dialog")).toHaveCount(1);
-    await page.getByRole("link", { name: "måleusikkerhet", exact: true }).hover();
+    await page.getByRole("link", { name: "intermediær presisjon", exact: true }).hover();
     await expect(page.getByRole("dialog")).toHaveCount(1);
-    await expect(page.getByRole("dialog")).toContainText("Måleusikkerhet");
+    await expect(page.getByRole("dialog")).toContainText("Intermediær presisjon");
   });
 });
