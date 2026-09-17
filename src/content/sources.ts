@@ -26,6 +26,12 @@ export const SOURCES = {
     url: "https://doi.org/10.56526/2026.0005",
     note: "Praktisk veiledning for måleusikkerhet basert på intern presisjon og gjenvinning.",
   },
+  iupacAnalytical: {
+    title: "Metrological and quality concepts in analytical chemistry (IUPAC Recommendations 2021)",
+    organization: "IUPAC",
+    url: "https://doi.org/10.1515/pac-2019-0819",
+    note: "Terminologi for blant annet blank, matrikseffekt og standardaddisjon.",
+  },
   isoControlCharts: {
     title: "ISO 7870-1:2019 — Control charts — Part 1: General guidelines",
     organization: "ISO",
