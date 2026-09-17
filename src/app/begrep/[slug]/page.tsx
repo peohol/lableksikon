@@ -99,6 +99,23 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
         </DepthDisclosure>
       </div>
 
+      {term.sources?.length ? (
+        <section className={`${styles.text} ${styles.sources}`} aria-labelledby="sources-heading">
+          <h2 id="sources-heading" className={styles.sourcesTitle}>Fagkilder</h2>
+          <ul className={styles.sourcesList}>
+            {term.sources.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.title}
+                </a>
+                <span className={styles.sourceOrganization}> — {source.organization}</span>
+                {source.note ? <span className={styles.sourceNote}>. {source.note}</span> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       {neighbours ? (
         <PreviousNextNavigation
           current={term}
