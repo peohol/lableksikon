@@ -1,39 +1,41 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const presisjon: PublishedTerm = {
   slug: "presisjon",
   title: "Presisjon",
   category: "kvalitet",
   definition:
-    "Hvor likt resultatet blir når samme prøve måles flere ganger under samme betingelser.",
+    "Hvor godt gjentatte måleresultater stemmer overens med hverandre under angitte målebetingelser.",
   aliases: ["spredning", "gjentak", "RSD", "standardavvik", "pilkast", "repeterbarhet"],
   explanation: [
     {
       kind: "p",
-      text: "Tenk på pilkast. Presisjon handler bare om hvor tett pilene sitter samlet, ikke om de treffer blinken. Sitter alle pilene i samme hjørne av skiva, er kastet presist — og likevel feil.",
+      text: "Tenk på pilkast. Presisjon handler om hvor tett pilene sitter samlet, ikke om de treffer blinken. Sitter alle pilene tett i samme hjørne av skiva, er kastene presise — men ikke nødvendigvis nøyaktige.",
     },
     {
       kind: "p",
-      text: "På laben betyr det at du kan måle samme prøve seks ganger og få nesten samme tall hver gang, selv om nivået er systematisk forskjøvet. Hvor nær sannheten tallet ligger, hører til [riktighet](begrep:noyaktighet) og [måleusikkerhet](begrep:maleusikkerhet).",
+      text: "På laben betyr det at gjentatte målinger kan gi svært like tall selv om resultatene har en systematisk [skjevhet](begrep:skjevhet). Hvor nær et måleresultat ligger en referanseverdi, hører til [riktighet og nøyaktighet](begrep:noyaktighet).",
     },
   ],
   demo: "presisjon-spredning",
   depth: {
-    title: "Dybde: standardavvik, RSD og hvilken presisjon som måles",
+    title: "Dybde: standardavvik, RSD og presisjonsbetingelser",
     blocks: [
       {
         kind: "p",
-        text: "Presisjon tallfestes som standardavviket s for n gjentatte målinger, oftest relativt: RSD = s / x̄ · 100 %. Med få gjentak er s selv et usikkert estimat, og n = 6 er et vanlig minimum i metodevalidering.",
+        text: "Presisjon uttrykkes numerisk ved mål på upresisjon, typisk standardavvik, varians eller variasjonskoeffisient (RSD/CV). Et estimat av presisjon er selv usikkert når det bygger på få observasjoner, så antall replikater må tilpasses formålet med undersøkelsen.",
       },
       {
         kind: "p",
-        text: "Nivået må oppgis. Repeterbarhet er samme operatør, samme instrument, samme dag. Intermediær presisjon varierer dag og operatør innen ett laboratorium. Reproduserbarhet er mellom laboratorier, og gir alltid høyere RSD.",
+        text: "Presisjon gir bare mening når betingelsene er angitt. [Repeterbarhet](begrep:repeterbarhet) gjelder korte tidsintervaller under like betingelser. [Intermediær presisjon](begrep:intermediar) tillater variasjon innen samme laboratorium, mens [reproduserbarhet](begrep:reproduserbarhet) gjelder målinger under ulike laboratoriebetingelser.",
       },
       {
         kind: "p",
-        text: "Presisjon inngår som ett bidrag i [måleusikkerhet](begrep:maleusikkerhet), men dekker ikke systematisk skjevhet.",
+        text: "Presisjonsdata er ofte et viktig bidrag ved vurdering av [måleusikkerhet](begrep:maleusikkerhet), men presisjon alene beskriver ikke systematiske effekter.",
       },
     ],
   },
+  sources: [SOURCES.vim, SOURCES.eurachemValidation],
   status: "publisert",
 };
