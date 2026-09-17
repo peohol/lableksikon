@@ -19,6 +19,6 @@ export const intermediar: PublishedTerm = {
       { kind: "p", text: "Intermediær presisjon er ofte mer representativ for den tilfeldige variasjonen i rutinedrift enn et rent repeterbarhetsforsøk, men resultatet avhenger av at forsøket faktisk dekker de variasjonskildene laboratoriet møter." },
     ],
   },
-  sources: [SOURCES.vimIntermediatePrecision, SOURCES.eurachem2025],
+  sources: [SOURCES.vimIntermediatePrecisionCondition, SOURCES.vimIntermediatePrecision, SOURCES.eurachem2025],
   status: "publisert",
 };

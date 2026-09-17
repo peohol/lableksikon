@@ -1,7 +1,6 @@
 import type { Source } from "./schema";
 
-const EURACHEM_2025 =
-  "https://www.eurachem.org/images/stories/Guides/pdf/MV_guide_3rd_ed_V1_EN.pdf";
+const EURACHEM_2025 = "https://eurachem.org/index.php/publications/guides/mv";
 
 /** Autoritative fagkilder som kan gjenbrukes mellom begreper. */
 export const SOURCES = {
@@ -9,8 +8,11 @@ export const SOURCES = {
   vimTrueness: { title: "JCGM VIM — Measurement trueness", url: "https://jcgm.bipm.org/vim/en/2.14.html", locator: "VIM 2.14" },
   vimPrecision: { title: "JCGM VIM — Measurement precision", url: "https://jcgm.bipm.org/vim/en/2.15.html", locator: "VIM 2.15" },
   vimBias: { title: "JCGM VIM — Measurement bias", url: "https://jcgm.bipm.org/vim/en/2.18.html", locator: "VIM 2.18" },
+  vimRepeatabilityCondition: { title: "JCGM VIM — Repeatability condition of measurement", url: "https://jcgm.bipm.org/vim/en/2.20.html", locator: "VIM 2.20" },
   vimRepeatability: { title: "JCGM VIM — Measurement repeatability", url: "https://jcgm.bipm.org/vim/en/2.21.html", locator: "VIM 2.21" },
+  vimIntermediatePrecisionCondition: { title: "JCGM VIM — Intermediate precision condition of measurement", url: "https://jcgm.bipm.org/vim/en/2.22.html", locator: "VIM 2.22" },
   vimIntermediatePrecision: { title: "JCGM VIM — Intermediate measurement precision", url: "https://jcgm.bipm.org/vim/en/2.23.html", locator: "VIM 2.23" },
+  vimReproducibilityCondition: { title: "JCGM VIM — Reproducibility condition of measurement", url: "https://jcgm.bipm.org/vim/en/2.24.html", locator: "VIM 2.24" },
   vimReproducibility: { title: "JCGM VIM — Measurement reproducibility", url: "https://jcgm.bipm.org/vim/en/2.25.html", locator: "VIM 2.25" },
   vimUncertainty: { title: "JCGM VIM — Measurement uncertainty", url: "https://jcgm.bipm.org/vim/en/2.26.html", locator: "VIM 2.26" },
   vimExpandedUncertainty: { title: "JCGM VIM — Expanded measurement uncertainty", url: "https://jcgm.bipm.org/vim/en/2.35.html", locator: "VIM 2.35" },

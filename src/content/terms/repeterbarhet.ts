@@ -5,7 +5,7 @@ export const repeterbarhet: PublishedTerm = {
   slug: "repeterbarhet",
   title: "Repeterbarhet",
   category: "kvalitet",
-  definition: "Presisjon for gjentatte målinger under spesifiserte, mest mulig like forhold over kort tid.",
+  definition: "Presisjon for gjentatte målinger under spesifiserte repeterbarhetsbetingelser over kort tid.",
   aliases: ["repeatability", "within-run", "serie", "korttidspresisjon"],
   explanation: [
     { kind: "p", text: "Når samme prøve analyseres flere ganger i én kort serie med samme prosedyre og målesystem, undersøker vi hvor mye resultatene spriker under repeterbarhetsbetingelser." },
@@ -19,6 +19,6 @@ export const repeterbarhet: PublishedTerm = {
       { kind: "p", text: "Repeterbarhet uttrykkes gjerne som standardavvik eller RSD. Den observerte verdien avhenger av både prøvenivå, forsøksdesign og hvor mange replikater som inngår." },
     ],
   },
-  sources: [SOURCES.vimRepeatability, SOURCES.vimPrecision, SOURCES.eurachem2025],
+  sources: [SOURCES.vimRepeatabilityCondition, SOURCES.vimRepeatability, SOURCES.eurachem2025],
   status: "publisert",
 };
