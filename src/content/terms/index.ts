@@ -35,6 +35,14 @@ import { blindprove } from "./blindprove";
 import { drift } from "./drift";
 import { kontrollprove } from "./kontrollprove";
 import { matriseeffekt } from "./matriseeffekt";
+import { ionesuppresjon } from "./ionesuppresjon";
+import { ioneforsterkning } from "./ioneforsterkning";
+import { interferens } from "./interferens";
+import { bakgrunnssignal } from "./bakgrunnssignal";
+import { matriksblank } from "./matriksblank";
+import { kontaminering } from "./kontaminering";
+import { krysskontaminering } from "./krysskontaminering";
+import { provelagring } from "./provelagring";
 import { standardavvik } from "./standardavvik";
 import { opplosning } from "./opplosning";
 
@@ -78,8 +86,17 @@ export const publishedTerms: PublishedTerm[] = [
   blindprove,
   drift,
   kontrollprove,
-  // Prøven og omgivelsene
+  // Prøven og omgivelsene: fra samlet matriseeffekt via konkrete mekanismer
+  // og blanker til kontaminering, overføring og lagringsbetingelser.
   matriseeffekt,
+  ionesuppresjon,
+  ioneforsterkning,
+  interferens,
+  bakgrunnssignal,
+  matriksblank,
+  kontaminering,
+  krysskontaminering,
+  provelagring,
   // Statistikk og beregning
   standardavvik,
   // Separasjon

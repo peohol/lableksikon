@@ -1,6 +1,7 @@
 import type { Source } from "./schema";
 
 const EURACHEM_2025 = "https://eurachem.org/index.php/publications/guides/mv";
+const EURACHEM_QAC_2026 = "https://eurachem.org/index.php/publications/guides/qa";
 
 /** Autoritative fagkilder som kan gjenbrukes mellom begreper. */
 export const SOURCES = {
@@ -21,6 +22,7 @@ export const SOURCES = {
   vimTraceability: { title: "JCGM VIM — Metrological traceability", url: "https://jcgm.bipm.org/vim/en/2.41.html", locator: "VIM 2.41" },
   vimVerification: { title: "JCGM VIM — Verification", url: "https://jcgm.bipm.org/vim/en/2.44.html", locator: "VIM 2.44" },
   vimValidation: { title: "JCGM VIM — Validation", url: "https://jcgm.bipm.org/vim/en/2.45.html", locator: "VIM 2.45" },
+  vimBackgroundIndication: { title: "JCGM VIM — Blank indication / background indication", url: "https://jcgm.bipm.org/vim/en/4.2.html", locator: "VIM 4.2" },
   vimSensitivity: { title: "JCGM VIM — Sensitivity of a measuring system", url: "https://jcgm.bipm.org/vim/en/4.12.html", locator: "VIM 4.12" },
   vimSelectivity: { title: "JCGM VIM — Selectivity of a measuring system", url: "https://jcgm.bipm.org/vim/en/4.13.html", locator: "VIM 4.13" },
   vimDetectionLimit: { title: "JCGM VIM — Detection limit", url: "https://jcgm.bipm.org/vim/en/4.18.html", locator: "VIM 4.18" },
@@ -28,6 +30,7 @@ export const SOURCES = {
   vimCalibrationCurve: { title: "JCGM VIM — Calibration curve", url: "https://jcgm.bipm.org/vim/en/4.31.html", locator: "VIM 4.31" },
   eurachem2025: { title: "Eurachem — The Fitness for Purpose of Analytical Methods, 3rd ed. (2025)", url: EURACHEM_2025 },
   eurachemQac2016: { title: "Eurachem/CITAC — Quality in Analytical Chemistry (2016)", url: "https://eurachem.org/images/stories/Guides/pdf/Eurachem_CITAC_QAC_2016_EN.pdf" },
+  eurachemQac2026: { title: "Eurachem/CITAC — Guide to Quality in Analytical Chemistry, 4th ed. (2026)", url: EURACHEM_QAC_2026 },
   iupacMetrology2021: { title: "IUPAC Recommendations — Metrological and quality concepts in analytical chemistry", url: "https://doi.org/10.1515/pac-2019-0819" },
   iupacCalibrationFunction: { title: "IUPAC Gold Book — Calibration function", url: "https://goldbook.iupac.org/terms/view/C00778" },
   iupacLinearitySystem: { title: "IUPAC Gold Book — Linearity of a measuring system", url: "https://goldbook.iupac.org/terms/view/08023" },
@@ -35,7 +38,13 @@ export const SOURCES = {
   iupacQuantificationLimit: { title: "IUPAC Gold Book — Limit of quantification", url: "https://goldbook.iupac.org/terms/view/08022" },
   iupacWorkingInterval: { title: "IUPAC Gold Book — Working interval", url: "https://goldbook.iupac.org/terms/view/08051" },
   iupacRecovery: { title: "IUPAC Gold Book — Recovered quantity value ratio", url: "https://goldbook.iupac.org/terms/view/08039" },
+  iupacBackgroundIndication: { title: "IUPAC Gold Book — Background indication", url: "https://goldbook.iupac.org/terms/view/08007" },
+  iupacInterferent: { title: "IUPAC Gold Book — Interferent", url: "https://goldbook.iupac.org/terms/view/08019" },
+  iupacInterference: { title: "IUPAC Gold Book — Interference", url: "https://goldbook.iupac.org/terms/view/I03089" },
   iupacBlank: { title: "IUPAC Gold Book — Blank material", url: "https://goldbook.iupac.org/terms/view/08010" },
+  iupacIonSuppression: { title: "IUPAC Gold Book — Ion suppression", url: "https://goldbook.iupac.org/terms/view/12445" },
+  iupacIonEnhancement: { title: "IUPAC Gold Book — Ion enhancement", url: "https://goldbook.iupac.org/terms/view/12437" },
+  iupacCarryOver: { title: "IUPAC Gold Book — Carry-over", url: "https://goldbook.iupac.org/terms/view/C00866" },
   iupacInternalStandard: { title: "IUPAC Gold Book — Internal standard", url: "https://goldbook.iupac.org/terms/view/I03108" },
   iupacSurrogateInternalStandard: { title: "IUPAC Gold Book — Surrogate internal standard", url: "https://goldbook.iupac.org/terms/view/12589" },
   iupacStandardAddition: { title: "IUPAC Gold Book — Measurement procedure with standard addition", url: "https://goldbook.iupac.org/terms/view/08030" },

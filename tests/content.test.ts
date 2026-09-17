@@ -79,6 +79,10 @@ describe("publiseringsstatus", () => {
     expect(termsInCategory("kalibrering")).toHaveLength(16);
   });
 
+  it("har komplett kategori for prøven og omgivelsene", () => {
+    expect(termsInCategory("prove")).toHaveLength(9);
+  });
+
   it("skjuler kategorier uten publiserte begreper", () => {
     for (const category of categories) {
       const hasTerms = termsInCategory(category.slug).length > 0;
@@ -109,11 +113,18 @@ describe("global rekkefølge", () => {
     expect(neighbours?.next.category).not.toBe("kvalitet");
   });
 
+  it("krysser fra kalibrering til prøven og fra prøven til statistikk", () => {
+    expect(getNeighbours("kontrollprove")?.next.slug).toBe("matriseeffekt");
+    expect(getNeighbours("provelagring")?.next.slug).toBe("standardavvik");
+  });
+
   it("gir riktig posisjon i kategorien", () => {
     expect(positionInCategory("presisjon")).toEqual({ index: 1, total: 18 });
     expect(positionInCategory("noyaktighet")).toEqual({ index: 18, total: 18 });
     expect(positionInCategory("kalibreringskurve")).toEqual({ index: 1, total: 16 });
     expect(positionInCategory("kontrollprove")).toEqual({ index: 16, total: 16 });
+    expect(positionInCategory("matriseeffekt")).toEqual({ index: 1, total: 9 });
+    expect(positionInCategory("provelagring")).toEqual({ index: 9, total: 9 });
     expect(positionInCategory("standardavvik")).toEqual({ index: 1, total: 1 });
   });
 });
