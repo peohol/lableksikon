@@ -15,7 +15,7 @@ export const ettpunkts: PublishedTerm = {
   depth: {
     title: "Dybde: når ett punkt kan være forsvarlig",
     blocks: [
-      { kind: "p", text: "Eurachem beskriver at ett kalibreringspunkt kan være tilstrekkelig i et dokumentert lineært område når hensikten er å etablere eller kontrollere stigningstallet. Før rutinebruk må linearitet, område og relevant varians være undersøkt." },
+      { kind: "p", text: "Eurachem anbefaler at hele kalibreringsfunksjonen og intervallet undersøkes ved verifisering eller validering, og at laboratoriet deretter dokumenterer at den foreslåtte rutinekalibreringen — for eksempel ett punkt — faktisk er egnet for formålet." },
       { kind: "p", text: "Ettpunktskalibrering er derfor ikke en snarvei rundt validering. Risikoen øker dersom responsen drifter, konstantleddet endrer seg, matriseeffekter varierer eller prøvene ligger langt fra kalibratornivået." },
       { kind: "p", text: "[Kontrollprøver](begrep:kontrollprove) kan gi uavhengig informasjon om at rutineserien fortsatt oppfører seg som forventet, men de erstatter ikke dokumentasjon av selve kalibreringsstrategien." },
     ],
