@@ -43,7 +43,20 @@ import { matriksblank } from "./matriksblank";
 import { kontaminering } from "./kontaminering";
 import { krysskontaminering } from "./krysskontaminering";
 import { provelagring } from "./provelagring";
+import { gjennomsnitt } from "./gjennomsnitt";
+import { median } from "./median";
+import { varians } from "./varians";
 import { standardavvik } from "./standardavvik";
+import { normalfordeling } from "./normalfordeling";
+import { frihetsgrader } from "./frihetsgrader";
+import { konfidensintervall } from "./konfidensintervall";
+import { signifikansniva } from "./signifikansniva";
+import { ttest } from "./ttest";
+import { ftest } from "./ftest";
+import { regresjon } from "./regresjon";
+import { minstekvadrater } from "./minstekvadrater";
+import { korrelasjon } from "./korrelasjon";
+import { uteligger } from "./uteligger";
 import { opplosning } from "./opplosning";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
@@ -68,8 +81,7 @@ export const publishedTerms: PublishedTerm[] = [
   verifisering,
   kontrollkort,
   noyaktighet,
-  // Kalibrering og kontroll: fra selve kalibreringsrelasjonen via område og
-  // modellvalg til praktiske strategier og løpende seriekontroll.
+  // Kalibrering og kontroll
   kalibreringskurve,
   linearitet,
   arbeidsomrade,
@@ -86,8 +98,7 @@ export const publishedTerms: PublishedTerm[] = [
   blindprove,
   drift,
   kontrollprove,
-  // Prøven og omgivelsene: fra samlet matriseeffekt via konkrete mekanismer
-  // og blanker til kontaminering, overføring og lagringsbetingelser.
+  // Prøven og omgivelsene
   matriseeffekt,
   ionesuppresjon,
   ioneforsterkning,
@@ -97,8 +108,22 @@ export const publishedTerms: PublishedTerm[] = [
   kontaminering,
   krysskontaminering,
   provelagring,
-  // Statistikk og beregning
+  // Statistikk og beregning: sentralmål og spredning, deretter fordelinger og
+  // inferens, så modellering og til slutt observasjoner som utfordrer modellen.
+  gjennomsnitt,
+  median,
+  varians,
   standardavvik,
+  normalfordeling,
+  frihetsgrader,
+  konfidensintervall,
+  signifikansniva,
+  ttest,
+  ftest,
+  regresjon,
+  minstekvadrater,
+  korrelasjon,
+  uteligger,
   // Separasjon
   opplosning,
 ];
