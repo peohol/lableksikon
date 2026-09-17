@@ -6,7 +6,7 @@ export const presisjon: PublishedTerm = {
   title: "Presisjon",
   category: "kvalitet",
   definition: "Hvor godt gjentatte målinger stemmer overens med hverandre under spesifiserte betingelser.",
-  aliases: ["precision", "spredning", "RSD", "standardavvik", "gjentak"],
+  aliases: ["precision", "spredning", "RSD", "standardavvik", "gjentak", "pilkast"],
   explanation: [
     { kind: "p", text: "Tenk på pilkast. Presisjon handler om hvor tett pilene sitter samlet, ikke om de treffer midten. En tett klynge i feil del av skiva kan derfor være svært presis og samtidig systematisk feil." },
     { kind: "p", text: "Presisjon må alltid knyttes til betingelsene for gjentakelsen. [Repeterbarhet](begrep:repeterbarhet), [intermediær presisjon](begrep:intermediar) og [reproduserbarhet](begrep:reproduserbarhet) beskriver ulike nivåer av slike betingelser." },
