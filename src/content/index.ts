@@ -1,5 +1,5 @@
 import { categories } from "./categories";
-import { draftTerms } from "./drafts";
+import { draftTerms as prototypeDraftTerms } from "./drafts";
 import { publishedTerms } from "./terms";
 import { conceptLinksIn } from "./richtext";
 import {
@@ -12,6 +12,15 @@ import {
 
 export type { Block, Category, DraftTerm, PublishedTerm } from "./schema";
 export { parseInline, plainText } from "./richtext";
+
+/**
+ * `drafts.ts` stammer fra designprototypen. Når et begrep publiseres, er den
+ * publiserte posten autoritativ og prototypens køpost filtreres bort her.
+ * Dermed kan prototypefilen bevares som historisk redaksjonelt råmateriale
+ * uten at samme slug finnes to ganger i den aktive innholdsmodellen.
+ */
+const publishedSlugsForDraftFilter = new Set(publishedTerms.map((term) => term.slug));
+const draftTerms = prototypeDraftTerms.filter((term) => !publishedSlugsForDraftFilter.has(term.slug));
 
 export interface ContentProblem {
   where: string;
