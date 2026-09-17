@@ -58,6 +58,7 @@ export const SOURCES = {
   iupacConfidenceLevel: { title: "IUPAC Gold Book — Confidence level", url: "https://goldbook.iupac.org/terms/view/C01246" },
   iupacConfidenceLimits: { title: "IUPAC Gold Book — Confidence limits", url: "https://goldbook.iupac.org/terms/view/C01247" },
   iupacCorrelationCoefficient: { title: "IUPAC Gold Book — Correlation coefficient", url: "https://goldbook.iupac.org/terms/view/C01347" },
+  iupacRegressionAnalysis: { title: "IUPAC Gold Book — Regression analysis", url: "https://goldbook.iupac.org/terms/view/RT06979" },
   iupacLeastSquares: { title: "IUPAC Gold Book — Least squares regression", url: "https://goldbook.iupac.org/terms/view/10149" },
   iupacOrdinaryLeastSquares: { title: "IUPAC Gold Book — Ordinary least squares regression", url: "https://goldbook.iupac.org/terms/view/10154" },
   nistStandardDeviation: { title: "NIST/SEMATECH e-Handbook — Measures of Scale", url: "https://www.itl.nist.gov/div898/handbook/eda/section3/eda356.htm" },
