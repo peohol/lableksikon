@@ -6,7 +6,7 @@ export const matriksblank: PublishedTerm = {
   title: "Matriksblank",
   category: "prove",
   definition: "Et blankmateriale som består av samme eller relevant prøvematriks, med ingen eller så lite som mulig av analytten som undersøkes.",
-  aliases: ["matrix blank", "blank matrix", "analyttfri matriks", "blankmatriks", "matrix-free analyte"],
+  aliases: ["matrix blank", "blank matrix", "analyttfri matriks", "blankmatriks"],
   explanation: [
     { kind: "p", text: "En matriksblank skal etterligne prøvens øvrige innhold uten at analytten selv bidrar vesentlig. Den kan derfor vise signaler og [interferenser](begrep:interferens) som en ren løsemiddelblank ikke fanger opp." },
     { kind: "p", text: "IUPAC omtaler «matrix blank» som én type blankmateriale. Det er ikke alltid mulig å skaffe en perfekt analyttfri matriks; da må laboratoriet dokumentere hvordan bakgrunn eller endogent analyttnivå håndteres." },
