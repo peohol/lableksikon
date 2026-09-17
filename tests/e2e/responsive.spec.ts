@@ -5,9 +5,12 @@ const PATHS = [
   "/",
   "/a-aa",
   "/kategori/kalibrering",
+  "/kategori/prove",
   "/begrep/noyaktighet",
   "/begrep/kvantifiseringsgrense",
   "/begrep/matrikstilpasset",
+  "/begrep/ionesuppresjon",
+  "/begrep/provelagring",
   "/begrep/opplosning",
 ];
 
