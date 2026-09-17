@@ -33,6 +33,16 @@ export type Block = z.infer<typeof blockSchema>;
 export const demoIdSchema = z.enum(DEMO_IDS);
 export type DemoId = z.infer<typeof demoIdSchema>;
 
+/** Fagkilde som underbygger definisjon, terminologi eller sentrale fagpåstander. */
+export const sourceSchema = z.object({
+  title: z.string().min(1),
+  organization: z.string().min(1),
+  url: z.string().url(),
+  note: z.string().min(1).optional(),
+});
+
+export type Source = z.infer<typeof sourceSchema>;
+
 /**
  * Et publisert begrep. Alt som trengs for den offentlige siden må være på
  * plass: definisjon, enkel forklaring, demonstrasjon og dybde. Det finnes
@@ -52,6 +62,12 @@ export const publishedTermSchema = z.object({
   demo: demoIdSchema,
   /** Synonymer og beslektede ord for søk. Skrives i grunnform. */
   aliases: z.array(z.string().min(1)),
+  /**
+   * Kilder blir obligatoriske når det eksisterende innholdet er faglig gjennomgått.
+   * Feltet er midlertidig valgfritt for å kunne innføre kildestøtte uten å gjøre
+   * dagens publiserte sider ugyldige under migreringen.
+   */
+  sources: z.array(sourceSchema).min(1).optional(),
   status: z.literal("publisert"),
 });
 
