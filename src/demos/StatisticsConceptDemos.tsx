@@ -1,5 +1,4 @@
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
-import shared from "./demos.module.css";
 import styles from "./StatisticsConceptDemos.module.css";
 
 function ValueRows({ rows }: { rows: Array<{ label: string; values: string }> }) {
