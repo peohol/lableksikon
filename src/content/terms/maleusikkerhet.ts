@@ -1,11 +1,12 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const maleusikkerhet: PublishedTerm = {
   slug: "maleusikkerhet",
   title: "Måleusikkerhet",
   category: "kvalitet",
   definition:
-    "Et intervall som angir hvor det sanne resultatet med rimelig sikkerhet ligger.",
+    "En ikke-negativ parameter som beskriver spredningen av verdier som, ut fra informasjonen man har, med rimelighet kan tilordnes målestørrelsen.",
   aliases: [
     "usikkerhet",
     "intervall",
@@ -18,30 +19,31 @@ export const maleusikkerhet: PublishedTerm = {
   explanation: [
     {
       kind: "p",
-      text: "Når du veier deg om morgenen, tenker du kanskje «82 kilo, pluss minus en halv». Måleusikkerhet er den samme tanken, bare regnet ut systematisk i stedet for antatt.",
+      text: "Et måleresultat er ikke et perfekt punkt på tallinja. Måleusikkerhet beskriver hvor stor spredning det er rimelig å knytte til verdien vi tilordner det vi prøver å måle, gitt all informasjonen vi har om måleprosessen.",
     },
     {
       kind: "p",
-      text: "Et analyseresultat er aldri ett eksakt tall. Pipettering, kalibreringskurve, temperatur og [presisjon](begrep:presisjon) bidrar hver med sin lille bit slark. Legger du bidragene sammen, får du et intervall — og først da kan du si om resultatet ligger over eller under en grenseverdi.",
+      text: "Bidrag kan komme fra blant annet kalibrering, prøveopparbeiding, referansematerialer, [presisjon](begrep:presisjon) og systematiske effekter. Usikkerhet betyr derfor ikke at «den sanne verdien med en bestemt sannsynlighet ligger i intervallet»; den beskriver kvaliteten på kunnskapen om målestørrelsen.",
     },
   ],
   demo: "usikkerhetsbudsjett",
   depth: {
-    title: "Dybde: budsjett, kombinert usikkerhet og dekningsfaktor",
+    title: "Dybde: standardusikkerhet, kombinert usikkerhet og utvidet usikkerhet",
     blocks: [
       {
         kind: "p",
-        text: "Uavhengige bidrag kombineres kvadratisk: u_c = √(u₁² + u₂² + …). Derfor dominerer det største bidraget, og det er der forbedring gir effekt — å halvere et bidrag på 0,9 % endrer nesten ingenting.",
+        text: "Standard måleusikkerhet er måleusikkerhet uttrykt som et standardavvik. Når flere uavhengige standardusikkerhetsbidrag inngår i en modell, kombineres de typisk ved kvadratisk summering. Korrelasjoner må tas hensyn til dersom bidragene ikke er uavhengige.",
       },
       {
         kind: "p",
-        text: "Utvidet usikkerhet U = k · u_c, vanligvis med k = 2, som svarer til omtrent 95 % dekning. Resultatet rapporteres som x ± U med k oppgitt.",
+        text: "[Utvidet måleusikkerhet](begrep:utvidet) fås ved å multiplisere kombinert standardusikkerhet med en [dekningsfaktor](begrep:dekningsfaktor). Dekningsfaktoren velges ut fra ønsket dekningssannsynlighet og den aktuelle sannsynlighetsfordelingen; k = 2 gir ofte omtrent 95 % dekning når en normaltilnærming er rimelig.",
       },
       {
         kind: "p",
-        text: "Skjevhet skal korrigeres eller inngå i budsjettet. Bidrag fra [matriseeffekt](begrep:matriseeffekt) er ofte vanskeligst å tallfeste, fordi de varierer fra prøve til prøve.",
+        text: "Et usikkerhetsbudsjett dokumenterer hvilke bidrag som er tatt med, hvordan de er estimert og hvordan de er kombinert. I rutineanalytikk kan data fra intermediær presisjon og gjenvinning være et praktisk grunnlag for å estimere viktige deler av usikkerheten.",
       },
     ],
   },
+  sources: [SOURCES.vim, SOURCES.gum, SOURCES.eurachemUncertainty],
   status: "publisert",
 };
