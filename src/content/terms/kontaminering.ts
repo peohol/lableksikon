@@ -6,7 +6,7 @@ export const kontaminering: PublishedTerm = {
   title: "Kontaminering",
   category: "prove",
   definition: "Uønsket tilførsel av analytt eller annet materiale til prøve, blank, reagens eller utstyr som kan påvirke måleresultatet.",
-  aliases: ["contamination", "forurensning", "kontaminasjon", "bakgrunn", "sporstoff"],
+  aliases: ["contamination", "forurensning", "kontaminasjon", "sporstoff"],
   explanation: [
     { kind: "p", text: "Kontaminering kan komme fra beholdere, pipetter, laboratoriemiljø, reagenser, standarder eller tidligere arbeid. Ved sporanalyse kan svært små mengder være nok til å gi målbar feil." },
     { kind: "p", text: "Et uventet signal i en [blank](begrep:blindprove) kan være et tegn på kontaminering, men blanktypen avgjør hvor i prosessen feilen kan lokaliseres. En instrumentblank sier for eksempel lite om kontaminering som oppstår under prøveopparbeidingen." },
