@@ -1,35 +1,24 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const noyaktighet: PublishedTerm = {
   slug: "noyaktighet",
   title: "Riktighet, presisjon og nøyaktighet",
   category: "kvalitet",
-  definition:
-    "Tre nærliggende begreper: presisjon er hvor samlet målingene er, riktighet er om de ligger rundt den sanne verdien, og nøyaktighet er begge egenskapene sett sammen.",
-  aliases: ["accuracy", "trueness", "riktighet", "skjevhet", "bias", "nøyaktig"],
+  definition: "Nøyaktighet beskriver hvor nær et måleresultat er den sanne verdien; begrepet henger sammen med både riktighet og presisjon.",
+  aliases: ["accuracy", "trueness", "riktighet", "nøyaktig", "true value", "bias"],
   explanation: [
-    {
-      kind: "p",
-      text: "Tre ord som ofte brukes om hverandre, men som betyr tre forskjellige ting. Pilkast igjen: presisjon er hvor tett pilene sitter, riktighet er om de sitter rundt blinken, og nøyaktighet er begge samtidig.",
-    },
-    {
-      kind: "p",
-      text: "Skillet er praktisk, ikke pedantisk: [presisjon](begrep:presisjon) fikser du ved å gjenta og stramme opp rutinene, mens riktighet må avdekkes med referansemateriale eller ringtest. Gjentatte målinger alene avslører den aldri.",
-    },
+    { kind: "p", text: "Tre ord ligner, men beskriver ikke det samme. [Presisjon](begrep:presisjon) handler om hvor godt gjentatte målinger stemmer overens. Riktighet handler om hvor nær middelverdien av mange målinger ligger en referanseverdi." },
+    { kind: "p", text: "Nøyaktighet brukes om hvor nær et enkelt måleresultat er den sanne verdien. VIM understreker at nøyaktighet ikke er en egen tallstørrelse, og at begrepet er knyttet til både presisjon og riktighet." },
   ],
   demo: "riktighet-skiver",
   depth: {
-    title: "Dybde: terminologien i ISO 5725 og VIM",
+    title: "Dybde: VIM-terminologien og forholdet til skjevhet",
     blocks: [
-      {
-        kind: "p",
-        text: "I ISO-terminologien er nøyaktighet (accuracy) samlebegrepet, satt sammen av riktighet (trueness) og presisjon. Dagligtalen bruker «nøyaktig» om begge deler, og det er der forvirringen oppstår.",
-      },
-      {
-        kind: "p",
-        text: "Riktighet uttrykkes som skjevhet, altså forskjellen mellom forventet middelverdi og en referanseverdi. Den kan korrigeres for, men korreksjonen har sin egen usikkerhet, som må inn i [budsjettet for måleusikkerhet](begrep:maleusikkerhet).",
-      },
+      { kind: "p", text: "Riktighet er definert for middelverdien av et stort antall gjentatte målinger i forhold til en referanseverdi og er omvendt knyttet til systematisk målefeil. Den uttrykkes derfor ofte gjennom et estimat på [skjevhet](begrep:skjevhet), ikke som «prosent riktighet»." },
+      { kind: "p", text: "Høy presisjon alene gir ikke høy nøyaktighet hvis resultatene er systematisk forskjøvet. Omvendt kan et middel ligge nær referansen selv om enkeltmålingene har stor tilfeldig spredning." },
     ],
   },
+  sources: [SOURCES.vimAccuracy, SOURCES.vimTrueness, SOURCES.vimPrecision],
   status: "publisert",
 };

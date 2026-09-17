@@ -100,7 +100,7 @@ test.describe("responsivitet", () => {
     const columnsAt = async (width: number) => {
       await page.setViewportSize({ width, height: 900 });
       await page.goto("/");
-      await page.getByRole("link", { name: "Kvalitet i måling" }).waitFor();
+      await page.getByRole("link", { name: "Kvalitet i måling", exact: true }).waitFor();
       return page.evaluate(() => {
         const grid = document.querySelector("main div[class*='grid']") as HTMLElement;
         return getComputedStyle(grid).gridTemplateColumns.split(" ").length;

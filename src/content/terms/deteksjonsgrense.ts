@@ -1,38 +1,25 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const deteksjonsgrense: PublishedTerm = {
   slug: "deteksjonsgrense",
   title: "Deteksjonsgrense",
   category: "kalibrering",
-  definition: "Den minste mengden som kan skilles sikkert fra instrumentets egen støy.",
-  aliases: ["LOD", "støy", "signal-støy", "blank", "ikke påvist", "grense", "hvisking", "LOQ"],
+  definition: "Et lavt analyttnivå der metoden, med definerte sannsynligheter for falskt positivt og falskt negativt svar, kan skille tilstedeværelse fra fravær.",
+  aliases: ["LOD", "limit of detection", "deteksjon", "signal-støy", "blank", "påvisningsgrense"],
   explanation: [
-    {
-      kind: "p",
-      text: "Alle instrumenter brummer litt, også når prøven er tom. Tenk på en samtale i et rom med vifte: normal tale hører du tydelig, en hvisking forsvinner i viftesuset — selv om hviskingen er der.",
-    },
-    {
-      kind: "p",
-      text: "Deteksjonsgrensen er hvor stort signalet må være før vi tør si at stoffet faktisk finnes i prøven. Under grensa er riktig svar «ikke påvist», ikke «null». Hvor lite du kan måle henger derfor sammen med hvor rolig bakgrunnen er, ikke bare med instrumentets følsomhet.",
-    },
+    { kind: "p", text: "Ved svært lave nivåer overlapper resultatfordelingen for prøver med analytt og for prøver uten analytt. En deteksjonsgrense må derfor knyttes til hvor stor risiko man aksepterer for å hevde analytt når den ikke er der, og for å overse analytt som faktisk er der." },
+    { kind: "p", text: "Dette er en egenskap ved hele måleprosedyren, ikke bare instrumentet. Blankvariasjon, prøveopparbeiding, [matriseeffekt](begrep:matriseeffekt) og valgt statistisk tilnærming påvirker grensen." },
   ],
   demo: "deteksjonsgrense-stoy",
   depth: {
-    title: "Dybde: LOD, LOQ og hvordan grensa fastsettes",
+    title: "Dybde: LOD, LOQ og hvorfor én formel ikke passer alle metoder",
     blocks: [
-      {
-        kind: "p",
-        text: "LOD estimeres oftest fra blankprøver som x̄_blank + 3s_blank, eller fra kalibreringskurvens standardfeil: 3,3 · s_y/b. Kvantifiseringsgrensen LOQ ligger høyere, typisk 10s, fordi det er strengere å oppgi et tall enn å slå fast at noe er der.",
-      },
-      {
-        kind: "p",
-        text: "Grensene er egenskaper ved hele metoden: opparbeiding, fortynning og [matriseeffekt](begrep:matriseeffekt) flytter dem. Derfor bør de bestemmes i reell matriks, med [blindprøver](begrep:blindprove) fra samme serie.",
-      },
-      {
-        kind: "p",
-        text: "Resultater under LOQ rapporteres som «< LOQ» med grensa oppgitt. Å regne videre på slike tall gir falsk presisjon.",
-      },
+      { kind: "p", text: "VIM definerer deteksjonsgrensen gjennom to feilrisikoer: sannsynligheten for falskt å hevde tilstedeværelse og sannsynligheten for falskt å hevde fravær. Eurachem beskriver flere praktiske måter å estimere grensen på avhengig av datagrunnlag og metode." },
+      { kind: "p", text: "Signal-støy-forhold rundt 3 og faktorer som 3 eller 3,3 ganger et standardavvik brukes i enkelte konvensjoner, men er ikke en universell definisjon av LOD. Tilsvarende er «10 ganger standardavviket» en vanlig heuristikk for kvantifiseringsgrense, ikke en naturkonstant." },
+      { kind: "p", text: "Hvordan resultater under en kvantifiserings- eller rapporteringsgrense skal rapporteres og brukes videre, avhenger av formål, regelverk og laboratoriets beslutningsregler." },
     ],
   },
+  sources: [SOURCES.vimDetectionLimit, SOURCES.eurachem2025],
   status: "publisert",
 };

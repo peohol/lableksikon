@@ -1,35 +1,25 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const blindprove: PublishedTerm = {
   slug: "blindprove",
   title: "Blindprøve",
   category: "kalibrering",
-  definition:
-    "En prøve uten analytten, som viser hva metoden gir når svaret skal være ingenting.",
-  aliases: ["blank", "nullprøve", "reagensblank", "metodeblank", "matriksblank"],
+  definition: "Et blankmateriale med ingen eller så lite som mulig av analytten, brukt til å undersøke signalet som oppstår uten analyttbidrag.",
+  aliases: ["blank", "blank material", "nullprøve", "reagensblank", "metodeblank", "matriksblank"],
   explanation: [
-    {
-      kind: "p",
-      text: "En blindprøve er en prøve du vet ikke inneholder stoffet du leter etter. Den går gjennom nøyaktig samme behandling som de virkelige prøvene, og forteller deg hva instrumentet svarer når svaret skal være ingenting.",
-    },
-    {
-      kind: "p",
-      text: "Får blindprøven et signal, kommer det fra utstyret, reagensene eller lokalet — ikke fra prøven. Det er derfor det finnes flere typer, og hvilken du velger bestemmer hva du faktisk får kontrollert.",
-    },
+    { kind: "p", text: "En blank skal vise hva måleprosedyren bidrar med når analytten ikke skal bidra til signalet. Avhengig av hva du vil undersøke, kan blanken bestå av løsemiddel, reagenser, analyttfri matriks eller materiale som går gjennom hele prosedyren." },
+    { kind: "p", text: "Et signal i blanken kan skyldes bakgrunn, kontaminering, reagenser eller deler av prosessen. Derfor er «blank» ikke én prøveoppskrift, men en familie av kontroller med ulike formål." },
   ],
   demo: "blindprove-typer",
   depth: {
-    title: "Dybde: blankkorreksjon og blankverdiens plass i grensene",
+    title: "Dybde: blanktyper, blankkorreksjon og deteksjon",
     blocks: [
-      {
-        kind: "p",
-        text: "Blankverdien trekkes fra prøvesignalet når bidraget er stabilt og kjent. Er den ustabil, er spredningen i blankene viktigere enn nivået: det er nettopp s_blank som setter [deteksjonsgrensen](begrep:deteksjonsgrense).",
-      },
-      {
-        kind: "p",
-        text: "Blindprøver kjøres med i hver analyseserie, ikke bare ved validering, og resultatene føres på kontrollkort slik at en gradvis økning oppdages før den ødelegger en serie.",
-      },
+      { kind: "p", text: "IUPAC skiller blant annet mellom løsemiddelblank, reagensblank, matriksblank, prosedyreblank og instrumentblank. Hvilken som er relevant avhenger av hvor i målekjeden man vil lete etter bidrag." },
+      { kind: "p", text: "Blankkorreksjon bør bygge på en forstått og tilstrekkelig stabil blankrespons. Blankens variasjon er også sentral i flere tilnærminger til [deteksjonsgrense](begrep:deteksjonsgrense)." },
+      { kind: "p", text: "Hvor ofte blanker skal analyseres og hvilke akseptkriterier som gjelder, bestemmes av metode, risiko og kvalitetsprosedyre; det finnes ikke én universell regel om at alle blanktyper skal inngå i hver serie." },
     ],
   },
+  sources: [SOURCES.iupacBlank, SOURCES.eurachem2025],
   status: "publisert",
 };

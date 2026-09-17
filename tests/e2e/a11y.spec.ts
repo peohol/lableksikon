@@ -26,9 +26,9 @@ test.describe("automatisert tilgjengelighetssjekk", () => {
   }
 
   test("åpen dybde og åpen forhåndsvisning har ingen aksefeil", async ({ page }) => {
-    await page.goto("/begrep/linearitet");
+    await page.goto("/begrep/presisjon");
     await page.locator("summary").click();
-    await page.getByRole("link", { name: "deteksjonsgrense", exact: true }).hover();
+    await page.getByRole("link", { name: "måleusikkerhet", exact: true }).hover();
     await expect(page.getByRole("dialog")).toBeVisible();
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])

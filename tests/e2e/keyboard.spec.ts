@@ -53,12 +53,12 @@ test.describe("tastaturreise", () => {
 
   test("begrepsforhåndsvisning på tastatur: åpne, gå inn, Escape", async ({ page }) => {
     await page.goto("/begrep/presisjon");
-    const conceptLink = page.getByRole("link", { name: "riktighet", exact: true });
+    const conceptLink = page.getByRole("link", { name: "Repeterbarhet", exact: true });
     await conceptLink.focus();
 
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
-    await expect(dialog).toContainText("Riktighet, presisjon og nøyaktighet");
+    await expect(dialog).toContainText("Repeterbarhet");
 
     // Tab flytter fokus inn i kortet.
     await page.keyboard.press("Tab");
@@ -75,7 +75,7 @@ test.describe("tastaturreise", () => {
     await page.goto("/begrep/presisjon");
     const heading = page.getByRole("heading", { level: 1 });
     const before = await heading.boundingBox();
-    const paragraph = page.getByRole("link", { name: "måleusikkerhet", exact: true });
+    const paragraph = page.getByRole("link", { name: "Repeterbarhet", exact: true });
     await paragraph.hover();
     await expect(page.getByRole("dialog")).toBeVisible();
     const after = await heading.boundingBox();

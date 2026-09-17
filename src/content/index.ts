@@ -1,5 +1,5 @@
 import { categories } from "./categories";
-import { draftTerms } from "./drafts";
+import { draftTerms as prototypeDraftTerms } from "./drafts";
 import { publishedTerms } from "./terms";
 import { conceptLinksIn } from "./richtext";
 import {
@@ -10,19 +10,23 @@ import {
   type PublishedTerm,
 } from "./schema";
 
-export type { Block, Category, DraftTerm, PublishedTerm } from "./schema";
+export type { Block, Category, DraftTerm, PublishedTerm, Source } from "./schema";
 export { parseInline, plainText } from "./richtext";
+
+/**
+ * `drafts.ts` er den opprinnelige prototypens redaksjonelle kø. Når et begrep
+ * publiseres, filtreres den gamle køposten bort her slik at den aldri blir
+ * eksponert eller validert som et samtidig utkast.
+ */
+const publishedSlugs = new Set(publishedTerms.map((term) => term.slug));
+export const draftTerms = prototypeDraftTerms.filter((term) => !publishedSlugs.has(term.slug));
 
 export interface ContentProblem {
   where: string;
   message: string;
 }
 
-/**
- * Validerer hele innholdslaget. Kalles ved modullasting, slik at ugyldig
- * innhold stopper både `next build` og testkjøring i stedet for å nå
- * nettleseren.
- */
+/** Validerer hele innholdslaget ved modullasting. */
 export function validateContent(): ContentProblem[] {
   const problems: ContentProblem[] = [];
   const report = (where: string, message: string) => problems.push({ where, message });
@@ -39,7 +43,6 @@ export function validateContent(): ContentProblem[] {
   }
 
   const seenSlugs = new Map<string, string>();
-  const publishedSlugs = new Set(publishedTerms.map((term) => term.slug));
 
   for (const term of publishedTerms) {
     const where = `begrep ${term.slug}`;
@@ -52,10 +55,7 @@ export function validateContent(): ContentProblem[] {
     seenSlugs.set(term.slug, "publiserte begreper");
     if (!categorySlugs.has(term.category)) report(where, `ukjent kategori «${term.category}»`);
 
-    const links = [
-      ...conceptLinksIn(term.explanation),
-      ...conceptLinksIn(term.depth.blocks),
-    ];
+    const links = [...conceptLinksIn(term.explanation), ...conceptLinksIn(term.depth.blocks)];
     for (const slug of links) {
       if (slug === term.slug) report(where, "begrepslenke peker på begrepet selv");
       else if (!publishedSlugs.has(slug)) {
@@ -94,17 +94,12 @@ const byCategory = new Map<string, PublishedTerm[]>(
   ]),
 );
 
-/**
- * Den globale rekkefølgen: kategoriene i redaksjonell rekkefølge, begrepene i
- * sin rekkefølge innen kategorien. Forrige/neste følger denne, sirkulært.
- */
 export const orderedTerms: PublishedTerm[] = categories.flatMap(
   (category) => byCategory.get(category.slug) ?? [],
 );
 
 const termBySlug = new Map(orderedTerms.map((term) => [term.slug, term]));
 
-/** Kategorier som faktisk har publiserte begreper. Tomme kategorier vises ikke. */
 export const publishedCategories: Category[] = categories.filter(
   (category) => (byCategory.get(category.slug) ?? []).length > 0,
 );
@@ -142,7 +137,6 @@ export interface Neighbours {
   next: PublishedTerm;
 }
 
-/** Sirkulær naboer i global rekkefølge. Krever minst ett publisert begrep. */
 export function getNeighbours(slug: string): Neighbours | undefined {
   const index = orderedTerms.findIndex((term) => term.slug === slug);
   if (index === -1) return undefined;
@@ -153,10 +147,6 @@ export function getNeighbours(slug: string): Neighbours | undefined {
   };
 }
 
-/**
- * Relaterte begreper utledes av begrepslenkene i teksten — både utgående og
- * inngående. Da finnes relasjonen bare ett sted: i den løpende teksten.
- */
 export function getRelatedSlugs(slug: string): string[] {
   const term = getTerm(slug);
   if (!term) return [];
@@ -167,14 +157,10 @@ export function getRelatedSlugs(slug: string): string[] {
   const incoming = orderedTerms
     .filter((other) => {
       if (other.slug === slug) return false;
-      return [...conceptLinksIn(other.explanation), ...conceptLinksIn(other.depth.blocks)].includes(
-        slug,
-      );
+      return [...conceptLinksIn(other.explanation), ...conceptLinksIn(other.depth.blocks)].includes(slug);
     })
     .map((other) => other.slug);
   return [...new Set([...outgoing, ...incoming])].filter((s) => s !== slug).sort();
 }
 
-/** Alle begreper som ikke er publisert. Skal aldri nå den offentlige appen. */
-export { draftTerms };
 export { categories };

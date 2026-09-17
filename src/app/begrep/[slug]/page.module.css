@@ -1,8 +1,7 @@
 /*
  * Begrepssiden er ett grid med navngitte linjer. Teksten ligger alltid i
  * text-start/text-end; en bred demonstrasjon kan velge full-start/full-end
- * uten at teksten flytter seg. Det er hele mekanismen bak at demonstrasjonen
- * kan få stor visuell prioritet.
+ * uten at teksten flytter seg.
  */
 .article {
   display: grid;
@@ -65,4 +64,34 @@
 
 .explanation {
   margin-top: 20px;
+}
+
+.sources {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.sourcesTitle {
+  margin: 0 0 8px;
+}
+
+.sourceList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 5px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+}
+
+.sourceList a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+.sourceList a:hover {
+  color: var(--color-accent-hover);
 }

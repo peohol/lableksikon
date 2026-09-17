@@ -14,9 +14,11 @@ paths:
 - **Begrepslenker refererer til slug**, ikke til kopiert tekst:
   `[synlig tekst](begrep:slug)`. Den synlige teksten kan bøyes fritt.
 - **Et begrep publiseres først når siden er komplett** — definisjon, enkel
-  forklaring, demonstrasjon og dybde. Alt annet ligger i `drafts.ts` og skal
-  aldri nå den offentlige appen. Det finnes ingen offentlig
-  «ufullstendig begrep»-tilstand.
+  forklaring, demonstrasjon, dybde og minst én etterprøvbar fagkilde. Alt annet
+  er redaksjonell kø og skal aldri nå den offentlige appen.
+- Fagkilder skal som hovedregel være autoritative standard-/metrologikilder,
+  faglige retningslinjer eller primærkilder. Ikke bruk blogginnlegg som fasit
+  når en normativ eller autoritativ kilde finnes.
 - Aliaser skrives i grunnform; søket håndterer bøyning og æ/ø/å selv.
 - Validering kjører ved modullasting og stopper bygget ved feil. Nytt begrep
   krever også en demonstrasjon: id i `src/demos/ids.ts`, komponent i

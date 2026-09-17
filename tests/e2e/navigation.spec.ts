@@ -6,7 +6,7 @@ test.describe("URL-er og navigasjon", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "Begrepene i analytisk kjemi, forklart så enkelt som mulig.",
     );
-    await expect(page.getByRole("link", { name: "Kvalitet i måling" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Kvalitet i måling", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: /Alle \d+ begreper, A–Å/ })).toBeVisible();
   });
 
@@ -16,7 +16,7 @@ test.describe("URL-er og navigasjon", () => {
     await expect(page).toHaveURL(/\/begrep\/presisjon$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Presisjon");
 
-    await page.getByRole("link", { name: "Kvalitet i måling" }).click();
+    await page.getByRole("link", { name: "Kvalitet i måling", exact: true }).click();
     await expect(page).toHaveURL(/\/kategori\/kvalitet$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Kvalitet i måling");
 

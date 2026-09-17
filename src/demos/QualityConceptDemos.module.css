@@ -1,0 +1,164 @@
+.valueRows {
+  display: grid;
+  gap: 10px;
+}
+
+.valueRow {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.45fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.rowLabel, .cardTitle {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.rowValues {
+  font-family: var(--font-reading);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-body);
+}
+
+.bigComparison {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.bigComparison > div, .delta {
+  display: grid;
+  gap: 3px;
+}
+
+.bigComparison strong, .signal {
+  font-family: var(--font-reading);
+  font-size: clamp(28px, 6vw, 44px);
+  font-weight: 400;
+}
+
+.arrow {
+  font-size: 30px;
+  color: var(--color-text-tertiary);
+}
+
+.delta strong {
+  color: var(--color-warning);
+}
+
+.formulaLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.formulaLine > * {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+.formulaLine strong {
+  border-color: var(--color-accent);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  gap: 12px;
+}
+
+.columns > div {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: 10px;
+}
+
+.flowItem {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.flowNumber {
+  flex: 0 0 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-ink-invert);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.axis, .limit {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.limit {
+  stroke-dasharray: 7 5;
+}
+
+.lineMuted, .lineAccent {
+  fill: none;
+  stroke-width: 4;
+}
+
+.lineMuted {
+  stroke: var(--color-text-tertiary);
+}
+
+.lineAccent {
+  stroke: var(--color-accent);
+}
+
+.svgText {
+  fill: var(--color-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+}
+
+.point {
+  fill: var(--color-accent);
+}
+
+.pointWarning {
+  fill: var(--color-warning);
+}
+
+@media (max-width: 520px) {
+  .valueRow {
+    grid-template-columns: 1fr;
+  }
+}

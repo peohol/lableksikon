@@ -1,39 +1,24 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const internstandard: PublishedTerm = {
   slug: "internstandard",
   title: "Internstandard",
   category: "kalibrering",
-  definition:
-    "Et kjent stoff som tilsettes alle prøver, slik at variasjon i behandlingen kan regnes bort.",
-  aliases: ["IS", "isotopmerket", "tilsetning", "forhold", "ratio", "tap"],
+  definition: "Et stoff som tilsettes i kjent mengde og brukes som intern referanse for identifikasjon eller kvantifisering av analytten.",
+  aliases: ["internal standard", "IS", "isotopmerket", "responsforhold", "surrogate"],
   explanation: [
-    {
-      kind: "p",
-      text: "Tenk at du skal måle hvor mye saft det er i et glass, men søler litt på veien til vekta. Svaret blir for lavt, og du merker det ikke. Tilsetter du en kjent mengde av et annet stoff i samme glass, søles det like mye av begge — og forholdet mellom dem står stille.",
-    },
-    {
-      kind: "p",
-      text: "Internstandarden følger prøven gjennom hele opparbeidingen, og vi regner på forholdet mellom signalene i stedet for på signalet alene. Tap, fortynningsfeil og svingninger i instrumentet rammer da begge likt og faller ut av regnestykket.",
-    },
+    { kind: "p", text: "Hvis analytt og internstandard påvirkes på samme måte av en variasjonskilde, kan forholdet mellom signalene være mer stabilt enn analyttsignalet alene. Derfor beregnes kvantitativ respons ofte som analyttsignal dividert på internstandardsignal." },
+    { kind: "p", text: "Internstandarden må velges og tilsettes slik at den faktisk følger de variasjonene man ønsker å korrigere for. En internstandard som tilsettes etter prøveopparbeidingen kan for eksempel ikke korrigere for tap som allerede har skjedd." },
   ],
   demo: "internstandard-forhold",
   depth: {
-    title: "Dybde: valg av internstandard og hva den ikke fikser",
+    title: "Dybde: isotopmerkede standarder og begrensningene ved korreksjonen",
     blocks: [
-      {
-        kind: "p",
-        text: "En god internstandard oppfører seg mest mulig som analytten gjennom ekstraksjon, kromatografi og ionisering, men kan måles atskilt. I massespektrometri er isotopmerkede analoger idealet.",
-      },
-      {
-        kind: "p",
-        text: "Kalibreringen gjøres på responsforholdet analytt/IS mot konsentrasjon. Tilsetningen må skje tidlig, før tapene oppstår — tilsatt til slutt korrigerer den bare for instrumentet.",
-      },
-      {
-        kind: "p",
-        text: "Internstandard kompenserer for proporsjonale tap, ikke for feil som rammer bare analytten. Eluerer IS langt fra analytten, kan [matriseeffekt](begrep:matriseeffekt) treffe de to ulikt.",
-      },
+      { kind: "p", text: "I kvantitativ massespektrometri er en isotopmerket variant av analytten ofte den foretrukne surrogate internstandarden fordi kjemisk oppførsel, retensjon og ionisering ligner analytten tett." },
+      { kind: "p", text: "Korreksjonen er bare så god som samsvaret. Hvis [matriseeffekt](begrep:matriseeffekt), ekstraksjon eller nedbrytning påvirker analytt og internstandard forskjellig, kan responsforholdet fortsatt være skjevt." },
     ],
   },
+  sources: [SOURCES.iupacInternalStandard, SOURCES.iupacSurrogateInternalStandard, SOURCES.eurachem2025],
   status: "publisert",
 };

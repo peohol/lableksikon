@@ -16,6 +16,15 @@ export const categorySchema = z.object({
 
 export type Category = z.infer<typeof categorySchema>;
 
+/** Etterprøvbar fagkilde for et publisert begrep. */
+export const sourceSchema = z.object({
+  title: z.string().min(1),
+  url: z.string().url(),
+  locator: z.string().min(1).optional(),
+});
+
+export type Source = z.infer<typeof sourceSchema>;
+
 /**
  * Blokkformat for lesetekst. Inline-markup i `text` er begrenset til
  * begrepslenker: `[synlig tekst](begrep:slug)`. Definisjoner kopieres aldri
@@ -35,8 +44,7 @@ export type DemoId = z.infer<typeof demoIdSchema>;
 
 /**
  * Et publisert begrep. Alt som trengs for den offentlige siden må være på
- * plass: definisjon, enkel forklaring, demonstrasjon og dybde. Det finnes
- * ingen offentlig «ufullstendig begrep»-tilstand (handoff, låst beslutning).
+ * plass: definisjon, enkel forklaring, demonstrasjon, dybde og fagkilder.
  */
 export const publishedTermSchema = z.object({
   slug: slugSchema,
@@ -52,6 +60,8 @@ export const publishedTermSchema = z.object({
   demo: demoIdSchema,
   /** Synonymer og beslektede ord for søk. Skrives i grunnform. */
   aliases: z.array(z.string().min(1)),
+  /** Minst én autoritativ kilde må følge hvert publisert begrep. */
+  sources: z.array(sourceSchema).min(1),
   status: z.literal("publisert"),
 });
 
