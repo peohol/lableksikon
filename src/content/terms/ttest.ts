@@ -6,7 +6,7 @@ export const ttest: PublishedTerm = {
   title: "t-test",
   category: "statistikk",
   definition: "En familie av hypotesetester som bruker en t-fordeling til å vurdere en middelverdi eller forskjell mellom middelverdier når variansen må estimeres fra dataene.",
-  aliases: ["t-test", "Student t-test", "Student", "Welch", "paired t-test", "tosample t-test"],
+  aliases: ["t-test", "Student t-test", "Student", "Welch", "paired t-test", "two-sample t-test"],
   explanation: [
     { kind: "p", text: "En én-utvalgs t-test kan sammenligne et [gjennomsnitt](begrep:gjennomsnitt) med en referanseverdi. En to-utvalgs t-test kan sammenligne to middelverdier, og en paret t-test analyserer forskjellene innen matchede par." },
     { kind: "p", text: "Testen vurderer forskjellen relativt til den estimerte tilfeldige variasjonen. En større forskjell, mindre spredning eller flere uavhengige observasjoner gir typisk en større absolutt t-verdi." },
