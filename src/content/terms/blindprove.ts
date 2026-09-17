@@ -16,7 +16,7 @@ export const blindprove: PublishedTerm = {
     title: "Dybde: blanktyper, blankkorreksjon og deteksjon",
     blocks: [
       { kind: "p", text: "IUPAC skiller blant annet mellom løsemiddelblank, reagensblank, matriksblank, prosedyreblank og instrumentblank. Hvilken som er relevant avhenger av hvor i målekjeden man vil lete etter bidrag." },
-      { kind: "p", text: "Blankkorreksjon bør bygge på en forstått og tilstrekkelig stabil blankrespons. Blankens variasjon er også sentral i flere tilnærminger til [deteksjonsgrense](begrep:deteksjonsgrense)." },
+      { kind: "p", text: "Blankkorreksjon bør bygge på en forstått og tilstrekkelig stabil blankrespons. Blankens variasjon er også sentral i flere tilnærminger til [deteksjonsgrense](begrep:deteksjonsgrense) og [kvantifiseringsgrense](begrep:kvantifiseringsgrense)." },
       { kind: "p", text: "Hvor ofte blanker skal analyseres og hvilke akseptkriterier som gjelder, bestemmes av metode, risiko og kvalitetsprosedyre; det finnes ikke én universell regel om at alle blanktyper skal inngå i hver serie." },
     ],
   },

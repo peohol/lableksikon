@@ -16,7 +16,7 @@ export const deteksjonsgrense: PublishedTerm = {
     title: "Dybde: LOD, LOQ og hvorfor én formel ikke passer alle metoder",
     blocks: [
       { kind: "p", text: "VIM definerer deteksjonsgrensen gjennom to feilrisikoer: sannsynligheten for falskt å hevde tilstedeværelse og sannsynligheten for falskt å hevde fravær. Eurachem beskriver flere praktiske måter å estimere grensen på avhengig av datagrunnlag og metode." },
-      { kind: "p", text: "Signal-støy-forhold rundt 3 og faktorer som 3 eller 3,3 ganger et standardavvik brukes i enkelte konvensjoner, men er ikke en universell definisjon av LOD. Tilsvarende er «10 ganger standardavviket» en vanlig heuristikk for kvantifiseringsgrense, ikke en naturkonstant." },
+      { kind: "p", text: "Signal-støy-forhold rundt 3 og faktorer som 3 eller 3,3 ganger et standardavvik brukes i enkelte konvensjoner, men er ikke en universell definisjon av LOD. Tilsvarende er «10 ganger standardavviket» bare én mulig tilnærming til [kvantifiseringsgrense](begrep:kvantifiseringsgrense)." },
       { kind: "p", text: "Hvordan resultater under en kvantifiserings- eller rapporteringsgrense skal rapporteres og brukes videre, avhenger av formål, regelverk og laboratoriets beslutningsregler." },
     ],
   },
