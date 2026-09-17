@@ -48,7 +48,7 @@ test.describe("tastaturreise", () => {
       .getByRole("link", { name: /Neste/ });
     await nextLink.focus();
     await page.keyboard.press("Enter");
-    await expect(page).toHaveURL(/\/begrep\/internstandard$/);
+    await expect(page).toHaveURL(/\/begrep\/kvantifiseringsgrense$/);
   });
 
   test("begrepsforhåndsvisning på tastatur: åpne, gå inn, Escape", async ({ page }) => {
