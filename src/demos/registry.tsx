@@ -2,110 +2,56 @@ import dynamic from "next/dynamic";
 
 import type { DemoId } from "./ids";
 
-const RepeterbarhetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.RepeterbarhetDemo),
-);
-const IntermediarDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.IntermediarDemo),
-);
-const ReproduserbarhetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.ReproduserbarhetDemo),
-);
-const SkjevhetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.SkjevhetDemo),
-);
-const GjenvinningDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.GjenvinningDemo),
-);
-const UtvidetUsikkerhetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.UtvidetUsikkerhetDemo),
-);
-const DekningsfaktorDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.DekningsfaktorDemo),
-);
-const SelektivitetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.SelektivitetDemo),
-);
-const SpesifisitetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.SpesifisitetDemo),
-);
-const FolsomhetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.FolsomhetDemo),
-);
-const RobusthetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.RobusthetDemo),
-);
-const SporbarhetDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.SporbarhetDemo),
-);
-const ValideringDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.ValideringDemo),
-);
-const VerifiseringDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.VerifiseringDemo),
-);
-const KontrollkortDemo = dynamic(() =>
-  import("./QualityConceptDemos").then((module) => module.KontrollkortDemo),
-);
+const RepeterbarhetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.RepeterbarhetDemo));
+const IntermediarDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.IntermediarDemo));
+const ReproduserbarhetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.ReproduserbarhetDemo));
+const SkjevhetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.SkjevhetDemo));
+const GjenvinningDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.GjenvinningDemo));
+const UtvidetUsikkerhetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.UtvidetUsikkerhetDemo));
+const DekningsfaktorDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.DekningsfaktorDemo));
+const SelektivitetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.SelektivitetDemo));
+const SpesifisitetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.SpesifisitetDemo));
+const FolsomhetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.FolsomhetDemo));
+const RobusthetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.RobusthetDemo));
+const SporbarhetDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.SporbarhetDemo));
+const ValideringDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.ValideringDemo));
+const VerifiseringDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.VerifiseringDemo));
+const KontrollkortDemo = dynamic(() => import("./QualityConceptDemos").then((m) => m.KontrollkortDemo));
 
-const KalibreringskurveDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.KalibreringskurveDemo),
-);
-const KvantifiseringsgrenseDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.KvantifiseringsgrenseDemo),
-);
-const ResponsfaktorDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.ResponsfaktorDemo),
-);
-const ArbeidsomradeDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.ArbeidsomradeDemo),
-);
-const EttpunktskalibreringDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.EttpunktskalibreringDemo),
-);
-const VektetRegresjonDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.VektetRegresjonDemo),
-);
-const NullpunktDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.NullpunktDemo),
-);
-const DriftDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.DriftDemo),
-);
-const KontrollproveDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.KontrollproveDemo),
-);
-const EksternKalibreringDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.EksternKalibreringDemo),
-);
-const MatrikstilpassetKalibreringDemo = dynamic(() =>
-  import("./CalibrationConceptDemos").then((module) => module.MatrikstilpassetKalibreringDemo),
-);
+const KalibreringskurveDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.KalibreringskurveDemo));
+const KvantifiseringsgrenseDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.KvantifiseringsgrenseDemo));
+const ResponsfaktorDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.ResponsfaktorDemo));
+const ArbeidsomradeDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.ArbeidsomradeDemo));
+const EttpunktskalibreringDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.EttpunktskalibreringDemo));
+const VektetRegresjonDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.VektetRegresjonDemo));
+const NullpunktDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.NullpunktDemo));
+const DriftDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.DriftDemo));
+const KontrollproveDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.KontrollproveDemo));
+const EksternKalibreringDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.EksternKalibreringDemo));
+const MatrikstilpassetKalibreringDemo = dynamic(() => import("./CalibrationConceptDemos").then((m) => m.MatrikstilpassetKalibreringDemo));
 
-const IonesuppresjonDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.IonesuppresjonDemo),
-);
-const IoneforsterkningDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.IoneforsterkningDemo),
-);
-const InterferensDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.InterferensDemo),
-);
-const BakgrunnssignalDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.BakgrunnssignalDemo),
-);
-const MatriksblankDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.MatriksblankDemo),
-);
-const KontamineringDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.KontamineringDemo),
-);
-const KrysskontamineringDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.KrysskontamineringDemo),
-);
-const ProvelagringDemo = dynamic(() =>
-  import("./SampleConceptDemos").then((module) => module.ProvelagringDemo),
-);
+const IonesuppresjonDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.IonesuppresjonDemo));
+const IoneforsterkningDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.IoneforsterkningDemo));
+const InterferensDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.InterferensDemo));
+const BakgrunnssignalDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.BakgrunnssignalDemo));
+const MatriksblankDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.MatriksblankDemo));
+const KontamineringDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.KontamineringDemo));
+const KrysskontamineringDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.KrysskontamineringDemo));
+const ProvelagringDemo = dynamic(() => import("./SampleConceptDemos").then((m) => m.ProvelagringDemo));
+
+const GjennomsnittDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.GjennomsnittDemo));
+const MedianDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.MedianDemo));
+const VariansDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.VariansDemo));
+const NormalfordelingDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.NormalfordelingDemo));
+const FrihetsgraderDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.FrihetsgraderDemo));
+const KonfidensintervallDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.KonfidensintervallDemo));
+const SignifikansnivaDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.SignifikansnivaDemo));
+const TTestDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.TTestDemo));
+const FTestDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.FTestDemo));
+const RegresjonDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.RegresjonDemo));
+const MinsteKvadraterDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.MinsteKvadraterDemo));
+const KorrelasjonDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.KorrelasjonDemo));
+const UteliggerDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.UteliggerDemo));
 
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
@@ -152,7 +98,20 @@ const demos = {
   "kontaminering-kilde": KontamineringDemo,
   "krysskontaminering-sekvens": KrysskontamineringDemo,
   "provelagring-betingelser": ProvelagringDemo,
+  "gjennomsnitt-balanse": GjennomsnittDemo,
+  "median-sortering": MedianDemo,
+  "varians-kvadrater": VariansDemo,
   "standardavvik-formel": dynamic(() => import("./StandardavvikFormel")),
+  "normalfordeling-spredning": NormalfordelingDemo,
+  "frihetsgrader-sum": FrihetsgraderDemo,
+  "konfidensintervall-repetisjon": KonfidensintervallDemo,
+  "signifikansniva-hale": SignifikansnivaDemo,
+  "ttest-signal-stoy": TTestDemo,
+  "ftest-variansforhold": FTestDemo,
+  "regresjon-modell": RegresjonDemo,
+  "minstekvadrater-residualer": MinsteKvadraterDemo,
+  "korrelasjon-monstre": KorrelasjonDemo,
+  "uteligger-punkt": UteliggerDemo,
   "opplosning-topper": dynamic(() => import("./OpplosningTopper")),
 } as const satisfies Record<DemoId, React.ComponentType>;
 
