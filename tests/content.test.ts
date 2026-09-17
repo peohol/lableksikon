@@ -21,23 +21,25 @@ describe("innholdsmodellen", () => {
     expect(validateContent()).toEqual([]);
   });
 
-  it("har unike slugger på tvers av publiserte og utkast", () => {
+  it("har unike slugger på tvers av publiserte og aktive utkast", () => {
     const slugs = [...orderedTerms, ...draftTerms].map((term) => term.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 
   it("gir hvert publisert begrep en demonstrasjon som finnes i registeret", () => {
+    for (const term of orderedTerms) expect(DEMO_IDS).toContain(term.demo);
+  });
+
+  it("gir hvert publisert begrep minst én gyldig fagkilde", () => {
     for (const term of orderedTerms) {
-      expect(DEMO_IDS).toContain(term.demo);
+      expect(term.sources.length).toBeGreaterThan(0);
+      for (const source of term.sources) expect(() => new URL(source.url)).not.toThrow();
     }
   });
 
   it("lar definisjonen finnes bare ett sted", () => {
-    // Definisjonen i lister, søk og popover hentes alltid fra begrepets egen post.
     const term = getTerm("presisjon");
-    expect(term?.definition).toBe(
-      "Hvor likt resultatet blir når samme prøve måles flere ganger under samme betingelser.",
-    );
+    expect(term?.definition).toBe("Hvor godt gjentatte målinger stemmer overens med hverandre under spesifiserte betingelser.");
     const explanationText = term?.explanation.map((b) => ("text" in b ? b.text : "")).join(" ");
     expect(explanationText).not.toContain(term?.definition);
   });
@@ -50,7 +52,7 @@ describe("innholdsmodellen", () => {
     }
   });
 
-  it("gir hvert begrep en dybdetittel som sier hva dybden inneholder", () => {
+  it("gir hvert begrep en beskrivende dybdetittel", () => {
     for (const term of orderedTerms) {
       expect(term.depth.title.toLowerCase()).not.toBe("les mer");
       expect(term.depth.blocks.length).toBeGreaterThan(0);
@@ -69,10 +71,7 @@ describe("publiseringsstatus", () => {
   });
 
   it("teller bare publiserte begreper i kategoriene", () => {
-    const counted = publishedCategories.reduce(
-      (sum, category) => sum + termsInCategory(category.slug).length,
-      0,
-    );
+    const counted = publishedCategories.reduce((sum, category) => sum + termsInCategory(category.slug).length, 0);
     expect(counted).toBe(orderedTerms.length);
   });
 
@@ -89,9 +88,7 @@ describe("global rekkefølge", () => {
   it("følger kategorirekkefølgen, så rekkefølgen innen kategorien", () => {
     const categoryOrder = publishedCategories.map((category) => category.slug);
     const seen: string[] = [];
-    for (const term of orderedTerms) {
-      if (seen.at(-1) !== term.category) seen.push(term.category);
-    }
+    for (const term of orderedTerms) if (seen.at(-1) !== term.category) seen.push(term.category);
     expect(seen).toEqual(categoryOrder);
   });
 
@@ -102,14 +99,15 @@ describe("global rekkefølge", () => {
     expect(getNeighbours(first.slug)?.previous.slug).toBe(last.slug);
   });
 
-  it("krysser kategorigrenser", () => {
+  it("krysser kategorigrenser etter siste kvalitetsbegrep", () => {
     const neighbours = getNeighbours("noyaktighet");
     expect(neighbours?.next.slug).toBe("linearitet");
     expect(neighbours?.next.category).not.toBe("kvalitet");
   });
 
   it("gir riktig posisjon i kategorien", () => {
-    expect(positionInCategory("presisjon")).toEqual({ index: 1, total: 3 });
+    expect(positionInCategory("presisjon")).toEqual({ index: 1, total: 18 });
+    expect(positionInCategory("noyaktighet")).toEqual({ index: 18, total: 18 });
     expect(positionInCategory("standardavvik")).toEqual({ index: 1, total: 1 });
   });
 });
@@ -130,9 +128,9 @@ describe("begrepslenker i tekst", () => {
 
   it("utleder relaterte begreper fra lenkene, begge veier", () => {
     const related = getRelatedSlugs("presisjon");
-    expect(related).toContain("maleusikkerhet"); // utgående
+    expect(related).toContain("maleusikkerhet");
     expect(related).toContain("noyaktighet");
     expect(related).not.toContain("presisjon");
-    expect(getRelatedSlugs("maleusikkerhet")).toContain("presisjon"); // inngående
+    expect(getRelatedSlugs("maleusikkerhet")).toContain("presisjon");
   });
 });

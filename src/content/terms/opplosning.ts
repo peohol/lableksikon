@@ -1,34 +1,24 @@
 import type { PublishedTerm } from "../schema";
+import { SOURCES } from "../sources";
 
 export const opplosning: PublishedTerm = {
   slug: "opplosning",
   title: "Kromatografisk oppløsning",
   category: "separasjon",
-  definition: "Hvor godt to nabotopper er skilt fra hverandre.",
-  aliases: ["resolution", "R", "toppseparasjon", "overlapp", "platetall", "selektivitet"],
+  definition: "Et mål på hvor godt to nabotopper er separert i forhold til toppbreddene.",
+  aliases: ["resolution", "Rs", "toppseparasjon", "peak resolution", "overlapp"],
   explanation: [
-    {
-      kind: "p",
-      text: "To stoffer som kommer ut av kolonnen nesten samtidig, gir to topper som delvis ligger oppå hverandre. Tenk på to stemmer som snakker i kor: jo mer de overlapper, jo vanskeligere er det å høre hvem som sier hva.",
-    },
-    {
-      kind: "p",
-      text: "Oppløsning er et tall på hvor godt to nabotopper er skilt. Er den for lav, klarer du ikke å måle arealene hver for seg, og resultatet for det ene stoffet blir forurenset av det andre.",
-    },
+    { kind: "p", text: "To forbindelser kan ha ulike retensjonstider og likevel gi topper som overlapper så mye at de ikke kan bestemmes uavhengig. Oppløsningen beskriver derfor både avstanden mellom toppene og hvor brede de er." },
+    { kind: "p", text: "Bedre separasjon kan oppnås ved å flytte toppene fra hverandre, gjøre dem smalere eller begge deler. Hvilket tiltak som virker best, avhenger av det kromatografiske systemet." },
   ],
   demo: "opplosning-topper",
   depth: {
-    title: "Dybde: R, platetall og selektivitet",
+    title: "Dybde: Rs, toppbredde og tommelfingerregler",
     blocks: [
-      {
-        kind: "p",
-        text: "Oppløsningen beregnes som R = 2(t₂ − t₁) / (w₁ + w₂), altså avstanden mellom toppene delt på bredden deres. Den kan derfor forbedres på to måter: skyve toppene fra hverandre (selektivitet) eller gjøre dem smalere (platetall).",
-      },
-      {
-        kind: "p",
-        text: "I praksis er selektivitet den kraftigste knappen — endret mobilfase eller kolonnekjemi flytter toppene, mens platetall skalerer med kvadratroten av kolonnelengden og koster tid og trykk.",
-      },
+      { kind: "p", text: "For toppbredder målt ved basis uttrykkes peak resolution vanligvis som Rs = 2(tR₂ − tR₁)/(w₁ + w₂). Samme retensjonsforskjell gir altså dårligere oppløsning når toppene blir bredere." },
+      { kind: "p", text: "Rs rundt 1,5 omtales ofte som omtrent baseline-separasjon for to sammenlignbare, nær-gaussiske topper, men det er en tommelfingerregel — ikke en universell kvalitetsgrense. Kravet må passe formålet og toppformen." },
     ],
   },
+  sources: [SOURCES.iupacPeakResolution],
   status: "publisert",
 };

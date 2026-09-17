@@ -1,9 +1,9 @@
 # Lableksion
 
 Lableksion er et pedagogisk oppslagsverk for begreper i analytisk kjemi. Hvert
-begrep har fire lag i fast rekkefølge — kort definisjon, hverdagslig forklaring,
-pedagogisk demonstrasjon og valgfri teknisk dybde — og du kan bla gjennom hele
-verket kontinuerlig med forrige/neste.
+begrep har en kort definisjon, en hverdagslig forklaring, en pedagogisk
+demonstrasjon, valgfri teknisk dybde og etterprøvbare fagkilder. Du kan bla
+gjennom hele verket kontinuerlig med forrige/neste.
 
 Produktet skal oppleves som et rolig oppslagsverk, ikke som en lærebok, et
 dashboard eller en kursplattform.
@@ -45,15 +45,16 @@ allerede installert i miljøet, kan den brukes med
 ```
 src/
   app/                 Ruter: / , /begrep/<slug> , /kategori/<slug> , /a-aa
-  components/          Grensesnittkomponenter (header, søk, lister, popover, ramme)
+  components/          Grensesnittkomponenter
   content/
     categories.ts      Kategorier i redaksjonell rekkefølge
     terms/             Ett publisert begrep per fil
-    drafts.ts          Begreper uten komplett innhold — publiseres ikke
+    drafts.ts          Redaksjonell kø fra prototypen
+    sources.ts         Gjenbrukbare autoritative fagkilder
     schema.ts          Datamodell og validering (Zod)
     richtext.ts        Inline-format for begrepslenker
     index.ts           Oppslag, rekkefølge, validering
-  demos/               Demonstrasjonene, én komponent per begrep
+  demos/               Demonstrasjonene
   lib/                 Søk, norsk normalisering, alfabet, småfunksjoner
   styles/              Designtokens og felles primitiver
 tests/                 Enhets- og komponenttester
@@ -61,17 +62,16 @@ tests/e2e/             Playwright-tester
 design_handoff_lableksion/   Normativ designspesifikasjon (endres ikke)
 ```
 
-Innholdet ligger som typede TypeScript-filer. Hvert begrep er én post med slug,
-tittel, kategori, definisjon, forklaring, dybde, demonstrasjonsreferanse og
-aliaser. Definisjonen finnes bare der — søk, lister, forhåndsvisning og
-begrepsside leser den samme strengen.
+Innholdet ligger som typede TypeScript-filer. Hvert publiserte begrep har én
+kanonisk definisjon som gjenbrukes i søk, lister og forhåndsvisning, samt
+forklaring, dybde, demonstrasjon, aliaser og fagkilder.
 
 ## Innhold i denne versjonen
 
-Elleve begreper er publisert, med hver sin demonstrasjon. De øvrige begrepene
-fra designprototypen ligger som redaksjonell kø i `src/content/drafts.ts` og har
-ingen offentlig side. Tekstene er hentet fra prototypen og er ikke faglig
-kvalitetssikret.
+26 begreper er publisert. Kategorien «Kvalitet i måling» er komplett med 18
+begreper og er faglig gjennomgått mot blant annet JCGM/VIM, Eurachem og IUPAC.
+De åtte øvrige publiserte begrepene er også faglig revidert og kildebelagt.
+Resten av prototypebegrepene ligger i redaksjonell kø og har ingen offentlig side.
 
 ## Drift
 

@@ -50,7 +50,6 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
   const position = positionInCategory(term.slug);
   const neighbours = getNeighbours(term.slug);
 
-  // Strukturert data: et oppslagsverk er nettopp en samling definerte begreper.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTerm",
@@ -64,6 +63,7 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
     termCode: term.slug,
     url: `/begrep/${term.slug}`,
     inLanguage: "nb",
+    citation: term.sources.map((source) => source.url),
   };
 
   return (
@@ -98,6 +98,18 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
           <Prose blocks={term.depth.blocks} variant="depth" />
         </DepthDisclosure>
       </div>
+
+      <section className={`${styles.text} ${styles.sources}`} aria-labelledby={`${term.slug}-sources`}>
+        <h2 id={`${term.slug}-sources`} className={`kicker ${styles.sourcesTitle}`}>Fagkilder</h2>
+        <ul className={styles.sourceList}>
+          {term.sources.map((source) => (
+            <li key={`${source.url}-${source.locator ?? ""}`}>
+              <a href={source.url}>{source.title}</a>
+              {source.locator ? <span> · {source.locator}</span> : null}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {neighbours ? (
         <PreviousNextNavigation

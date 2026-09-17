@@ -14,20 +14,10 @@ describe("normalisering", () => {
     expect(normalize("BLINDPRØVE")).toBe("blindprove");
     expect(normalize("Særlig")).toBe("saerlig");
   });
-
-  it("fjerner diakritiske tegn", () => {
-    expect(normalize("résumé")).toBe("resume");
-  });
-
+  it("fjerner diakritiske tegn", () => expect(normalize("résumé")).toBe("resume"));
   it("deler tekst i ord", () => {
-    expect(tokenize("Riktighet, presisjon og nøyaktighet")).toEqual([
-      "riktighet",
-      "presisjon",
-      "og",
-      "noyaktighet",
-    ]);
+    expect(tokenize("Riktighet, presisjon og nøyaktighet")).toEqual(["riktighet", "presisjon", "og", "noyaktighet"]);
   });
-
   it("kjenner igjen norske bøyningsformer", () => {
     expect(sameWord("kurver", "kurve")).toBe(true);
     expect(sameWord("maleusikkerheten", "maleusikkerhet")).toBe(true);
@@ -42,14 +32,14 @@ describe("søkerangering", () => {
   it("setter treff der tittelen starter med søkestrengen først", () => {
     const result = search("s", entries);
     expect(result[0]?.reason).toBe("tittel-start");
-    expect(result[0]?.slug).toBe("standardaddisjon");
+    const starts = result.filter((h) => h.reason === "tittel-start").map((h) => h.title);
+    expect(starts).toEqual([...starts].sort((a, b) => a.localeCompare(b, "nb")));
   });
 
   it("rangerer tittel-start over tittel-inneholder over alias over definisjon", () => {
     const level = { "tittel-start": 0, tittel: 1, alias: 2, definisjon: 3 } as const;
     const levels = search("presisjon", entries).map((h) => level[h.reason]);
     expect(levels[0]).toBe(0);
-    // «Riktighet, presisjon og nøyaktighet» inneholder ordet lenger inne i tittelen.
     expect(levels).toContain(1);
     expect(levels).toEqual([...levels].sort((a, b) => a - b));
   });
@@ -60,10 +50,7 @@ describe("søkerangering", () => {
     expect(titles).toEqual([...titles].sort((a, b) => a.localeCompare(b, "nb")));
   });
 
-  it("finner eksakt begrepsnavn", () => {
-    expect(slugs("Blindprøve")[0]).toBe("blindprove");
-  });
-
+  it("finner eksakt begrepsnavn", () => expect(slugs("Blindprøve")[0]).toBe("blindprove"));
   it("finner på begynnelsen av begrepsnavnet", () => {
     expect(slugs("linea")[0]).toBe("linearitet");
     expect(slugs("kromato")[0]).toBe("opplosning");
@@ -74,7 +61,7 @@ describe("søkerangering", () => {
     expect(aliasHit?.reason).toBe("alias");
     expect(MATCH_LABEL[aliasHit!.reason]).toBe(" · treff på beslektet ord");
     expect(hit("LOD", "deteksjonsgrense")?.reason).toBe("alias");
-    expect(hit("bias", "noyaktighet")?.reason).toBe("alias");
+    expect(hit("bias", "skjevhet")?.reason).toBe("alias");
   });
 
   it("finner i definisjonen og merker det", () => {
@@ -111,27 +98,23 @@ describe("søkerangering", () => {
   });
 
   it("endrer ikke rangeringen for flerordssøk som ikke er sammensetninger", () => {
-    // «Riktighet, presisjon og nøyaktighet» treffer fortsatt på ordene hver for seg.
-    const hit = search("riktighet presisjon", entries).find((h) => h.slug === "noyaktighet");
-    expect(hit?.reason).toBe("tittel");
+    const found = search("riktighet presisjon", entries).find((h) => h.slug === "noyaktighet");
+    expect(found?.reason).toBe("tittel");
   });
-
-  it("er case-insensitivt", () => {
-    expect(slugs("PRESISJON")).toEqual(slugs("presisjon"));
-  });
-
+  it("er case-insensitivt", () => expect(slugs("PRESISJON")).toEqual(slugs("presisjon")));
   it("gir ingen treff på tom streng", () => {
     expect(search("", entries)).toEqual([]);
     expect(search("   ", entries)).toEqual([]);
   });
-
-  it("gir ingen treff på noe som ikke finnes", () => {
-    expect(search("zzz", entries)).toEqual([]);
-  });
+  it("gir ingen treff på noe som ikke finnes", () => expect(search("zzz", entries)).toEqual([]));
 
   it("søker aldri i upubliserte begreper", () => {
-    expect(slugs("ringtest")).toEqual([]);
     expect(slugs("akkreditering")).toEqual([]);
+    expect(slugs("molaritet")).toEqual([]);
+  });
+
+  it("kan finne publiserte begreper via alias som fortsatt finnes som eget upublisert køord", () => {
+    expect(slugs("ringtest")).toContain("reproduserbarhet");
   });
 });
 
