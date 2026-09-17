@@ -48,6 +48,7 @@ export interface ConceptLinkProps {
 export function ConceptLink({ slug, label, title, definition, categoryName }: ConceptLinkProps) {
   const [open, setOpen] = useState(false);
   const dismissedAt = useRef(0);
+  const pointerFocus = useRef(false);
   const canHover = useCanHover();
   const isNarrow = useMediaQuery("(max-width: 619px)");
 
@@ -86,7 +87,20 @@ export function ConceptLink({ slug, label, title, definition, categoryName }: Co
   const role = useRole(context, { role: "dialog" });
   const { getReferenceProps, getFloatingProps } = useInteractions([hover, dismiss, role]);
 
+  const handlePointerDown = useCallback(
+    (event: React.PointerEvent<HTMLAnchorElement>) => {
+      // Et touch-trykk gir ofte fokus før click. La click-hendelsen eie
+      // åpning/lukking, så samme trykk ikke først åpner og deretter lukker.
+      if (!canHover && event.pointerType !== "mouse") pointerFocus.current = true;
+    },
+    [canHover],
+  );
+
   const handleFocus = useCallback(() => {
+    if (pointerFocus.current) {
+      pointerFocus.current = false;
+      return;
+    }
     if (Date.now() - dismissedAt.current >= REOPEN_GUARD_MS) changeOpen(true);
   }, [changeOpen]);
 
@@ -95,6 +109,7 @@ export function ConceptLink({ slug, label, title, definition, categoryName }: Co
       // Uten hover er første trykk en forhåndsvisning, ikke en navigasjon.
       if (canHover) return;
       event.preventDefault();
+      pointerFocus.current = false;
       changeOpen(!open);
     },
     [canHover, changeOpen, open],
@@ -122,7 +137,11 @@ export function ConceptLink({ slug, label, title, definition, categoryName }: Co
         ref={refs.setReference}
         className={styles.link}
         aria-haspopup="dialog"
-        {...getReferenceProps({ onFocus: handleFocus, onClick: handleClick })}
+        {...getReferenceProps({
+          onPointerDown: handlePointerDown,
+          onFocus: handleFocus,
+          onClick: handleClick,
+        })}
       >
         {label}
       </Link>
