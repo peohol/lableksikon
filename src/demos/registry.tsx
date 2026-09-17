@@ -82,6 +82,31 @@ const MatrikstilpassetKalibreringDemo = dynamic(() =>
   import("./CalibrationConceptDemos").then((module) => module.MatrikstilpassetKalibreringDemo),
 );
 
+const IonesuppresjonDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.IonesuppresjonDemo),
+);
+const IoneforsterkningDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.IoneforsterkningDemo),
+);
+const InterferensDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.InterferensDemo),
+);
+const BakgrunnssignalDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.BakgrunnssignalDemo),
+);
+const MatriksblankDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.MatriksblankDemo),
+);
+const KontamineringDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.KontamineringDemo),
+);
+const KrysskontamineringDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.KrysskontamineringDemo),
+);
+const ProvelagringDemo = dynamic(() =>
+  import("./SampleConceptDemos").then((module) => module.ProvelagringDemo),
+);
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -119,6 +144,14 @@ const demos = {
   "ekstern-kalibrering-separat": EksternKalibreringDemo,
   "matrikstilpasset-kalibrering-matriks": MatrikstilpassetKalibreringDemo,
   "matriseeffekt-matrikser": dynamic(() => import("./MatriseeffektMatrikser")),
+  "ionesuppresjon-respons": IonesuppresjonDemo,
+  "ioneforsterkning-respons": IoneforsterkningDemo,
+  "interferens-signal": InterferensDemo,
+  "bakgrunnssignal-nivaa": BakgrunnssignalDemo,
+  "matriksblank-sammenligning": MatriksblankDemo,
+  "kontaminering-kilde": KontamineringDemo,
+  "krysskontaminering-sekvens": KrysskontamineringDemo,
+  "provelagring-betingelser": ProvelagringDemo,
   "standardavvik-formel": dynamic(() => import("./StandardavvikFormel")),
   "opplosning-topper": dynamic(() => import("./OpplosningTopper")),
 } as const satisfies Record<DemoId, React.ComponentType>;

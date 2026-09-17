@@ -8,7 +8,7 @@ export const blindprove: PublishedTerm = {
   definition: "Et blankmateriale med ingen eller så lite som mulig av analytten, brukt til å undersøke signalet som oppstår uten analyttbidrag.",
   aliases: ["blank", "blank material", "nullprøve", "reagensblank", "metodeblank", "matriksblank"],
   explanation: [
-    { kind: "p", text: "En blank skal vise hva måleprosedyren bidrar med når analytten ikke skal bidra til signalet. Avhengig av hva du vil undersøke, kan blanken bestå av løsemiddel, reagenser, analyttfri matriks eller materiale som går gjennom hele prosedyren." },
+    { kind: "p", text: "En blank skal vise hva måleprosedyren bidrar med når analytten ikke skal bidra til signalet. Avhengig av hva du vil undersøke, kan blanken bestå av løsemiddel, reagenser, [analyttfri matriks](begrep:matriksblank) eller materiale som går gjennom hele prosedyren." },
     { kind: "p", text: "Et signal i blanken kan skyldes bakgrunn, kontaminering, reagenser eller deler av prosessen. Derfor er «blank» ikke én prøveoppskrift, men en familie av kontroller med ulike formål." },
   ],
   demo: "blindprove-typer",
