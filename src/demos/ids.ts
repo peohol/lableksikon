@@ -102,6 +102,11 @@ export const DEMO_IDS = [
   "avviksbehandling-steg",
   "internkontroll-lopende",
   "revisjonsspor-historikk",
+  "si-system",
+  "molmasse-forhold",
+  "molaritet-forhold",
+  "masseprosent-nevner",
+  "ppm-forhold",
 ] as const;
 
 export type DemoId = (typeof DEMO_IDS)[number];
