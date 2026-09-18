@@ -94,6 +94,8 @@ export const SOURCES = {
   iupacMixing: { title: "IUPAC Gold Book — Mixing in analytical chemistry", url: "https://goldbook.iupac.org/terms/view/M03945" },
   iupacMilling: { title: "IUPAC Gold Book — Milling", url: "https://goldbook.iupac.org/terms/view/M03928" },
   iupacSamplePretreatment: { title: "IUPAC Gold Book — Sample pre-treatment", url: "https://goldbook.iupac.org/terms/view/08042" },
+  iupacPreconcentration: { title: "IUPAC Gold Book — Preconcentration in trace analysis", url: "https://goldbook.iupac.org/terms/view/P04803" },
+  iupacAbsolutePreconcentration: { title: "IUPAC Gold Book — Absolute preconcentration", url: "https://goldbook.iupac.org/terms/view/A00027" },
   iupacSolventExtraction: { title: "IUPAC Gold Book — Solvent extraction", url: "https://goldbook.iupac.org/terms/view/S05752" },
   iupacLiquidLiquidExtraction: { title: "IUPAC Gold Book — Liquid-liquid extraction", url: "https://goldbook.iupac.org/terms/view/L03587" },
   iupacDigestion: { title: "IUPAC Gold Book — Digestion in sample preparation", url: "https://goldbook.iupac.org/terms/view/10234" },
