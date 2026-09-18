@@ -36,7 +36,7 @@ test.describe("produksjonskontrakt", () => {
     await page.goto("/begrep/presisjon");
 
     await expect(page).toHaveTitle("Presisjon — Lableksion");
-    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /måleresultater/);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /gjentatte målinger/);
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "Presisjon — Lableksion");
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", "nb_NO");
 
