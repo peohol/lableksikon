@@ -5,11 +5,11 @@ export const ringtest: PublishedTerm = {
   slug: "ringtest",
   title: "Ringtest",
   category: "kvalitetssikring",
-  definition: "I laboratoriepraksis: en mellomlaboratoriesammenligning der deltakernes prestasjon vanligvis vurderes mot forhåndsfastsatte kriterier, altså kompetanseprøving.",
+  definition: "Uformell betegnelse for en mellomlaboratoriesammenligning; brukes ofte om kompetanseprøving, men er ikke en presis formell term.",
   aliases: ["proficiency testing", "PT", "kompetanseprøving", "sammenlignende prøving", "interlaboratory comparison", "ILC"],
   explanation: [
     { kind: "p", text: "Flere laboratorier mottar samme eller sammenlignbart prøvingsmateriale og analyserer det uavhengig. Resultatene sammenlignes etter et definert opplegg, slik at laboratoriet får en ekstern vurdering av hvordan det presterer." },
-    { kind: "p", text: "«Ringtest» brukes ofte uformelt om kompetanseprøving. Teknisk er ikke enhver mellomlaboratoriesammenligning en kompetanseprøving: ved proficiency testing vurderes deltakernes prestasjon mot forhåndsfastsatte kriterier." },
+    { kind: "p", text: "IUPAC fraråder «ring test» som term i formelle dokumenter fordi ordet kan brukes om ulike typer mellomlaboratoriesammenligning. Når formålet er å vurdere deltakernes prestasjon mot forhåndsfastsatte kriterier, er den presise termen kompetanseprøving, eller proficiency testing (PT)." },
   ],
   demo: "ringtest-sammenligning",
   depth: {
@@ -19,6 +19,6 @@ export const ringtest: PublishedTerm = {
       { kind: "p", text: "Kompetanseprøving gir et periodisk, uavhengig blikk utenfra. Den erstatter ikke [internkontroll](begrep:internkontroll), som følger metodeytelsen fortløpende mellom slike eksterne vurderinger." },
     ],
   },
-  sources: [SOURCES.iupacProficiencyTesting, SOURCES.eurachemQac2026],
+  sources: [SOURCES.iupacInterlaboratoryComparison, SOURCES.iupacProficiencyTesting, SOURCES.eurachemQac2026],
   status: "publisert",
 };
