@@ -66,6 +66,19 @@ const SeparasjonsfaktorDemo = dynamic(() => import("./SeparationConceptDemos").t
 const DodvolumDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.DodvolumDemo));
 const InjeksjonsvolumDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.InjeksjonsvolumDemo));
 
+const SignalStoyDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.SignalStoyDemo));
+const MassespektrometriDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.MassespektrometriDemo));
+const IoniseringDetectionDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.IoniseringDemo));
+const FragmenteringDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.FragmenteringDemo));
+const SimDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.SimDemo));
+const MrmDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.MrmDemo));
+const MasseopplosningDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.MasseopplosningDemo));
+const LcmsDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.LcmsDemo));
+const GcmsDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.GcmsDemo));
+const UvdetektorDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.UvdetektorDemo));
+const FidDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.FidDemo));
+const LedningsevneDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.LedningsevneDemo));
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -138,6 +151,18 @@ const demos = {
   "dodvolum-begreper": DodvolumDemo,
   "injeksjonsvolum-plugg": InjeksjonsvolumDemo,
   "opplosning-topper": dynamic(() => import("./OpplosningTopper")),
+  "signalstoy-forhold": SignalStoyDemo,
+  "massespektrometri-kjede": MassespektrometriDemo,
+  "ionisering-ladning": IoniseringDetectionDemo,
+  "fragmentering-spalting": FragmenteringDemo,
+  "sim-utvalg": SimDemo,
+  "mrm-overganger": MrmDemo,
+  "masseopplosning-topper": MasseopplosningDemo,
+  "lcms-kobling": LcmsDemo,
+  "gcms-kobling": GcmsDemo,
+  "uvdetektor-absorbans": UvdetektorDemo,
+  "fid-flamme": FidDemo,
+  "ledningsevne-celle": LedningsevneDemo,
 } as const satisfies Record<DemoId, React.ComponentType>;
 
 /** Rendrer demonstrasjonen et begrep viser til. */

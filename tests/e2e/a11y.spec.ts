@@ -9,6 +9,7 @@ const PAGES = [
   ["begrep med interaktiv demonstrasjon", "/begrep/presisjon"],
   ["begrep med stor graf", "/begrep/opplosning"],
   ["separasjonsbegrep med statisk demonstrasjon", "/begrep/dodvolum"],
+  ["deteksjonsbegrep med statisk demonstrasjon", "/begrep/mrm"],
   ["begrep med formel", "/begrep/standardavvik"],
   ["begrep med stegvis demonstrasjon", "/begrep/standardaddisjon"],
 ];

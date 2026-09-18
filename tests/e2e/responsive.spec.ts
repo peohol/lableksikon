@@ -8,6 +8,7 @@ const PATHS = [
   "/kategori/prove",
   "/kategori/statistikk",
   "/kategori/separasjon",
+  "/kategori/deteksjon",
   "/begrep/noyaktighet",
   "/begrep/kvantifiseringsgrense",
   "/begrep/matrikstilpasset",
@@ -20,6 +21,10 @@ const PATHS = [
   "/begrep/selektivitetsfaktor",
   "/begrep/dodvolum",
   "/begrep/injeksjonsvolum",
+  "/begrep/mrm",
+  "/begrep/masseopplosning",
+  "/begrep/uvdetektor",
+  "/begrep/ledningsevne",
 ];
 
 async function horizontalOverflow(page: Page) {

@@ -73,6 +73,18 @@ export const DEMO_IDS = [
   "dodvolum-begreper",
   "injeksjonsvolum-plugg",
   "opplosning-topper",
+  "signalstoy-forhold",
+  "massespektrometri-kjede",
+  "ionisering-ladning",
+  "fragmentering-spalting",
+  "sim-utvalg",
+  "mrm-overganger",
+  "masseopplosning-topper",
+  "lcms-kobling",
+  "gcms-kobling",
+  "uvdetektor-absorbans",
+  "fid-flamme",
+  "ledningsevne-celle",
 ] as const;
 
 export type DemoId = (typeof DEMO_IDS)[number];

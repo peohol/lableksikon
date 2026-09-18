@@ -70,6 +70,18 @@ import { selektivitetsfaktor } from "./selektivitetsfaktor";
 import { opplosning } from "./opplosning";
 import { dodvolum } from "./dodvolum";
 import { injeksjonsvolum } from "./injeksjonsvolum";
+import { signalstoy } from "./signalstoy";
+import { massespektrometri } from "./massespektrometri";
+import { ionisering } from "./ionisering";
+import { fragmentering } from "./fragmentering";
+import { simmodus } from "./simmodus";
+import { mrm } from "./mrm";
+import { masseopplosning } from "./masseopplosning";
+import { lcms } from "./lcms";
+import { gcms } from "./gcms";
+import { uvdetektor } from "./uvdetektor";
+import { fid } from "./fid";
+import { ledningsevne } from "./ledningsevne";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
 export const publishedTerms: PublishedTerm[] = [
@@ -152,4 +164,18 @@ export const publishedTerms: PublishedTerm[] = [
   opplosning,
   dodvolum,
   injeksjonsvolum,
+  // Deteksjon og måleprinsipp: fra signalbegreper via massespektrometriens
+  // grunntrinn og målrettede modi til koblede teknikker og andre detektorer.
+  signalstoy,
+  massespektrometri,
+  ionisering,
+  fragmentering,
+  simmodus,
+  mrm,
+  masseopplosning,
+  lcms,
+  gcms,
+  uvdetektor,
+  fid,
+  ledningsevne,
 ];
