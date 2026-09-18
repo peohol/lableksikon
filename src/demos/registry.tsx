@@ -53,6 +53,19 @@ const MinsteKvadraterDemo = dynamic(() => import("./StatisticsConceptDemos").the
 const KorrelasjonDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.KorrelasjonDemo));
 const UteliggerDemo = dynamic(() => import("./StatisticsConceptDemos").then((m) => m.UteliggerDemo));
 
+const MobilfaseDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.MobilfaseDemo));
+const StasjonarfaseDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.StasjonarfaseDemo));
+const RetensjonstidDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.RetensjonstidDemo));
+const GradientDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.GradientDemo));
+const IsokratiskDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.IsokratiskDemo));
+const ElueringsrekkefolgeDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.ElueringsrekkefolgeDemo));
+const ToppbreddeDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.ToppbreddeDemo));
+const HaledannelseDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.HaledannelseDemo));
+const PlatetallDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.PlatetallDemo));
+const SeparasjonsfaktorDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.SeparasjonsfaktorDemo));
+const DodvolumDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.DodvolumDemo));
+const InjeksjonsvolumDemo = dynamic(() => import("./SeparationConceptDemos").then((m) => m.InjeksjonsvolumDemo));
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -112,6 +125,18 @@ const demos = {
   "minstekvadrater-residualer": MinsteKvadraterDemo,
   "korrelasjon-monstre": KorrelasjonDemo,
   "uteligger-punkt": UteliggerDemo,
+  "mobilfase-bevegelse": MobilfaseDemo,
+  "stasjonarfase-fordeling": StasjonarfaseDemo,
+  "retensjonstid-tidslinje": RetensjonstidDemo,
+  "gradient-program": GradientDemo,
+  "isokratisk-konstant": IsokratiskDemo,
+  "elueringsrekkefolge-lop": ElueringsrekkefolgeDemo,
+  "toppbredde-mal": ToppbreddeDemo,
+  "haledannelse-form": HaledannelseDemo,
+  "platetall-bredde": PlatetallDemo,
+  "separasjonsfaktor-forhold": SeparasjonsfaktorDemo,
+  "dodvolum-begreper": DodvolumDemo,
+  "injeksjonsvolum-plugg": InjeksjonsvolumDemo,
   "opplosning-topper": dynamic(() => import("./OpplosningTopper")),
 } as const satisfies Record<DemoId, React.ComponentType>;
 
