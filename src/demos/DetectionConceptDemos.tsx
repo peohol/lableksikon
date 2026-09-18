@@ -37,9 +37,9 @@ export function SignalStoyDemo() {
     >
       <Rows
         rows={[
-          { label: "Signalstyrke", value: "100 vilkårlige enheter" },
-          { label: "Støy: eksempel A", value: "4 → forhold 25" },
-          { label: "Støy: eksempel B", value: "25 → forhold 4" },
+          { label: "Signaleffekt", value: "100 vilkårlige enheter" },
+          { label: "Støyeffekt: eksempel A", value: "4 → forhold 25" },
+          { label: "Støyeffekt: eksempel B", value: "25 → forhold 4" },
         ]}
       />
     </DemonstrationFrame>
