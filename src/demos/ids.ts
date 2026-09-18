@@ -60,6 +60,18 @@ export const DEMO_IDS = [
   "minstekvadrater-residualer",
   "korrelasjon-monstre",
   "uteligger-punkt",
+  "mobilfase-bevegelse",
+  "stasjonarfase-fordeling",
+  "retensjonstid-tidslinje",
+  "gradient-program",
+  "isokratisk-konstant",
+  "elueringsrekkefolge-lop",
+  "toppbredde-mal",
+  "haledannelse-form",
+  "platetall-bredde",
+  "separasjonsfaktor-forhold",
+  "dodvolum-begreper",
+  "injeksjonsvolum-plugg",
   "opplosning-topper",
 ] as const;
 
