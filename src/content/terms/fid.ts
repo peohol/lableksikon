@@ -15,7 +15,7 @@ export const fid: PublishedTerm = {
   depth: {
     title: "Dybde: FID-respons er ikke lik for alle molekyler",
     blocks: [
-      { kind: "p", text: "Responsen avhenger av forbindelsens kjemiske sammensetning. FID omtales derfor ofte som nær karbon-masseresponsiv for mange organiske forbindelser, men responsfaktoren er ikke universelt identisk." },
+      { kind: "p", text: "Responsen avhenger av forbindelsens kjemiske sammensetning. For mange organiske forbindelser følger responsen i stor grad hvor mye detekterbart karbon som passerer flammen, men ulike funksjonelle grupper kan gi ulike responsfaktorer." },
       { kind: "p", text: "I motsetning til [GC-MS](begrep:gcms) gir FID ikke et massespektrum. Detektoren er robust og kvantitativ, men identiteten må støttes av kromatografien og eventuelt andre informasjonskilder." },
     ],
   },
