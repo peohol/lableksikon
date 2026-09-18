@@ -32,7 +32,7 @@ npm run check    # lint + typecheck + enhetstester + build
 
 ```bash
 npm test         # enhets- og komponenttester (Vitest + Testing Library + axe)
-npm run test:e2e # nettlesertester (Playwright: tastatur, popover, responsivitet, akse)
+npm run test:e2e # nettlesertester (tastatur, popover, responsivitet, axe og visuell regresjon)
 ```
 
 E2E-testene bygger ikke selv: kjør `npm run build` først. Første gang må
@@ -49,7 +49,7 @@ src/
   content/
     categories.ts      Kategorier i redaksjonell rekkefølge
     terms/             Ett publisert begrep per fil
-    drafts.ts          Redaksjonell kø fra prototypen
+    drafts.ts          Aktiv redaksjonell kø for upubliserte utkast
     sources.ts         Gjenbrukbare autoritative fagkilder
     schema.ts          Datamodell og validering (Zod)
     richtext.ts        Inline-format for begrepslenker
@@ -68,10 +68,14 @@ forklaring, dybde, demonstrasjon, aliaser og fagkilder.
 
 ## Innhold i denne versjonen
 
-26 begreper er publisert. Kategorien «Kvalitet i måling» er komplett med 18
-begreper og er faglig gjennomgått mot blant annet JCGM/VIM, Eurachem og IUPAC.
-De åtte øvrige publiserte begrepene er også faglig revidert og kildebelagt.
-Resten av prototypebegrepene ligger i redaksjonell kø og har ingen offentlig side.
+Alle de 105 begrepene fra den opprinnelige designprototypen er nå publisert i
+10 kategorier. Begrepene er faglig gjennomgått og kildebelagt mot autoritative
+kilder som blant annet JCGM/VIM, Eurachem, IUPAC, BIPM og relevante
+standard-/referansekilder.
+
+Den opprinnelige prototypekøen er ferdig behandlet. `drafts.ts` er nå en tom,
+aktiv redaksjonell kø som kan brukes til nye begreper senere uten at uferdig
+innhold blir offentlig.
 
 ## Drift
 
