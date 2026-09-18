@@ -34,10 +34,10 @@ export default function OpplosningTopper() {
   const label = comma(resolution, 2);
   const verdict =
     resolution >= 1.5
-      ? "Toppene er tilnærmet helt skilt. Arealene kan måles hver for seg."
+      ? "For omtrent gaussiske topper tilsvarer dette ofte nær baselineseparasjon. Metodens krav avgjør om separasjonen er tilstrekkelig."
       : resolution >= 1
-        ? "Delvis overlapp. Arealene kan beregnes, men med økt usikkerhet."
-        : "Toppene smelter sammen til én. Stoffene kan ikke kvantifiseres hver for seg her.";
+        ? "Toppene overlapper. Hvor mye dette påvirker resultatet, avhenger av toppform, integrasjon og metodekrav."
+        : "Toppene overlapper kraftig og gir svak kromatografisk separasjon under disse betingelsene.";
 
   return (
     <DemonstrationFrame
@@ -73,8 +73,8 @@ export default function OpplosningTopper() {
       <div className={`${shared.row} ${shared.rule} ${styles.readouts}`}>
         <Readout label="Oppløsning" value={`R = ${label}`} size="small" />
         <div className={styles.requirement}>
-          <span className="readout-label">Krav i de fleste metoder</span>
-          <span className={styles.requirementText}>R ≥ 1,5 gir tilnærmet full separasjon</span>
+          <span className="readout-label">Vanlig tommelfingerregel</span>
+          <span className={styles.requirementText}>R ≈ 1,5 tilsvarer ofte nær baselineseparasjon</span>
         </div>
         <div className={styles.verdictCol}>
           <Verdict reserve={0}>{verdict}</Verdict>
