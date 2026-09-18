@@ -5,7 +5,7 @@ export const masseopplosning: PublishedTerm = {
   slug: "masseopplosning",
   title: "Masseoppløsning",
   category: "deteksjon",
-  definition: "Et massespektrometers evne til å skille ionetoppsignaler som ligger nær hverandre i m/z; numerisk beskrives dette ofte med resolving power."
+  definition: "Et massespektrometers evne til å skille ionetoppsignaler som ligger nær hverandre i m/z; numerisk beskrives dette ofte med resolving power.",
   aliases: ["mass resolution", "resolving power", "masseoppløsning", "HRMS", "FWHM"],
   explanation: [
     { kind: "p", text: "To ioner kan ha svært nærliggende m/z. Høyere masseoppløsning gjør det mulig å skille smalere eller tettere liggende topper og dermed redusere noen typer spektral interferens." },
