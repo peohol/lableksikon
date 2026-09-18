@@ -42,8 +42,11 @@ export default function PresisjonSpredning() {
         <div className={styles.target}>
           <svg viewBox="0 0 200 200" aria-hidden="true" className={shared.svg}>
             <circle cx="100" cy="100" r="88" className="surface-muted-fill svg-hairline" />
-            <circle cx="100" cy="100" r="58" className="surface-fill svg-hairline" />
-            <circle cx="100" cy="100" r="28" className="surface-muted-fill svg-axis" />
+            <circle cx="100" cy="100" r="66" className="surface-fill svg-hairline" />
+            <circle cx="100" cy="100" r="44" className="surface-muted-fill svg-hairline" />
+            <circle cx="100" cy="100" r="22" className="surface-fill svg-axis" />
+            <line x1="100" y1="12" x2="100" y2="188" className="svg-guide" />
+            <line x1="12" y1="100" x2="188" y2="100" className="svg-guide" />
             <circle cx="100" cy="100" r="3" className="svg-label-ink" />
           </svg>
           {SHOTS.map(([dx, dy], index) => (
