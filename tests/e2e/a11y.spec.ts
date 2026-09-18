@@ -15,6 +15,8 @@ const PAGES = [
   ["kvalitetssikringsbegrep", "/begrep/internkontroll"],
   ["enhetskategori", "/kategori/enheter"],
   ["enhetsbegrep", "/begrep/ppm"],
+  ["feilkildekategori", "/kategori/feilkilder"],
+  ["feilkildebegrep", "/begrep/grovfeil"],
   ["begrep med formel", "/begrep/standardavvik"],
   ["begrep med stegvis demonstrasjon", "/begrep/standardaddisjon"],
 ];

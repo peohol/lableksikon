@@ -108,8 +108,10 @@ describe("søkerangering", () => {
   });
   it("gir ingen treff på noe som ikke finnes", () => expect(search("zzz", entries)).toEqual([]));
 
-  it("søker aldri i upubliserte begreper", () => {
-    expect(slugs("grovfeil")).toEqual([]);
+  it("finner siste publiserte feilkilde og faglige aliaser", () => {
+    expect(slugs("grovfeil")[0]).toBe("grovfeil");
+    expect(slugs("blunder")).toContain("grovfeil");
+    expect(slugs("transkripsjonsfeil")).toContain("grovfeil");
   });
 
   it("finner nye enhetsbegreper og faglige aliaser", () => {

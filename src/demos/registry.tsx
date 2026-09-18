@@ -104,6 +104,8 @@ const MolaritetDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.
 const MasseprosentDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.MasseprosentDemo));
 const PpmDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.PpmDemo));
 
+const GrovfeilDemo = dynamic(() => import("./ErrorSourceConceptDemos").then((m) => m.GrovfeilDemo));
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -210,6 +212,7 @@ const demos = {
   "molaritet-forhold": MolaritetDemo,
   "masseprosent-nevner": MasseprosentDemo,
   "ppm-forhold": PpmDemo,
+  "grovfeil-skille": GrovfeilDemo,
 } as const satisfies Record<DemoId, React.ComponentType>;
 
 /** Rendrer demonstrasjonen et begrep viser til. */

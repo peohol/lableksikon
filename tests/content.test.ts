@@ -61,13 +61,8 @@ describe("innholdsmodellen", () => {
 });
 
 describe("publiseringsstatus", () => {
-  it("eksponerer ingen utkast i den offentlige modellen", () => {
-    const publishedSlugs = new Set(orderedTerms.map((term) => term.slug));
-    for (const draft of draftTerms) {
-      expect(publishedSlugs.has(draft.slug)).toBe(false);
-      expect(getTerm(draft.slug)).toBeUndefined();
-      expect(getNeighbours(draft.slug)).toBeUndefined();
-    }
+  it("har tømt den opprinnelige redaksjonelle utkastkøen", () => {
+    expect(draftTerms).toEqual([]);
   });
 
   it("teller bare publiserte begreper i kategoriene", () => {
@@ -121,12 +116,16 @@ describe("publiseringsstatus", () => {
     ]);
   });
 
-  it("skjuler kategorier uten publiserte begreper", () => {
+  it("har komplett kategori for feilkilder", () => {
+    expect(termsInCategory("feilkilder").map((term) => term.slug)).toEqual(["grovfeil"]);
+  });
+
+  it("har publisert alle redaksjonelle kategorier", () => {
     for (const category of categories) {
-      const hasTerms = termsInCategory(category.slug).length > 0;
-      expect(Boolean(getCategory(category.slug))).toBe(hasTerms);
+      expect(termsInCategory(category.slug).length).toBeGreaterThan(0);
+      expect(getCategory(category.slug)).toEqual(category);
     }
-    expect(publishedCategories.length).toBeLessThan(categories.length);
+    expect(publishedCategories).toHaveLength(categories.length);
   });
 });
 
@@ -159,7 +158,8 @@ describe("global rekkefølge", () => {
     expect(getNeighbours("ledningsevne")?.next.slug).toBe("representativ");
     expect(getNeighbours("fortynningsfaktor")?.next.slug).toBe("akkreditering");
     expect(getNeighbours("revisjonsspor")?.next.slug).toBe("sienheter");
-    expect(getNeighbours("ppm")?.next.slug).toBe("presisjon");
+    expect(getNeighbours("ppm")?.next.slug).toBe("grovfeil");
+    expect(getNeighbours("grovfeil")?.next.slug).toBe("presisjon");
   });
 
   it("gir riktig posisjon i kategorien", () => {
@@ -185,6 +185,7 @@ describe("global rekkefølge", () => {
     expect(positionInCategory("revisjonsspor")).toEqual({ index: 7, total: 7 });
     expect(positionInCategory("sienheter")).toEqual({ index: 1, total: 5 });
     expect(positionInCategory("ppm")).toEqual({ index: 5, total: 5 });
+    expect(positionInCategory("grovfeil")).toEqual({ index: 1, total: 1 });
   });
 });
 

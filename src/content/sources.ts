@@ -22,6 +22,8 @@ export const SOURCES = {
   vimReproducibilityCondition: { title: "JCGM VIM — Reproducibility condition of measurement", url: "https://jcgm.bipm.org/vim/en/2.24.html", locator: "VIM 2.24" },
   vimReproducibility: { title: "JCGM VIM — Measurement reproducibility", url: "https://jcgm.bipm.org/vim/en/2.25.html", locator: "VIM 2.25" },
   vimUncertainty: { title: "JCGM VIM — Measurement uncertainty", url: "https://jcgm.bipm.org/vim/en/2.26.html", locator: "VIM 2.26" },
+  vimMeasurementError: { title: "JCGM VIM — Measurement error", url: "https://jcgm.bipm.org/vim/en/2.16.html", locator: "VIM 2.16" },
+  eurachemQuam2012: { title: "Eurachem/CITAC — Quantifying Uncertainty in Analytical Measurement, 3rd ed. (2012)", url: "https://eurachem.org/index.php/publications/guides/quam" },
   vimExpandedUncertainty: { title: "JCGM VIM — Expanded measurement uncertainty", url: "https://jcgm.bipm.org/vim/en/2.35.html", locator: "VIM 2.35" },
   vimCoverageFactor: { title: "JCGM VIM — Coverage factor", url: "https://jcgm.bipm.org/vim/en/2.38.html", locator: "VIM 2.38" },
   vimCalibration: { title: "JCGM VIM — Calibration", url: "https://jcgm.bipm.org/vim/en/2.39.html", locator: "VIM 2.39" },
