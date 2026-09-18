@@ -85,6 +85,16 @@ export const DEMO_IDS = [
   "uvdetektor-absorbans",
   "fid-flamme",
   "ledningsevne-celle",
+  "representativ-utvalg",
+  "delprove-splitting",
+  "homogenisering-fordeling",
+  "ekstraksjon-faseoverforing",
+  "oppkonsentrering-volum",
+  "fortynning-volum",
+  "fortynningsfaktor-regnestykke",
+  "filtrering-fraksjoner",
+  "oppslutning-matriks",
+  "provemengde-heterogenitet",
 ] as const;
 
 export type DemoId = (typeof DEMO_IDS)[number];
