@@ -16,7 +16,7 @@ export const massespektrometri: PublishedTerm = {
     title: "Dybde: fra molekyl til massespektrum",
     blocks: [
       { kind: "p", text: "Den klassiske arbeidskjeden er ionekilde → masseanalysator → detektor. Ulike instrumenttyper realiserer disse trinnene forskjellig, men felles er at en måler ioner og deres m/z-relaterte respons." },
-      { kind: "p", text: "I tandem-massespektrometri kan bestemte ioner velges, [fragmenteres](begrep:fragmentering) og produkt-ionenee analyseres videre. Dette gir mer struktur- og identitetsinformasjon enn et enkelt m/z-signal alene." },
+      { kind: "p", text: "I tandem-massespektrometri kan bestemte ioner velges, [fragmenteres](begrep:fragmentering) og produkt-ionene analyseres videre. Dette gir mer struktur- og identitetsinformasjon enn et enkelt m/z-signal alene." },
     ],
   },
   sources: [SOURCES.iupacMassSpectrometry, SOURCES.iupacMassSpectrometer, SOURCES.iupacMSMS],
