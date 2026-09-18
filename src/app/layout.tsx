@@ -29,18 +29,23 @@ const plexSans = localFont({
   adjustFontFallback: "Arial",
 });
 
+const siteDescription =
+  "Et pedagogisk oppslagsverk for begreper i analytisk kjemi: kort definisjon, hverdagslig forklaring, demonstrasjon og teknisk dybde.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: "Lableksion — begrepene i analytisk kjemi, forklart",
     template: "%s — Lableksion",
   },
-  description:
-    "Et pedagogisk oppslagsverk for begreper i analytisk kjemi: kort definisjon, hverdagslig forklaring, demonstrasjon og teknisk dybde.",
+  description: siteDescription,
   openGraph: {
     type: "website",
     locale: "nb_NO",
     siteName: "Lableksion",
+    title: "Lableksion — begrepene i analytisk kjemi, forklart",
+    description: siteDescription,
+    url: "/",
   },
 };
 
