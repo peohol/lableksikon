@@ -2,15 +2,9 @@ import { DemonstrationFrame } from "@/components/DemonstrationFrame";
 import shared from "./demos.module.css";
 import styles from "./BlindproveTyper.module.css";
 
-function Vial({
-  kind,
-  signalHeight,
-}: {
-  kind: "reagent" | "method" | "matrix";
-  signalHeight: number;
-}) {
+function Vial({ kind }: { kind: "reagent" | "method" | "matrix" }) {
   return (
-    <svg viewBox="0 0 150 150" aria-hidden="true" className={styles.vial}>
+    <svg viewBox="0 0 150 135" aria-hidden="true" className={styles.vial}>
       <rect x="49" y="13" width="52" height="9" rx="3" className="svg-label-ink" />
       <path
         d="M54 22v9l-8 14v48c0 18 12 29 29 29s29-11 29-29V45l-8-14v-9"
@@ -29,7 +23,8 @@ function Vial({
 
       {kind === "method" ? (
         <>
-          <path d="M20 28h28m-14-8v16M112 20l18 18m-7-25 14 14" className="series-2-stroke" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M18 24h25v18H18zM112 22h20v20h-20z" className="svg-hairline" strokeWidth="1.5" />
+          <path d="M30 42v12m92-12v12" className="svg-guide" strokeWidth="1.5" />
           <circle cx="58" cy="86" r="2.5" className="series-2-fill" />
           <circle cx="91" cy="99" r="2" className="series-2-fill" />
         </>
@@ -45,9 +40,6 @@ function Vial({
           <circle cx="88" cy="91" r="1.8" />
         </g>
       ) : null}
-
-      <line x1="24" y1="137" x2="126" y2="137" className="svg-hairline" />
-      <rect x="68" y={137 - signalHeight} width="14" height={signalHeight} rx="2" className="series-2-fill" />
     </svg>
   );
 }
@@ -60,20 +52,20 @@ export default function BlindproveTyper() {
   return (
     <DemonstrationFrame
       kind="illustrasjon"
-      instruction="Tre blindprøver, tre ting de fanger opp"
+      instruction="Tre blindprøver, tre ting de kan avdekke"
       label="Illustrasjon: tre typer blindprøver"
-      afterword="Søylen nederst viser et mulig blindsignal. Jo mer av analyseforløpet blindprøven følger, desto flere mulige kilder kan den avdekke."
+      afterword="Forskjellen er hva blankprøven inneholder og hvilke deler av analyseforløpet den følger — ikke at én blanktype generelt skal gi mer eller mindre signal enn en annen."
     >
       <div className={shared.columns}>
         <div>
-          <Vial kind="reagent" signalHeight={7} />
+          <Vial kind="reagent" />
           <p className={shared.columnName}>Reagensblank</p>
           <p className={shared.columnText}>
             Bare løsemiddel og reagenser. Fanger opp forurensning i det du tilsetter.
           </p>
         </div>
         <div>
-          <Vial kind="method" signalHeight={14} />
+          <Vial kind="method" />
           <p className={shared.columnName}>Metodeblank</p>
           <p className={shared.columnText}>
             Går gjennom hele opparbeidingen. Fanger opp bidrag fra utstyr, reagenser og alle trinn
@@ -81,7 +73,7 @@ export default function BlindproveTyper() {
           </p>
         </div>
         <div>
-          <Vial kind="matrix" signalHeight={21} />
+          <Vial kind="matrix" />
           <p className={shared.columnName}>Matriksblank</p>
           <p className={shared.columnText}>
             Ekte matriks uten analytten. Viser signal og interferens som selve matriksen kan bidra
