@@ -32,6 +32,25 @@ test.describe("produksjonskontrakt", () => {
     expect(robotsText).toMatch(/Sitemap: https?:\/\//);
   });
 
+  test("offentlige sidetyper har komplett delingsmetadata", async ({ page }) => {
+    const pages = [
+      ["/", "Lableksion — begrepene i analytisk kjemi, forklart"],
+      ["/kategori/kvalitet", "Kvalitet i måling — Lableksion"],
+      ["/a-aa", "Alle begreper A–Å — Lableksion"],
+    ] as const;
+
+    for (const [path, title] of pages) {
+      await page.goto(path);
+      await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", title);
+      await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", "nb_NO");
+      await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute("content", "Lableksion");
+
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+      expect(canonical).toBeTruthy();
+      expect(new URL(canonical as string).pathname).toBe(path);
+    }
+  });
+
   test("begrepssider har komplett delings- og strukturert metadata", async ({ page }) => {
     await page.goto("/begrep/presisjon");
 
