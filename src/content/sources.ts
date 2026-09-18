@@ -105,6 +105,7 @@ export const SOURCES = {
   eurachemSampling2019: { title: "Eurachem — Measurement uncertainty arising from sampling, 2nd ed. (2019)", url: "https://eurachem.org/index.php/publications/guides/musamp" },
   iupacLaboratoryAccreditation: { title: "IUPAC Gold Book — Accreditation of a laboratory", url: "https://goldbook.iupac.org/terms/view/08054" },
   iupacProficiencyTesting: { title: "IUPAC Gold Book — Proficiency testing", url: "https://goldbook.iupac.org/terms/view/08101" },
+  iupacInterlaboratoryComparison: { title: "IUPAC Gold Book — Interlaboratory comparison", url: "https://goldbook.iupac.org/terms/view/08081" },
   iupacCertifiedReferenceMaterial: { title: "IUPAC Gold Book — Certified reference material", url: "https://goldbook.iupac.org/terms/view/15546" },
   iupacReferenceMaterialCertificate: { title: "IUPAC Gold Book — Reference material certificate", url: "https://goldbook.iupac.org/terms/view/08117" },
   iupacStandardOperatingProcedure: { title: "IUPAC Gold Book — Standard operating procedure", url: "https://goldbook.iupac.org/terms/view/08131" },
