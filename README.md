@@ -32,7 +32,7 @@ npm run check    # lint + typecheck + enhetstester + build
 
 ```bash
 npm test         # enhets- og komponenttester (Vitest + Testing Library + axe)
-npm run test:e2e # nettlesertester (tastatur, popover, responsivitet, axe og visuell regresjon)
+npm run test:e2e # nettlesertester (tastatur, popover, responsivitet, axe og visuelle layoutkontrakter)
 ```
 
 E2E-testene bygger ikke selv: kjør `npm run build` først. Første gang må
