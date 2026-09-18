@@ -10,6 +10,7 @@ const PATHS = [
   "/kategori/separasjon",
   "/kategori/deteksjon",
   "/kategori/provetaking",
+  "/kategori/kvalitetssikring",
   "/begrep/noyaktighet",
   "/begrep/kvantifiseringsgrense",
   "/begrep/matrikstilpasset",
@@ -30,6 +31,9 @@ const PATHS = [
   "/begrep/ekstraksjon",
   "/begrep/fortynningsfaktor",
   "/begrep/provemengde",
+  "/begrep/akkreditering",
+  "/begrep/srm",
+  "/begrep/revisjonsspor",
 ];
 
 async function horizontalOverflow(page: Page) {

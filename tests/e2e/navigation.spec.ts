@@ -40,7 +40,7 @@ test.describe("URL-er og navigasjon", () => {
   });
 
   test("upubliserte begreper har ingen side", async ({ page }) => {
-    const response = await page.goto("/begrep/ringtest");
+    const response = await page.goto("/begrep/molaritet");
     expect(response?.status()).toBe(404);
   });
 
@@ -68,8 +68,16 @@ test.describe("URL-er og navigasjon", () => {
     const next = page.getByRole("navigation", { name: "Bla mellom begreper" }).getByRole("link", {
       name: /Neste/,
     });
-    await expect(next).toContainText("Presisjon");
+    await expect(next).toContainText("Akkreditering");
     await next.click();
+    await expect(page).toHaveURL(/\/begrep\/akkreditering$/);
+
+    await page.goto("/begrep/revisjonsspor");
+    const wrap = page.getByRole("navigation", { name: "Bla mellom begreper" }).getByRole("link", {
+      name: /Neste/,
+    });
+    await expect(wrap).toContainText("Presisjon");
+    await wrap.click();
     await expect(page).toHaveURL(/\/begrep\/presisjon$/);
   });
 

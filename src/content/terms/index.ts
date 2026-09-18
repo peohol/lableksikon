@@ -92,6 +92,13 @@ import { fortynningsfaktor } from "./fortynningsfaktor";
 import { filtrering } from "./filtrering";
 import { oppslutning } from "./oppslutning";
 import { provemengde } from "./provemengde";
+import { akkreditering } from "./akkreditering";
+import { ringtest } from "./ringtest";
+import { srm } from "./srm";
+import { standardmetode } from "./standardmetode";
+import { avviksbehandling } from "./avviksbehandling";
+import { internkontroll } from "./internkontroll";
+import { revisjonsspor } from "./revisjonsspor";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
 export const publishedTerms: PublishedTerm[] = [
@@ -200,4 +207,13 @@ export const publishedTerms: PublishedTerm[] = [
   oppkonsentrering,
   fortynning,
   fortynningsfaktor,
+  // Kvalitetssikring: ytre rammer og sammenligning først, deretter
+  // referanser/metode og til slutt avvik, løpende kontroll og dataintegritet.
+  akkreditering,
+  ringtest,
+  srm,
+  standardmetode,
+  avviksbehandling,
+  internkontroll,
+  revisjonsspor,
 ];

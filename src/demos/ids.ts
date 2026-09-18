@@ -95,6 +95,13 @@ export const DEMO_IDS = [
   "filtrering-fraksjoner",
   "oppslutning-matriks",
   "provemengde-heterogenitet",
+  "akkreditering-omfang",
+  "ringtest-sammenligning",
+  "srm-sertifikat",
+  "standardmetode-verifisering",
+  "avviksbehandling-steg",
+  "internkontroll-lopende",
+  "revisjonsspor-historikk",
 ] as const;
 
 export type DemoId = (typeof DEMO_IDS)[number];

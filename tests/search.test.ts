@@ -109,12 +109,12 @@ describe("søkerangering", () => {
   it("gir ingen treff på noe som ikke finnes", () => expect(search("zzz", entries)).toEqual([]));
 
   it("søker aldri i upubliserte begreper", () => {
-    expect(slugs("akkreditering")).toEqual([]);
     expect(slugs("molaritet")).toEqual([]);
   });
 
-  it("kan finne publiserte begreper via alias som fortsatt finnes som eget upublisert køord", () => {
-    expect(slugs("ringtest")).toContain("reproduserbarhet");
+  it("finner ringtest som eget publisert begrep og via faglig synonym", () => {
+    expect(slugs("ringtest")[0]).toBe("ringtest");
+    expect(slugs("proficiency testing")).toContain("ringtest");
   });
 });
 

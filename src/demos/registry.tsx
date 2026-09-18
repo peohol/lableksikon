@@ -90,6 +90,14 @@ const FiltreringDemo = dynamic(() => import("./SamplePreparationConceptDemos").t
 const OppslutningDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.OppslutningDemo));
 const ProvemengdeDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.ProvemengdeDemo));
 
+const AkkrediteringDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.AkkrediteringDemo));
+const RingtestDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.RingtestDemo));
+const SrmDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.SrmDemo));
+const StandardmetodeDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.StandardmetodeDemo));
+const AvviksbehandlingDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.AvviksbehandlingDemo));
+const InternkontrollDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.InternkontrollDemo));
+const RevisjonssporDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.RevisjonssporDemo));
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -184,6 +192,13 @@ const demos = {
   "filtrering-fraksjoner": FiltreringDemo,
   "oppslutning-matriks": OppslutningDemo,
   "provemengde-heterogenitet": ProvemengdeDemo,
+  "akkreditering-omfang": AkkrediteringDemo,
+  "ringtest-sammenligning": RingtestDemo,
+  "srm-sertifikat": SrmDemo,
+  "standardmetode-verifisering": StandardmetodeDemo,
+  "avviksbehandling-steg": AvviksbehandlingDemo,
+  "internkontroll-lopende": InternkontrollDemo,
+  "revisjonsspor-historikk": RevisjonssporDemo,
 } as const satisfies Record<DemoId, React.ComponentType>;
 
 /** Rendrer demonstrasjonen et begrep viser til. */
