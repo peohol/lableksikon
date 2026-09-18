@@ -104,6 +104,7 @@ import { molmasse } from "./molmasse";
 import { molaritet } from "./molaritet";
 import { masseprosent } from "./masseprosent";
 import { ppm } from "./ppm";
+import { grovfeil } from "./grovfeil";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
 export const publishedTerms: PublishedTerm[] = [
@@ -228,4 +229,7 @@ export const publishedTerms: PublishedTerm[] = [
   molaritet,
   masseprosent,
   ppm,
+  // Feilkilder: siste kategori avslutter med hendelser som ikke skal
+  // behandles som normal tilfeldig eller systematisk målefeil.
+  grovfeil,
 ];
