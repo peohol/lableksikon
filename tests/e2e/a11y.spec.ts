@@ -8,6 +8,7 @@ const PAGES = [
   ["A–Å", "/a-aa"],
   ["begrep med interaktiv demonstrasjon", "/begrep/presisjon"],
   ["begrep med stor graf", "/begrep/opplosning"],
+  ["separasjonsbegrep med statisk demonstrasjon", "/begrep/dodvolum"],
   ["begrep med formel", "/begrep/standardavvik"],
   ["begrep med stegvis demonstrasjon", "/begrep/standardaddisjon"],
 ];

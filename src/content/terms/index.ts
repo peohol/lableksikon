@@ -57,7 +57,19 @@ import { regresjon } from "./regresjon";
 import { minstekvadrater } from "./minstekvadrater";
 import { korrelasjon } from "./korrelasjon";
 import { uteligger } from "./uteligger";
+import { mobilfase } from "./mobilfase";
+import { stasjonarfase } from "./stasjonarfase";
+import { retensjonstid } from "./retensjonstid";
+import { gradient } from "./gradient";
+import { isokratisk } from "./isokratisk";
+import { elueringsrekkefolge } from "./elueringsrekkefolge";
+import { toppbredde } from "./toppbredde";
+import { haledannelse } from "./haledannelse";
+import { platetall } from "./platetall";
+import { selektivitetsfaktor } from "./selektivitetsfaktor";
 import { opplosning } from "./opplosning";
+import { dodvolum } from "./dodvolum";
+import { injeksjonsvolum } from "./injeksjonsvolum";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
 export const publishedTerms: PublishedTerm[] = [
@@ -124,6 +136,20 @@ export const publishedTerms: PublishedTerm[] = [
   minstekvadrater,
   korrelasjon,
   uteligger,
-  // Separasjon
+  // Separasjon: faser og retensjon først, deretter elueringsmåte og rekkefølge,
+  // så toppform/effektivitet, selektivitet og samlet oppløsning. Terminologi
+  // og injeksjonsbidrag avslutter kategorien.
+  mobilfase,
+  stasjonarfase,
+  retensjonstid,
+  gradient,
+  isokratisk,
+  elueringsrekkefolge,
+  toppbredde,
+  haledannelse,
+  platetall,
+  selektivitetsfaktor,
   opplosning,
+  dodvolum,
+  injeksjonsvolum,
 ];

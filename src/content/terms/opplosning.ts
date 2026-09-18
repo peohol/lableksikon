@@ -8,15 +8,15 @@ export const opplosning: PublishedTerm = {
   definition: "Et mål på hvor godt to nabotopper er separert i forhold til toppbreddene.",
   aliases: ["resolution", "Rs", "toppseparasjon", "peak resolution", "overlapp"],
   explanation: [
-    { kind: "p", text: "To forbindelser kan ha ulike retensjonstider og likevel gi topper som overlapper så mye at de ikke kan bestemmes uavhengig. Oppløsningen beskriver derfor både avstanden mellom toppene og hvor brede de er." },
-    { kind: "p", text: "Bedre separasjon kan oppnås ved å flytte toppene fra hverandre, gjøre dem smalere eller begge deler. Hvilket tiltak som virker best, avhenger av det kromatografiske systemet." },
+    { kind: "p", text: "To forbindelser kan ha ulike [retensjonstider](begrep:retensjonstid) og likevel gi topper som overlapper betydelig. Oppløsningen beskriver derfor både avstanden mellom toppene og hvor brede de er." },
+    { kind: "p", text: "Bedre separasjon kan oppnås ved å øke retensjonsforskjellen, redusere [toppbredden](begrep:toppbredde) eller begge deler. [Separasjonsfaktoren](begrep:selektivitetsfaktor) beskriver retensjonsforskjellen mellom to nabotopper, men er ikke alene et mål på oppløsning." },
   ],
   demo: "opplosning-topper",
   depth: {
     title: "Dybde: Rs, toppbredde og tommelfingerregler",
     blocks: [
       { kind: "p", text: "For toppbredder målt ved basis uttrykkes peak resolution vanligvis som Rs = 2(tR₂ − tR₁)/(w₁ + w₂). Samme retensjonsforskjell gir altså dårligere oppløsning når toppene blir bredere." },
-      { kind: "p", text: "Rs rundt 1,5 omtales ofte som omtrent baseline-separasjon for to sammenlignbare, nær-gaussiske topper, men det er en tommelfingerregel — ikke en universell kvalitetsgrense. Kravet må passe formålet og toppformen." },
+      { kind: "p", text: "Rs rundt 1,5 omtales ofte som omtrent baseline-separasjon for to sammenlignbare, nær-gaussiske topper, men dette er en tommelfingerregel — ikke en universell kvalitetsgrense eller garanti for korrekt kvantifisering. Kravet må passe formålet, toppformen og metoden." },
     ],
   },
   sources: [SOURCES.iupacPeakResolution],
