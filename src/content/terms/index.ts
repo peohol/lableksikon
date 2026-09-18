@@ -82,6 +82,16 @@ import { gcms } from "./gcms";
 import { uvdetektor } from "./uvdetektor";
 import { fid } from "./fid";
 import { ledningsevne } from "./ledningsevne";
+import { representativ } from "./representativ";
+import { delprove } from "./delprove";
+import { homogenisering } from "./homogenisering";
+import { ekstraksjon } from "./ekstraksjon";
+import { oppkonsentrering } from "./oppkonsentrering";
+import { fortynning } from "./fortynning";
+import { fortynningsfaktor } from "./fortynningsfaktor";
+import { filtrering } from "./filtrering";
+import { oppslutning } from "./oppslutning";
+import { provemengde } from "./provemengde";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
 export const publishedTerms: PublishedTerm[] = [
@@ -178,4 +188,16 @@ export const publishedTerms: PublishedTerm[] = [
   uvdetektor,
   fid,
   ledningsevne,
+  // Prøvetaking og opparbeiding: representativitet og prøvereduksjon først,
+  // deretter fysisk og kjemisk behandling fram mot måleklar løsning.
+  representativ,
+  delprove,
+  homogenisering,
+  provemengde,
+  ekstraksjon,
+  filtrering,
+  oppslutning,
+  oppkonsentrering,
+  fortynning,
+  fortynningsfaktor,
 ];

@@ -79,6 +79,17 @@ const UvdetektorDemo = dynamic(() => import("./DetectionConceptDemos").then((m) 
 const FidDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.FidDemo));
 const LedningsevneDemo = dynamic(() => import("./DetectionConceptDemos").then((m) => m.LedningsevneDemo));
 
+const RepresentativDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.RepresentativDemo));
+const DelproveDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.DelproveDemo));
+const HomogeniseringDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.HomogeniseringDemo));
+const EkstraksjonDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.EkstraksjonDemo));
+const OppkonsentreringDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.OppkonsentreringDemo));
+const FortynningDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.FortynningDemo));
+const FortynningsfaktorDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.FortynningsfaktorDemo));
+const FiltreringDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.FiltreringDemo));
+const OppslutningDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.OppslutningDemo));
+const ProvemengdeDemo = dynamic(() => import("./SamplePreparationConceptDemos").then((m) => m.ProvemengdeDemo));
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -163,6 +174,16 @@ const demos = {
   "uvdetektor-absorbans": UvdetektorDemo,
   "fid-flamme": FidDemo,
   "ledningsevne-celle": LedningsevneDemo,
+  "representativ-utvalg": RepresentativDemo,
+  "delprove-splitting": DelproveDemo,
+  "homogenisering-fordeling": HomogeniseringDemo,
+  "ekstraksjon-faseoverforing": EkstraksjonDemo,
+  "oppkonsentrering-volum": OppkonsentreringDemo,
+  "fortynning-volum": FortynningDemo,
+  "fortynningsfaktor-regnestykke": FortynningsfaktorDemo,
+  "filtrering-fraksjoner": FiltreringDemo,
+  "oppslutning-matriks": OppslutningDemo,
+  "provemengde-heterogenitet": ProvemengdeDemo,
 } as const satisfies Record<DemoId, React.ComponentType>;
 
 /** Rendrer demonstrasjonen et begrep viser til. */
