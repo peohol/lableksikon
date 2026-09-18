@@ -11,6 +11,8 @@ const PAGES = [
   ["separasjonsbegrep med statisk demonstrasjon", "/begrep/dodvolum"],
   ["deteksjonsbegrep med statisk demonstrasjon", "/begrep/mrm"],
   ["prøvetakingsbegrep med statisk demonstrasjon", "/begrep/representativ"],
+  ["kvalitetssikringskategori", "/kategori/kvalitetssikring"],
+  ["kvalitetssikringsbegrep", "/begrep/internkontroll"],
   ["begrep med formel", "/begrep/standardavvik"],
   ["begrep med stegvis demonstrasjon", "/begrep/standardaddisjon"],
 ];
