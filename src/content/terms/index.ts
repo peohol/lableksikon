@@ -99,6 +99,11 @@ import { standardmetode } from "./standardmetode";
 import { avviksbehandling } from "./avviksbehandling";
 import { internkontroll } from "./internkontroll";
 import { revisjonsspor } from "./revisjonsspor";
+import { sienheter } from "./sienheter";
+import { molmasse } from "./molmasse";
+import { molaritet } from "./molaritet";
+import { masseprosent } from "./masseprosent";
+import { ppm } from "./ppm";
 
 /** Alle publiserte begreper i redaksjonell rekkefølge innen hver kategori. */
 export const publishedTerms: PublishedTerm[] = [
@@ -216,4 +221,11 @@ export const publishedTerms: PublishedTerm[] = [
   avviksbehandling,
   internkontroll,
   revisjonsspor,
+  // Enheter og referansemateriale: SI-rammen først, deretter koblingen mellom
+  // masse og stoffmengde, konsentrasjon og til slutt dimensjonsløse fraksjoner.
+  sienheter,
+  molmasse,
+  molaritet,
+  masseprosent,
+  ppm,
 ];
