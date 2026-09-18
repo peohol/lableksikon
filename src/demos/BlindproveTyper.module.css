@@ -1,14 +1,6 @@
 .vial {
   width: 100%;
-  max-width: 120px;
+  max-width: 150px;
   display: block;
   margin: 0 auto;
-}
-
-.liquid {
-  opacity: 0.18;
-}
-
-.liquidMore {
-  opacity: 0.3;
 }

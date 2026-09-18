@@ -25,6 +25,14 @@ export async function generateMetadata({
     title: category.name,
     description: category.gloss,
     alternates: { canonical: `/kategori/${category.slug}` },
+    openGraph: {
+      type: "website",
+      locale: "nb_NO",
+      siteName: "Lableksion",
+      title: `${category.name} — Lableksion`,
+      description: category.gloss,
+      url: `/kategori/${category.slug}`,
+    },
   };
 }
 

@@ -14,6 +14,7 @@ import {
 } from "@/content";
 import { TermDemonstration } from "@/demos/registry";
 import { positionLabel } from "@/lib/labels";
+import { siteUrl } from "@/lib/site";
 import styles from "./page.module.css";
 
 export function generateStaticParams() {
@@ -35,6 +36,9 @@ export async function generateMetadata({
     description: term.definition,
     alternates: { canonical: `/begrep/${term.slug}` },
     openGraph: {
+      type: "website",
+      locale: "nb_NO",
+      siteName: "Lableksion",
       title: `${term.title} — Lableksion`,
       description: term.definition,
       url: `/begrep/${term.slug}`,
@@ -49,6 +53,7 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
 
   const position = positionInCategory(term.slug);
   const neighbours = getNeighbours(term.slug);
+  const termUrl = new URL(`/begrep/${term.slug}`, siteUrl).toString();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -58,10 +63,10 @@ export default async function TermPage({ params }: { params: Promise<{ slug: str
     inDefinedTermSet: {
       "@type": "DefinedTermSet",
       name: "Lableksion",
-      url: "/",
+      url: siteUrl,
     },
     termCode: term.slug,
-    url: `/begrep/${term.slug}`,
+    url: termUrl,
     inLanguage: "nb",
     citation: term.sources.map((source) => source.url),
   };
