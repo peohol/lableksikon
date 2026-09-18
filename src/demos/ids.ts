@@ -107,6 +107,7 @@ export const DEMO_IDS = [
   "molaritet-forhold",
   "masseprosent-nevner",
   "ppm-forhold",
+  "grovfeil-skille",
 ] as const;
 
 export type DemoId = (typeof DEMO_IDS)[number];
