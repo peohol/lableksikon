@@ -176,7 +176,7 @@ describe("interaktive demonstrasjoner", () => {
     fireEvent.change(slider, { target: { value: "0" } });
     expect(screen.getByText(/overlapper kraftig/)).toBeInTheDocument();
     fireEvent.change(slider, { target: { value: "100" } });
-    expect(screen.getByText(/nær baselineseparasjon/)).toBeInTheDocument();
+    expect(screen.getByText(/^For omtrent gaussiske topper/)).toBeInTheDocument();
   });
 });
 
