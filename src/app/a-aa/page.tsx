@@ -6,10 +6,20 @@ import { orderedTerms } from "@/content";
 import { groupByLetter } from "@/lib/alphabet";
 import styles from "./page.module.css";
 
+const description = "Alle begreper i Lableksion, sortert alfabetisk.";
+
 export const metadata: Metadata = {
   title: "Alle begreper A–Å",
-  description: "Alle begreper i Lableksion, sortert alfabetisk.",
+  description,
   alternates: { canonical: "/a-aa" },
+  openGraph: {
+    type: "website",
+    locale: "nb_NO",
+    siteName: "Lableksion",
+    title: "Alle begreper A–Å — Lableksion",
+    description,
+    url: "/a-aa",
+  },
 };
 
 export default function AlphabeticalIndexPage() {
