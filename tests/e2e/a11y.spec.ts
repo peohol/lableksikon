@@ -13,6 +13,8 @@ const PAGES = [
   ["prøvetakingsbegrep med statisk demonstrasjon", "/begrep/representativ"],
   ["kvalitetssikringskategori", "/kategori/kvalitetssikring"],
   ["kvalitetssikringsbegrep", "/begrep/internkontroll"],
+  ["enhetskategori", "/kategori/enheter"],
+  ["enhetsbegrep", "/begrep/ppm"],
   ["begrep med formel", "/begrep/standardavvik"],
   ["begrep med stegvis demonstrasjon", "/begrep/standardaddisjon"],
 ];

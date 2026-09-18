@@ -109,7 +109,14 @@ describe("søkerangering", () => {
   it("gir ingen treff på noe som ikke finnes", () => expect(search("zzz", entries)).toEqual([]));
 
   it("søker aldri i upubliserte begreper", () => {
-    expect(slugs("molaritet")).toEqual([]);
+    expect(slugs("grovfeil")).toEqual([]);
+  });
+
+  it("finner nye enhetsbegreper og faglige aliaser", () => {
+    expect(slugs("molaritet")[0]).toBe("molaritet");
+    expect(slugs("stoffmengdekonsentrasjon")).toContain("molaritet");
+    expect(slugs("parts per million")).toContain("ppm");
+    expect(slugs("molvekt")).toContain("molmasse");
   });
 
   it("finner ringtest som eget publisert begrep og via faglig synonym", () => {

@@ -11,6 +11,7 @@ const PATHS = [
   "/kategori/deteksjon",
   "/kategori/provetaking",
   "/kategori/kvalitetssikring",
+  "/kategori/enheter",
   "/begrep/noyaktighet",
   "/begrep/kvantifiseringsgrense",
   "/begrep/matrikstilpasset",
@@ -34,6 +35,9 @@ const PATHS = [
   "/begrep/akkreditering",
   "/begrep/srm",
   "/begrep/revisjonsspor",
+  "/begrep/sienheter",
+  "/begrep/molaritet",
+  "/begrep/ppm",
 ];
 
 async function horizontalOverflow(page: Page) {

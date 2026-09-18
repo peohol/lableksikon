@@ -98,6 +98,12 @@ const AvviksbehandlingDemo = dynamic(() => import("./QualityAssuranceConceptDemo
 const InternkontrollDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.InternkontrollDemo));
 const RevisjonssporDemo = dynamic(() => import("./QualityAssuranceConceptDemos").then((m) => m.RevisjonssporDemo));
 
+const SiSystemDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.SiSystemDemo));
+const MolmasseDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.MolmasseDemo));
+const MolaritetDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.MolaritetDemo));
+const MasseprosentDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.MasseprosentDemo));
+const PpmDemo = dynamic(() => import("./UnitsConceptDemos").then((m) => m.PpmDemo));
+
 /** Kobler et begrep til sin demonstrasjon. */
 const demos = {
   "presisjon-spredning": dynamic(() => import("./PresisjonSpredning")),
@@ -199,6 +205,11 @@ const demos = {
   "avviksbehandling-steg": AvviksbehandlingDemo,
   "internkontroll-lopende": InternkontrollDemo,
   "revisjonsspor-historikk": RevisjonssporDemo,
+  "si-system": SiSystemDemo,
+  "molmasse-forhold": MolmasseDemo,
+  "molaritet-forhold": MolaritetDemo,
+  "masseprosent-nevner": MasseprosentDemo,
+  "ppm-forhold": PpmDemo,
 } as const satisfies Record<DemoId, React.ComponentType>;
 
 /** Rendrer demonstrasjonen et begrep viser til. */
