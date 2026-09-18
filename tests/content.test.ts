@@ -95,6 +95,10 @@ describe("publiseringsstatus", () => {
     expect(termsInCategory("deteksjon")).toHaveLength(12);
   });
 
+  it("har komplett kategori for prøvetaking og opparbeiding", () => {
+    expect(termsInCategory("provetaking")).toHaveLength(10);
+  });
+
   it("skjuler kategorier uten publiserte begreper", () => {
     for (const category of categories) {
       const hasTerms = termsInCategory(category.slug).length > 0;
@@ -130,7 +134,8 @@ describe("global rekkefølge", () => {
     expect(getNeighbours("provelagring")?.next.slug).toBe("gjennomsnitt");
     expect(getNeighbours("uteligger")?.next.slug).toBe("mobilfase");
     expect(getNeighbours("injeksjonsvolum")?.next.slug).toBe("signalstoy");
-    expect(getNeighbours("ledningsevne")?.next.slug).toBe("presisjon");
+    expect(getNeighbours("ledningsevne")?.next.slug).toBe("representativ");
+    expect(getNeighbours("fortynningsfaktor")?.next.slug).toBe("presisjon");
   });
 
   it("gir riktig posisjon i kategorien", () => {
@@ -149,6 +154,9 @@ describe("global rekkefølge", () => {
     expect(positionInCategory("signalstoy")).toEqual({ index: 1, total: 12 });
     expect(positionInCategory("mrm")).toEqual({ index: 6, total: 12 });
     expect(positionInCategory("ledningsevne")).toEqual({ index: 12, total: 12 });
+    expect(positionInCategory("representativ")).toEqual({ index: 1, total: 10 });
+    expect(positionInCategory("ekstraksjon")).toEqual({ index: 5, total: 10 });
+    expect(positionInCategory("fortynningsfaktor")).toEqual({ index: 10, total: 10 });
   });
 });
 
