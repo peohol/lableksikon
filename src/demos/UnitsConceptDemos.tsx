@@ -25,8 +25,8 @@ export function SiSystemDemo() {
       <Rows rows={[
         { label: "Baseenheter", value: "s · m · kg · A · K · mol · cd" },
         { label: "Avledet eksempel", value: "Pa = kg · m⁻¹ · s⁻²" },
-        { label: "Laboratoriestørrelse", value: "molmasse: kg/mol" },
-        { label: "Laboratoriestørrelse", value: "stoffmengdekonsentrasjon: mol/m³" },
+        { label: "Molmasse", value: "kg/mol" },
+        { label: "Stoffmengdekonsentrasjon", value: "mol/m³" },
       ]} />
     </DemonstrationFrame>
   );
