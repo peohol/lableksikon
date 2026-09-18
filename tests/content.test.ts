@@ -111,6 +111,16 @@ describe("publiseringsstatus", () => {
     ]);
   });
 
+  it("har komplett kategori for enheter og referansemateriale", () => {
+    expect(termsInCategory("enheter").map((term) => term.slug)).toEqual([
+      "sienheter",
+      "molmasse",
+      "molaritet",
+      "masseprosent",
+      "ppm",
+    ]);
+  });
+
   it("skjuler kategorier uten publiserte begreper", () => {
     for (const category of categories) {
       const hasTerms = termsInCategory(category.slug).length > 0;
@@ -148,7 +158,8 @@ describe("global rekkefølge", () => {
     expect(getNeighbours("injeksjonsvolum")?.next.slug).toBe("signalstoy");
     expect(getNeighbours("ledningsevne")?.next.slug).toBe("representativ");
     expect(getNeighbours("fortynningsfaktor")?.next.slug).toBe("akkreditering");
-    expect(getNeighbours("revisjonsspor")?.next.slug).toBe("presisjon");
+    expect(getNeighbours("revisjonsspor")?.next.slug).toBe("sienheter");
+    expect(getNeighbours("ppm")?.next.slug).toBe("presisjon");
   });
 
   it("gir riktig posisjon i kategorien", () => {
@@ -172,6 +183,8 @@ describe("global rekkefølge", () => {
     expect(positionInCategory("fortynningsfaktor")).toEqual({ index: 10, total: 10 });
     expect(positionInCategory("akkreditering")).toEqual({ index: 1, total: 7 });
     expect(positionInCategory("revisjonsspor")).toEqual({ index: 7, total: 7 });
+    expect(positionInCategory("sienheter")).toEqual({ index: 1, total: 5 });
+    expect(positionInCategory("ppm")).toEqual({ index: 5, total: 5 });
   });
 });
 
