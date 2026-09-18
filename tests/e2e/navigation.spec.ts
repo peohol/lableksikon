@@ -39,11 +39,6 @@ test.describe("URL-er og navigasjon", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Siden finnes ikke.");
   });
 
-  test("upubliserte begreper har ingen side", async ({ page }) => {
-    const response = await page.goto("/begrep/grovfeil");
-    expect(response?.status()).toBe(404);
-  });
-
   test("søketilstanden ligger i URL-en og kan deles", async ({ page }) => {
     await page.goto("/");
     await page.getByLabel("Søk", { exact: true }).fill("pilkast");
@@ -81,6 +76,13 @@ test.describe("URL-er og navigasjon", () => {
     await expect(page).toHaveURL(/\/begrep\/sienheter$/);
 
     await page.goto("/begrep/ppm");
+    const toErrors = page.getByRole("navigation", { name: "Bla mellom begreper" }).getByRole("link", {
+      name: /Neste/,
+    });
+    await expect(toErrors).toContainText("Grov feil");
+    await toErrors.click();
+    await expect(page).toHaveURL(/\/begrep\/grovfeil$/);
+
     const wrap = page.getByRole("navigation", { name: "Bla mellom begreper" }).getByRole("link", {
       name: /Neste/,
     });
