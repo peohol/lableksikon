@@ -14,9 +14,9 @@ export type { Block, Category, DraftTerm, PublishedTerm, Source } from "./schema
 export { parseInline, plainText } from "./richtext";
 
 /**
- * `drafts.ts` er den opprinnelige prototypens redaksjonelle kø. Når et begrep
- * publiseres, filtreres den gamle køposten bort her slik at den aldri blir
- * eksponert eller validert som et samtidig utkast.
+ * `drafts.ts` er den aktive redaksjonelle køen. Utkast publiseres aldri i
+ * søk, kategorier eller begrepsnavigasjon. Slugger som allerede er publisert
+ * filtreres defensivt bort slik at et foreldet utkast ikke kan eksponeres.
  */
 const publishedSlugs = new Set(publishedTerms.map((term) => term.slug));
 export const draftTerms = prototypeDraftTerms.filter((term) => !publishedSlugs.has(term.slug));
