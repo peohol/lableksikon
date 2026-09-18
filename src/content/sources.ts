@@ -5,6 +5,12 @@ const EURACHEM_QAC_2026 = "https://eurachem.org/index.php/publications/guides/qa
 
 /** Autoritative fagkilder som kan gjenbrukes mellom begreper. */
 export const SOURCES = {
+  iupacAmountConcentration: { title: "IUPAC Gold Book — Amount concentration", url: "https://goldbook.iupac.org/terms/view/A00295" },
+  iupacMolarity: { title: "IUPAC Gold Book — Molarity", url: "https://goldbook.iupac.org/terms/view/M03977" },
+  iupacMolarMass: { title: "IUPAC Gold Book — Molar mass", url: "https://goldbook.iupac.org/terms/view/12214" },
+  iupacMassFraction: { title: "IUPAC Gold Book — Mass fraction", url: "https://goldbook.iupac.org/terms/view/M03722" },
+  bipmSI: { title: "BIPM — The International System of Units (SI)", url: "https://www.bipm.org/en/measurement-units" },
+  bipmSIBrochure: { title: "BIPM — SI Brochure, 9th ed. (updated 2026)", url: "https://www.bipm.org/en/publications/si-brochure" },
   vimAccuracy: { title: "JCGM VIM — Measurement accuracy", url: "https://jcgm.bipm.org/vim/en/2.13.html", locator: "VIM 2.13" },
   vimTrueness: { title: "JCGM VIM — Measurement trueness", url: "https://jcgm.bipm.org/vim/en/2.14.html", locator: "VIM 2.14" },
   vimPrecision: { title: "JCGM VIM — Measurement precision", url: "https://jcgm.bipm.org/vim/en/2.15.html", locator: "VIM 2.15" },
