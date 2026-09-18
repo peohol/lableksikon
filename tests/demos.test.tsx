@@ -174,9 +174,9 @@ describe("interaktive demonstrasjoner", () => {
     render(<OpplosningTopper />);
     const slider = screen.getByRole("slider", { name: "Avstand mellom toppene" });
     fireEvent.change(slider, { target: { value: "0" } });
-    expect(screen.getByText(/smelter sammen/)).toBeInTheDocument();
+    expect(screen.getByText(/overlapper kraftig/)).toBeInTheDocument();
     fireEvent.change(slider, { target: { value: "100" } });
-    expect(screen.getByText(/tilnærmet helt skilt/)).toBeInTheDocument();
+    expect(screen.getByText(/nær baselineseparasjon/)).toBeInTheDocument();
   });
 });
 
