@@ -27,10 +27,10 @@ test.describe("URL-er og navigasjon", () => {
   });
 
   test("dyplenking og reload virker", async ({ page }) => {
-    await page.goto("/begrep/opplosning");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Kromatografisk oppløsning");
+    await page.goto("/begrep/injeksjonsvolum");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Injeksjonsvolum");
     await page.reload();
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Kromatografisk oppløsning");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Injeksjonsvolum");
   });
 
   test("ukjent begrep gir 404-side, ikke en halvferdig begrepsside", async ({ page }) => {
@@ -64,7 +64,7 @@ test.describe("URL-er og navigasjon", () => {
   });
 
   test("forrige/neste er global og sirkulær", async ({ page }) => {
-    await page.goto("/begrep/opplosning");
+    await page.goto("/begrep/injeksjonsvolum");
     const next = page.getByRole("navigation", { name: "Bla mellom begreper" }).getByRole("link", {
       name: /Neste/,
     });
