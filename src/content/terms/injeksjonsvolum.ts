@@ -16,7 +16,7 @@ export const injeksjonsvolum: PublishedTerm = {
     title: "Dybde: mer prøve er ikke alltid bedre kromatografi",
     blocks: [
       { kind: "p", text: "Større injeksjonsvolum kan øke mengden analytt som når detektoren, men kan samtidig introdusere mer båndspredning eller overbelastning. Derfor må volumet vurderes mot både følsomhet og separasjonsytelse." },
-      { kind: "p", text: "Farmakopékrav tillater i mange sammenhenger endring av injeksjonsvolum bare når systemegnethet fortsatt er tilfredsstillende; ved økning må blant annet linearitet og oppløsning forbli tilfredsstillende." },
+      { kind: "p", text: "I USP-dokumentasjonen for harmonisering av kromatografikapitlet <621> er injeksjonsvolum et eksempel på en parameter som kan justeres når systemegnetheten fortsatt er tilfredsstillende. Ved økning fremheves blant annet at linearitet og oppløsning må forbli tilfredsstillende." },
     ],
   },
   sources: [SOURCES.uspChromatographyInjection],
