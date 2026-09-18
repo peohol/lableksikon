@@ -36,6 +36,9 @@ export async function generateMetadata({
     description: term.definition,
     alternates: { canonical: `/begrep/${term.slug}` },
     openGraph: {
+      type: "website",
+      locale: "nb_NO",
+      siteName: "Lableksion",
       title: `${term.title} — Lableksion`,
       description: term.definition,
       url: `/begrep/${term.slug}`,
