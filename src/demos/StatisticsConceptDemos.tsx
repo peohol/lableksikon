@@ -10,7 +10,7 @@ function Flow({ items }: { items: string[] }) {
 }
 
 export function GjennomsnittDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Fordel totalsummen likt på alle observasjonene." label="Gjennomsnitt som balanseringspunkt" afterword="\\(9 + 10 + 11 = 30\\), og \\(30/3 = 10\\)."><ValueRows rows={[{ label: "Data", values: "9 · 10 · 11" }, { label: "Sum", values: "30" }, { label: "Gjennomsnitt", values: "10" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="formel" instruction="Fordel totalsummen likt på alle observasjonene." label="Gjennomsnitt som balanseringspunkt" afterword="\(9 + 10 + 11 = 30\), og \(30/3 = 10\)."><ValueRows rows={[{ label: "Data", values: "9 · 10 · 11" }, { label: "Sum", values: "30" }, { label: "Gjennomsnitt", values: "10" }]} /></DemonstrationFrame>;
 }
 
 export function MedianDemo() {
@@ -18,15 +18,15 @@ export function MedianDemo() {
 }
 
 export function VariansDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Se hvordan avvik fra gjennomsnittet kvadreres før de summeres." label="Varians bygges av kvadrerte avvik" afterword="Kvadrering gjør alle bidrag positive og gir store avvik større innflytelse."><ValueRows rows={[{ label: "Data", values: "8 · 10 · 12; \\\\(\\\\bar{x} = 10\\\\)" }, { label: "Avvik", values: "−2 · 0 · +2" }, { label: "Kvadrater", values: "4 · 0 · 4" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="formel" instruction="Se hvordan avvik fra gjennomsnittet kvadreres før de summeres." label="Varians bygges av kvadrerte avvik" afterword="Kvadrering gjør alle bidrag positive og gir store avvik større innflytelse."><ValueRows rows={[{ label: "Data", values: "8 · 10 · 12; \\(\\bar{x} = 10\\)" }, { label: "Avvik", values: "−2 · 0 · +2" }, { label: "Kvadrater", values: "4 · 0 · 4" }]} /></DemonstrationFrame>;
 }
 
 export function NormalfordelingDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Se hvor mye av en normalfordeling som ligger nær middelverdien." label="68–95–99,7-regelen for normalfordelingen" afterword="Prosentene gjelder en idealisert normalfordeling, ikke alle klokkeformede datasett."><ValueRows rows={[{ label: "\\\\(\\\\mu \\\\pm 1\\\\sigma\\\\)", values: "ca. 68,3 %" }, { label: "\\\\(\\\\mu \\\\pm 2\\\\sigma\\\\)", values: "ca. 95,4 %" }, { label: "\\\\(\\\\mu \\\\pm 3\\\\sigma\\\\)", values: "ca. 99,7 %" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="sammenligning" instruction="Se hvor mye av en normalfordeling som ligger nær middelverdien." label="68–95–99,7-regelen for normalfordelingen" afterword="Prosentene gjelder en idealisert normalfordeling, ikke alle klokkeformede datasett."><ValueRows rows={[{ label: "\\(\\mu \\pm 1\\sigma\\)", values: "ca. 68,3 %" }, { label: "\\(\\mu \\pm 2\\sigma\\)", values: "ca. 95,4 %" }, { label: "\\(\\mu \\pm 3\\sigma\\)", values: "ca. 99,7 %" }]} /></DemonstrationFrame>;
 }
 
 export function FrihetsgraderDemo() {
-  return <DemonstrationFrame kind="stegvis" instruction="Lås gjennomsnittet og se hvorfor siste avvik bestemmes av de andre." label="Tre observasjoner og to frihetsgrader" afterword="Når summen av avvik skal være null, er bare \\(n - 1\\) av avvikene uavhengige."><Flow items={["Tre observasjoner", "Gjennomsnittet estimeres", "To avvik kan variere fritt", "Det tredje må få summen til null"]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="stegvis" instruction="Lås gjennomsnittet og se hvorfor siste avvik bestemmes av de andre." label="Tre observasjoner og to frihetsgrader" afterword="Når summen av avvik skal være null, er bare \(n - 1\) av avvikene uavhengige."><Flow items={["Tre observasjoner", "Gjennomsnittet estimeres", "To avvik kan variere fritt", "Det tredje må få summen til null"]} /></DemonstrationFrame>;
 }
 
 export function KonfidensintervallDemo() {
@@ -34,15 +34,15 @@ export function KonfidensintervallDemo() {
 }
 
 export function SignifikansnivaDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Se α som en på forhånd valgt feilrate for testprosedyren." label="Signifikansnivå og type-I-feil" afterword="α = 0,05 betyr ikke at nullhypotesen har 5 % sannsynlighet for å være sann."><ValueRows rows={[{ label: "Før data", values: "velg \\\\(\\\\alpha = 0{,}05\\\\)" }, { label: "Hvis \\\\(H_0\\\\) er sann", values: "inntil 5 % langsiktig forkastningsrate" }, { label: "Etter data", values: "sammenlign \\\\(p\\\\) med \\\\(\\\\alpha\\\\)" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="sammenligning" instruction="Se α som en på forhånd valgt feilrate for testprosedyren." label="Signifikansnivå og type-I-feil" afterword="α = 0,05 betyr ikke at nullhypotesen har 5 % sannsynlighet for å være sann."><ValueRows rows={[{ label: "Før data", values: "velg \\(\\alpha = 0{,}05\\)" }, { label: "Hvis \\(H_0\\) er sann", values: "inntil 5 % langsiktig forkastningsrate" }, { label: "Etter data", values: "sammenlign \\(p\\) med \\(\\alpha\\)" }]} /></DemonstrationFrame>;
 }
 
 export function TTestDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Sammenlign observert forskjell med standardfeilen." label="t-verdi som signal relativt til estimert tilfeldig variasjon" afterword="Stor absolutt t-verdi betyr at forskjellen er stor relativt til den estimerte standardfeilen."><ValueRows rows={[{ label: "Forskjell", values: "2,0" }, { label: "Standardfeil", values: "0,5" }, { label: "\\\\(t\\\\)", values: "\\\\(2{,}0/0{,}5 = 4{,}0\\\\)" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="formel" instruction="Sammenlign observert forskjell med standardfeilen." label="t-verdi som signal relativt til estimert tilfeldig variasjon" afterword="Stor absolutt t-verdi betyr at forskjellen er stor relativt til den estimerte standardfeilen."><ValueRows rows={[{ label: "Forskjell", values: "2,0" }, { label: "Standardfeil", values: "0,5" }, { label: "\\(t\\)", values: "\\(2{,}0/0{,}5 = 4{,}0\\)" }]} /></DemonstrationFrame>;
 }
 
 export function FTestDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Sammenlign to varianser som et forhold." label="F-statistikk som variansforhold" afterword="Et forhold nær 1 passer bedre med like varianser enn et forhold langt fra 1; kritiske grenser avhenger av frihetsgrader og α."><ValueRows rows={[{ label: "Varians A", values: "4" }, { label: "Varians B", values: "2" }, { label: "\\\\(F\\\\)", values: "\\\\(4/2 = 2\\\\)" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="formel" instruction="Sammenlign to varianser som et forhold." label="F-statistikk som variansforhold" afterword="Et forhold nær 1 passer bedre med like varianser enn et forhold langt fra 1; kritiske grenser avhenger av frihetsgrader og α."><ValueRows rows={[{ label: "Varians A", values: "4" }, { label: "Varians B", values: "2" }, { label: "\\(F\\)", values: "\\(4/2 = 2\\)" }]} /></DemonstrationFrame>;
 }
 
 export function RegresjonDemo() {
@@ -54,7 +54,7 @@ export function MinsteKvadraterDemo() {
 }
 
 export function KorrelasjonDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Sammenlign lineære mønstre med ulike retninger." label="Pearsons r beskriver lineær samvariasjon" afterword="\\(r\\) nær 0 betyr liten lineær sammenheng, men kan skjule et tydelig ikke-lineært mønster."><div className={styles.columns}><div><span className={styles.cardTitle}>Positiv</span><strong className={styles.signal}>\\(r \\approx +0{,}9\\)</strong></div><div><span className={styles.cardTitle}>Ingen lineær</span><strong className={styles.signal}>\\(r \\approx 0\\)</strong></div><div><span className={styles.cardTitle}>Negativ</span><strong className={styles.signal}>\\(r \\approx -0{,}9\\)</strong></div></div></DemonstrationFrame>;
+  return <DemonstrationFrame kind="sammenligning" instruction="Sammenlign lineære mønstre med ulike retninger." label="Pearsons r beskriver lineær samvariasjon" afterword="\(r\) nær 0 betyr liten lineær sammenheng, men kan skjule et tydelig ikke-lineært mønster."><div className={styles.columns}><div><span className={styles.cardTitle}>Positiv</span><strong className={styles.signal}>\(r \approx +0{,}9\)</strong></div><div><span className={styles.cardTitle}>Ingen lineær</span><strong className={styles.signal}>\(r \approx 0\)</strong></div><div><span className={styles.cardTitle}>Negativ</span><strong className={styles.signal}>\(r \approx -0{,}9\)</strong></div></div></DemonstrationFrame>;
 }
 
 export function UteliggerDemo() {
