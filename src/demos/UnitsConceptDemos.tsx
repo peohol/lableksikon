@@ -26,7 +26,7 @@ export function SiSystemDemo() {
         { label: "Baseenheter", value: "s · m · kg · A · K · mol · cd" },
         { label: "Avledet eksempel", value: "\\(\\mathrm{Pa}=\\mathrm{kg}\\,\\mathrm{m}^{-1}\\,\\mathrm{s}^{-2}\\)" },
         { label: "Molmasse", value: "kg/mol" },
-        { label: "Stoffmengdekonsentrasjon", value: "mol/m³" },
+        { label: "Stoffmengdekonsentrasjon", value: "\\(\\mathrm{mol/m^3}\\)" },
       ]} />
     </DemonstrationFrame>
   );
