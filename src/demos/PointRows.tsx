@@ -19,7 +19,10 @@ const clampPercent = (value: number) => Math.min(100, Math.max(0, value));
 const percent = (value: number, min: number, max: number) =>
   clampPercent(((value - min) / (max - min)) * 100);
 
-const label = (value: number) => String(value).replace(".", ",");
+const label = (value: number) => {
+  const text = Number.isInteger(value) ? String(value) : value.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+  return text.replace(".", ",");
+};
 
 /**
  * Felles visuell byggestein for punktbaserte demonstrasjoner.
@@ -36,9 +39,14 @@ export function PointRows({
   max: number;
   markers?: PointMarker[];
 }) {
+  const description = rows
+    .map((row) => `${row.label}: ${row.values.map(label).join(", ")}`)
+    .join(". ");
+
   return (
-    <div className={styles.plot} aria-hidden="true">
-      {rows.map((row) => (
+    <>
+      <div className={styles.plot} aria-hidden="true">
+        {rows.map((row) => (
         <div key={row.label} className={styles.row}>
           <span className={styles.rowLabel}>{row.label}</span>
           <div className={styles.track}>
@@ -67,10 +75,12 @@ export function PointRows({
           </div>
         </div>
       ))}
-      <div className={styles.scale} aria-hidden="true">
-        <span>{label(min)}</span>
-        <span>{label(max)}</span>
+        <div className={styles.scale} aria-hidden="true">
+          <span>{label(min)}</span>
+          <span>{label(max)}</span>
+        </div>
       </div>
-    </div>
+      <p className="visually-hidden">{description}</p>
+    </>
   );
 }
