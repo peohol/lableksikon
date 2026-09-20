@@ -43,7 +43,7 @@ export function MathFormula({
         // Typesett neste verdi i en skjult buffer. Den ferdigrendrede forrige
         // formelen forblir synlig helt til MathJax er ferdig.
         mathJax.typesetClear?.([target]);
-        target.textContent = `\\\\(${sourceTex}\\\\)`;
+        target.textContent = `\\(${sourceTex}\\)`;
         await mathJax.typesetPromise([target]);
 
         // Slideren kan ha rukket å produsere en nyere verdi. I så fall lar vi
