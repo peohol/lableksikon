@@ -9,7 +9,7 @@ export const masseprosent: PublishedTerm = {
   aliases: ["mass percent", "mass fraction percent", "vektprosent", "w/w", "% m/m"],
   explanation: [
     { kind: "p", text: "Har en blanding total masse 100,0 g og 5,0 g av denne massen er analytt, er massefraksjonen 0,050 og masseprosenten 5,0 %. Nevneren er alltid total masse av blandingen." },
-    { kind: "p", text: "Derfor gir 5,0 g analytt tilsatt til 100,0 g løsemiddel ikke 5,0 %, men 5,0/105,0 × 100 % ≈ 4,76 %. Det er en vanlig forskjell mellom «andel av totalen» og «mengde tilsatt til noe annet»." },
+    { kind: "p", text: "Derfor gir 5,0 g analytt tilsatt til 100,0 g løsemiddel ikke 5,0 %, men \\(5{,}0/105{,}0 \\times 100\\,\\% \\approx 4{,}76\\,\\%\\). Det er en vanlig forskjell mellom «andel av totalen» og «mengde tilsatt til noe annet»." },
   ],
   demo: "masseprosent-nevner",
   depth: {
