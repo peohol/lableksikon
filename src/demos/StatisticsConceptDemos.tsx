@@ -34,7 +34,7 @@ export function KonfidensintervallDemo() {
 }
 
 export function SignifikansnivaDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Se α som en på forhånd valgt feilrate for testprosedyren." label="Signifikansnivå og type-I-feil" afterword="α = 0,05 betyr ikke at nullhypotesen har 5 % sannsynlighet for å være sann."><ValueRows rows={[{ label: "Før data", values: "velg \\(\\alpha = 0{,}05\\)" }, { label: "Hvis \\(H_0\\) er sann", values: "inntil 5 % langsiktig forkastningsrate" }, { label: "Etter data", values: "sammenlign \\(p\\) med \\(\\alpha\\)" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="sammenligning" instruction="Se \\(\\alpha\\) som en på forhånd valgt feilrate for testprosedyren." label="Signifikansnivå og type-I-feil" afterword="\\(\\alpha = 0{,}05\\) betyr ikke at nullhypotesen har 5 % sannsynlighet for å være sann."><ValueRows rows={[{ label: "Før data", values: "velg \\(\\alpha = 0{,}05\\)" }, { label: "Hvis \\(H_0\\) er sann", values: "inntil 5 % langsiktig forkastningsrate" }, { label: "Etter data", values: "sammenlign \\(p\\) med \\(\\alpha\\)" }]} /></DemonstrationFrame>;
 }
 
 export function TTestDemo() {
@@ -42,7 +42,7 @@ export function TTestDemo() {
 }
 
 export function FTestDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Sammenlign to varianser som et forhold." label="F-statistikk som variansforhold" afterword="Et forhold nær 1 passer bedre med like varianser enn et forhold langt fra 1; kritiske grenser avhenger av frihetsgrader og α."><ValueRows rows={[{ label: "Varians A", values: "4" }, { label: "Varians B", values: "2" }, { label: "\\(F\\)", values: "\\(4/2 = 2\\)" }]} /></DemonstrationFrame>;
+  return <DemonstrationFrame kind="formel" instruction="Sammenlign to varianser som et forhold." label="F-statistikk som variansforhold" afterword="Et forhold nær 1 passer bedre med like varianser enn et forhold langt fra 1; kritiske grenser avhenger av frihetsgrader og \\(\\alpha\\)."><ValueRows rows={[{ label: "Varians A", values: "4" }, { label: "Varians B", values: "2" }, { label: "\\(F\\)", values: "\\(4/2 = 2\\)" }]} /></DemonstrationFrame>;
 }
 
 export function RegresjonDemo() {
