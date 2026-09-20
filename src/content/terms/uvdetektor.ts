@@ -8,7 +8,7 @@ export const uvdetektor: PublishedTerm = {
   definition: "Kromatografisk detektor som registrerer hvor mye ultrafiolett eller synlig lys som absorberes av komponenter i eluaten.",
   aliases: ["UV", "UV/VIS", "absorbansdetektor", "DAD", "PDA", "diode array"],
   explanation: [
-    { kind: "p", text: "En UV-detektor sender lys gjennom en gjennomstrømningscelle og sammenligner innkommende og transmittert stråling. Responsen uttrykkes vanligvis som absorbans, A = log₁₀(P₀/P)." },
+    { kind: "p", text: "En UV-detektor sender lys gjennom en gjennomstrømningscelle og sammenligner innkommende og transmittert stråling. Responsen uttrykkes vanligvis som absorbans, \\(A = \\log_{10}(P_0/P)\\)." },
     { kind: "p", text: "Bare forbindelser som absorberer ved den valgte bølgelengden gir direkte respons. En diode-array- eller PDA-detektor kan registrere flere bølgelengder eller et spektrum, mens en enklere detektor kan følge én eller noen få bølgelengder." },
   ],
   demo: "uvdetektor-absorbans",
