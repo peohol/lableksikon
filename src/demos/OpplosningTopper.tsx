@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { comma } from "@/lib/statistics";
 import { Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
@@ -32,6 +33,7 @@ export default function OpplosningTopper() {
 
   const resolution = (centerB - centerA) / (4 * WIDTH);
   const label = comma(resolution, 2);
+  const labelTex = label.replace(",", "{,}");
   const verdict =
     resolution >= 1.5
       ? "For omtrent gaussiske topper tilsvarer dette ofte nær baselineseparasjon. Metodens krav avgjør om separasjonen er tilstrekkelig."
@@ -71,10 +73,10 @@ export default function OpplosningTopper() {
         ends={["toppene ligger oppå hverandre", "helt skilt"]}
       />
       <div className={`${shared.row} ${shared.rule} ${styles.readouts}`}>
-        <Readout label="Oppløsning" value={`R = ${label}`} size="small" />
+        <Readout label="Oppløsning" value={<MathFormula tex={`R = ${labelTex}`} />} size="small" />
         <div className={styles.requirement}>
           <span className="readout-label">Vanlig tommelfingerregel</span>
-          <span className={styles.requirementText}>R ≈ 1,5 tilsvarer ofte nær baselineseparasjon</span>
+          <span className={styles.requirementText}><MathFormula tex="R \\approx 1{,}5" /> tilsvarer ofte nær baselineseparasjon</span>
         </div>
         <div className={styles.verdictCol}>
           <Verdict reserve={0}>{verdict}</Verdict>
