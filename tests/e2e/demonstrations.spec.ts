@@ -65,7 +65,7 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     await expect(slider).toHaveValue("0");
     await expect(page.getByText(/praktisk talt på referansen/)).toBeVisible();
     await page.keyboard.press("End");
-    await expect(page.getByText(/systematisk forskjøvet/)).toBeVisible();
+    await expect(page.getByText(/^Punktene er fortsatt tett samlet, men hele klyngen ligger systematisk forskjøvet fra referansen\.$/)).toBeVisible();
   });
 
   test("medianen står stille når ytterpunktet flyttes", async ({ page }) => {
