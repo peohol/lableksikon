@@ -227,7 +227,8 @@ describe("interaktive demonstrasjoner", () => {
     render(<GjennomsnittDemo />);
     const slider = screen.getByRole("slider", { name: "Plassering av den femte observasjonen" });
     fireEvent.change(slider, { target: { value: "18" } });
-    expect(screen.getByText(/7\{,\}6/)).toBeInTheDocument();
+    const formula = screen.getByText("Gjennomsnitt").closest("div")?.querySelector("[data-math-tex]");
+    expect(formula).toHaveAttribute("data-math-tex", "\\bar{x} = 7{,}6");
   });
 
   it("median: medianen står mens gjennomsnittet flyttes av ytterpunktet", () => {
@@ -235,7 +236,8 @@ describe("interaktive demonstrasjoner", () => {
     const slider = screen.getByRole("slider", { name: "Plassering av den største observasjonen" });
     fireEvent.change(slider, { target: { value: "30" } });
     expect(screen.getByText(/Medianen blir 7,0 hele veien/)).toBeInTheDocument();
-    expect(screen.getByText(/10\{,\}4/)).toBeInTheDocument();
+    const formula = screen.getByText("Gjennomsnitt").closest("div")?.querySelector("[data-math-tex]");
+    expect(formula).toHaveAttribute("data-math-tex", "\\bar{x} = 10{,}4");
   });
 
   it("varians: et fjernt punkt øker utvalgsvariansen", () => {
@@ -280,19 +282,19 @@ describe("statiske demonstrasjoner", () => {
   });
 
   it("viser statistikk som er regnet ut av måleserien, ikke hardkodet", () => {
-    render(<StandardavvikFormelDemo />);
+    const { container } = render(<StandardavvikFormelDemo />);
     // Endres måleserien, skal tallene under følge med av seg selv.
     const average = comma(mean(MEASUREMENTS), 2).replace(",", "{,}");
     const standardDeviation = comma(sampleStandardDeviation(MEASUREMENTS), 2).replace(",", "{,}");
     const rsd = comma(relativeStandardDeviation(MEASUREMENTS), 1).replace(",", "{,}");
     const expected =
-      `\\(\\bar{x} = ${average}\\,\\mathrm{mg/L} \\quad s = ${standardDeviation}\\,\\mathrm{mg/L} \\quad \\mathrm{RSD} = ${rsd}\\,\\%\\)`;
-    const result = screen.getByText(expected);
-    expect(result.textContent).toBe(expected);
+      `\\bar{x} = ${average}\\,\\mathrm{mg/L} \\quad s = ${standardDeviation}\\,\\mathrm{mg/L} \\quad \\mathrm{RSD} = ${rsd}\\,\\%`;
+    const result = container.querySelector('[data-math-tex*="RSD"]');
+    expect(result).toHaveAttribute("data-math-tex", expected);
     // Og verdiene skal fortsatt regnes fra akkurat denne serien.
-    expect(result.textContent).toContain("10{,}30");
-    expect(result.textContent).toContain("0{,}14");
-    expect(result.textContent).toContain("1{,}4");
+    expect(result?.getAttribute("data-math-tex")).toContain("10{,}30");
+    expect(result?.getAttribute("data-math-tex")).toContain("0{,}14");
+    expect(result?.getAttribute("data-math-tex")).toContain("1{,}4");
   });
 
   it("viser like mange søyler som målinger", () => {
@@ -302,10 +304,15 @@ describe("statiske demonstrasjoner", () => {
   });
 
   it("standardavvik forklarer hvert ledd i MathJax-formelen", () => {
-    render(<StandardavvikFormel />);
-    expect(screen.getAllByText(/\\sqrt/).length).toBeGreaterThan(0);
-    const terms = screen.getAllByRole("term").map((node) => node.textContent);
-    expect(terms).toEqual(["\\(x_i - \\bar{x}\\)", "\\((\\ldots)^2\\)", "\\(n - 1\\)", "\\(\\sqrt{\\;}\\)"]);
+    const { container } = render(<StandardavvikFormel />);
+    const formulas = Array.from(container.querySelectorAll("[data-math-tex]")).map((node) =>
+      node.getAttribute("data-math-tex"),
+    );
+    expect(formulas.some((tex) => tex?.includes("\\sqrt"))).toBe(true);
+    const terms = screen.getAllByRole("term").map((node) =>
+      node.querySelector("[data-math-tex]")?.getAttribute("data-math-tex"),
+    );
+    expect(terms).toEqual(["x_i - \\bar{x}", "(\\ldots)^2", "n - 1", "\\sqrt{\\;}"]);
     expect(screen.getByText(/Antall frihetsgrader/)).toBeInTheDocument();
   });
 });

@@ -9,7 +9,8 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     const readout = page
       .getByText("Best tilpassede rette linje")
       .locator("..")
-      .locator("mjx-container");
+      .locator("mjx-container")
+      .visible();
     await expect(readout).toBeVisible();
     const before = await readout.innerHTML();
 
@@ -44,7 +45,8 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     const readout = page
       .getByText("Best tilpassede rette linje")
       .locator("..")
-      .locator("mjx-container");
+      .locator("mjx-container")
+      .visible();
     await expect(readout).toBeVisible();
     const before = await readout.innerHTML();
     const slider = page.getByRole("slider", { name: "Avbøying av kalibreringskurven" });
@@ -52,6 +54,73 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     await page.keyboard.press("End");
     await expect.poll(async () => readout.innerHTML()).not.toBe(before);
     await expect(page.getByText(/Tydelig metning/)).toBeVisible();
+  });
+
+  test("MathJax viser ikke rå TeX under raske slideroppdateringer", async ({ page }) => {
+    await page.goto("/begrep/repeterbarhet");
+
+    const readout = page
+      .getByText("Relativt standardavvik")
+      .locator("..")
+      .locator("mjx-container")
+      .visible();
+    await expect(readout).toBeVisible();
+    const before = await readout.innerHTML();
+
+    await page.evaluate(() => {
+      const isHidden = (node: Node) => {
+        let element = node.parentElement;
+        while (element) {
+          const style = getComputedStyle(element);
+          if (
+            element.getAttribute("aria-hidden") === "true" ||
+            style.display === "none" ||
+            style.visibility === "hidden" ||
+            style.opacity === "0"
+          ) {
+            return true;
+          }
+          element = element.parentElement;
+        }
+        return false;
+      };
+
+      const inspect = () => {
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        let node = walker.nextNode();
+        while (node) {
+          const text = node.textContent ?? "";
+          if ((text.includes("\\(") || text.includes("\\)")) && !isHidden(node)) {
+            document.body.dataset.rawMathVisible = "true";
+            return;
+          }
+          node = walker.nextNode();
+        }
+      };
+
+      document.body.dataset.rawMathVisible = "false";
+      inspect();
+      const observer = new MutationObserver(inspect);
+      observer.observe(document.body, {
+        subtree: true,
+        childList: true,
+        characterData: true,
+        attributes: true,
+        attributeFilter: ["aria-hidden", "class", "style"],
+      });
+      (window as typeof window & { __mathSourceObserver?: MutationObserver }).__mathSourceObserver =
+        observer;
+    });
+
+    const slider = page.getByRole("slider", { name: "Tilfeldig variasjon i den korte serien" });
+    await slider.focus();
+    for (let step = 0; step < 12; step += 1) {
+      await page.keyboard.press("ArrowRight");
+    }
+    await page.keyboard.press("End");
+
+    await expect.poll(async () => readout.innerHTML()).not.toBe(before);
+    expect(await page.evaluate(() => document.body.dataset.rawMathVisible)).toBe("false");
   });
 
   test("skjevhet kan flyttes fra null til tydelig systematisk forskyvning", async ({ page }) => {
