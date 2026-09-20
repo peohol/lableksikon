@@ -13,10 +13,10 @@ export const korrelasjon: PublishedTerm = {
   ],
   demo: "korrelasjon-monstre",
   depth: {
-    title: "Dybde: r, R² og hvorfor grafen fortsatt er nødvendig",
+    title: "Dybde: \\(r\\), \\(R^2\\) og hvorfor grafen fortsatt er nødvendig",
     blocks: [
       { kind: "p", text: "Korrelasjonskoeffisienten standardiserer samvariasjonen med spredningen i x og y. Dermed er den enhetsløs og uendret ved lineær skalering av variablene." },
-      { kind: "p", text: "Ved enkel lineær [regresjon](begrep:regresjon) med konstantledd er R² lik r², men dette gjør ikke r eller R² til en generell test av modellens egnethet. Residualer og modellforutsetninger må fortsatt vurderes." },
+      { kind: "p", text: "Ved enkel lineær [regresjon](begrep:regresjon) med konstantledd er \\(R^2 = r^2\\), men dette gjør ikke \\(r\\) eller \\(R^2\\) til en generell test av modellens egnethet. Residualer og modellforutsetninger må fortsatt vurderes." },
       { kind: "p", text: "En enkelt [uteligger](begrep:uteligger) kan endre r kraftig. Derfor bør et spredningsplott alltid vurderes sammen med koeffisienten." },
     ],
   },

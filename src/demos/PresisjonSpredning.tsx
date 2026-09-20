@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./PresisjonSpredning.module.css";
@@ -25,6 +26,7 @@ export default function PresisjonSpredning() {
   const amplitude = 2 + spread * 0.3;
   const rsd = 0.4 + spread * 0.115;
   const rsdLabel = format(rsd);
+  const rsdTex = rsdLabel.replace(",", "{,}");
   const verdict =
     rsd < 2
       ? "Målingene er svært presise: gjentak gir praktisk talt samme tall."
@@ -59,7 +61,7 @@ export default function PresisjonSpredning() {
           ))}
         </div>
         <div className={shared.readingCol}>
-          <Readout label="Seks gjentatte målinger av samme prøve" value={`RSD ${rsdLabel} %`} />
+          <Readout label="Seks gjentatte målinger av samme prøve" value={<MathFormula tex={`\\mathrm{RSD} = ${rsdTex}\\,\\%`} />} />
           <Verdict reserve={3.2}>{verdict}</Verdict>
           <div>
             <Slider

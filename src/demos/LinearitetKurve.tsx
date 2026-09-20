@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { clamp, comma, fitLine } from "@/lib/statistics";
 import { Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
@@ -20,6 +21,7 @@ export default function LinearitetKurve() {
   const ys = BEND_AMOUNT.map((amount, index) => 220 - 36 * index + bend * amount);
   const fit = fitLine(ys);
   const r2 = comma(fit.r2, 4);
+  const r2Tex = r2.replace(",", "{,}");
   const percent = Math.round(bend * 100);
 
   const maxResidual = Math.max(
@@ -28,11 +30,13 @@ export default function LinearitetKurve() {
   );
 
   const verdict =
-    bend < 0.12
-      ? "Punktene ligger på linja, og residualene spretter tilfeldig rundt null. Metoden er lineær i dette området."
-      : bend < 0.45
-        ? "R² ser fortsatt fint ut, men residualene begynner å danne en bue. Det er et tidlig varsel."
-        : "Tydelig metning i toppen. Høye prøver må fortynnes, ellers rapporteres de for lavt — selv med høy R².";
+    bend < 0.12 ? (
+      <>Punktene ligger på linja, og residualene spretter tilfeldig rundt null. Metoden er lineær i dette området.</>
+    ) : bend < 0.45 ? (
+      <><MathFormula tex="R^2" /> ser fortsatt fint ut, men residualene begynner å danne en bue. Det er et tidlig varsel.</>
+    ) : (
+      <>Tydelig metning i toppen. Høye prøver må fortynnes, ellers rapporteres de for lavt — selv med høy <MathFormula tex="R^2" />.</>
+    );
 
   const bendFromPointer = (clientY: number) => {
     const svg = svgRef.current;
@@ -137,7 +141,7 @@ export default function LinearitetKurve() {
           </svg>
           <Slider
             label="Avbøying av kalibreringskurven"
-            valueText={`Avbøying ${percent} prosent, R² ${r2}`}
+            valueText={`Avbøying ${percent} prosent, R-kvadrat ${r2}`}
             value={percent}
             onChange={(value) => setBend(value / 100)}
             ends={["rett linje", "full metning"]}
@@ -145,7 +149,7 @@ export default function LinearitetKurve() {
         </div>
 
         <div className={shared.readingCol}>
-          <Readout label="Best tilpassede rette linje" value={`R² = ${r2}`} size="small" />
+          <Readout label="Best tilpassede rette linje" value={<MathFormula tex={`R^2 = ${r2Tex}`} />} size="small" />
           <div>
             <span className={shared.caption}>Residualer</span>
             <div className={styles.residuals} aria-hidden="true">

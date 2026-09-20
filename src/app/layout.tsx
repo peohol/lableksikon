@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 import { Header } from "@/components/Header";
+import { MathJax } from "@/components/MathJax";
 import { SkipLink } from "@/components/SkipLink";
 import { buildSearchIndex } from "@/lib/search-index";
 import { siteUrl } from "@/lib/site";
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SkipLink />
         <Header searchIndex={buildSearchIndex()} termCount={orderedTerms.length} />
         <main id="innhold">{children}</main>
+        <MathJax />
       </body>
     </html>
   );

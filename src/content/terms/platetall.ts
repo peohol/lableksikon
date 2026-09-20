@@ -15,7 +15,7 @@ export const platetall: PublishedTerm = {
   depth: {
     title: "Dybde: N og antakelsen om gaussiske topper",
     blocks: [
-      { kind: "p", text: "For en symmetrisk gaussisk topp er vanlige uttrykk N = 16(tR/wb)² og N = 5,545(tR/wh)². IUPAC understreker at disse uttrykkene bygger på en gaussisk toppmodell." },
+      { kind: "p", text: "For en symmetrisk gaussisk topp er vanlige uttrykk \\(N = 16(t_R/w_b)^2\\) og \\(N = 5{,}545(t_R/w_h)^2\\). IUPAC understreker at disse uttrykkene bygger på en gaussisk toppmodell." },
       { kind: "p", text: "Observerte topper påvirkes også av ekstrakolonne-båndspredning. Et målt platetall er derfor ikke alltid en ren egenskap ved kolonnematerialet alene." },
     ],
   },

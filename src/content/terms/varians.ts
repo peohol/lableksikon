@@ -9,7 +9,7 @@ export const varians: PublishedTerm = {
   aliases: ["variance", "s2", "s²", "sigma2", "σ²", "spredningsmål"],
   explanation: [
     { kind: "p", text: "Avvikene fra [gjennomsnittet](begrep:gjennomsnitt) kan være både positive og negative. Ved å kvadrere dem unngår man at de opphever hverandre, og store avvik får større vekt." },
-    { kind: "p", text: "Varians får enheten kvadrert, for eksempel (mg/L)². [Standardavviket](begrep:standardavvik) er derfor ofte enklere å tolke direkte fordi det har samme enhet som dataene." },
+    { kind: "p", text: "Varians får enheten kvadrert, for eksempel \\((\\mathrm{mg/L})^2\\). [Standardavviket](begrep:standardavvik) er derfor ofte enklere å tolke direkte fordi det har samme enhet som dataene." },
   ],
   demo: "varians-kvadrater",
   depth: {

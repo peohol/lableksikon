@@ -5,10 +5,10 @@ export const normalfordeling: PublishedTerm = {
   slug: "normalfordeling",
   title: "Normalfordeling",
   category: "statistikk",
-  definition: "En symmetrisk, unimodal sannsynlighetsfordeling bestemt av middelverdien μ og standardavviket σ.",
+  definition: "En symmetrisk, unimodal sannsynlighetsfordeling bestemt av middelverdien og standardavviket.",
   aliases: ["normal distribution", "Gauss", "Gaussian", "klokkekurve", "bell curve"],
   explanation: [
-    { kind: "p", text: "Normalfordelingen har én topp og er symmetrisk rundt middelverdien. Omtrent 68 % av fordelingen ligger innenfor ±1 standardavvik, 95 % innenfor omtrent ±2 og 99,7 % innenfor omtrent ±3." },
+    { kind: "p", text: "Normalfordelingen har én topp og er symmetrisk rundt middelverdien. Omtrent 68 % av fordelingen ligger innenfor \\(\\pm 1\\) standardavvik, 95 % innenfor omtrent \\(\\pm 2\\) og 99,7 % innenfor omtrent \\(\\pm 3\\)." },
     { kind: "p", text: "At et histogram ser klokkeformet ut er ikke i seg selv bevis på normalfordeling. Fordelingsantakelser bør vurderes i lys av datamengde, grafikk og formålet med analysen." },
   ],
   demo: "normalfordeling-spredning",

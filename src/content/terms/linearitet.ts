@@ -13,10 +13,10 @@ export const linearitet: PublishedTerm = {
   ],
   demo: "linearitet-kurve",
   depth: {
-    title: "Dybde: residualer, R² og valg av regresjonsmodell",
+    title: "Dybde: residualer, \\(R^2\\) og valg av regresjonsmodell",
     blocks: [
-      { kind: "p", text: "Et høyt R² er ikke i seg selv dokumentasjon på god kalibreringslinearitet. Residualer, tilbakeberegnede kalibratorer og faglig relevante akseptkriterier gir mer direkte informasjon om hvor modellen avviker." },
-      { kind: "p", text: "Dersom variansen endrer seg med nivået, kan [vektet regresjon](begrep:vektet) være hensiktsmessig. Valget av vekter, for eksempel 1/x eller 1/x², bør begrunnes med data og modellatferd fremfor å brukes automatisk." },
+      { kind: "p", text: "Et høyt \\(R^2\\) er ikke i seg selv dokumentasjon på god kalibreringslinearitet. Residualer, tilbakeberegnede kalibratorer og faglig relevante akseptkriterier gir mer direkte informasjon om hvor modellen avviker." },
+      { kind: "p", text: "Dersom variansen endrer seg med nivået, kan [vektet regresjon](begrep:vektet) være hensiktsmessig. Valget av vekter, for eksempel \\(1/x\\) eller \\(1/x^2\\), bør begrunnes med data og modellatferd fremfor å brukes automatisk." },
       { kind: "p", text: "Et validert [arbeidsområde](begrep:arbeidsomrade) avgrenses av mer enn modelltilpasning alene; presisjon, skjevhet og kvantifiseringsevne må også være tilstrekkelige i området." },
     ],
   },

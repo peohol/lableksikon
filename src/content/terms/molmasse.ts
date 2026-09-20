@@ -5,10 +5,10 @@ export const molmasse: PublishedTerm = {
   slug: "molmasse",
   title: "Molmasse",
   category: "enheter",
-  definition: "Massen av et stoff dividert med stoffmengden, M = m/n.",
+  definition: "Massen av et stoff dividert med stoffmengden.",
   aliases: ["molar mass", "g/mol", "kg/mol", "molvekt"],
   explanation: [
-    { kind: "p", text: "Molmassen forteller hvor stor masse som svarer til én bestemt stoffmengde. Hvis M = 40,0 g/mol, har 0,250 mol en masse på 10,0 g." },
+    { kind: "p", text: "Molmassen forteller hvor stor masse som svarer til én bestemt stoffmengde. Sammenhengen er \\(M = m/n\\). Hvis \\(M = 40{,}0\\,\\mathrm{g/mol}\\) og \\(n = 0{,}250\\,\\mathrm{mol}\\), er massen \\(m = 10{,}0\\,\\mathrm{g}\\)." },
     { kind: "p", text: "SI-enheten er kg/mol, mens g/mol er svært vanlig i kjemi. Molmassen gjør det mulig å regne mellom masse og stoffmengde, og er derfor sentral når løsninger med kjent [molaritet](begrep:molaritet) skal lages fra en innveid masse." },
   ],
   demo: "molmasse-forhold",

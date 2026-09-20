@@ -9,7 +9,7 @@ export const fragmentering: PublishedTerm = {
   aliases: ["fragmentation", "fragmention", "product ion", "MS/MS", "CID"],
   explanation: [
     { kind: "p", text: "Fragmentering kan oppstå allerede under [ionisering](begrep:ionisering), eller fremkalles bevisst i tandem-[massespektrometri](begrep:massespektrometri), for eksempel ved kollisjonsindusert dissosiasjon." },
-    { kind: "p", text: "Produkt-ionenes m/z og relative intensiteter kan gi strukturell informasjon og øke selektiviteten. I [MRM](begrep:mrm) overvåkes bestemte kombinasjoner av forløperion og produkt-ion." },
+    { kind: "p", text: "Produkt-ionenes \\(m/z\\) og relative intensiteter kan gi strukturell informasjon og øke selektiviteten. I [MRM](begrep:mrm) overvåkes bestemte kombinasjoner av forløperion og produkt-ion." },
   ],
   demo: "fragmentering-spalting",
   depth: {

@@ -15,7 +15,7 @@ export const opplosning: PublishedTerm = {
   depth: {
     title: "Dybde: Rs, toppbredde og tommelfingerregler",
     blocks: [
-      { kind: "p", text: "For toppbredder målt ved basis uttrykkes peak resolution vanligvis som Rs = 2(tR₂ − tR₁)/(w₁ + w₂). Samme retensjonsforskjell gir altså dårligere oppløsning når toppene blir bredere." },
+      { kind: "p", text: "For toppbredder målt ved basis uttrykkes peak resolution vanligvis som \\(R_s = \\frac{2(t_{R,2}-t_{R,1})}{w_1+w_2}\\). Samme retensjonsforskjell gir altså dårligere oppløsning når toppene blir bredere." },
       { kind: "p", text: "Rs rundt 1,5 omtales ofte som omtrent baseline-separasjon for to sammenlignbare, nær-gaussiske topper, men dette er en tommelfingerregel — ikke en universell kvalitetsgrense eller garanti for korrekt kvantifisering. Kravet må passe formålet, toppformen og metoden." },
     ],
   },

@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { comma } from "@/lib/statistics";
 import { Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
@@ -26,27 +27,28 @@ export default function DeteksjonsgrenseStoy() {
   });
   const snr = PEAK_HEIGHT / Math.max(2.5, noise * 0.8);
   const snrLabel = comma(snr, 1);
+  const snrTex = snrLabel.replace(",", "{,}");
   const belowLimit = snr < 3;
   const verdict =
     snr >= 10
       ? "Toppen er godt over støyen i denne illustrasjonen."
       : snr >= 3
-        ? "Toppen kan skilles fra støyen etter illustrasjonens S/N-kriterium."
-        : "Under grensa i denne illustrasjonen: S/N-kriteriet er ikke lenger oppfylt.";
+        ? "Toppen kan skilles fra støyen etter illustrasjonens signal-støy-kriterium."
+        : "Under grensa i denne illustrasjonen: signal-støy-kriteriet er ikke lenger oppfylt.";
 
   return (
     <DemonstrationFrame
       kind="interaktiv"
       instruction="Skru opp støyen og se hvordan signal-støy-forholdet faller"
       label="Pedagogisk demonstrasjon av signal mot støy"
-      afterword="S/N = 3 brukes her for å vise prinsippet. Reell LOD skal bestemmes med en definert, validert tilnærming for den aktuelle metoden."
+      afterword="\(S/N = 3\) brukes her for å vise prinsippet. Reell LOD skal bestemmes med en definert, validert tilnærming for den aktuelle metoden."
     >
       <div className={`chart-surface ${styles.chart}`} aria-hidden="true">
         {bars.map((height, index) => <div key={index} className={styles.bar} style={{ height: `${height}%` }} />)}
       </div>
       <Slider label="Støynivå i bakgrunnen" valueText={`Signal-støy-forhold ${snrLabel}`} value={noise} onChange={setNoise} ends={["rolig bakgrunn", "mye støy"]} />
       <div className={`${shared.row} ${shared.rule}`}>
-        <Readout label="illustrativ grense: S/N = 3" value={`S/N = ${snrLabel}`} size="small" />
+        <Readout label="Illustrativ signal-støy-grense" value={<MathFormula tex={`S/N = ${snrTex}`} />} size="small" />
       </div>
       <Verdict tone={belowLimit ? "warning" : "normal"}>{verdict}</Verdict>
     </DemonstrationFrame>

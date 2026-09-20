@@ -8,7 +8,7 @@ export const dekningsfaktor: PublishedTerm = {
   definition: "Et tall større enn én som multipliseres med kombinert standardusikkerhet for å få utvidet måleusikkerhet.",
   aliases: ["coverage factor", "k", "k-faktor", "dekningssannsynlighet"],
   explanation: [
-    { kind: "p", text: "Tenk på k som en breddeknapp. Samme standardusikkerhet gir et smalere intervall med k = 1 enn med k = 2." },
+    { kind: "p", text: "Tenk på \\(k\\) som en breddeknapp. Samme standardusikkerhet gir et smalere intervall med \\(k = 1\\) enn med \\(k = 2\\)." },
     { kind: "p", text: "Men k velges ikke bare fordi et bestemt tall er vanlig. Ønsket dekningssannsynlighet og formen på usikkerhetsfordelingen bestemmer hvilken faktor som er passende for [utvidet måleusikkerhet](begrep:utvidet)." },
   ],
   demo: "dekningsfaktor-k",

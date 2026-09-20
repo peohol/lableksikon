@@ -75,7 +75,7 @@ export function KrysskontamineringDemo() {
 export function BakgrunnssignalDemo() {
   return (
     <DemonstrationFrame kind="sammenligning" instruction="Skill et stabilt bakgrunnsnivå fra tilfeldig variasjon rundt nivået." label="Bakgrunnssignal og støy er forskjellige størrelser" afterword="Bakgrunnen kan ligge over null selv når analytten ikke bidrar; støy er variasjonen rundt dette nivået.">
-      <ValueRows rows={[{ label: "Bakgrunnsnivå", values: "ca. 8 responsenheter" }, { label: "Tilfeldig støy", values: "typisk ±1 rundt bakgrunnen" }, { label: "Analytt + bakgrunn", values: "ca. 48 responsenheter" }]} />
+      <ValueRows rows={[{ label: "Bakgrunnsnivå", values: "ca. 8 responsenheter" }, { label: "Tilfeldig støy", values: "typisk \\(\\pm 1\\) rundt bakgrunnen" }, { label: "Analytt + bakgrunn", values: "ca. 48 responsenheter" }]} />
     </DemonstrationFrame>
   );
 }

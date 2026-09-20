@@ -92,9 +92,9 @@ export function ResponsfaktorDemo() {
       afterword="En responsfaktor er knyttet til det aktuelle målesystemet og betingelsene; ulike analytter kan gi ulik respons ved samme mengde."
     >
       <div className={styles.formulaLine}>
-        <span>A: 500 / 10 = 50</span>
-        <span>B: 300 / 10 = 30</span>
-        <strong>A responderer 1,67× sterkere</strong>
+        <span>A: \(500/10 = 50\)</span>
+        <span>B: \(300/10 = 30\)</span>
+        <strong>A responderer 1,67 ganger sterkere</strong>
       </div>
     </DemonstrationFrame>
   );
@@ -151,8 +151,8 @@ export function VektetRegresjonDemo() {
       <ValueRows
         rows={[
           { label: "Uvektet", values: "alle punkter får samme statistiske vekt" },
-          { label: "1/x", values: "lave nivåer får større vekt enn høye" },
-          { label: "1/x²", values: "forskjellen i vekt blir enda sterkere" },
+          { label: "\\(1/x\\)", values: "lave nivåer får større vekt enn høye" },
+          { label: "\\(1/x^2\\)", values: "forskjellen i vekt blir enda sterkere" },
         ]}
       />
     </DemonstrationFrame>
@@ -168,9 +168,9 @@ export function NullpunktDemo() {
       afterword="Et ikke-null konstantledd kan skyldes bakgrunn, blankbidrag eller modelltilpasning. Det skal ikke uten begrunnelse settes lik null."
     >
       <div className={styles.formulaLine}>
-        <strong>y = a + bx</strong>
-        <span>x = 0 → y = a</span>
-        <span>a = konstantledd / skjæring</span>
+        <strong>\(y = a + bx\)</strong>
+        <span>\(x = 0 \Rightarrow y = a\)</span>
+        <span>\(a\) — konstantledd / skjæring</span>
       </div>
     </DemonstrationFrame>
   );

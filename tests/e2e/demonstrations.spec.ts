@@ -6,8 +6,12 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
   test("bare toppunktet i linearitetsgrafen kan dras", async ({ page }) => {
     await page.goto("/begrep/linearitet");
 
-    const readout = page.getByText(/^R² = /);
-    const before = await readout.textContent();
+    const readout = page
+      .getByText("Best tilpassede rette linje")
+      .locator("..")
+      .locator("mjx-container");
+    await expect(readout).toBeVisible();
+    const before = await readout.innerHTML();
 
     const svg = page.locator("svg").first();
     const svgBox = (await svg.boundingBox())!;
@@ -21,7 +25,7 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     await page.mouse.down();
     await page.mouse.move(idleX, svgBox.y + svgBox.height * 0.4, { steps: 8 });
     await page.mouse.up();
-    await expect(readout).toHaveText(before as string);
+    await expect.poll(async () => readout.innerHTML()).toBe(before);
 
     // Selve punktet skal derimot kunne dras.
     await page.mouse.move(handleBox.x + handleBox.width / 2, handleBox.y + handleBox.height / 2);
@@ -32,17 +36,21 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
       { steps: 10 },
     );
     await page.mouse.up();
-    await expect(readout).not.toHaveText(before as string);
+    await expect.poll(async () => readout.innerHTML()).not.toBe(before);
   });
 
   test("slideren gjør det samme fra tastaturet", async ({ page }) => {
     await page.goto("/begrep/linearitet");
-    const readout = page.getByText(/^R² = /);
-    const before = await readout.textContent();
+    const readout = page
+      .getByText("Best tilpassede rette linje")
+      .locator("..")
+      .locator("mjx-container");
+    await expect(readout).toBeVisible();
+    const before = await readout.innerHTML();
     const slider = page.getByRole("slider", { name: "Avbøying av kalibreringskurven" });
     await slider.focus();
     await page.keyboard.press("End");
-    await expect(readout).not.toHaveText(before as string);
+    await expect.poll(async () => readout.innerHTML()).not.toBe(before);
     await expect(page.getByText(/Tydelig metning/)).toBeVisible();
   });
 
