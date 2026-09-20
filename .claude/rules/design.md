@@ -19,6 +19,9 @@ presist — ikke moderniser, forenkle eller reinterpretér det.
   tilgjengeligheten. Pedagogikken bestemmes av begrepet. Maks én primær
   interaksjon, maks to dataserier (`accent` og `warning`), og alle tilstander
   skal ha en meningsfull verdict-tekst.
+- **Matematikk skrives som TeX og rendres med MathJax.** Bruk `\\(...\\)`
+  inline og `\\[...\\]` for egne linjer. Ikke håndformater matematiske
+  uttrykk med Unicode-symboler eller HTML når de kan uttrykkes i TeX.
 - **Alt som kan dras skal også kunne styres fra tastaturet.** Hard regel.
 - **Aldri farge alene.** Verdict-tekst sier hva som skjer, chips har tegn i
   tillegg til fyll, dataserier skiller seg på strektype i tillegg til farge.
