@@ -8,7 +8,7 @@ export const signifikansniva: PublishedTerm = {
   definition: "En forhåndsvalgt grense α for sannsynligheten for å forkaste nullhypotesen når den faktisk er sann, under modellforutsetningene for testen.",
   aliases: ["significance level", "alpha", "α", "0,05", "5 %", "type I error"],
   explanation: [
-    { kind: "p", text: "Velger man α = 0,05, aksepterer testprosedyren en langsiktig risiko på opptil 5 % for type-I-feil når nullhypotesen er sann og forutsetningene holder." },
+    { kind: "p", text: "Velger man \\(\\alpha = 0{,}05\\), aksepterer testprosedyren en langsiktig risiko på opptil 5 % for type-I-feil når nullhypotesen er sann og forutsetningene holder." },
     { kind: "p", text: "Signifikansnivået er ikke det samme som p-verdien. α velges før analysen; p-verdien beregnes fra dataene og sammenlignes ofte med α." },
   ],
   demo: "signifikansniva-hale",
