@@ -94,7 +94,7 @@ export function ResponsfaktorDemo() {
       <div className={styles.formulaLine}>
         <span>A: \(500/10 = 50\)</span>
         <span>B: \(300/10 = 30\)</span>
-        <strong>A responderer 1,67× sterkere</strong>
+        <strong>A responderer 1,67 ganger sterkere</strong>
       </div>
     </DemonstrationFrame>
   );
