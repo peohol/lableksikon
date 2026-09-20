@@ -103,7 +103,7 @@ export function GjenvinningDemo() {
       kind="formel"
       instruction="Følg hva som skjer når en kjent mengde analytt tilsettes prøven."
       label="Spike recovery beregnet fra før- og ettermåling"
-      afterword="Her er spike recovery (98 − 80) / 20 = 90 %. Ordet recovery brukes også om andre størrelser."
+      afterword="Her er spike recovery \\((98-80)/20 = 90\\,\\%\\). Ordet recovery brukes også om andre størrelser."
     >
       <div className={styles.formulaLine}>
         <span>Før: 80</span><span>+ spike: 20</span><span>målt etter: 98</span><strong>90 %</strong>
@@ -118,9 +118,9 @@ export function UtvidetUsikkerhetDemo() {
       kind="formel"
       instruction="Se hvordan standardusikkerhet blir til utvidet usikkerhet."
       label="Utvidet måleusikkerhet fra kombinert standardusikkerhet"
-      afterword="k = 2 gir ofte omtrent 95 % dekning, men bare under passende fordelingsforutsetninger."
+      afterword="\\(k = 2\\) gir ofte omtrent 95 % dekning, men bare under passende fordelingsforutsetninger."
     >
-      <div className={styles.formulaLine}><span>uᶜ = 1,5</span><span>k = 2</span><strong>U = 3,0</strong><span>100 ± 3</span></div>
+      <div className={styles.formulaLine}><span>\\(u_c = 1{,}5\\)</span><span>\\(k = 2\\)</span><strong>\\(U = 3{,}0\\)</strong><span>\\(100 \\pm 3\\)</span></div>
     </DemonstrationFrame>
   );
 }
@@ -129,11 +129,11 @@ export function DekningsfaktorDemo() {
   return (
     <DemonstrationFrame
       kind="sammenligning"
-      instruction="Sammenlign intervallet når samme standardusikkerhet multipliseres med ulike k."
+      instruction="Sammenlign intervallet når samme standardusikkerhet multipliseres med ulike \\(k\\)."
       label="Dekningsfaktor og intervallbredde"
-      afterword="Større k gir et bredere intervall; ønsket dekning og sannsynlighetsfordeling bestemmer passende k."
+      afterword="Større \\(k\\) gir et bredere intervall; ønsket dekning og sannsynlighetsfordeling bestemmer passende \\(k\\)."
     >
-      <ValueRows rows={[{ label: "k = 1", values: "98,5 ├──── 100 ────┤ 101,5" }, { label: "k = 2", values: "97,0 ├──────── 100 ────────┤ 103,0" }]} />
+      <ValueRows rows={[{ label: "\\\\(k = 1\\\\)", values: "98,5 ├──── 100 ────┤ 101,5" }, { label: "\\\\(k = 2\\\\)", values: "97,0 ├──────── 100 ────────┤ 103,0" }]} />
     </DemonstrationFrame>
   );
 }
