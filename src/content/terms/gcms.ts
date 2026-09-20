@@ -8,7 +8,7 @@ export const gcms: PublishedTerm = {
   definition: "Koblet teknikk der gasskromatografi separerer prøvekomponentene før de detekteres med et massespektrometer.",
   aliases: ["GC/MS", "gas chromatography mass spectrometry", "GC-MS/MS"],
   explanation: [
-    { kind: "p", text: "I GC separeres forbindelser i en gassformig [mobilfase](begrep:mobilfase). Når de eluerer fra kolonnen, går de videre til [massespektrometeret](begrep:massespektrometri), som registrerer m/z-relaterte signaler." },
+    { kind: "p", text: "I GC separeres forbindelser i en gassformig [mobilfase](begrep:mobilfase). Når de eluerer fra kolonnen, går de videre til [massespektrometeret](begrep:massespektrometri), som registrerer \\(m/z\\)-relaterte signaler." },
     { kind: "p", text: "Elektronionisering er svært vanlig i GC-MS og gir ofte reproducerbare, fragmentrike spektre som kan sammenlignes med biblioteker. Men GC-MS som begrep krever ikke én bestemt [ioniseringsmetode](begrep:ionisering)." },
   ],
   demo: "gcms-kobling",
