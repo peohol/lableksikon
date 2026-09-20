@@ -1,23 +1,24 @@
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { comma, mean, relativeStandardDeviation, sampleStandardDeviation } from "@/lib/statistics";
 import shared from "./demos.module.css";
 import styles from "./StandardavvikFormel.module.css";
 
 const TERMS = [
   {
-    symbol: "xᵢ − x̄",
+    symbol: "x_i - \\bar{x}",
     text: "Avstanden fra hver enkelt måling til gjennomsnittet.",
   },
   {
-    symbol: "( … )²",
+    symbol: "(\\ldots)^2",
     text: "Kvadreringen fjerner fortegnet, så avvik over og under ikke utligner hverandre.",
   },
   {
-    symbol: "n − 1",
+    symbol: "n - 1",
     text: "Antall frihetsgrader. Én går tapt fordi gjennomsnittet er regnet ut fra samme data.",
   },
   {
-    symbol: "√",
+    symbol: "\\sqrt{\\;}",
     text: "Kvadratroten fører resultatet tilbake til samme enhet som målingene.",
   },
 ];
@@ -39,6 +40,9 @@ export default function StandardavvikFormel() {
   const average = mean(MEASUREMENTS);
   const standardDeviation = sampleStandardDeviation(MEASUREMENTS);
   const rsd = relativeStandardDeviation(MEASUREMENTS);
+  const averageTex = comma(average, 2).replace(",", "{,}");
+  const standardDeviationTex = comma(standardDeviation, 2).replace(",", "{,}");
+  const rsdTex = comma(rsd, 1).replace(",", "{,}");
 
   return (
     <DemonstrationFrame
@@ -51,21 +55,13 @@ export default function StandardavvikFormel() {
         minus 1.
       </p>
       <div className={styles.formula} aria-hidden="true">
-        <span>s</span>
-        <span className={styles.equals}>=</span>
-        <span className={styles.root}>
-          <span className={styles.radical}>√</span>
-          <span className={styles.fraction}>
-            <span className={styles.numerator}>Σ (xᵢ − x̄)²</span>
-            <span className={styles.denominator}>n − 1</span>
-          </span>
-        </span>
+        <MathFormula tex="s = \\sqrt{\\frac{\\sum_i (x_i - \\bar{x})^2}{n - 1}}" />
       </div>
 
       <dl className={styles.terms}>
         {TERMS.map((term) => (
           <div key={term.symbol}>
-            <dt className={styles.symbol}>{term.symbol}</dt>
+            <dt className={styles.symbol}><MathFormula tex={term.symbol} /></dt>
             <dd className={styles.explanation}>{term.text}</dd>
           </div>
         ))}
@@ -86,8 +82,7 @@ export default function StandardavvikFormel() {
           ))}
         </div>
         <p className={styles.result}>
-          x̄ = {comma(average, 2)} mg/L &nbsp; s = {comma(standardDeviation, 2)} mg/L &nbsp; RSD ={" "}
-          {comma(rsd, 1)} %
+          <MathFormula tex={`\\bar{x} = ${averageTex}\\,\\mathrm{mg/L} \\quad s = ${standardDeviationTex}\\,\\mathrm{mg/L} \\quad \\mathrm{RSD} = ${rsdTex}\\,\\%`} />
         </p>
       </div>
     </DemonstrationFrame>
