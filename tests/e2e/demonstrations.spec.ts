@@ -6,7 +6,11 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
   test("bare toppunktet i linearitetsgrafen kan dras", async ({ page }) => {
     await page.goto("/begrep/linearitet");
 
-    const readout = page.getByText(/^R² = /);
+    const readout = page
+      .getByText("Best tilpassede rette linje")
+      .locator("..")
+      .locator("mjx-container");
+    await expect(readout).toBeVisible();
     const before = await readout.textContent();
 
     const svg = page.locator("svg").first();
@@ -37,7 +41,11 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
 
   test("slideren gjør det samme fra tastaturet", async ({ page }) => {
     await page.goto("/begrep/linearitet");
-    const readout = page.getByText(/^R² = /);
+    const readout = page
+      .getByText("Best tilpassede rette linje")
+      .locator("..")
+      .locator("mjx-container");
+    await expect(readout).toBeVisible();
     const before = await readout.textContent();
     const slider = page.getByRole("slider", { name: "Avbøying av kalibreringskurven" });
     await slider.focus();
