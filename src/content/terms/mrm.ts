@@ -9,7 +9,7 @@ export const mrm: PublishedTerm = {
   aliases: ["multiple reaction monitoring", "SRM", "selected reaction monitoring", "transition", "overgang"],
   explanation: [
     { kind: "p", text: "I selected reaction monitoring (SRM) registreres bestemte produkt-ioner som stammer fra valgte forløperioner gjennom to eller flere stadier av [massespektrometri](begrep:massespektrometri). MRM er IUPAC-navnet når SRM anvendes på flere produkt-ioner fra ett eller flere forløperioner." },
-    { kind: "p", text: "I kvantitativ LC-MS/MS omtales en kombinasjon av forløper-m/z og produkt-m/z ofte som en overgang. Seleksjon både før og etter [fragmentering](begrep:fragmentering) kan gi høy analytisk selektivitet." },
+    { kind: "p", text: "I kvantitativ LC-MS/MS omtales en kombinasjon av forløper-\\(m/z\\) og produkt-\\(m/z\\) ofte som en overgang. Seleksjon både før og etter [fragmentering](begrep:fragmentering) kan gi høy analytisk selektivitet." },
   ],
   demo: "mrm-overganger",
   depth: {
