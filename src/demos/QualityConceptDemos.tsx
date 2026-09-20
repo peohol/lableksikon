@@ -1,4 +1,12 @@
+"use client";
+
+import { useState } from "react";
+
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
+import { comma, mean, relativeStandardDeviation, sampleStandardDeviation } from "@/lib/statistics";
+import { PointRows } from "./PointRows";
+import { Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./QualityConceptDemos.module.css";
 
@@ -28,70 +36,206 @@ function Flow({ items }: { items: string[] }) {
   );
 }
 
+const OFFSETS = [-1, -0.6, -0.2, 0.2, 0.6, 1] as const;
+const SMALL_OFFSETS = [-1, 0, 1] as const;
+
+const scaledSeries = (center: number, amplitude: number, offsets = OFFSETS) =>
+  offsets.map((offset) => center + offset * amplitude);
+
+const texNumber = (value: number, decimals: number) =>
+  comma(value, decimals).replace(",", "{,}");
+
 export function RepeterbarhetDemo() {
+  const [spread, setSpread] = useState(32);
+  const amplitude = 0.08 + spread * 0.016;
+  const values = scaledSeries(100, amplitude);
+  const sd = sampleStandardDeviation(values);
+  const rsd = relativeStandardDeviation(values);
+
+  const verdict =
+    rsd < 0.35
+      ? "Målingene ligger svært tett i denne korte serien."
+      : rsd < 0.9
+        ? "Spredningen er synlig, men alle punktene ligger fortsatt nær samme nivå."
+        : "Stor korttidsvariasjon gjør at gjentak av samme prøve gir tydelig ulike resultater.";
+
   return (
     <DemonstrationFrame
-      kind="illustrasjon"
-      instruction="Se hvor tett seks målinger ligger når forholdene holdes mest mulig like."
-      label="Repeterbarhet illustrert med én kort måleserie"
-      afterword="Repeterbarhet beskriver korttidsvariasjonen under spesifiserte, like forhold."
+      kind="interaktiv"
+      instruction="Øk den tilfeldige variasjonen og se serien spre seg."
+      label="Repeterbarhet som spredning i én kort måleserie"
+      afterword="Bare korttidsvariasjonen endres her. Dag, operatør og laboratorium holdes utenfor."
     >
-      <ValueRows rows={[{ label: "Samme serie", values: "100,1 · 99,9 · 100,0 · 100,2 · 99,8 · 100,0" }]} />
+      <div className={shared.stack}>
+        <PointRows rows={[{ label: "Samme serie", values }]} min={98} max={102} markers={[{ value: 100 }]} />
+        <div className={shared.row}>
+          <Readout
+            label="Standardavvik"
+            value={<MathFormula tex={`s = ${texNumber(sd, 2)}`} />}
+            size="small"
+          />
+          <Readout
+            label="Relativt standardavvik"
+            value={<MathFormula tex={`\\mathrm{RSD} = ${texNumber(rsd, 2)}\\,\\%`} />}
+            size="small"
+          />
+        </div>
+        <Verdict reserve={2.8}>{verdict}</Verdict>
+        <Slider
+          label="Tilfeldig variasjon i den korte serien"
+          valueText={`RSD ${comma(rsd, 2)} prosent`}
+          value={spread}
+          onChange={setSpread}
+          ends={["tett serie", "stor spredning"]}
+        />
+      </div>
     </DemonstrationFrame>
   );
 }
 
 export function IntermediarDemo() {
+  const [betweenSeries, setBetweenSeries] = useState(34);
+  const shift = betweenSeries * 0.018;
+  const within = 0.22;
+  const rows = [
+    { label: "Mandag · A", values: scaledSeries(100 - shift * 0.7, within, SMALL_OFFSETS) },
+    { label: "Onsdag · B", values: scaledSeries(100 + shift, within, SMALL_OFFSETS) },
+    { label: "Fredag · A", values: scaledSeries(100 - shift * 0.2, within, SMALL_OFFSETS) },
+  ];
+  const all = rows.flatMap((row) => row.values);
+  const sd = sampleStandardDeviation(all);
+
+  const verdict =
+    betweenSeries < 15
+      ? "Seriene ligger nesten oppå hverandre: ekstra variasjon mellom dager og operatører er liten."
+      : betweenSeries < 60
+        ? "Hver serie er tett, men sentrene ligger forskjellig. Det er variasjon utover repeterbarhet."
+        : "Forskjellene mellom seriene dominerer nå den samlede presisjonen i laboratoriet.";
+
   return (
     <DemonstrationFrame
-      kind="sammenligning"
-      instruction="Sammenlign serier fra samme laboratorium når dag og operatør varierer."
-      label="Intermediær presisjon på tvers av dager"
-      afterword="Her undersøkes mer av laboratoriets normale variasjon enn ved repeterbarhet."
+      kind="interaktiv"
+      instruction="Flytt seriene fra hverandre uten å endre spredningen innen hver serie."
+      label="Intermediær presisjon som variasjon mellom serier i samme laboratorium"
+      afterword="Innen-serie-spredningen er konstant. Kontrollen legger bare til variasjon mellom dager og operatører."
     >
-      <ValueRows
-        rows={[
-          { label: "Mandag · A", values: "99,8 · 100,1 · 100,0" },
-          { label: "Onsdag · B", values: "100,5 · 100,2 · 100,4" },
-          { label: "Fredag · A", values: "99,7 · 100,3 · 99,9" },
-        ]}
-      />
+      <div className={shared.stack}>
+        <PointRows rows={rows} min={97.5} max={102.5} markers={[{ value: 100 }]} />
+        <Readout
+          label="Samlet standardavvik for alle ni resultater"
+          value={<MathFormula tex={`s = ${texNumber(sd, 2)}`} />}
+          size="small"
+        />
+        <Verdict reserve={3}>{verdict}</Verdict>
+        <Slider
+          label="Variasjon mellom dager og operatører"
+          valueText={`Mellom-serie-forskyvning ${comma(shift, 2)} enheter`}
+          value={betweenSeries}
+          onChange={setBetweenSeries}
+          ends={["seriene overlapper", "ulike serienivåer"]}
+        />
+      </div>
     </DemonstrationFrame>
   );
 }
 
 export function ReproduserbarhetDemo() {
+  const [betweenLabs, setBetweenLabs] = useState(38);
+  const shift = betweenLabs * 0.025;
+  const within = 0.3;
+  const rows = [
+    { label: "Lab A", values: scaledSeries(100 - shift, within, SMALL_OFFSETS) },
+    { label: "Lab B", values: scaledSeries(100 + shift * 0.35, within, SMALL_OFFSETS) },
+    { label: "Lab C", values: scaledSeries(100 + shift, within, SMALL_OFFSETS) },
+  ];
+  const all = rows.flatMap((row) => row.values);
+  const sd = sampleStandardDeviation(all);
+
+  const verdict =
+    betweenLabs < 15
+      ? "Laboratoriene gir nesten samme nivå i denne illustrasjonen."
+      : betweenLabs < 55
+        ? "Klyngene er tette hver for seg, men laboratorienes nivåer skiller seg."
+        : "Mellom-laboratorievariasjonen er nå mye større enn spredningen innen hvert laboratorium.";
+
   return (
     <DemonstrationFrame
-      kind="sammenligning"
-      instruction="Se hvordan samme materiale kan gi litt ulike resultater i ulike laboratorier."
-      label="Reproduserbarhet mellom laboratorier"
-      afterword="Reproduserbarhet er presisjon under betingelser som omfatter ulike laboratorier."
+      kind="interaktiv"
+      instruction="Øk forskjellen mellom laboratoriene og behold presisjonen innen hvert laboratorium."
+      label="Reproduserbarhet som variasjon mellom laboratorier"
+      afterword="Reproduserbarhet beskriver presisjon under bredere betingelser. Den er ikke definert som «alltid dårligere» enn repeterbarhet."
     >
-      <ValueRows
-        rows={[
-          { label: "Lab A", values: "100,2 · 99,7 · 100,0" },
-          { label: "Lab B", values: "101,0 · 100,4 · 100,8" },
-          { label: "Lab C", values: "99,1 · 99,5 · 99,3" },
-        ]}
-      />
+      <div className={shared.stack}>
+        <PointRows rows={rows} min={96.5} max={103.5} markers={[{ value: 100 }]} />
+        <Readout
+          label="Samlet standardavvik for laboratoriene"
+          value={<MathFormula tex={`s = ${texNumber(sd, 2)}`} />}
+          size="small"
+        />
+        <Verdict reserve={3}>{verdict}</Verdict>
+        <Slider
+          label="Variasjon mellom laboratorier"
+          valueText={`Forskyvning opptil ${comma(shift, 2)} enheter`}
+          value={betweenLabs}
+          onChange={setBetweenLabs}
+          ends={["laboratoriene overlapper", "ulike laboratorienivåer"]}
+        />
+      </div>
     </DemonstrationFrame>
   );
 }
 
 export function SkjevhetDemo() {
+  const [bias, setBias] = useState(2);
+  const offsets = [-0.45, -0.25, -0.08, 0.08, 0.25, 0.45];
+  const values = offsets.map((offset) => 100 + bias + offset);
+  const average = mean(values);
+  const estimatedBias = average - 100;
+  const absoluteBias = Math.abs(estimatedBias);
+
+  const verdict =
+    absoluteBias < 0.25
+      ? "Middelverdien ligger praktisk talt på referansen i denne illustrasjonen."
+      : "Punktene er fortsatt tett samlet, men hele klyngen ligger systematisk forskjøvet fra referansen.";
+
   return (
     <DemonstrationFrame
-      kind="sammenligning"
-      instruction="Sammenlign middelverdien med en referanseverdi."
-      label="Systematisk skjevhet mot referanse"
-      afterword="Gjennomsnittet kan ligge stabilt på feil side av referansen selv når spredningen er liten."
+      kind="interaktiv"
+      instruction="Flytt hele måleklyngen uten å endre spredningen."
+      label="Systematisk skjevhet som forskyvning fra en referanseverdi"
+      afterword="Kontrollen endrer systematisk skjevhet, ikke presisjon. En tett klynge kan derfor fortsatt ligge på feil nivå."
     >
-      <div className={styles.bigComparison}>
-        <div><span className="readout-label">Referanse</span><strong>100,0</strong></div>
-        <span aria-hidden="true" className={styles.arrow}>→</span>
-        <div><span className="readout-label">Middelverdi</span><strong>104,0</strong></div>
-        <div className={styles.delta}><span className="readout-label">Skjevhet</span><strong>+4,0</strong></div>
+      <div className={shared.stack}>
+        <PointRows
+          rows={[{ label: "Måleresultater", values }]}
+          min={94}
+          max={106}
+          markers={[{ value: 100, tone: "warning", dashed: true }]}
+        />
+        <div className={shared.row}>
+          <Readout
+            label="Referanseverdi"
+            value={<MathFormula tex="x_{\\mathrm{ref}} = 100{,}0" />}
+            size="small"
+          />
+          <Readout
+            label="Estimert skjevhet"
+            value={<MathFormula tex={`\\mathrm{bias} = ${estimatedBias >= 0 ? "+" : ""}${texNumber(estimatedBias, 1)}`} />}
+            size="small"
+            tone={absoluteBias >= 2 ? "warning" : "normal"}
+          />
+        </div>
+        <Verdict reserve={3}>{verdict}</Verdict>
+        <Slider
+          label="Systematisk skjevhet"
+          valueText={`${bias >= 0 ? "pluss " : "minus "}${comma(Math.abs(bias), 1)} enheter`}
+          value={bias}
+          onChange={setBias}
+          min={-5}
+          max={5}
+          step={0.5}
+          ends={["negativ skjevhet", "positiv skjevhet"]}
+        />
       </div>
     </DemonstrationFrame>
   );
