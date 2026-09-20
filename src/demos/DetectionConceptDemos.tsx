@@ -128,7 +128,7 @@ export function MasseopplosningDemo() {
     <DemonstrationFrame
       kind="formel"
       instruction="Hold m/z lik og sammenlign to definerte toppbredder."
-      label="Mindre \\(\\Delta m\\) gir større numerisk resolving power når \\(m/\\Delta m\\) brukes"
+      label="Mindre delta m gir større numerisk resolving power når masse deles på delta m"
       afterword="Tallet er først sammenlignbart når kriteriet for \\(\\Delta m\\) er spesifisert."
     >
       <Rows
