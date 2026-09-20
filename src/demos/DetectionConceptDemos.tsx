@@ -33,7 +33,7 @@ export function SignalStoyDemo() {
       kind="formel"
       instruction="Sammenlign samme signal med to støynivåer."
       label="Signal-støy-forholdet avhenger av både signal og støy"
-      afterword="Hvilken praktisk S/N-verdi programvaren viser, avhenger også av hvordan signal og støy er beregnet."
+      afterword="Hvilken praktisk verdi for signal-støy-forhold programvaren viser, avhenger også av hvordan signal og støy er beregnet."
     >
       <Rows
         rows={[
@@ -128,8 +128,8 @@ export function MasseopplosningDemo() {
     <DemonstrationFrame
       kind="formel"
       instruction="Hold m/z lik og sammenlign to definerte toppbredder."
-      label="Mindre Δm gir større numerisk resolving power når m/Δm brukes"
-      afterword="Tallet er først sammenlignbart når kriteriet for Δm er spesifisert."
+      label="Mindre \\(\\Delta m\\) gir større numerisk resolving power når \\(m/\\Delta m\\) brukes"
+      afterword="Tallet er først sammenlignbart når kriteriet for \\(\\Delta m\\) er spesifisert."
     >
       <Rows
         rows={[
@@ -179,8 +179,8 @@ export function UvdetektorDemo() {
       <Rows
         rows={[
           { label: "Formel", value: "\\(A = \\log_{10}(P_0/P)\\)" },
-          { label: "P/P₀ = 0,50", value: "A ≈ 0,301" },
-          { label: "P/P₀ = 0,10", value: "A = 1,000" },
+          { label: "\\(P/P_0 = 0{,}50\\)", value: "\\(A \\approx 0{,}301\\)" },
+          { label: "\\(P/P_0 = 0{,}10\\)", value: "\\(A = 1{,}000\\)" },
         ]}
       />
     </DemonstrationFrame>
