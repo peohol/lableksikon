@@ -41,9 +41,9 @@ export function MolmasseDemo() {
       afterword="\(M = m/n\). Kjenner du to av størrelsene, kan den tredje beregnes."
     >
       <div className={styles.formulaLine}>
-        <span>\(M = 40{,}0\,\mathrm{g/mol}\)</span>
-        <span>\(n = 0{,}250\,\mathrm{mol}\)</span>
-        <strong>\(m = 10{,}0\,\mathrm{g}\)</strong>
+        <span>{"\\(M = 40{,}0\\,\\mathrm{g/mol}\\)"}</span>
+        <span>{"\\(n = 0{,}250\\,\\mathrm{mol}\\)"}</span>
+        <strong>{"\\(m = 10{,}0\\,\\mathrm{g}\\)"}</strong>
       </div>
     </DemonstrationFrame>
   );
@@ -58,9 +58,9 @@ export function MolaritetDemo() {
       afterword="Nevneren er den ferdige løsningens volum, ikke volumet av løsemiddel før tillaging."
     >
       <div className={styles.formulaLine}>
-        <span>\(n = 0{,}100\,\mathrm{mol}\)</span>
-        <span>\(V = 0{,}500\,\mathrm{L}\)</span>
-        <strong>\(c = 0{,}200\,\mathrm{mol/L}\)</strong>
+        <span>{"\\(n = 0{,}100\\,\\mathrm{mol}\\)"}</span>
+        <span>{"\\(V = 0{,}500\\,\\mathrm{L}\\)"}</span>
+        <strong>{"\\(c = 0{,}200\\,\\mathrm{mol/L}\\)"}</strong>
       </div>
     </DemonstrationFrame>
   );
