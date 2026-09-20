@@ -37,10 +37,10 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Begrep | Prioritet | Forslag |
 |---|---|---|
 | Presisjon | P2 | Behold dagens interaktive spredningsdemo. Den er et godt mønster for resten. |
-| Repeterbarhet | P0 | Vis seks–åtte målepunkter som punktsky/strip-plot rundt et nivå. Slider for tilfeldig variasjon; RSD/SD oppdateres samtidig. Brukeren ser direkte hva «tett serie» betyr. |
-| Intermediær presisjon | P0 | Tre grupper for dag/operatør. Én kontroll for mellom-serie-variasjon som flytter gruppesentra uten å endre innen-serie-spredningen. Gjør skillet mot repeterbarhet visuelt. |
-| Reproduserbarhet | P0 | Samme idé på laboratorienivå: tre laboratorier med egne klynger. Slider for mellom-laboratorievariasjon. |
-| Skjevhet | P0 | Målepunkter mot en referanselinje/målskive. Slider flytter hele klyngen sideveis uten å endre spredningen; avlest skjevhet oppdateres. |
+| Repeterbarhet | P0 | ✅ **Implementert i PR #15.** Vis seks–åtte målepunkter som punktsky/strip-plot rundt et nivå. Slider for tilfeldig variasjon; RSD/SD oppdateres samtidig. Brukeren ser direkte hva «tett serie» betyr. |
+| Intermediær presisjon | P0 | ✅ **Implementert i PR #15.** Tre grupper for dag/operatør. Én kontroll for mellom-serie-variasjon som flytter gruppesentra uten å endre innen-serie-spredningen. Gjør skillet mot repeterbarhet visuelt. |
+| Reproduserbarhet | P0 | ✅ **Implementert i PR #15.** Samme idé på laboratorienivå: tre laboratorier med egne klynger. Slider for mellom-laboratorievariasjon. |
+| Skjevhet | P0 | ✅ **Implementert i PR #15.** Målepunkter mot en referanselinje/målskive. Slider flytter hele klyngen sideveis uten å endre spredningen; avlest skjevhet oppdateres. |
 | Gjenvinning | P0 | Tre søyler eller beholdere: før spike, tilsatt mengde, målt etter spike. Slider for faktisk gjenfunnet andel gjør recovery synlig og beregnes med MathJax. |
 | Måleusikkerhet | P2 | Behold dagens byggbare usikkerhetsbudsjett. Kan senere suppleres med en synlig usikkerhetsstolpe på sluttresultatet. |
 | Utvidet måleusikkerhet | P0 | Intervall rundt et måleresultat. Slider for dekningsfaktor gjør intervallet bredere/smalere mens `U = k u_c` og endepunktene oppdateres. |
@@ -94,9 +94,9 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Gjennomsnitt | P0 | «Balansepunkt» på tallinje. Dra ett datapunkt; gjennomsnittet flytter seg som tyngdepunkt. Dette viser mer enn et enkelt summeringsregnestykke. |
-| Median | P0 | Fem punkter på tallinje. Dra ekstremverdien langt ut og se medianen stå stille mens gjennomsnittet flytter seg. |
-| Varians | P0 | Punktdiagram med middelverdi og vertikale avstander. Dra ett punkt; vis avvik og kvadrerte bidrag som arealer/søyler. |
+| Gjennomsnitt | P0 | ✅ **Implementert i PR #15.** «Balansepunkt» på tallinje. Dra ett datapunkt; gjennomsnittet flytter seg som tyngdepunkt. Dette viser mer enn et enkelt summeringsregnestykke. |
+| Median | P0 | ✅ **Implementert i PR #15.** Fem punkter på tallinje. Dra ekstremverdien langt ut og se medianen stå stille mens gjennomsnittet flytter seg. |
+| Varians | P0 | ✅ **Implementert i PR #15.** Punktdiagram med middelverdi og vertikale avstander. Dra ett punkt; vis avvik og kvadrerte bidrag som arealer/søyler. |
 | Standardavvik | P1 | Dagens formelforklaring er ryddig, men kan senere få samme punktdiagram som varians og vise `s` direkte når ett punkt flyttes. |
 | Normalfordeling | P0 | Klokkekurve med slider for `σ`; marker arealet innen `μ ± 1σ`, `2σ` og `3σ`. Gjør 68–95–99,7 visuelt. |
 | Frihetsgrader | P0 | Tre punkter/avvik med fast gjennomsnitt. La brukeren flytte to; det tredje må flytte seg automatisk slik at summen av avvik forblir null. |
@@ -107,7 +107,7 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Regresjon | P0 | Punktdiagram med en linje. Brukeren flytter ett datapunkt eller slope; residualer tegnes som vertikale segmenter. |
 | Minste kvadrater | P0 | La brukeren dra regresjonslinjen. Vis residualkvadrater/total SSE og la minimum bli tydelig når linjen nærmer seg OLS-løsningen. |
 | Korrelasjon | P0 | Punktsky som morfer fra positiv via ikke-lineær/ingen lineær til negativ sammenheng. Vis `r`, men inkluder et U-formet datasett med `r\approx0` for å avlive feiltolkning. |
-| Uteligger | P0 | Dra ett punkt bort fra resten og vis samtidig middelverdi, median, SD og eventuelt regresjonslinje. Poenget er påvirkning, ikke automatisk sletting. |
+| Uteligger | P0 | ✅ **Implementert i PR #15.** Dra ett punkt bort fra resten og vis samtidig middelverdi, median, SD og eventuelt regresjonslinje. Poenget er påvirkning, ikke automatisk sletting. |
 
 ## Separasjon
 

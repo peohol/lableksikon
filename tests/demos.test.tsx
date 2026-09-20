@@ -14,13 +14,27 @@ import BlindproveTyper from "@/demos/BlindproveTyper";
 import RiktighetSkiver from "@/demos/RiktighetSkiver";
 import StandardavvikFormel from "@/demos/StandardavvikFormel";
 import OpplosningTopper from "@/demos/OpplosningTopper";
+import {
+  IntermediarDemo,
+  RepeterbarhetDemo,
+  ReproduserbarhetDemo,
+  SkjevhetDemo,
+} from "@/demos/QualityConceptDemos";
+import {
+  GjennomsnittDemo,
+  MedianDemo,
+  UteliggerDemo,
+  VariansDemo,
+} from "@/demos/StatisticsConceptDemos";
 import StandardavvikFormelDemo, { MEASUREMENTS } from "@/demos/StandardavvikFormel";
 import {
   comma,
   fitLine,
   mean,
+  median,
   relativeStandardDeviation,
   sampleStandardDeviation,
+  sampleVariance,
 } from "@/lib/statistics";
 
 describe("regnefunksjoner", () => {
@@ -29,6 +43,9 @@ describe("regnefunksjoner", () => {
     expect(mean(values)).toBeCloseTo(10.3, 10);
     expect(sampleStandardDeviation(values)).toBeCloseTo(0.1414213562, 8);
     expect(relativeStandardDeviation(values)).toBeCloseTo(1.3730229, 6);
+    expect(sampleVariance(values)).toBeCloseTo(0.02, 8);
+    expect(median([2, 4, 7, 9, 30])).toBe(7);
+    expect(median([2, 4, 7, 9])).toBe(5.5);
   });
 
   it("bruker n − 1, ikke n", () => {
@@ -170,6 +187,74 @@ describe("interaktive demonstrasjoner", () => {
     expect(screen.getByText(/Tydelig metning/)).toBeInTheDocument();
   });
 
+  it("repeterbarhet: slideren endrer korttidsspredningen", () => {
+    render(<RepeterbarhetDemo />);
+    const slider = screen.getByRole("slider", { name: "Tilfeldig variasjon i den korte serien" });
+    fireEvent.change(slider, { target: { value: "0" } });
+    expect(screen.getByText(/svært tett/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "100" } });
+    expect(screen.getByText(/Stor korttidsvariasjon/)).toBeInTheDocument();
+  });
+
+  it("intermediær presisjon: mellom-serie-slideren flytter serienivåene", () => {
+    render(<IntermediarDemo />);
+    const slider = screen.getByRole("slider", { name: "Variasjon mellom dager og operatører" });
+    fireEvent.change(slider, { target: { value: "0" } });
+    expect(screen.getByText(/nesten oppå hverandre/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "100" } });
+    expect(screen.getByText(/dominerer nå den samlede presisjonen/)).toBeInTheDocument();
+  });
+
+  it("reproduserbarhet: laboratorieforskjeller endres uavhengig av innen-lab-spredning", () => {
+    render(<ReproduserbarhetDemo />);
+    const slider = screen.getByRole("slider", { name: "Variasjon mellom laboratorier" });
+    fireEvent.change(slider, { target: { value: "0" } });
+    expect(screen.getByText(/nesten samme nivå/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "100" } });
+    expect(screen.getByText(/mye større enn spredningen innen hvert laboratorium/)).toBeInTheDocument();
+  });
+
+  it("skjevhet: hele klyngen kan flyttes uten å endre presisjonen", () => {
+    render(<SkjevhetDemo />);
+    const slider = screen.getByRole("slider", { name: "Systematisk skjevhet" });
+    fireEvent.change(slider, { target: { value: "0" } });
+    expect(screen.getByText(/praktisk talt på referansen/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "5" } });
+    expect(screen.getByText(/systematisk forskjøvet/)).toBeInTheDocument();
+  });
+
+  it("gjennomsnitt: balansepunktet følger et flyttet datapunkt", () => {
+    render(<GjennomsnittDemo />);
+    const slider = screen.getByRole("slider", { name: "Plassering av den femte observasjonen" });
+    fireEvent.change(slider, { target: { value: "18" } });
+    expect(screen.getByText(/7\{,\}6/)).toBeInTheDocument();
+  });
+
+  it("median: medianen står mens gjennomsnittet flyttes av ytterpunktet", () => {
+    render(<MedianDemo />);
+    const slider = screen.getByRole("slider", { name: "Plassering av den største observasjonen" });
+    fireEvent.change(slider, { target: { value: "30" } });
+    expect(screen.getByText(/Medianen blir 7,0 hele veien/)).toBeInTheDocument();
+    expect(screen.getByText(/10\{,\}4/)).toBeInTheDocument();
+  });
+
+  it("varians: et fjernt punkt øker utvalgsvariansen", () => {
+    render(<VariansDemo />);
+    const slider = screen.getByRole("slider", { name: "Plassering av den fjerde observasjonen" });
+    const before = slider.getAttribute("aria-valuetext");
+    fireEvent.change(slider, { target: { value: "18" } });
+    expect(slider.getAttribute("aria-valuetext")).not.toBe(before);
+    expect(slider.getAttribute("aria-valuetext")).toContain("varians");
+  });
+
+  it("uteligger: et fjernt punkt varsler om stor påvirkning uten å kalles feil", () => {
+    render(<UteliggerDemo />);
+    const slider = screen.getByRole("slider", { name: "Plassering av den mulige uteliggeren" });
+    fireEvent.change(slider, { target: { value: "30" } });
+    expect(screen.getByText(/Gjennomsnitt og standardavvik trekkes kraftig/)).toBeInTheDocument();
+    expect(screen.getByText(/ikke automatisk en feil/)).toBeInTheDocument();
+  });
+
   it("oppløsning: slideren styrer R og konklusjonen", () => {
     render(<OpplosningTopper />);
     const slider = screen.getByRole("slider", { name: "Avstand mellom toppene" });
@@ -238,6 +323,14 @@ describe("tilgjengelighet i demonstrasjoner", () => {
     ["blindprøve", <BlindproveTyper key="i" />],
     ["riktighet", <RiktighetSkiver key="j" />],
     ["standardavvik", <StandardavvikFormel key="k" />],
+    ["repeterbarhet", <RepeterbarhetDemo key="l" />],
+    ["intermediær presisjon", <IntermediarDemo key="m" />],
+    ["reproduserbarhet", <ReproduserbarhetDemo key="n" />],
+    ["skjevhet", <SkjevhetDemo key="o" />],
+    ["gjennomsnitt", <GjennomsnittDemo key="p" />],
+    ["median", <MedianDemo key="q" />],
+    ["varians", <VariansDemo key="r" />],
+    ["uteligger", <UteliggerDemo key="s" />],
   ] as const;
 
   it.each(demos)("%s har ingen aksefeil", async (_name, element) => {

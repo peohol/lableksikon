@@ -86,3 +86,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.squareBlock {
+  display: grid;
+  gap: 8px;
+}
+
+.squareTitle {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.squareBars {
+  display: grid;
+  gap: 5px;
+}
+
+.squareRow {
+  height: 10px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.squareBar {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+}
+
+.squareBarWarning {
+  background: var(--color-warning);
+}

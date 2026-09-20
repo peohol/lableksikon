@@ -14,6 +14,7 @@ const PATHS = [
   "/kategori/enheter",
   "/kategori/feilkilder",
   "/begrep/noyaktighet",
+  "/begrep/repeterbarhet",
   "/begrep/kvantifiseringsgrense",
   "/begrep/matrikstilpasset",
   "/begrep/ionesuppresjon",

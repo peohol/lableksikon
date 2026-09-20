@@ -54,6 +54,28 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     await expect(page.getByText(/Tydelig metning/)).toBeVisible();
   });
 
+  test("skjevhet kan flyttes fra null til tydelig systematisk forskyvning", async ({ page }) => {
+    await page.goto("/begrep/skjevhet");
+    const slider = page.getByRole("slider", { name: "Systematisk skjevhet" });
+    await slider.focus();
+    await page.keyboard.press("Home");
+    for (let step = 0; step < 10; step += 1) {
+      await page.keyboard.press("ArrowRight");
+    }
+    await expect(slider).toHaveValue("0");
+    await expect(page.getByText(/praktisk talt på referansen/)).toBeVisible();
+    await page.keyboard.press("End");
+    await expect(page.getByText(/^Punktene er fortsatt tett samlet, men hele klyngen ligger systematisk forskjøvet fra referansen\.$/)).toBeVisible();
+  });
+
+  test("medianen står stille når ytterpunktet flyttes", async ({ page }) => {
+    await page.goto("/begrep/median");
+    const slider = page.getByRole("slider", { name: "Plassering av den største observasjonen" });
+    await slider.focus();
+    await page.keyboard.press("End");
+    await expect(page.getByText(/Medianen blir 7,0 hele veien/)).toBeVisible();
+  });
+
   test("headersøket annonserer hvor mange treff som vises", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("combobox", { name: "Søk etter begrep" }).fill("e");

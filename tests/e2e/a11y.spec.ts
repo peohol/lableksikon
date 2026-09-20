@@ -18,6 +18,8 @@ const PAGES = [
   ["feilkildekategori", "/kategori/feilkilder"],
   ["feilkildebegrep", "/begrep/grovfeil"],
   ["begrep med formel", "/begrep/standardavvik"],
+  ["ny interaktiv kvalitetsdemo", "/begrep/repeterbarhet"],
+  ["ny interaktiv statistikkdemo", "/begrep/median"],
   ["begrep med stegvis demonstrasjon", "/begrep/standardaddisjon"],
 ];
 
