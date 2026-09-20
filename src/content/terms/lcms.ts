@@ -15,7 +15,7 @@ export const lcms: PublishedTerm = {
   depth: {
     title: "Dybde: separasjon og deteksjon er to forskjellige trinn",
     blocks: [
-      { kind: "p", text: "Kromatografien kan skille forbindelser som ellers ville konkurrert i ionekilden eller gitt overlappende massesignaler. Massespektrometeret tilfører samtidig m/z- og eventuelt fragmentinformasjon." },
+      { kind: "p", text: "Kromatografien kan skille forbindelser som ellers ville konkurrert i ionekilden eller gitt overlappende massesignaler. Massespektrometeret tilfører samtidig \\(m/z\\)- og eventuelt fragmentinformasjon." },
       { kind: "p", text: "LC-MS kombinerer derfor ortogonale informasjonskilder, men koblingen fjerner ikke [matriseeffekter](begrep:matriseeffekt) eller [interferenser](begrep:interferens). Metoden må fortsatt valideres som helhet." },
     ],
   },
