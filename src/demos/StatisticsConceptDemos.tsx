@@ -1,4 +1,19 @@
+"use client";
+
+import { useState } from "react";
+
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
+import {
+  comma,
+  mean,
+  median,
+  sampleStandardDeviation,
+  sampleVariance,
+} from "@/lib/statistics";
+import { PointRows } from "./PointRows";
+import { Readout, Slider, Verdict } from "./primitives";
+import shared from "./demos.module.css";
 import styles from "./StatisticsConceptDemos.module.css";
 
 function ValueRows({ rows }: { rows: Array<{ label: string; values: string }> }) {
@@ -9,16 +24,155 @@ function Flow({ items }: { items: string[] }) {
   return <ol className={styles.flow}>{items.map((item, index) => <li key={item} className={styles.flowItem}><span className={styles.flowNumber}>{index + 1}</span><span>{item}</span></li>)}</ol>;
 }
 
+const texNumber = (value: number, decimals: number) =>
+  comma(value, decimals).replace(",", "{,}");
+
 export function GjennomsnittDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Fordel totalsummen likt på alle observasjonene." label="Gjennomsnitt som balanseringspunkt" afterword="\(9 + 10 + 11 = 30\), og \(30/3 = 10\)."><ValueRows rows={[{ label: "Data", values: "9 · 10 · 11" }, { label: "Sum", values: "30" }, { label: "Gjennomsnitt", values: "10" }]} /></DemonstrationFrame>;
+  const [movingPoint, setMovingPoint] = useState(12);
+  const values = [2, 4, 6, 8, movingPoint];
+  const average = mean(values);
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt én observasjon og se balansepunktet følge etter."
+      label="Gjennomsnitt som balansepunkt på en tallinje"
+      afterword="Alle observasjonene påvirker gjennomsnittet. Hvor langt et punkt flyttes betyr derfor noe, ikke bare rekkefølgen."
+    >
+      <div className={shared.stack}>
+        <PointRows rows={[{ label: "Fem observasjoner", values }]} min={0} max={20} markers={[{ value: average }]} />
+        <Readout
+          label="Gjennomsnitt"
+          value={<MathFormula tex={`\\bar{x} = ${texNumber(average, 1)}`} />}
+          size="small"
+        />
+        <Verdict reserve={2.8}>
+          Flytter du det siste punktet mot høyre, flytter gjennomsnittet seg samme vei fordi hele avstanden inngår i beregningen.
+        </Verdict>
+        <Slider
+          label="Plassering av den femte observasjonen"
+          valueText={`Femte observasjon ${movingPoint}`}
+          value={movingPoint}
+          onChange={setMovingPoint}
+          min={8}
+          max={18}
+          ends={["nær de andre", "langt til høyre"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function MedianDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Sorter verdiene og finn midten." label="Median med og uten ekstremverdi" afterword="Ekstremverdien flytter gjennomsnittet mye mer enn medianen."><ValueRows rows={[{ label: "Data", values: "2 · 4 · 7 · 9 · 30" }, { label: "Median", values: "7" }, { label: "Gjennomsnitt", values: "10,4" }]} /></DemonstrationFrame>;
+  const [extreme, setExtreme] = useState(14);
+  const values = [2, 4, 7, 9, extreme];
+  const average = mean(values);
+  const middle = median(values);
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Dra ytterpunktet utover og sammenlign median med gjennomsnitt."
+      label="Medianen står stille når en ytterverdi flyttes"
+      afterword="Medianen bestemmes av rangeringen. Gjennomsnittet bruker derimot avstanden til alle observasjonene."
+    >
+      <div className={shared.stack}>
+        <PointRows
+          rows={[{ label: "Sorterte data", values }]}
+          min={0}
+          max={32}
+          markers={[
+            { value: average },
+            { value: middle, tone: "warning", dashed: true },
+          ]}
+        />
+        <p className={shared.caption}>Heltrukken linje: gjennomsnitt · stiplet linje: median</p>
+        <div className={shared.row}>
+          <Readout
+            label="Gjennomsnitt"
+            value={<MathFormula tex={`\\bar{x} = ${texNumber(average, 1)}`} />}
+            size="small"
+          />
+          <Readout
+            label="Median"
+            value={<MathFormula tex={`\\tilde{x} = ${texNumber(middle, 1)}`} />}
+            size="small"
+          />
+        </div>
+        <Verdict reserve={2.8}>
+          Medianen blir {comma(middle, 1)} hele veien, mens gjennomsnittet trekkes mot ytterpunktet.
+        </Verdict>
+        <Slider
+          label="Plassering av den største observasjonen"
+          valueText={`Største observasjon ${extreme}`}
+          value={extreme}
+          onChange={setExtreme}
+          min={9}
+          max={30}
+          ends={["rett utenfor midten", "svært langt ute"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function VariansDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Se hvordan avvik fra gjennomsnittet kvadreres før de summeres." label="Varians bygges av kvadrerte avvik" afterword="Kvadrering gjør alle bidrag positive og gir store avvik større innflytelse."><ValueRows rows={[{ label: "Data", values: "8 · 10 · 12; \\(\\bar{x} = 10\\)" }, { label: "Avvik", values: "−2 · 0 · +2" }, { label: "Kvadrater", values: "4 · 0 · 4" }]} /></DemonstrationFrame>;
+  const [movingPoint, setMovingPoint] = useState(12);
+  const values = [8, 9, 10, movingPoint];
+  const average = mean(values);
+  const variance = sampleVariance(values);
+  const squares = values.map((value) => (value - average) ** 2);
+  const largestSquare = Math.max(...squares, 0.01);
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt ett punkt og se avvikene og de kvadrerte bidragene vokse."
+      label="Varians bygget av kvadrerte avvik fra gjennomsnittet"
+      afterword="Her vises utvalgsvariansen med \(n-1\) i nevneren. Store avvik får stor vekt fordi de kvadreres."
+    >
+      <div className={shared.stack}>
+        <PointRows rows={[{ label: "Fire observasjoner", values }]} min={7} max={19} markers={[{ value: average }]} />
+        <div className={styles.squareBlock}>
+          <span className={styles.squareTitle}>Kvadrerte avvik fra gjennomsnittet</span>
+          <div className={styles.squareBars} aria-hidden="true">
+            {squares.map((square, index) => (
+              <div key={index} className={styles.squareRow}>
+                <span
+                  className={`${styles.squareBar} ${index === values.length - 1 ? styles.squareBarWarning : ""}`}
+                  style={{ width: `${Math.max(4, (square / largestSquare) * 100)}%` }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={shared.row}>
+          <Readout
+            label="Gjennomsnitt"
+            value={<MathFormula tex={`\\bar{x} = ${texNumber(average, 2)}`} />}
+            size="small"
+          />
+          <Readout
+            label="Utvalgsvarians"
+            value={<MathFormula tex={`s^2 = ${texNumber(variance, 2)}`} />}
+            size="small"
+          />
+        </div>
+        <Verdict reserve={2.8}>
+          Når ett punkt flyttes langt bort, vokser både avviket og det kvadrerte bidraget uforholdsmessig mye.
+        </Verdict>
+        <Slider
+          label="Plassering av den fjerde observasjonen"
+          valueText={`Fjerde observasjon ${movingPoint}, varians ${comma(variance, 2)}`}
+          value={movingPoint}
+          onChange={setMovingPoint}
+          min={10}
+          max={18}
+          ends={["nær resten", "langt fra resten"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function NormalfordelingDemo() {
@@ -58,5 +212,67 @@ export function KorrelasjonDemo() {
 }
 
 export function UteliggerDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Se hvordan én ekstrem observasjon kan påvirke ulike sammendrag." label="En mulig uteligger er ikke automatisk en feil" afterword="Punktet skal undersøkes, ikke automatisk slettes."><ValueRows rows={[{ label: "Data", values: "9 · 10 · 10 · 11 · 30" }, { label: "Gjennomsnitt", values: "14,0" }, { label: "Median", values: "10" }]} /></DemonstrationFrame>;
+  const [movingPoint, setMovingPoint] = useState(13);
+  const values = [9, 9.5, 10, 10.5, movingPoint];
+  const average = mean(values);
+  const middle = median(values);
+  const sd = sampleStandardDeviation(values);
+  const isFar = movingPoint >= 18;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt ett punkt bort fra resten og se hvilke sammendrag som følger etter."
+      label="Mulig uteligger og påvirkning på statistiske sammendrag"
+      afterword="Et avvikende punkt er ikke automatisk en feil. Demonstrasjonen viser påvirkning, ikke en regel for sletting."
+    >
+      <div className={shared.stack}>
+        <PointRows
+          rows={[{
+            label: "Fem observasjoner",
+            values,
+            tones: values.map((_, index) => index === values.length - 1 && isFar ? "warning" : "accent"),
+          }]}
+          min={8}
+          max={32}
+          markers={[
+            { value: average },
+            { value: middle, tone: "warning", dashed: true },
+          ]}
+        />
+        <p className={shared.caption}>Heltrukken linje: gjennomsnitt · stiplet linje: median</p>
+        <div className={shared.row}>
+          <Readout
+            label="Gjennomsnitt"
+            value={<MathFormula tex={`\\bar{x} = ${texNumber(average, 1)}`} />}
+            size="small"
+          />
+          <Readout
+            label="Median"
+            value={<MathFormula tex={`\\tilde{x} = ${texNumber(middle, 1)}`} />}
+            size="small"
+          />
+          <Readout
+            label="Standardavvik"
+            value={<MathFormula tex={`s = ${texNumber(sd, 1)}`} />}
+            size="small"
+          />
+        </div>
+        <Verdict tone={isFar ? "warning" : "normal"} reserve={3}>
+          {isFar
+            ? "Punktet ligger nå markert langt fra resten. Gjennomsnitt og standardavvik trekkes kraftig, mens medianen endres lite."
+            : "Punktet ligger fortsatt forholdsvis nær resten. Flytt det videre og se påvirkningen øke."}
+        </Verdict>
+        <Slider
+          label="Plassering av den mulige uteliggeren"
+          valueText={`Siste observasjon ${movingPoint}`}
+          value={movingPoint}
+          onChange={setMovingPoint}
+          min={11}
+          max={30}
+          ends={["nær datasettet", "langt fra datasettet"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
