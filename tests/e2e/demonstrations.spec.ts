@@ -59,6 +59,10 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
     const slider = page.getByRole("slider", { name: "Systematisk skjevhet" });
     await slider.focus();
     await page.keyboard.press("Home");
+    for (let step = 0; step < 10; step += 1) {
+      await page.keyboard.press("ArrowRight");
+    }
+    await expect(slider).toHaveValue("0");
     await expect(page.getByText(/praktisk talt på referansen/)).toBeVisible();
     await page.keyboard.press("End");
     await expect(page.getByText(/systematisk forskjøvet/)).toBeVisible();
