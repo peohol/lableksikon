@@ -43,6 +43,23 @@ export function mean(values: number[]): number {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
+/** Medianen av en ikke-tom tallserie. */
+export function median(values: number[]): number {
+  if (values.length === 0) return Number.NaN;
+  const sorted = [...values].sort((a, b) => a - b);
+  const middle = Math.floor(sorted.length / 2);
+  if (sorted.length % 2 === 1) return sorted[middle] as number;
+  return ((sorted[middle - 1] as number) + (sorted[middle] as number)) / 2;
+}
+
+/** Utvalgsvariansen s² med n − 1 frihetsgrader. */
+export function sampleVariance(values: number[]): number {
+  const n = values.length;
+  if (n < 2) return Number.NaN;
+  const average = mean(values);
+  return values.reduce((sum, value) => sum + (value - average) ** 2, 0) / (n - 1);
+}
+
 /**
  * Utvalgsstandardavviket s, altså med n − 1 frihetsgrader. Det er dette
  * standardavviket laboratoriet regner ut fra en måleserie.
@@ -50,9 +67,7 @@ export function mean(values: number[]): number {
 export function sampleStandardDeviation(values: number[]): number {
   const n = values.length;
   if (n < 2) return Number.NaN;
-  const average = mean(values);
-  const sumOfSquares = values.reduce((sum, value) => sum + (value - average) ** 2, 0);
-  return Math.sqrt(sumOfSquares / (n - 1));
+  return Math.sqrt(sampleVariance(values));
 }
 
 /** Relativt standardavvik i prosent: s / x̄ · 100. */
