@@ -50,11 +50,7 @@ export default function StandardavvikFormel() {
       instruction="Hvert ledd forklart"
       label="Demonstrasjon: formelen for standardavvik"
     >
-      <p className="visually-hidden">
-        Standardavviket s er kvadratroten av summen av kvadrerte avvik fra gjennomsnittet, delt på n
-        minus 1.
-      </p>
-      <div className={styles.formula} aria-hidden="true">
+      <div className={styles.formula}>
         <MathFormula tex="s = \\sqrt{\\frac{\\sum_i (x_i - \\bar{x})^2}{n - 1}}" />
       </div>
 
