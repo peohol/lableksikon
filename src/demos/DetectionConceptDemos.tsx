@@ -70,8 +70,8 @@ export function IoniseringDemo() {
       <Rows
         rows={[
           { label: "Nøytral art", value: "M" },
-          { label: "Positivt eksempel", value: "\\\\([M + H]^+\\\\)" },
-          { label: "Negativt eksempel", value: "\\\\([M - H]^-\\\\)" },
+          { label: "Positivt eksempel", value: "\\([M + H]^+\\)" },
+          { label: "Negativt eksempel", value: "\\([M - H]^-\\)" },
         ]}
       />
     </DemonstrationFrame>
@@ -101,8 +101,8 @@ export function SimDemo() {
     >
       <Rows
         rows={[
-          { label: "Fullskanning", value: "\\\\(m/z: 50\\\\text{–}500\\\\)" },
-          { label: "SIM", value: "\\\\(m/z: 121,\\\\ 165,\\\\ 193\\\\)" },
+          { label: "Fullskanning", value: "\\(m/z: 50\\text{–}500\\)" },
+          { label: "SIM", value: "\\(m/z: 121,\\ 165,\\ 193\\)" },
           { label: "Informasjon", value: "målrettet i stedet for bred spektral registrering" },
         ]}
       />
@@ -118,7 +118,7 @@ export function MrmDemo() {
       label="MRM kombinerer ioneseleksjon, fragmentering og ny seleksjon"
       afterword="MRM innebærer flere slike SRM-observasjoner; en overgang er ikke nødvendigvis unik for ett stoff."
     >
-      <Flow items={["Forløper \\\\(m/z = 300\\\\) velges", "Ion fragmenteres", "Produkt \\\\(m/z = 182\\\\) velges", "Overgangen registreres"]} />
+      <Flow items={["Forløper \\(m/z = 300\\) velges", "Ion fragmenteres", "Produkt \\(m/z = 182\\) velges", "Overgangen registreres"]} />
     </DemonstrationFrame>
   );
 }
@@ -133,9 +133,9 @@ export function MasseopplosningDemo() {
     >
       <Rows
         rows={[
-          { label: "\\\\(m/z\\\\)", value: "500" },
-          { label: "\\\\(\\\\Delta m = 0{,}010\\\\)", value: "\\\\(m/\\\\Delta m = 50\\\\,000\\\\)" },
-          { label: "\\\\(\\\\Delta m = 0{,}005\\\\)", value: "\\\\(m/\\\\Delta m = 100\\\\,000\\\\)" },
+          { label: "\\(m/z\\)", value: "500" },
+          { label: "\\(\\Delta m = 0{,}010\\)", value: "\\(m/\\Delta m = 50\\,000\\)" },
+          { label: "\\(\\Delta m = 0{,}005\\)", value: "\\(m/\\Delta m = 100\\,000\\)" },
         ]}
       />
     </DemonstrationFrame>
@@ -178,7 +178,7 @@ export function UvdetektorDemo() {
     >
       <Rows
         rows={[
-          { label: "Formel", value: "\\\\(A = \\\\log_{10}(P_0/P)\\\\)" },
+          { label: "Formel", value: "\\(A = \\log_{10}(P_0/P)\\)" },
           { label: "P/P₀ = 0,50", value: "A ≈ 0,301" },
           { label: "P/P₀ = 0,10", value: "A = 1,000" },
         ]}
