@@ -202,7 +202,7 @@ describe("statiske demonstrasjoner", () => {
     const rsd = comma(relativeStandardDeviation(MEASUREMENTS), 1).replace(",", "{,}");
     const expected =
       `\\(\\bar{x} = ${average}\\,\\mathrm{mg/L} \\quad s = ${standardDeviation}\\,\\mathrm{mg/L} \\quad \\mathrm{RSD} = ${rsd}\\,\\%\\)`;
-    const result = screen.getByText(/\\bar\{x\}/);
+    const result = screen.getByText(expected);
     expect(result.textContent).toBe(expected);
     // Og verdiene skal fortsatt regnes fra akkurat denne serien.
     expect(result.textContent).toContain("10{,}30");
