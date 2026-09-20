@@ -91,7 +91,7 @@ export function MathFormula({
   }, [tex]);
 
   return (
-    <span className={styles.wrapper} aria-label={label} suppressHydrationWarning>
+    <span className={styles.wrapper} data-math-tex={tex} aria-label={label} suppressHydrationWarning>
       <span
         ref={firstRef}
         data-math-slot="0"
