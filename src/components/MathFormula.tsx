@@ -39,5 +39,5 @@ export function MathFormula({
     render();
   }, [tex]);
 
-  return <span ref={ref} aria-label={label} />;
+  return (\n    <span key={tex} ref={ref} aria-label={label} suppressHydrationWarning>\n      {`\\\\(${tex}\\\\)`}\n    </span>\n  );
 }
