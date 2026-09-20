@@ -54,7 +54,7 @@ export function MinsteKvadraterDemo() {
 }
 
 export function KorrelasjonDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Sammenlign lineære mønstre med ulike retninger." label="Pearsons r beskriver lineær samvariasjon" afterword="\(r\) nær 0 betyr liten lineær sammenheng, men kan skjule et tydelig ikke-lineært mønster."><div className={styles.columns}><div><span className={styles.cardTitle}>Positiv</span><strong className={styles.signal}>\(r \approx +0{,}9\)</strong></div><div><span className={styles.cardTitle}>Ingen lineær</span><strong className={styles.signal}>\(r \approx 0\)</strong></div><div><span className={styles.cardTitle}>Negativ</span><strong className={styles.signal}>\(r \approx -0{,}9\)</strong></div></div></DemonstrationFrame>;
+  return <DemonstrationFrame kind="sammenligning" instruction="Sammenlign lineære mønstre med ulike retninger." label="Pearsons r beskriver lineær samvariasjon" afterword="\(r\) nær 0 betyr liten lineær sammenheng, men kan skjule et tydelig ikke-lineært mønster."><div className={styles.columns}><div><span className={styles.cardTitle}>Positiv</span><strong className={styles.signal}>{"\\(r \\approx +0{,}9\\)"}</strong></div><div><span className={styles.cardTitle}>Ingen lineær</span><strong className={styles.signal}>{"\\(r \\approx 0\\)"}</strong></div><div><span className={styles.cardTitle}>Negativ</span><strong className={styles.signal}>{"\\(r \\approx -0{,}9\\)"}</strong></div></div></DemonstrationFrame>;
 }
 
 export function UteliggerDemo() {
