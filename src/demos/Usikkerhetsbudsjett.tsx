@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { Chip, ChipGroup, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./Usikkerhetsbudsjett.module.css";
@@ -24,6 +25,8 @@ export default function Usikkerhetsbudsjett() {
   const combined = Math.sqrt(CONTRIBUTIONS.reduce((sum, contribution, index) => sum + (enabled[index] ? contribution.percent ** 2 : 0), 0));
   const expanded = 2 * combined;
   const absolute = (RESULT * expanded) / 100;
+  const absoluteTex = comma(absolute, 3).replace(",", "{,}");
+  const expandedTex = comma(expanded, 1).replace(",", "{,}");
   const crosses = RESULT + absolute >= LIMIT;
   const verdict = combined === 0
     ? "Uten bidrag er svaret et punkt uten slark — det finnes ikke i praksis."
@@ -32,7 +35,7 @@ export default function Usikkerhetsbudsjett() {
       : "Hele intervallet ligger under grenseverdien med den forenklede beslutningsregelen i eksemplet.";
 
   return (
-    <DemonstrationFrame kind="interaktiv" instruction="Bygg et forenklet budsjett bidrag for bidrag" label="Pedagogisk demonstrasjon av usikkerhetsbudsjett mot en grenseverdi" afterword="Eksemplet bruker uavhengige relative bidrag, k = 2 og en enkel intervallregel. Virkelige usikkerhetsmodeller og beslutningsregler må tilpasses formålet.">
+    <DemonstrationFrame kind="interaktiv" instruction="Bygg et forenklet budsjett bidrag for bidrag" label="Pedagogisk demonstrasjon av usikkerhetsbudsjett mot en grenseverdi" afterword="Eksemplet bruker uavhengige relative bidrag, \(k = 2\) og en enkel intervallregel. Virkelige usikkerhetsmodeller og beslutningsregler må tilpasses formålet.">
       <p className={shared.note}>Prøven er målt til <strong className={styles.strong}>0,42 mg/kg</strong>. Grenseverdien er 0,50 mg/kg.</p>
       <div className={styles.chips}>
         <ChipGroup label="Bidrag i usikkerhetsbudsjettet">
@@ -52,8 +55,8 @@ export default function Usikkerhetsbudsjett() {
         <div className={styles.resultLabel} style={{ left: position(RESULT) }}>0,42</div>
       </div>
       <div className={`${shared.row} ${shared.rule}`}>
-        <span className={styles.value}>± {comma(absolute, 3)} mg/kg</span>
-        <span className={shared.caption}>utvidet usikkerhet, k = 2 ({comma(expanded, 1)} %)</span>
+        <span className={styles.value}><MathFormula tex={`\\pm ${absoluteTex}\\,\\mathrm{mg/kg}`} /></span>
+        <span className={shared.caption}>utvidet usikkerhet, <MathFormula tex="k = 2" /> (<MathFormula tex={`${expandedTex}\\,\\%`} />)</span>
       </div>
       <Verdict tone={crosses && combined > 0 ? "warning" : "normal"}>{verdict}</Verdict>
     </DemonstrationFrame>
