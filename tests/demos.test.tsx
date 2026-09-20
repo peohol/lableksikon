@@ -218,7 +218,7 @@ describe("statiske demonstrasjoner", () => {
 
   it("standardavvik forklarer hvert ledd i formelen og har tekstalternativ", () => {
     render(<StandardavvikFormel />);
-    expect(screen.getByText(/Standardavviket s er kvadratroten/)).toBeInTheDocument();
+    expect(screen.getByText(/\\\\frac\{\\\\sum_i/)).toBeInTheDocument();
     const terms = screen.getAllByRole("term").map((node) => node.textContent);
     expect(terms).toEqual(["\\(x_i - \\bar{x}\\)", "\\((\\ldots)^2\\)", "\\(n - 1\\)", "\\(\\sqrt{\\;}\\)"]);
     expect(screen.getByText(/Antall frihetsgrader/)).toBeInTheDocument();
