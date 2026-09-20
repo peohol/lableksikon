@@ -16,7 +16,7 @@ export const sienheter: PublishedTerm = {
     title: "Dybde: SI er mer enn de sju baseenhetene",
     blocks: [
       { kind: "p", text: "Avledede enheter som pascal (Pa), joule (J) og volt (V) er også SI-enheter. De kan uttrykkes ved baseenhetene uten ekstra numeriske faktorer." },
-      { kind: "p", text: "Noen mye brukte enheter er ikke SI-enheter. Liter er et viktig laboratorieeksempel og står i SI-brosjyrens oversikt over utbredte ikke-SI-enheter, med 1 L = 1 dm³ = 10⁻³ m³. Derfor er mol/L vanlig i kjemi selv om den koherente SI-enheten for stoffmengdekonsentrasjon er mol/m³." },
+      { kind: "p", text: "Noen mye brukte enheter er ikke SI-enheter. Liter er et viktig laboratorieeksempel og står i SI-brosjyrens oversikt over utbredte ikke-SI-enheter, med \\(1\\,\\mathrm{L} = 1\\,\\mathrm{dm^3} = 10^{-3}\\,\\mathrm{m^3}\\). Derfor er mol/L vanlig i kjemi selv om den koherente SI-enheten for stoffmengdekonsentrasjon er mol/m³." },
     ],
   },
   sources: [SOURCES.bipmSI, SOURCES.bipmSIBrochure],
