@@ -87,7 +87,7 @@ export function PpmDemo() {
     <DemonstrationFrame
       kind="sammenligning"
       instruction="Se hva 1 ppm betyr for ulike dimensjonsløse fraksjoner — og hva det ikke betyr."
-      label="ppm som \(10^{-6}\) relativ verdi"
+      label="ppm som én milliondel relativ verdi"
       afterword="ppm må knyttes til hvilken fraksjon som menes. mg/L er en konsentrasjon og er ikke generelt ppm."
     >
       <Rows rows={[
