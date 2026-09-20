@@ -120,7 +120,7 @@ export function UtvidetUsikkerhetDemo() {
       label="Utvidet måleusikkerhet fra kombinert standardusikkerhet"
       afterword="\(k = 2\) gir ofte omtrent 95 % dekning, men bare under passende fordelingsforutsetninger."
     >
-      <div className={styles.formulaLine}><span>\(u_c = 1{,}5\)</span><span>\(k = 2\)</span><strong>\(U = 3{,}0\)</strong><span>\(100 \pm 3\)</span></div>
+      <div className={styles.formulaLine}><span>{"\\(u_c = 1{,}5\\)"}</span><span>{"\\(k = 2\\)"}</span><strong>{"\\(U = 3{,}0\\)"}</strong><span>{"\\(100 \\pm 3\\)"}</span></div>
     </DemonstrationFrame>
   );
 }
