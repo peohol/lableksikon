@@ -77,7 +77,7 @@ describe("interaktive demonstrasjoner", () => {
     expect(chip).toHaveAttribute("aria-pressed", "false");
     await user.click(chip);
     expect(chip).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByText(/utvidet usikkerhet, k = 2/)).toBeInTheDocument();
+    expect(screen.getByText(/^utvidet usikkerhet/)).toBeInTheDocument();
   });
 
   it("usikkerhet: alle tre konklusjonene kan faktisk nås", async () => {
@@ -197,18 +197,17 @@ describe("statiske demonstrasjoner", () => {
   it("viser statistikk som er regnet ut av måleserien, ikke hardkodet", () => {
     render(<StandardavvikFormelDemo />);
     // Endres måleserien, skal tallene under følge med av seg selv.
+    const average = comma(mean(MEASUREMENTS), 2).replace(",", "{,}");
+    const standardDeviation = comma(sampleStandardDeviation(MEASUREMENTS), 2).replace(",", "{,}");
+    const rsd = comma(relativeStandardDeviation(MEASUREMENTS), 1).replace(",", "{,}");
     const expected =
-      `x̄ = ${comma(mean(MEASUREMENTS), 2)} mg/L` +
-      `\u00a0 s = ${comma(sampleStandardDeviation(MEASUREMENTS), 2)} mg/L` +
-      `\u00a0 RSD = ${comma(relativeStandardDeviation(MEASUREMENTS), 1)} %`;
-    const result = screen.getByText(/^x̄ =/);
-    expect(result.textContent?.replace(/\s+/g, " ").trim()).toBe(
-      expected.replace(/\s+/g, " ").trim(),
-    );
-    // Og verdiene skal være de riktige for akkurat denne serien.
-    expect(result).toHaveTextContent("x̄ = 10,30 mg/L");
-    expect(result).toHaveTextContent("s = 0,14 mg/L");
-    expect(result).toHaveTextContent("RSD = 1,4 %");
+      `\\(\\bar{x} = ${average}\\,\\mathrm{mg/L} \\quad s = ${standardDeviation}\\,\\mathrm{mg/L} \\quad \\mathrm{RSD} = ${rsd}\\,\\%\\)`;
+    const result = screen.getByText(/\\bar\{x\}/);
+    expect(result.textContent).toBe(expected);
+    // Og verdiene skal fortsatt regnes fra akkurat denne serien.
+    expect(result.textContent).toContain("10{,}30");
+    expect(result.textContent).toContain("0{,}14");
+    expect(result.textContent).toContain("1{,}4");
   });
 
   it("viser like mange søyler som målinger", () => {
@@ -221,7 +220,7 @@ describe("statiske demonstrasjoner", () => {
     render(<StandardavvikFormel />);
     expect(screen.getByText(/Standardavviket s er kvadratroten/)).toBeInTheDocument();
     const terms = screen.getAllByRole("term").map((node) => node.textContent);
-    expect(terms).toEqual(["xᵢ − x̄", "( … )²", "n − 1", "√"]);
+    expect(terms).toEqual(["\\(x_i - \\bar{x}\\)", "\\((\\ldots)^2\\)", "\\(n - 1\\)", "\\(\\sqrt{\\;}\\)"]);
     expect(screen.getByText(/Antall frihetsgrader/)).toBeInTheDocument();
   });
 });
