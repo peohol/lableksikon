@@ -4,30 +4,20 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-interface MathJaxApi {
-  startup?: { promise?: Promise<void> };
-  typesetPromise?: (elements?: HTMLElement[]) => Promise<void>;
-}
-
-declare global {
-  interface Window {
-    MathJax?: MathJaxApi;
-  }
-}
+import { enqueueMathJax, MATHJAX_READY_EVENT } from "@/lib/mathjax-client";
 
 function typesetCurrentPage() {
-  const mathJax = window.MathJax;
   const root = document.getElementById("innhold");
-  if (!mathJax?.typesetPromise || !root) return;
+  if (!root) return;
 
-  const ready = mathJax.startup?.promise ?? Promise.resolve();
-  void ready.then(() => mathJax.typesetPromise?.([root]));
+  enqueueMathJax(async (mathJax) => {
+    await mathJax.typesetPromise?.([root]);
+  });
 }
 
 /**
- * MathJax kjøres én gang etter innlasting og på nytt etter klientnavigasjon.
- * Vi bruker standardavgrensningene \\(...\\) og \\[...\\] slik at
- * ordinære dollartegn aldri tolkes som matematikk.
+ * MathJax typesetter den første siden ved egen oppstart. Etter klientnavigasjon
+ * ber vi den lete etter ny matematikk. Dynamiske formler bruker MathFormula.
  */
 export function MathJax() {
   const pathname = usePathname();
@@ -41,7 +31,7 @@ export function MathJax() {
       id="mathjax"
       src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
       strategy="afterInteractive"
-      onLoad={typesetCurrentPage}
+      onLoad={() => window.dispatchEvent(new Event(MATHJAX_READY_EVENT))}
     />
   );
 }
