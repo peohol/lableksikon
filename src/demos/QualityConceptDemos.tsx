@@ -39,7 +39,7 @@ function Flow({ items }: { items: string[] }) {
 const OFFSETS = [-1, -0.6, -0.2, 0.2, 0.6, 1] as const;
 const SMALL_OFFSETS = [-1, 0, 1] as const;
 
-const scaledSeries = (center: number, amplitude: number, offsets = OFFSETS) =>
+const scaledSeries = (center: number, amplitude: number, offsets: readonly number[] = OFFSETS) =>
   offsets.map((offset) => center + offset * amplitude);
 
 const texNumber = (value: number, decimals: number) =>
@@ -67,7 +67,7 @@ export function RepeterbarhetDemo() {
       afterword="Bare korttidsvariasjonen endres her. Dag, operatør og laboratorium holdes utenfor."
     >
       <div className={shared.stack}>
-        <PointRows rows={[{ label: "Samme serie", values }]} min={98} max={102} markers={[{ value: 100 }]} />
+        <PointRows rows={[{ label: "Samme serie", values }]} min={98} max={102} />
         <div className={shared.row}>
           <Readout
             label="Standardavvik"
@@ -120,7 +120,7 @@ export function IntermediarDemo() {
       afterword="Innen-serie-spredningen er konstant. Kontrollen legger bare til variasjon mellom dager og operatører."
     >
       <div className={shared.stack}>
-        <PointRows rows={rows} min={97.5} max={102.5} markers={[{ value: 100 }]} />
+        <PointRows rows={rows} min={97.5} max={102.5} />
         <Readout
           label="Samlet standardavvik for alle ni resultater"
           value={<MathFormula tex={`s = ${texNumber(sd, 2)}`} />}
@@ -166,7 +166,7 @@ export function ReproduserbarhetDemo() {
       afterword="Reproduserbarhet beskriver presisjon under bredere betingelser. Den er ikke definert som «alltid dårligere» enn repeterbarhet."
     >
       <div className={shared.stack}>
-        <PointRows rows={rows} min={96.5} max={103.5} markers={[{ value: 100 }]} />
+        <PointRows rows={rows} min={96.5} max={103.5} />
         <Readout
           label="Samlet standardavvik for laboratoriene"
           value={<MathFormula tex={`s = ${texNumber(sd, 2)}`} />}
