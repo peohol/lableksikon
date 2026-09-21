@@ -123,15 +123,15 @@ export function KvantifiseringsgrenseDemo() {
   const cv = relativeStandardDeviation(replicates);
   const relativeReplicates = replicates.map((value) => (value / concentration) * 100);
   const precisionCriterion = 10;
-  const meetsCriterion = cv <= precisionCriterion;
   const illustrativeLoq = 16;
+  const meetsCriterion = cv <= precisionCriterion + 1e-9;
 
   return (
     <DemonstrationFrame
       kind="interaktiv"
       instruction="Øk konsentrasjonen og se den relative spredningen mellom replikatene krympe."
       label="Kvantifiseringsgrense bestemt av et eksplisitt presisjonskrav"
-      afterword="Her brukes et illustrativt krav om CV høyst 10 %, slik at modellen får LOQ ved nivå 16. I en virkelig metode må ytelseskravet, datagrunnlaget og hvordan LOQ fastsettes være faglig begrunnet."
+      afterword="Her brukes et illustrativt krav om at variasjonskoeffisienten skal være høyst ti prosent, slik at modellen får kvantifiseringsgrense ved nivå 16. I en virkelig metode må ytelseskravet, datagrunnlaget og hvordan grensen fastsettes være faglig begrunnet."
     >
       <div className={shared.stack}>
         <PointRows
@@ -226,9 +226,11 @@ export function ArbeidsomradeDemo() {
   const [level, setLevel] = useState(60);
   const lower = 20;
   const upper = 100;
-  const cv = 8 + Math.max(0, lower - level) * 0.2;
-  const absoluteBias = 3 + Math.max(0, level - upper) * 0.2;
-  const withinRange = level >= lower && level <= upper;
+  const precisionCriterion = 10;
+  const biasCriterion = 5;
+  const cv = level < lower ? precisionCriterion + (lower - level) * 0.2 : 8;
+  const absoluteBias = level > upper ? biasCriterion + (level - upper) * 0.2 : 3;
+  const withinRange = cv <= precisionCriterion && absoluteBias <= biasCriterion;
   const x = (value: number) => 45 + (value / 120) * 430;
 
   return (
@@ -252,6 +254,7 @@ export function ArbeidsomradeDemo() {
           <Readout label="Illustrert ULOQ" value={<MathFormula tex={String(upper)} />} size="small" />
           <Readout label="Presisjon ved valgt nivå" value={<MathFormula tex={"CV = " + texNumber(cv, 1) + "\\,\\%"} />} size="small" tone={level < lower ? "warning" : "normal"} />
           <Readout label="Absolutt skjevhet ved valgt nivå" value={<MathFormula tex={"|bias| = " + texNumber(absoluteBias, 1) + "\\,\\%"} />} size="small" tone={level > upper ? "warning" : "normal"} />
+          <Readout label="Illustrerte krav" value={<MathFormula tex="CV \\le 10\\,\\%,\\quad |bias| \\le 5\\,\\%" />} size="small" />
         </div>
         <Verdict tone={withinRange ? "normal" : "warning"} reserve={3}>
           {withinRange
@@ -310,7 +313,7 @@ export function VektetRegresjonDemo() {
     <DemonstrationFrame
       kind="interaktiv"
       instruction="Bytt vekting og se hvordan linjen flyttes når lave nivåer får større statistisk vekt."
-      label="Heteroskedastiske kalibreringsdata med uvektet, 1/x og 1/x²-tilpasning"
+      label="Kalibreringsdata der lave nivåer kan gis større statistisk vekt"
       afterword="Vekting bør velges ut fra variansstrukturen og dokumenteres, ikke etter hvilken linje som ser penest ut. Eksemplet viser mekanismen, ikke en universell anbefaling om én vektingsfunksjon."
     >
       <div className={shared.stack}>
@@ -340,8 +343,8 @@ export function VektetRegresjonDemo() {
         </svg>
         <ChipGroup label="Vekting i regresjonen">
           <Chip variant="choice" pressed={weighting === "none"} onClick={() => setWeighting("none")}>Uvektet</Chip>
-          <Chip variant="choice" pressed={weighting === "1/x"} onClick={() => setWeighting("1/x")}>1/x</Chip>
-          <Chip variant="choice" pressed={weighting === "1/x2"} onClick={() => setWeighting("1/x2")}>1/x²</Chip>
+          <Chip variant="choice" pressed={weighting === "1/x"} onClick={() => setWeighting("1/x")}><MathFormula tex="1/x" label="1/x" /></Chip>
+          <Chip variant="choice" pressed={weighting === "1/x2"} onClick={() => setWeighting("1/x2")}><MathFormula tex="1/x^2" label="1/x²" /></Chip>
         </ChipGroup>
         <div className={shared.row}>
           <Readout label="Vektfunksjon" value={<MathFormula tex={"w = " + weightingTex} />} size="small" />
