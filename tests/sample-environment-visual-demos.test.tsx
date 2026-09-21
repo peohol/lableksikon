@@ -50,11 +50,11 @@ describe("interaktive prøve- og miljødemoer", () => {
     const trace = container.querySelector("[data-background-trace]");
     const initialPath = trace?.getAttribute("d");
 
-    const baseline = screen.getByRole("slider", { name: "Bakgrunnsnivå i signaltracen" });
+    const baseline = screen.getByRole("slider", { name: "Bakgrunnsnivå i signalkurven" });
     fireEvent.change(baseline, { target: { value: "15" } });
     expect(trace?.getAttribute("d")).not.toBe(initialPath);
 
-    const noise = screen.getByRole("slider", { name: "Tilfeldig støy i signaltracen" });
+    const noise = screen.getByRole("slider", { name: "Tilfeldig støy i signalkurven" });
     fireEvent.change(noise, { target: { value: "0" } });
     expect(formulas(container)).toContain("B = 15{,}0");
     expect(formulas(container)).toContain("A_{\\mathrm{støy}} = 0{,}0");
