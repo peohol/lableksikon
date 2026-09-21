@@ -130,11 +130,11 @@ function IonizationEffectDemo({ mode }: { mode: "suppression" | "enhancement" })
             size="small"
           />
           <Readout
-            label="Matriseeffekt"
+            label="Responsendring"
             value={
               <MathFormula
                 tex={
-                  "\\mathrm{ME} = " +
+                  "\\frac{\\Delta I}{I_0} = " +
                   (signedEffect > 0 ? "+" : "") +
                   texNumber(signedEffect, 0) +
                   "\\,\\%"
