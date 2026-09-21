@@ -72,6 +72,12 @@ describe("interaktive prøve- og miljødemoer", () => {
     const { container } = render(<KrysskontamineringDemo />);
     const slider = screen.getByRole("slider", { name: "Carry-over-andel mellom injeksjoner" });
     fireEvent.change(slider, { target: { value: "10" } });
+    const carryoverSeries = Array.from(container.querySelectorAll("[data-carryover-series]")).map(
+      (node) => node.getAttribute("data-carryover-series"),
+    );
+    expect(carryoverSeries).toEqual(["observed", "true"]);
+    expect(screen.getByText("uten carry-over")).toBeInTheDocument();
+    expect(screen.getByText("observert signal")).toBeInTheDocument();
     expect(formulas(container)).toContain("I_{\\mathrm{blank}} = 10{,}0");
     expect(formulas(container)).toContain("\\Delta I = 1{,}00");
     expect(formulas(container)).toContain("I_{\\mathrm{obs}} = 21{,}00");
