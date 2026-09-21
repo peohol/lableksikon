@@ -33,6 +33,21 @@ const plexSans = localFont({
 const siteDescription =
   "Et pedagogisk oppslagsverk for begreper i analytisk kjemi: kort definisjon, hverdagslig forklaring, demonstrasjon og teknisk dybde.";
 
+const themeInitScript = `
+(() => {
+  try {
+    const stored = window.localStorage.getItem("lableksion-theme");
+    const preference = stored === "light" || stored === "dark" ? stored : "system";
+    const systemUsesDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.dataset.theme =
+      preference === "system" ? (systemUsesDark ? "dark" : "light") : preference;
+  } catch {
+    document.documentElement.dataset.theme =
+      window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+})();
+`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -52,7 +67,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nb" className={`${newsreader.variable} ${plexSans.variable}`}>
+    <html
+      lang="nb"
+      className={`${newsreader.variable} ${plexSans.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <SkipLink />
         <Header searchIndex={buildSearchIndex()} termCount={orderedTerms.length} />

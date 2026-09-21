@@ -135,6 +135,38 @@ Semantiske tokens. Kontrast oppgitt mot det underlaget tokenet faktisk brukes p�
 | `focus` | `#1f6f6b` | focus ring | — |
 | `ink-invert` | `#ffffff` | tekst på `border-ink`- og `accent`-flater | 15.3:1 / 5.1:1 |
 
+### 1.2.1 Lys og mørk visning
+
+Appen har tre brukerinnstillinger: **Følg system**, **Lyst** og **Mørkt**. Standard er
+Følg system. Et eksplisitt valg lagres lokalt i nettleseren og skal brukes før
+første visning av siden, slik at temaet ikke blinker ved navigasjon eller reload.
+Når Følg system er valgt, skal appen reagere på endringer i operativsystemets
+fargevalg uten at siden må lastes på nytt.
+
+Mørk visning bruker de samme semantiske tokennavnene som lys visning; komponenter
+skal aldri ha egne tema-spesifikke farger.
+
+| Token | Mørk verdi |
+| --- | --- |
+| `background` | `#181714` |
+| `surface` | `#211f1b` |
+| `surface-muted` | `#292620` |
+| `text-primary` | `#f4f0e8` |
+| `text-body` | `#e6e0d4` |
+| `text-secondary` | `#c7bfae` |
+| `text-tertiary` | `#a79e8e` |
+| `text-disabled` | `#70695e` |
+| `border` | `#3c3830` |
+| `border-strong` | `#4b453b` |
+| `border-input` | `#5f5749` |
+| `border-ink` | `#f4f0e8` |
+| `accent` | `#71b7b1` |
+| `accent-hover` | `#94ccc7` |
+| `accent-soft` | `rgba(113,183,177,.24)` |
+| `warning` | `#e58b63` |
+| `focus` | `#71b7b1` |
+| `ink-invert` | `#181714` |
+
 Regler:
 - Maks to dataserier per demonstrasjon: `accent` og `warning`. Trengs en tredje, bruk `text-primary` som strek, ikke en ny farge.
 - `warning` er ikke en feilfarge. Den betyr «her er det noe å legge merke til faglig» — grenseverdi krysset, signal under grensa, kurve som avviker. Systemet har ingen error- eller success-farge; produktet har ingen skjemaer eller destruktive handlinger.
@@ -222,11 +254,11 @@ Hver komponent: struktur, varianter, states, responsiv regel.
 
 Sticky topp, `background` med 95 % opasitet og 6px backdrop-blur, 1px `border` under. Innhold i `max-width:78rem`, `flex`, `justify-content:space-between`, `flex-wrap:wrap`, `gap:10px 16px`.
 
-Venstre: ordmerket «Lableksion», Newsreader 20px/500, som knapp/lenke til `/`. Høyre: kompakt `SearchField` (`flex:1 1 170px; max-width:22rem`).
+Venstre: ordmerket «Lableksion», Newsreader 20px/500, som knapp/lenke til `/`, fulgt av en kompakt temainnstilling med valgene «Følg system», «Lyst» og «Mørkt». Høyre: kompakt `SearchField` (`flex:1 1 170px; max-width:22rem`).
 
 Ingen annen navigasjon. Ingen kategorimeny i headeren — kategoriene finnes på forsiden og i kickeren på hver begrepsside.
 
-Responsivt: under ~380px wrapper søkefeltet til egen linje under ordmerket. Headeren vokser i høyde; sticky-offset for A–Å-bokstavbaren må regnes ut fra faktisk høyde, ikke en konstant.
+Responsivt: under ~380px wrapper søkefeltet til egen linje under ordmerket og temainnstillingen. Headeren vokser i høyde; sticky-offset for A–Å-bokstavbaren må regnes ut fra faktisk høyde, ikke en konstant.
 
 ## 2.2 SearchField
 
