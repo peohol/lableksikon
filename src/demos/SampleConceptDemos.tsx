@@ -239,10 +239,10 @@ export function InterferensDemo() {
               : "Sterk signaloverlapp gjør at analyttresponsen ville bli tydelig overvurdert uten tilstrekkelig selektivitet."}
         </Verdict>
         <Slider
-          label="Overlap mellom interferent og analytt"
+          label="Overlapp mellom interferent og analytt"
           valueText={
             comma(overlap, 0) +
-            " prosent overlap; ekstra bidrag " +
+            " prosent overlapp; ekstra bidrag " +
             comma(contribution, 1)
           }
           value={overlap}
@@ -282,7 +282,7 @@ export function BakgrunnssignalDemo() {
   return (
     <DemonstrationFrame
       kind="interaktiv"
-      instruction="Endre bakgrunnsnivå og støy hver for seg og se at de påvirker signaltracen på forskjellige måter."
+      instruction="Endre bakgrunnsnivå og støy hver for seg og se at de påvirker signalkurven på forskjellige måter."
       label="Bakgrunnssignal som nivå, støy som variasjon rundt nivået"
       afterword="Et stabilt bakgrunnsbidrag kan ligge over null uten å være støy. Støy beskriver den tilfeldige variasjonen rundt det lokale bakgrunnsnivået."
     >
@@ -309,7 +309,7 @@ export function BakgrunnssignalDemo() {
           Bakgrunnsslideren flytter hele tracen opp og ned. Støyslideren endrer hvor mye signalet varierer rundt den stiplede bakgrunnslinjen.
         </Verdict>
         <Slider
-          label="Bakgrunnsnivå i signaltracen"
+          label="Bakgrunnsnivå i signalkurven"
           valueText={"bakgrunn " + comma(baseline, 1)}
           value={baseline}
           onChange={setBaseline}
@@ -319,7 +319,7 @@ export function BakgrunnssignalDemo() {
           ends={["nær null", "høy bakgrunn"]}
         />
         <Slider
-          label="Tilfeldig støy i signaltracen"
+          label="Tilfeldig støy i signalkurven"
           valueText={"støyamplitude " + comma(noise, 1)}
           value={noise}
           onChange={setNoise}
