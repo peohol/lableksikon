@@ -172,7 +172,7 @@
 .legendWarning {
   height: 0;
   background: transparent;
-  border-top: 3px dashed var(--color-warning);
+  border-top: 3px dotted var(--color-warning);
 }
 
 .legendWarm {
