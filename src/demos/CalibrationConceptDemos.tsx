@@ -341,7 +341,8 @@ export function VektetRegresjonDemo() {
     { x: 10, y: 27.0 },
   ];
   const fit = weightedFit(points, weighting);
-  const lowResidual = points[0].y - (fit.intercept + fit.slope * points[0].x);
+  const firstPoint = points[0]!;
+  const lowResidual = firstPoint.y - (fit.intercept + fit.slope * firstPoint.x);
   const x = (value: number) => 55 + (value / 10) * 420;
   const y = (value: number) => 205 - (value / 30) * 165;
   const label = weighting === "none" ? "uvektet" : weighting === "1/x" ? "1/x" : "1/x²";
@@ -463,6 +464,7 @@ export function DriftDemo() {
   const noise = [0.1, -0.2, 0.2, -0.1, 0.3, -0.2, 0.1, -0.1];
   const points = noise.map((value, index) => 100 + value + driftRate * index);
   const outside = points.some((value) => value > 103 || value < 97);
+  const lastPoint = points[points.length - 1]!;
   const x = (index: number) => 55 + index * 60;
   const y = (value: number) => 190 - ((value - 96) / 9) * 150;
   const polyline = points.map((value, index) => String(x(index)) + "," + String(y(value))).join(" ");
@@ -495,7 +497,7 @@ export function DriftDemo() {
         <div className={shared.row}>
           <Readout
             label="Siste kontrollsignal"
-            value={<MathFormula tex={texNumber(points[points.length - 1], 1)} />}
+            value={<MathFormula tex={texNumber(lastPoint, 1)} />}
             size="small"
           />
           <Readout
@@ -513,7 +515,7 @@ export function DriftDemo() {
         </Verdict>
         <Slider
           label="Driftshastighet gjennom analyseserien"
-          valueText={"drift " + comma(driftRate, 1) + " per måling; siste signal " + comma(points[points.length - 1], 1)}
+          valueText={"drift " + comma(driftRate, 1) + " per måling; siste signal " + comma(lastPoint, 1)}
           value={driftRate}
           onChange={setDriftRate}
           min={0}
