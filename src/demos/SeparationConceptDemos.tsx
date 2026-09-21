@@ -285,7 +285,7 @@ export function IsokratiskDemo() {
             className={styles.chromatogram}
           />
         </svg>
-        <Readout label="Mobilfasesammensetning" value={<MathFormula tex="40\\,\\% + 60\\,\\%" />} size="small" />
+        <Readout label="Mobilfasesammensetning" value={<MathFormula tex="A = 40\\,\\%,\\quad B = 60\\,\\%" />} size="small" />
       </div>
     </DemonstrationFrame>
   );
@@ -384,7 +384,7 @@ export function HaledannelseDemo() {
   const center = 235;
   const leftWidth = 42;
   const rightWidth = leftWidth * (1 + tailing / 55);
-  const overlap = Math.max(0, (rightWidth - 42) / 2);
+  const widthRatio = rightWidth / leftWidth;
 
   return (
     <DemonstrationFrame
@@ -402,7 +402,7 @@ export function HaledannelseDemo() {
         </svg>
         <div className={shared.row}>
           <Readout label="Illustrert halegrad" value={<MathFormula tex={texNumber(tailing, 0) + "\\,\\%"} />} size="small" />
-          <Readout label="Ekstra utstrekning bakover" value={<MathFormula tex={texNumber(overlap, 1)} />} size="small" />
+          <Readout label="Illustrert bakside/front-forhold" value={<MathFormula tex={texNumber(widthRatio, 2)} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
           {tailing === 0
