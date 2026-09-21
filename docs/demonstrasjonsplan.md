@@ -113,7 +113,7 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Mobilfase | P1 | ✅ **Implementert i PR #23.** Animert transport gjennom kolonne med valg mellom LC, GC og SFC; faseformen endres mens transportrollen bevares.  der mobilfasen beveger analyttsoner gjennom systemet. Valg LC/GC/SFC endrer faseikon/etikett, ikke den grunnleggende mekanismen. |
+| Mobilfase | P1 | ✅ **Implementert i PR #23.** Animert transport gjennom kolonne med valg mellom LC, GC og SFC; faseformen endres mens transportrollen bevares. |
 | Stasjonærfase | P0 | ✅ **Implementert i PR #23.** To analyttsoner beveger seg gjennom en kolonne; slider for relativ interaksjon med stasjonærfasen endrer hastighet/retensjon. |
 | Retensjonstid | P0 | ✅ **Implementert i PR #23.** Kromatogram med bevegelig topp. Marker injeksjon, `t_M`, `t_R` og justert retensjonstid direkte på tidsaksen. |
 | Gradient | P0 | ✅ **Implementert i PR #23.** Øvre panel: mobilfasesammensetning mot tid. Nedre panel: kromatogram. Slider for gradientbratthet viser hvordan sent eluerende topper flyttes sammen. |
