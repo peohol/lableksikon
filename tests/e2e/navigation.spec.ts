@@ -101,7 +101,10 @@ test.describe("URL-er og navigasjon", () => {
   test("headersøket tar deg til begrepet", async ({ page }) => {
     await page.goto("/a-aa");
     await page.getByRole("combobox", { name: "Søk etter begrep" }).fill("matrise");
-    const option = page.getByRole("option").first();
+    const option = page
+      .getByRole("listbox", { name: "Søketreff" })
+      .getByRole("option")
+      .first();
     await expect(option).toContainText("Matriseeffekt");
     await option.click();
     await expect(page).toHaveURL(/\/begrep\/matriseeffekt$/);
