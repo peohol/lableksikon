@@ -1,70 +1,203 @@
-.rows {
-  display: grid;
-  gap: 10px;
+.axis {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: minmax(9rem, 0.45fr) minmax(0, 1fr);
-  gap: 12px;
-  align-items: baseline;
-  padding: 10px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
+.referenceLine,
+.backgroundLine {
+  fill: none;
+  stroke: var(--color-text-tertiary);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
 }
 
-.label {
+.signalTrace,
+.conductivityTrace,
+.massPeakA,
+.massPeakB {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.signalTrace,
+.conductivityTrace {
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.spectrumPeak {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.spectrumPeakMuted {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 2;
+  stroke-dasharray: 3 3;
+  opacity: 0.45;
+}
+
+.stageBox,
+.stageActive,
+.ionSource,
+.analyzerBox,
+.collisionCellBox,
+.uvCell {
+  stroke-width: 2;
+}
+
+.stageBox,
+.analyzerBox,
+.ionSource,
+.uvCell {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border-strong);
+}
+
+.stageActive,
+.collisionCellBox {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+}
+
+.stageLabel {
+  fill: var(--color-text-primary);
   font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 600;
-  color: var(--color-text-primary);
+  text-anchor: middle;
+  pointer-events: none;
 }
 
-.value {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  font-family: var(--font-reading);
-  color: var(--color-text-body);
+.flowArrow,
+.gcLine {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
 }
 
-.flow {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
-  gap: 10px;
+.neutralMolecule,
+.precursorIon {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 2;
 }
 
-.flow li {
-  display: flex;
-  gap: 9px;
-  align-items: flex-start;
-  min-width: 0;
-  padding: 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+.positiveIon,
+.productIon {
+  fill: var(--color-warning);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.negativeIon,
+.productIonSecondary {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.svgLabel {
+  fill: var(--color-ink-invert);
   font-family: var(--font-ui);
   font-size: 14px;
-  line-height: 1.4;
-  overflow-wrap: anywhere;
+  font-weight: 700;
 }
 
-.flow li > span {
-  flex: 0 0 22px;
-  height: 22px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-ink-invert);
-  font-size: 11px;
-  font-weight: 600;
+.collisionCell {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-warning);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 4;
 }
 
-@media (max-width: 520px) {
-  .row {
-    grid-template-columns: 1fr;
+.massPeakA {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.massPeakB {
+  stroke: var(--color-warning);
+  stroke-width: 3;
+  stroke-dasharray: 8 5;
+}
+
+.selectionMarker {
+  fill: var(--color-warning);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+  transition: cx 180ms ease-out;
+}
+
+.beamIn,
+.beamOut {
+  stroke: var(--color-warning);
+  stroke-linecap: round;
+}
+
+.beamIn {
+  stroke-width: 10;
+}
+
+.beamOut {
+  transition:
+    opacity 180ms ease-out,
+    stroke-width 180ms ease-out;
+}
+
+.flame {
+  fill: color-mix(in srgb, var(--color-warning) 24%, transparent);
+  stroke: var(--color-warning);
+  stroke-width: 2.5;
+}
+
+.collector {
+  stroke: var(--color-border-strong);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.chargeCarrier {
+  fill: var(--color-accent);
+  animation: carrier-pulse 1.4s ease-in-out infinite alternate;
+}
+
+.signalBar {
+  fill: var(--color-accent);
+  transition:
+    y 180ms ease-out,
+    height 180ms ease-out;
+}
+
+.ionZone {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+@keyframes carrier-pulse {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 0.95;
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selectionMarker,
+  .beamOut,
+  .signalBar {
+    transition: none;
+  }
+
+  .chargeCarrier {
+    animation: none;
   }
 }
