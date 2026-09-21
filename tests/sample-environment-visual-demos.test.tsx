@@ -39,7 +39,7 @@ describe("interaktive prøve- og miljødemoer", () => {
   it("interferens: full overlap legger hele interferentsignalet til analyttens målepunkt", () => {
     const { container } = render(<InterferensDemo />);
     const interferentTrace = container.querySelector('[data-series="interferent"]');
-    expect(interferentTrace).toHaveAttribute("stroke-dasharray", "4 6");
+    expect(interferentTrace).toHaveAttribute("stroke-dasharray", "2 6");
 
     const slider = screen.getByRole("slider", { name: "Overlapp mellom interferent og analytt" });
     fireEvent.change(slider, { target: { value: "100" } });
