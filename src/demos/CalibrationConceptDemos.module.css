@@ -132,7 +132,6 @@
 }
 
 .projection,
-.projectionSecondary,
 .limitLine,
 .residualLine {
   fill: none;
@@ -144,9 +143,6 @@
   stroke: var(--color-accent);
 }
 
-.projectionSecondary {
-  stroke: var(--color-warning);
-}
 
 .limitLine {
   stroke: var(--color-warning);
