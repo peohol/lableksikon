@@ -234,7 +234,7 @@ describe("interaktive demonstrasjoner", () => {
     const { container } = render(<GjenvinningDemo />);
     const slider = screen.getByRole("slider", { name: "Gjenfunnet andel av tilsetningen" });
     fireEvent.change(slider, { target: { value: "50" } });
-    expect(screen.getByText(/stor del av den tilsatte mengden/)).toBeInTheDocument();
+    expect(screen.getByText(/kommer ikke tilbake i måleresultatet/)).toBeInTheDocument();
     const formulas = Array.from(container.querySelectorAll("[data-math-tex]")).map((node) =>
       node.getAttribute("data-math-tex"),
     );
