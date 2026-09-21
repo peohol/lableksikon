@@ -322,39 +322,568 @@ export function VariansDemo() {
 }
 
 export function NormalfordelingDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Se hvor mye av en normalfordeling som ligger nær middelverdien." label="68–95–99,7-regelen for normalfordelingen" afterword="Prosentene gjelder en idealisert normalfordeling, ikke alle klokkeformede datasett."><ValueRows rows={[{ label: "\\(\\mu \\pm 1\\sigma\\)", values: "ca. 68,3 %" }, { label: "\\(\\mu \\pm 2\\sigma\\)", values: "ca. 95,4 %" }, { label: "\\(\\mu \\pm 3\\sigma\\)", values: "ca. 99,7 %" }]} /></DemonstrationFrame>;
+  const [sd, setSd] = useState(1);
+  const x = (value: number) => 40 + ((value + 6) / 12) * 440;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Endre standardavviket og se fordelingen bli smalere eller bredere."
+      label="Normalfordeling med ett, to og tre standardavvik rundt middelverdien"
+      afterword="Arealandelene 68,3 %, 95,4 % og 99,7 % gjelder en idealisert normalfordeling. Når standardavviket endres, flyttes grensene, mens andelene innen samme antall standardavvik er de samme."
+    >
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 210" className={shared.svg} aria-hidden="true">
+          <path d={normalAreaPath(sd, 3)} className={styles.normalBand3} />
+          <path d={normalAreaPath(sd, 2)} className={styles.normalBand2} />
+          <path d={normalAreaPath(sd, 1)} className={styles.normalBand1} />
+          <path d={normalCurvePath(sd)} className={styles.distributionCurve} data-normal-curve="true" />
+          <line x1="40" y1="180" x2="480" y2="180" className={styles.axis} />
+          <line x1={x(0)} y1="38" x2={x(0)} y2="185" className={styles.meanLine} />
+          {[1, 2, 3].flatMap((multiple) =>
+            [-1, 1].map((sign) => (
+              <line
+                key={multiple + "-" + sign}
+                x1={x(sign * multiple * sd)}
+                y1="165"
+                x2={x(sign * multiple * sd)}
+                y2="188"
+                className={styles.sigmaGuide}
+              />
+            )),
+          )}
+        </svg>
+        <div className={shared.row}>
+          <Readout label="Standardavvik" value={<MathFormula tex={"\\sigma = " + texNumber(sd, 1)} />} size="small" />
+          <Readout label="Innen ett standardavvik" value={<MathFormula tex="68{,}3\\,\\%" />} size="small" />
+          <Readout label="Innen to standardavvik" value={<MathFormula tex="95{,}4\\,\\%" />} size="small" />
+          <Readout label="Innen tre standardavvik" value={<MathFormula tex="99{,}7\\,\\%" />} size="small" />
+        </div>
+        <Slider
+          label="Standardavvik i normalfordelingen"
+          valueText={"standardavvik " + comma(sd, 1)}
+          value={sd}
+          onChange={setSd}
+          min={0.7}
+          max={2}
+          step={0.1}
+          ends={["smal fordeling", "bred fordeling"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function FrihetsgraderDemo() {
-  return <DemonstrationFrame kind="stegvis" instruction="Lås gjennomsnittet og se hvorfor siste avvik bestemmes av de andre." label="Tre observasjoner og to frihetsgrader" afterword="Når summen av avvik skal være null, er bare \(n - 1\) av avvikene uavhengige."><Flow items={["Tre observasjoner", "Gjennomsnittet estimeres", "To avvik kan variere fritt", "Det tredje må få summen til null"]} /></DemonstrationFrame>;
+  const [firstDeviation, setFirstDeviation] = useState(-1);
+  const [secondDeviation, setSecondDeviation] = useState(1.5);
+  const average = 10;
+  const thirdDeviation = -firstDeviation - secondDeviation;
+  const values = [
+    average + firstDeviation,
+    average + secondDeviation,
+    average + thirdDeviation,
+  ];
+  const deviationText = (value: number) =>
+    value === 0
+      ? "0"
+      : (value > 0 ? "pluss " : "minus ") + comma(Math.abs(value), 1);
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt de to første avvikene. Det tredje må følge etter fordi gjennomsnittet holdes fast."
+      label="Tre observasjoner med to frie avvik når gjennomsnittet er estimert"
+      afterword="Når gjennomsnittet er beregnet fra de samme tre observasjonene, må avvikene summere til null. Derfor kan bare to av tre avvik velges uavhengig."
+    >
+      <div className={shared.stack}>
+        <PointRows
+          rows={[{ label: "Tre observasjoner", values }]}
+          min={5}
+          max={15}
+          markers={[{ value: average }]}
+        />
+        <div className={shared.row}>
+          <Readout label="Første avvik" value={<MathFormula tex={"d_1 = " + texNumber(firstDeviation, 1)} />} size="small" />
+          <Readout label="Andre avvik" value={<MathFormula tex={"d_2 = " + texNumber(secondDeviation, 1)} />} size="small" />
+          <Readout label="Tredje avvik følger" value={<MathFormula tex={"d_3 = " + texNumber(thirdDeviation, 1)} />} size="small" />
+          <Readout label="Sum av avvik" value={<MathFormula tex="d_1+d_2+d_3=0" />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          Du kan endre de to første avvikene uavhengig. Det tredje blir automatisk {deviationText(thirdDeviation)} for å bevare samme gjennomsnitt.
+        </Verdict>
+        <Slider
+          label="Første frie avvik"
+          valueText={deviationText(firstDeviation)}
+          value={firstDeviation}
+          onChange={setFirstDeviation}
+          min={-2}
+          max={2}
+          step={0.5}
+          ends={["negativt avvik", "positivt avvik"]}
+        />
+        <Slider
+          label="Andre frie avvik"
+          valueText={deviationText(secondDeviation)}
+          value={secondDeviation}
+          onChange={setSecondDeviation}
+          min={-2}
+          max={2}
+          step={0.5}
+          ends={["negativt avvik", "positivt avvik"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function KonfidensintervallDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Tenk deg at samme studie gjentas mange ganger." label="Konfidensnivå som langsiktig dekningsandel" afterword="Ved en korrekt 95 %-metode vil omtrent 95 av 100 intervaller dekke den sanne parameteren over mange gjentakelser."><ValueRows rows={[{ label: "100 nye utvalg", values: "100 nye intervaller" }, { label: "Forventet dekning", values: "omtrent 95 dekker parameteren" }, { label: "Ett ferdig intervall", values: "dekker eller dekker ikke" }]} /></DemonstrationFrame>;
+  const [sampleSize, setSampleSize] = useState(30);
+  const trueValue = 100;
+  const populationSd = 6;
+  const standardError = populationSd / Math.sqrt(sampleSize);
+  const halfWidth = 1.96 * standardError;
+  const zOffsets = [
+    -1.45, -0.82, 0.31, 1.12, -0.24,
+    0.74, -1.08, 0.16, 1.54, -0.63,
+    0.92, -1.71, 0.48, 1.28, -0.11,
+    0.57, -1.22, 0.05, 2.2, -0.39,
+  ];
+  const intervals = zOffsets.map((z) => {
+    const center = trueValue + z * standardError;
+    return {
+      center,
+      lower: center - halfWidth,
+      upper: center + halfWidth,
+      containsTruth: Math.abs(z) <= 1.96,
+    };
+  });
+  const covered = intervals.filter((interval) => interval.containsTruth).length;
+  const x = (value: number) => 40 + ((value - 92) / 16) * 440;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Øk utvalgsstørrelsen og se alle intervallene bli smalere rundt sine estimater."
+      label="Tjue gjentatte 95-prosentintervaller mot én sann parameterverdi"
+      afterword="I denne faste illustrasjonen dekker 19 av 20 intervaller den sanne parameteren. Ett bestemt 95-prosentintervall har ikke 95 % sannsynlighet for å inneholde en fast parameter; 95 % beskriver metodens langsiktige dekning."
+    >
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 245" className={shared.svg} aria-hidden="true">
+          <line x1={x(trueValue)} y1="10" x2={x(trueValue)} y2="232" className={styles.truthLine} />
+          {intervals.map((interval, index) => {
+            const y = 17 + index * 11;
+            return (
+              <g key={index}>
+                <line
+                  x1={x(interval.lower)}
+                  y1={y}
+                  x2={x(interval.upper)}
+                  y2={y}
+                  className={interval.containsTruth ? styles.intervalLine : styles.intervalMiss}
+                  data-ci-interval={index === 0 ? "first" : undefined}
+                />
+                <circle
+                  cx={x(interval.center)}
+                  cy={y}
+                  r="3.5"
+                  className={interval.containsTruth ? styles.intervalPoint : styles.intervalPointMiss}
+                />
+              </g>
+            );
+          })}
+        </svg>
+        <div className={shared.row}>
+          <Readout label="Utvalgsstørrelse" value={<MathFormula tex={"n = " + sampleSize} />} size="small" />
+          <Readout label="Halv intervallbredde" value={<MathFormula tex={"1{,}96\\,SE = " + texNumber(halfWidth, 2)} />} size="small" />
+          <Readout label="Dekker sann verdi i illustrasjonen" value={<MathFormula tex={covered + "/20 = 95\\,\\%"} />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          Når utvalgsstørrelsen øker, faller standardfeilen og intervallene blir smalere. Det ene intervallet som bommer, viser at korrekt metode ikke betyr at hvert enkelt intervall treffer.
+        </Verdict>
+        <Slider
+          label="Utvalgsstørrelse for konfidensintervallene"
+          valueText={"n " + sampleSize + "; halv intervallbredde " + comma(halfWidth, 2)}
+          value={sampleSize}
+          onChange={setSampleSize}
+          min={10}
+          max={100}
+          step={10}
+          ends={["mindre utvalg", "større utvalg"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function SignifikansnivaDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Se \\(\\alpha\\) som en på forhånd valgt feilrate for testprosedyren." label="Signifikansnivå og type-I-feil" afterword="\\(\\alpha = 0{,}05\\) betyr ikke at nullhypotesen har 5 % sannsynlighet for å være sann."><ValueRows rows={[{ label: "Før data", values: "velg \\(\\alpha = 0{,}05\\)" }, { label: "Hvis \\(H_0\\) er sann", values: "inntil 5 % langsiktig forkastningsrate" }, { label: "Etter data", values: "sammenlign \\(p\\) med \\(\\alpha\\)" }]} /></DemonstrationFrame>;
+  const [alpha, setAlpha] = useState(0.05);
+  const critical = inverseNormalCdf(1 - alpha / 2);
+  const x = (value: number) => 40 + ((value + 4) / 8) * 440;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Endre signifikansnivået og se forkastningsområdene i begge haler vokse eller krympe."
+      label="Tosidig signifikansnivå som markerte haler under en nullfordeling"
+      afterword="Signifikansnivået er en på forhånd valgt langsiktig type-I-feilrate for testprosedyren når nullhypotesen er sann og modellforutsetningene holder. Det er ikke sannsynligheten for at nullhypotesen er sann."
+    >
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 210" className={shared.svg} aria-hidden="true">
+          <path d={standardNormalTailPath(critical, "left")} className={styles.rejectionArea} />
+          <path d={standardNormalTailPath(critical, "right")} className={styles.rejectionArea} />
+          <path d={standardNormalCurvePath()} className={styles.distributionCurve} />
+          <line x1="40" y1="180" x2="480" y2="180" className={styles.axis} />
+          <line x1={x(-critical)} y1="48" x2={x(-critical)} y2="185" className={styles.criticalLine} />
+          <line x1={x(critical)} y1="48" x2={x(critical)} y2="185" className={styles.criticalLine} />
+        </svg>
+        <div className={shared.row}>
+          <Readout label="Signifikansnivå" value={<MathFormula tex={"\\alpha = " + texNumber(alpha, 2)} />} size="small" />
+          <Readout label="Hver hale" value={<MathFormula tex={"\\alpha/2 = " + texNumber(alpha / 2, 3)} />} size="small" />
+          <Readout label="Kritiske z-grenser" value={<MathFormula tex={"z = \\pm " + texNumber(critical, 2)} />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          Høyere signifikansnivå gjør de kritiske grensene mindre ekstreme og forkastningsområdene større.
+        </Verdict>
+        <Slider
+          label="Signifikansnivå alfa"
+          valueText={"alfa " + comma(alpha, 2) + "; kritisk z pluss/minus " + comma(critical, 2)}
+          value={alpha}
+          onChange={setAlpha}
+          min={0.01}
+          max={0.1}
+          step={0.01}
+          ends={["strengere grense", "større forkastningsområde"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function TTestDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Sammenlign observert forskjell med standardfeilen." label="t-verdi som signal relativt til estimert tilfeldig variasjon" afterword="Stor absolutt t-verdi betyr at forskjellen er stor relativt til den estimerte standardfeilen."><ValueRows rows={[{ label: "Forskjell", values: "2,0" }, { label: "Standardfeil", values: "0,5" }, { label: "\\(t\\)", values: "\\(2{,}0/0{,}5 = 4{,}0\\)" }]} /></DemonstrationFrame>;
+  const [difference, setDifference] = useState(1);
+  const offsets = [-1.3, -0.6, -0.2, 0.3, 0.7, 1.1];
+  const groupA = offsets.map((offset) => 10 + offset);
+  const groupB = offsets.map((offset) => 10 + difference + offset);
+  const meanA = mean(groupA);
+  const meanB = mean(groupB);
+  const varianceA = sampleVariance(groupA);
+  const varianceB = sampleVariance(groupB);
+  const nA = groupA.length;
+  const nB = groupB.length;
+  const componentA = varianceA / nA;
+  const componentB = varianceB / nB;
+  const standardError = Math.sqrt(componentA + componentB);
+  const tValue = (meanB - meanA) / standardError;
+  const degreesOfFreedom =
+    (componentA + componentB) ** 2 /
+    (componentA ** 2 / (nA - 1) + componentB ** 2 / (nB - 1));
+  const pValue = twoSidedTPValue(tValue, degreesOfFreedom);
+  const pTex =
+    pValue < 0.001
+      ? "p < 0{,}001"
+      : "p = " + texNumber(pValue, 3);
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt gruppemiddel B mens spredningen i begge grupper holdes uendret."
+      label="To grupper der t-verdien vokser når middelverdiene skilles"
+      afterword="Illustrasjonen bruker en tosidig Welch t-test. P-verdien er sannsynligheten, under nullhypotesen og modellforutsetningene, for et minst like ekstremt testresultat; den er ikke sannsynligheten for at nullhypotesen er sann."
+    >
+      <div className={shared.stack}>
+        <PointRows
+          rows={[
+            { label: "Gruppe A", values: groupA },
+            { label: "Gruppe B", values: groupB },
+          ]}
+          min={8}
+          max={15}
+          markers={[
+            { value: meanA },
+            { value: meanB, tone: "warning", dashed: true },
+          ]}
+        />
+        <p className={shared.caption}>Heltrukken linje: middelverdi A · stiplet linje: middelverdi B</p>
+        <div className={shared.row}>
+          <Readout label="Forskjell i middelverdi" value={<MathFormula tex={"\\Delta\\bar{x} = " + texNumber(meanB - meanA, 2)} />} size="small" />
+          <Readout label="t-verdi" value={<MathFormula tex={"t = " + texNumber(tValue, 2)} />} size="small" />
+          <Readout label="Tosidig p-verdi" value={<MathFormula tex={pTex} />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          Når forskjellen mellom gruppene øker uten at spredningen øker, blir teststatistikken større i absoluttverdi og p-verdien mindre.
+        </Verdict>
+        <Slider
+          label="Forskjell mellom gruppemidlene"
+          valueText={"forskjell " + comma(difference, 1) + "; t " + comma(tValue, 2) + "; p " + comma(pValue, 3)}
+          value={difference}
+          onChange={setDifference}
+          min={0}
+          max={3}
+          step={0.1}
+          ends={["samme middelverdi", "tydelig atskilte middelverdier"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function FTestDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Sammenlign to varianser som et forhold." label="F-statistikk som variansforhold" afterword="Et forhold nær 1 passer bedre med like varianser enn et forhold langt fra 1; kritiske grenser avhenger av frihetsgrader og \\(\\alpha\\)."><ValueRows rows={[{ label: "Varians A", values: "4" }, { label: "Varians B", values: "2" }, { label: "\\(F\\)", values: "\\(4/2 = 2\\)" }]} /></DemonstrationFrame>;
+  const [spreadB, setSpreadB] = useState(1.4);
+  const offsets = [-1.2, -0.5, 0, 0.5, 1.2];
+  const groupA = offsets.map((offset) => 10 + offset);
+  const groupB = offsets.map((offset) => 10 + offset * spreadB);
+  const varianceA = sampleVariance(groupA);
+  const varianceB = sampleVariance(groupB);
+  const fValue = varianceB / varianceA;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Endre spredningen i gruppe B mens middelverdien holdes den samme."
+      label="F-statistikk som et synlig forhold mellom to utvalgsvarianser"
+      afterword="Her er gruppe B lagt i telleren og gruppe A i nevneren. Om et observert F-forhold er uvanlig under en nullhypotese om like varianser, avhenger også av frihetsgrader, testretning og valgt signifikansnivå."
+    >
+      <div className={shared.stack}>
+        <PointRows
+          rows={[
+            { label: "Gruppe A", values: groupA },
+            { label: "Gruppe B", values: groupB },
+          ]}
+          min={6.5}
+          max={13.5}
+          markers={[{ value: 10 }]}
+        />
+        <div className={shared.row}>
+          <Readout label="Varians A" value={<MathFormula tex={"s_A^2 = " + texNumber(varianceA, 2)} />} size="small" />
+          <Readout label="Varians B" value={<MathFormula tex={"s_B^2 = " + texNumber(varianceB, 2)} />} size="small" />
+          <Readout label="Variansforhold" value={<MathFormula tex={"F = \\frac{s_B^2}{s_A^2} = " + texNumber(fValue, 2)} />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          Når spredningen i B er lik A, ligger F nær 1. Når B blir bredere eller smalere, flytter variansforholdet seg bort fra 1.
+        </Verdict>
+        <Slider
+          label="Relativ spredning i gruppe B"
+          valueText={"spredningsfaktor " + comma(spreadB, 1) + "; F " + comma(fValue, 2)}
+          value={spreadB}
+          onChange={setSpreadB}
+          min={0.5}
+          max={2.5}
+          step={0.1}
+          ends={["smalere enn A", "bredere enn A"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function RegresjonDemo() {
-  return <DemonstrationFrame kind="stegvis" instruction="Følg veien fra datapunkter til modell og residualer." label="Regresjon som modellering av respons" afterword="En god modell vurderes ikke bare etter hvor nær linjen ser ut til å ligge punktene."><Flow items={["Observer x og y", "Velg modellform", "Estimer parametere", "Undersøk residualer og prediksjoner"]} /></DemonstrationFrame>;
+  const [movingY, setMovingY] = useState(6.2);
+  const values = [1.2, 2.1, 3.2, 4, 5.1, movingY];
+  const fit = fitLine(values);
+  const x = (index: number) => 55 + index * 80;
+  const y = (value: number) => 190 - (value / 10) * 155;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt det siste datapunktet og se både regresjonslinjen og residualene endres."
+      label="Lineær regresjon med synlige residualer fra punktene til den tilpassede linjen"
+      afterword="Regresjonslinjen er minste-kvadraters tilpasning av respons mot punktindeks i dette eksemplet. En høy R-kvadratverdi alene dokumenterer ikke at modellen er riktig; residualmønster og modellforutsetninger må også vurderes."
+    >
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 220" className={shared.svg} aria-hidden="true">
+          <line x1="55" y1="190" x2="475" y2="190" className={styles.axis} />
+          <line x1="55" y1="190" x2="55" y2="30" className={styles.axis} />
+          {values.map((value, index) => (
+            <line
+              key={"r-" + index}
+              x1={x(index)}
+              y1={y(value)}
+              x2={x(index)}
+              y2={y(fit.predicted[index] as number)}
+              className={styles.residualLine}
+            />
+          ))}
+          <line
+            x1={x(0)}
+            y1={y(fit.predicted[0] as number)}
+            x2={x(5)}
+            y2={y(fit.predicted[5] as number)}
+            className={styles.regressionLine}
+          />
+          {values.map((value, index) => (
+            <circle
+              key={"p-" + index}
+              cx={x(index)}
+              cy={y(value)}
+              r="6"
+              className={index === values.length - 1 ? styles.scatterPointWarning : styles.scatterPoint}
+            />
+          ))}
+        </svg>
+        <div className={shared.row}>
+          <Readout label="Stigningstall" value={<MathFormula tex={"b_1 = " + texNumber(fit.slope, 2)} />} size="small" />
+          <Readout label="Forklaringsgrad" value={<MathFormula tex={"R^2 = " + texNumber(fit.r2, 3)} />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          Residualene er de vertikale avstandene fra hvert punkt til linjen. Når ett punkt flyttes, endres både linjen og residualmønsteret.
+        </Verdict>
+        <Slider
+          label="Høyde på det siste regresjonspunktet"
+          valueText={"siste respons " + comma(movingY, 1) + "; stigningstall " + comma(fit.slope, 2)}
+          value={movingY}
+          onChange={setMovingY}
+          min={3}
+          max={9}
+          step={0.2}
+          ends={["trekker linjen ned", "trekker linjen opp"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function MinsteKvadraterDemo() {
-  return <DemonstrationFrame kind="formel" instruction="Se hvordan residualene blir til én størrelse som skal minimeres." label="Minste kvadrater minimerer summen av residualkvadrater" afterword="Store residualer får ekstra stor innflytelse fordi de kvadreres."><ValueRows rows={[{ label: "Residualer", values: "−1 · +2 · −1" }, { label: "Kvadrater", values: "1 · 4 · 1" }, { label: "Sum", values: "6 — modellen velges for å gjøre denne minst mulig" }]} /></DemonstrationFrame>;
+  const [candidateSlope, setCandidateSlope] = useState(0.7);
+  const values = [1.1, 2.2, 2.7, 4.1, 5, 6.2];
+  const optimal = fitLine(values);
+  const meanX = (values.length - 1) / 2;
+  const meanY = mean(values);
+  const candidateIntercept = meanY - candidateSlope * meanX;
+  const candidatePredicted = values.map((_, index) => candidateIntercept + candidateSlope * index);
+  const candidateSse = values.reduce(
+    (sum, value, index) => sum + (value - (candidatePredicted[index] as number)) ** 2,
+    0,
+  );
+  const optimalSse = values.reduce(
+    (sum, value, index) => sum + (value - (optimal.predicted[index] as number)) ** 2,
+    0,
+  );
+  const nearMinimum = Math.abs(candidateSlope - optimal.slope) <= 0.06;
+  const x = (index: number) => 55 + index * 80;
+  const y = (value: number) => 190 - (value / 7.5) * 155;
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Endre stigningstallet på kandidatlinjen og se residualene og summen av residualkvadratene endres."
+      label="Minste kvadrater som søk etter linjen med lavest samlet residualkvadrat"
+      afterword="Kandidatlinjen holdes gjennom datasettets tyngdepunkt mens stigningstallet endres. For lineær regresjon med konstantledd ligger minste SSE ved OLS-løsningen."
+    >
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 220" className={shared.svg} aria-hidden="true">
+          <line x1="55" y1="190" x2="475" y2="190" className={styles.axis} />
+          <line x1="55" y1="190" x2="55" y2="30" className={styles.axis} />
+          {values.map((value, index) => (
+            <line
+              key={"ls-r-" + index}
+              x1={x(index)}
+              y1={y(value)}
+              x2={x(index)}
+              y2={y(candidatePredicted[index] as number)}
+              className={styles.residualLine}
+            />
+          ))}
+          <line
+            x1={x(0)}
+            y1={y(optimal.predicted[0] as number)}
+            x2={x(5)}
+            y2={y(optimal.predicted[5] as number)}
+            className={styles.optimalLine}
+          />
+          <line
+            x1={x(0)}
+            y1={y(candidatePredicted[0] as number)}
+            x2={x(5)}
+            y2={y(candidatePredicted[5] as number)}
+            className={styles.candidateLine}
+          />
+          {values.map((value, index) => (
+            <circle key={index} cx={x(index)} cy={y(value)} r="6" className={styles.scatterPoint} />
+          ))}
+        </svg>
+        <p className={shared.caption}>Heltrukken linje: kandidaten du styrer · stiplet linje: OLS-minimum</p>
+        <div className={shared.row}>
+          <Readout label="Kandidatens stigningstall" value={<MathFormula tex={"b_1 = " + texNumber(candidateSlope, 2)} />} size="small" />
+          <Readout label="Residualkvadratsum" value={<MathFormula tex={"SSE = " + texNumber(candidateSse, 2)} />} size="small" />
+          <Readout label="Minste SSE" value={<MathFormula tex={"SSE_{\\min} = " + texNumber(optimalSse, 2)} />} size="small" />
+        </div>
+        <Verdict reserve={3}>
+          {nearMinimum
+            ? "Kandidatlinjen ligger nå nær minste-kvadraters løsning, og SSE er nær minimum."
+            : "Flytt stigningstallet mot den stiplede linjen. Residualene krymper samlet og SSE faller mot minimum."}
+        </Verdict>
+        <Slider
+          label="Stigningstall for kandidatlinjen"
+          valueText={"stigningstall " + comma(candidateSlope, 2) + "; SSE " + comma(candidateSse, 2)}
+          value={candidateSlope}
+          onChange={setCandidateSlope}
+          min={0.4}
+          max={1.6}
+          step={0.05}
+          ends={["for flat linje", "for bratt linje"]}
+        />
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function KorrelasjonDemo() {
-  return <DemonstrationFrame kind="sammenligning" instruction="Sammenlign lineære mønstre med ulike retninger." label="Pearsons r beskriver lineær samvariasjon" afterword="\(r\) nær 0 betyr liten lineær sammenheng, men kan skjule et tydelig ikke-lineært mønster."><div className={styles.columns}><div><span className={styles.cardTitle}>Positiv</span><strong className={styles.signal}>{"\\(r \\approx +0{,}9\\)"}</strong></div><div><span className={styles.cardTitle}>Ingen lineær</span><strong className={styles.signal}>{"\\(r \\approx 0\\)"}</strong></div><div><span className={styles.cardTitle}>Negativ</span><strong className={styles.signal}>{"\\(r \\approx -0{,}9\\)"}</strong></div></div></DemonstrationFrame>;
+  const [pattern, setPattern] = useState<"positive" | "u" | "negative">("positive");
+  const xs = [0, 1, 2, 3, 4, 5];
+  const series = {
+    positive: [1, 1.8, 2.9, 3.7, 5.1, 5.8],
+    u: [6, 3, 1, 1, 3, 6],
+    negative: [6, 5.1, 4.2, 3.1, 2, 1],
+  };
+  const ys = series[pattern];
+  const correlation = pearsonCorrelation(xs, ys);
+  const x = (value: number) => 55 + value * 80;
+  const y = (value: number) => 190 - (value / 7) * 150;
+
+  const verdict =
+    pattern === "u"
+      ? "Her er sammenhengen tydelig U-formet, men den lineære korrelasjonen er omtrent null. Pearsons r kan derfor ikke brukes som generell test for «ingen sammenheng»."
+      : pattern === "positive"
+        ? "Punktene følger en tydelig stigende lineær retning, og Pearsons r ligger nær +1."
+        : "Punktene følger en tydelig fallende lineær retning, og Pearsons r ligger nær −1.";
+
+  return (
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Bytt mellom tre mønstre og sammenlign punktskyen med Pearsons korrelasjonskoeffisient."
+      label="Korrelasjon viser lineær samvariasjon, ikke all mulig sammenheng"
+      afterword="Pearsons r beskriver retning og styrke på lineær samvariasjon. En verdi nær null kan derfor forekomme selv når to variabler har en sterk, men ikke-lineær relasjon."
+    >
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 220" className={shared.svg} aria-hidden="true">
+          <line x1="55" y1="190" x2="475" y2="190" className={styles.axis} />
+          <line x1="55" y1="190" x2="55" y2="30" className={styles.axis} />
+          {xs.map((value, index) => (
+            <circle
+              key={value}
+              cx={x(value)}
+              cy={y(ys[index] as number)}
+              r="7"
+              className={styles.correlationPoint}
+            />
+          ))}
+        </svg>
+        <ChipGroup label="Mønster i punktskyen">
+          <Chip variant="choice" pressed={pattern === "positive"} onClick={() => setPattern("positive")}>Positiv lineær</Chip>
+          <Chip variant="choice" pressed={pattern === "u"} onClick={() => setPattern("u")}>U-formet</Chip>
+          <Chip variant="choice" pressed={pattern === "negative"} onClick={() => setPattern("negative")}>Negativ lineær</Chip>
+        </ChipGroup>
+        <Readout
+          label="Pearsons korrelasjonskoeffisient"
+          value={<MathFormula tex={"r = " + texNumber(correlation, 3)} />}
+          size="small"
+        />
+        <Verdict reserve={3.2}>{verdict}</Verdict>
+      </div>
+    </DemonstrationFrame>
+  );
 }
 
 export function UteliggerDemo() {
