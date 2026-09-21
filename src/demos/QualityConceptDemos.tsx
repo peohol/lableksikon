@@ -346,7 +346,7 @@ export function GjenvinningDemo() {
         </div>
         <Readout
           label="Gjenvinning"
-          value={<MathFormula tex={"R = \\\\frac{" + texNumber(after, 1) + " - 80}{20} \\\\cdot 100\\\\,\\\\% = " + texNumber(recovery, 0) + "\\\\,\\\\%"} />}
+          value={<MathFormula tex={"R = \\frac{" + texNumber(after, 1) + " - 80}{20} \\cdot 100\\,\\% = " + texNumber(recovery, 0) + "\\,\\%"} />}
           size="small"
           tone={recovery < 80 || recovery > 105 ? "warning" : "normal"}
         />
@@ -403,7 +403,7 @@ export function UtvidetUsikkerhetDemo() {
         </div>
         <Readout
           label="Rapportert intervall"
-          value={<MathFormula tex={"100 \\\\pm " + texNumber(expanded, 2) + " \\\\;=\\\\; [" + texNumber(lower, 2) + ";\\\\," + texNumber(upper, 2) + "]"} />}
+          value={<MathFormula tex={"100 \\pm " + texNumber(expanded, 2) + " \\;=\\; [" + texNumber(lower, 2) + ";\\," + texNumber(upper, 2) + "]"} />}
           size="small"
         />
         <Slider
@@ -442,7 +442,7 @@ export function DekningsfaktorDemo() {
           <Readout label="Dekningsfaktor" value={<MathFormula tex={"k = " + texNumber(coverageFactor, 1)} />} size="small" />
           <Readout
             label="Areal i normalillustrasjonen"
-            value={<MathFormula tex={"P(|Z| \\\\le k) \\\\approx " + texNumber(coverage, 1) + "\\\\,\\\\%"} />}
+            value={<MathFormula tex={"P(|Z| \\le k) \\approx " + texNumber(coverage, 1) + "\\,\\%"} />}
             size="small"
           />
         </div>
@@ -569,9 +569,9 @@ export function FolsomhetDemo() {
           <circle cx={x2} cy={y2} r="5" className={styles.point} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Fast konsentrasjonsendring" value={<MathFormula tex="\\\\Delta x = 40" />} size="small" />
-          <Readout label="Signalendring" value={<MathFormula tex={"\\\\Delta y = " + texNumber(deltaY, 1)} />} size="small" />
-          <Readout label="Følsomhet" value={<MathFormula tex={"S = \\\\frac{\\\\Delta y}{\\\\Delta x} = " + texNumber(slope, 2)} />} size="small" />
+          <Readout label="Fast konsentrasjonsendring" value={<MathFormula tex="\\Delta x = 40" />} size="small" />
+          <Readout label="Signalendring" value={<MathFormula tex={"\\Delta y = " + texNumber(deltaY, 1)} />} size="small" />
+          <Readout label="Følsomhet" value={<MathFormula tex={"S = \\frac{\\Delta y}{\\Delta x} = " + texNumber(slope, 2)} />} size="small" />
         </div>
         <Slider
           label="Stigningstall for kalibreringsresponsen"
@@ -620,10 +620,10 @@ export function RobusthetDemo() {
           />
         </svg>
         <div className={shared.row}>
-          <Readout label="Metodeinnstilling" value={<MathFormula tex={"\\\\mathrm{pH} = " + texNumber(ph, 2)} />} size="small" />
+          <Readout label="Metodeinnstilling" value={<MathFormula tex={"\\mathrm{pH} = " + texNumber(ph, 2)} />} size="small" />
           <Readout
             label="Relativ ytelse i illustrasjonen"
-            value={<MathFormula tex={texNumber(response, 1) + "\\\\,\\\\%"} />}
+            value={<MathFormula tex={texNumber(response, 1) + "\\,\\%"} />}
             size="small"
             tone={acceptable ? "normal" : "warning"}
           />
@@ -731,7 +731,7 @@ export function KontrollkortDemo() {
         </svg>
         <div className={shared.row}>
           <Readout label="Senterlinje" value={<MathFormula tex="100" />} size="small" />
-          <Readout label="Kontrollgrenser" value={<MathFormula tex="97 \\\\;\\\\text{til}\\\\; 103" />} size="small" />
+          <Readout label="Kontrollgrenser" value={<MathFormula tex="97 \\;\\text{til}\\; 103" />} size="small" />
           <Readout
             label="Punkter utenfor grenser"
             value={<MathFormula tex={String(outside)} />}
