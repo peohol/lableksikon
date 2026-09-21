@@ -240,6 +240,8 @@ describe("interaktive demonstrasjoner", () => {
     );
     expect(formulas).toContain("90{,}0");
     expect(formulas.some((tex) => tex?.includes("50\\,\\%"))).toBe(true);
+    fireEvent.change(slider, { target: { value: "115" } });
+    expect(slider).toHaveAttribute("aria-valuetext", expect.stringContaining("15 prosentpoeng over 100"));
   });
 
   it("utvidet usikkerhet: k gjør intervallet bredere", () => {
@@ -294,7 +296,7 @@ describe("interaktive demonstrasjoner", () => {
   it("kontrollkort: nivåskift flytter senere punkter mot og over faste grenser", () => {
     render(<KontrollkortDemo />);
     const slider = screen.getByRole("slider", { name: "Nivåskift fra måling 6" });
-    fireEvent.change(slider, { target: { value: "1" } });
+    fireEvent.change(slider, { target: { value: "0.5" } });
     expect(screen.getByText(/har flyttet seg oppover/)).toBeInTheDocument();
     fireEvent.change(slider, { target: { value: "5" } });
     expect(screen.getByText(/kontrollpunkt ligger utenfor/)).toBeInTheDocument();
