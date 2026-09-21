@@ -1,1 +1,190 @@
-.rows{display:grid;gap:10px}.row{display:grid;grid-template-columns:minmax(9rem,.45fr) minmax(0,1fr);gap:12px;align-items:baseline;padding:10px 12px;border:1px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface)}.label{font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--color-text-primary)}.value{min-width:0;font-family:var(--font-reading);color:var(--color-text-body)}.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:10px}.flow li{display:flex;gap:9px;align-items:flex-start;padding:12px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-family:var(--font-ui);font-size:14px;line-height:1.4}.flow li>span{flex:0 0 22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--color-accent);color:var(--color-ink-invert);font-size:11px;font-weight:600}@media(max-width:520px){.row{grid-template-columns:1fr}}
+.axis {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.columnTube,
+.columnBed,
+.systemSegment {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+}
+
+.columnBed {
+  fill: color-mix(in srgb, var(--color-surface-muted) 88%, var(--color-accent) 12%);
+}
+
+.mobileParticle {
+  fill: var(--color-accent);
+  opacity: 0.35;
+  animation: mobile-flow 1.45s ease-in-out infinite alternate;
+}
+
+.flowArrow,
+.flowGuide {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+}
+
+.flowGuide {
+  stroke-dasharray: 7 6;
+}
+
+.stationarySite {
+  fill: var(--color-border-strong);
+  stroke: var(--color-surface);
+  stroke-width: 1.5;
+}
+
+.zoneA,
+.zoneB {
+  stroke: var(--color-surface);
+  stroke-width: 2;
+  transition:
+    cx 180ms ease-out,
+    cy 180ms ease-out;
+}
+
+.zoneA {
+  fill: var(--color-accent);
+}
+
+.zoneB {
+  fill: var(--color-warning);
+}
+
+.zoneLabel {
+  fill: var(--color-ink-invert);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  transition:
+    x 180ms ease-out,
+    y 180ms ease-out;
+}
+
+.chromatogram,
+.neighborPeak,
+.warningPeak,
+.gradientLine,
+.isocraticLine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chromatogram {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.neighborPeak {
+  stroke: var(--color-warning);
+  stroke-width: 3;
+  stroke-dasharray: 8 5;
+}
+
+.warningPeak {
+  stroke: var(--color-warning);
+  stroke-width: 3.5;
+}
+
+.referenceLine,
+.measureLine,
+.baselineMeasure {
+  fill: none;
+  stroke-width: 2;
+}
+
+.referenceLine {
+  stroke: var(--color-text-tertiary);
+  stroke-dasharray: 6 5;
+}
+
+.measureLine {
+  stroke: var(--color-warning);
+  stroke-dasharray: 6 4;
+}
+
+.baselineMeasure {
+  stroke: var(--color-warning);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.injectionPoint {
+  fill: var(--color-warning);
+}
+
+.gradientLine {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+}
+
+.isocraticLine {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  stroke-dasharray: 10 5;
+}
+
+.peakLabel {
+  fill: var(--color-text-primary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  transition: x 180ms ease-out;
+}
+
+.focusSegment {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.samplePlug,
+.samplePlugWarning {
+  transition: width 180ms ease-out;
+}
+
+.samplePlug {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.samplePlugWarning {
+  fill: color-mix(in srgb, var(--color-warning) 20%, transparent);
+  stroke: var(--color-warning);
+  stroke-width: 2;
+}
+
+@keyframes mobile-flow {
+  from {
+    transform: translateX(-8px);
+    opacity: 0.25;
+  }
+
+  to {
+    transform: translateX(8px);
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileParticle {
+    animation: none;
+  }
+
+  .zoneA,
+  .zoneB,
+  .zoneLabel,
+  .peakLabel,
+  .samplePlug,
+  .samplePlugWarning {
+    transition: none;
+  }
+}
