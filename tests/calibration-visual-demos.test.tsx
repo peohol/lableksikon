@@ -38,8 +38,18 @@ describe("interaktive kalibreringsdemoer", () => {
     expect(screen.getByText(/utenfor det illustrerte arbeidsområdet/)).toBeInTheDocument();
   });
 
-  it("kvantifiseringsgrense: høyere nivå kan oppfylle det illustrerte CV-kravet", () => {
-    render(<KvantifiseringsgrenseDemo />);
+  it("kvantifiseringsgrense: punktenes faktiske spredning samsvarer med vist CV", () => {
+    const { container } = render(<KvantifiseringsgrenseDemo />);
+    const recoveries = Array.from(container.querySelectorAll("[data-recovery]")).map((node) =>
+      Number(node.getAttribute("data-recovery")),
+    );
+    const average = recoveries.reduce((sum, value) => sum + value, 0) / recoveries.length;
+    const sd = Math.sqrt(
+      recoveries.reduce((sum, value) => sum + (value - average) ** 2, 0) /
+        (recoveries.length - 1),
+    );
+    expect((sd / average) * 100).toBeCloseTo(25, 8);
+
     const slider = screen.getByRole("slider", { name: "Konsentrasjonsnivå for LOQ-illustrasjonen" });
     expect(screen.getByText(/for variable/)).toBeInTheDocument();
     fireEvent.change(slider, { target: { value: "9" } });
@@ -94,13 +104,21 @@ describe("interaktive kalibreringsdemoer", () => {
     expect(slider).toHaveAttribute("aria-valuetext", expect.stringContaining("106,9"));
   });
 
-  it("matrikstilpasset kalibrering: suppressjon gir skjev løsemiddeltolkning men riktig matrikstolkning", () => {
+  it("matrikstilpasset kalibrering: begge kalibreringskurvenes skjæringspunkter vises", () => {
     const { container } = render(<MatrikstilpassetKalibreringDemo />);
     const slider = screen.getByRole("slider", { name: "Matriseeffekt på respons" });
+
     fireEvent.change(slider, { target: { value: "50" } });
     expect(formulas(container)).toContain("\\hat{x}_{\\mathrm{solv}} = 5{,}0");
     expect(formulas(container)).toContain("\\hat{x}_{\\mathrm{matrix}} = 10{,}0");
     expect(screen.getByText(/undervurdere nivået/)).toBeInTheDocument();
+
+    fireEvent.change(slider, { target: { value: "120" } });
+    const solvent = container.querySelector('[data-calibration-intersection="solvent"]');
+    const matrix = container.querySelector('[data-calibration-intersection="matrix"]');
+    expect(Number(solvent?.getAttribute("cx"))).toBeGreaterThan(Number(matrix?.getAttribute("cx")));
+    expect(formulas(container)).toContain("\\hat{x}_{\\mathrm{solv}} = 12{,}0");
+    expect(formulas(container)).toContain("\\hat{x}_{\\mathrm{matrix}} = 10{,}0");
   });
 });
 
