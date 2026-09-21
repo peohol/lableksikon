@@ -62,6 +62,15 @@
   stroke: var(--color-accent);
 }
 
+.stageLabel {
+  fill: var(--color-text-primary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
 .flowArrow,
 .gcLine {
   fill: none;
