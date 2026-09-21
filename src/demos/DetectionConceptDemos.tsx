@@ -298,8 +298,8 @@ export function SimDemo() {
           label={mode === "sim" ? "Monitorerte ioner" : "Registrert masseområde"}
           value={
             mode === "sim"
-              ? <MathFormula tex="m/z = 121,\ 165,\ 193" />
-              : <MathFormula tex="50 \le m/z \le 250" />
+              ? <MathFormula tex={"m/z = 121,\\ 165,\\ 193"} />
+              : <MathFormula tex={"50 \\le m/z \\le 250"} />
           }
           size="small"
         />
@@ -441,6 +441,10 @@ function CoupledMsDemo({ mode }: { mode: "lc" | "gc" }) {
             { mass: 119, intensity: 76 },
           ];
 
+  const basePeak = spectra.reduce((best, item) =>
+    item.intensity > best.intensity ? item : best,
+  );
+
   return (
     <div className={shared.stack}>
       <svg viewBox="0 0 520 185" className={shared.svg} aria-hidden="true">
@@ -452,6 +456,15 @@ function CoupledMsDemo({ mode }: { mode: "lc" | "gc" }) {
         <Chip variant="choice" pressed={peak === "A"} onClick={() => setPeak("A")}>Topp A</Chip>
         <Chip variant="choice" pressed={peak === "B"} onClick={() => setPeak("B")}>Topp B</Chip>
       </ChipGroup>
+      <Readout
+        label="Valgt kromatografisk signal"
+        value={
+          <span>
+            Topp {peak} · base peak <MathFormula tex={"m/z = " + basePeak.mass} />
+          </span>
+        }
+        size="small"
+      />
       <Spectrum peaks={spectra} baseline={185} />
       <Verdict reserve={2.8}>
         Når {isLc ? "LC-" : "GC-"}toppen byttes, oppdateres massespekteret under. Retensjonstid og spektral informasjon er to ulike dimensjoner som kobles i samme analyse.
@@ -494,7 +507,7 @@ export function UvdetektorDemo() {
   return (
     <DemonstrationFrame
       kind="interaktiv"
-      instruction="Reduser transmisjonen gjennom målecellen og se den transmit­terte lysstrålen svekkes mens absorbansen øker."
+      instruction="Reduser transmisjonen gjennom målecellen og se den transmitterte lysstrålen svekkes mens absorbansen øker."
       label="UV-deteksjon kobler transmisjon til absorbans logaritmisk"
       afterword="Illustrasjonen viser definisjonen av absorbans. Kvantitativ sammenheng mellom absorbans og konsentrasjon krever i tillegg at Beer–Lambert-betingelsene er tilstrekkelig oppfylt."
     >
