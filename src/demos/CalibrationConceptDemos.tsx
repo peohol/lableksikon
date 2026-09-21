@@ -137,7 +137,13 @@ export function KvantifiseringsgrenseDemo() {
   const [concentration, setConcentration] = useState(4);
   const cv = 50 / Math.sqrt(concentration);
   const loq = 7;
-  const offsets = [-1.15, -0.72, -0.28, 0.05, 0.36, 0.74, 1.08];
+  const rawOffsets = [-1.15, -0.72, -0.28, 0.05, 0.36, 0.74, 1.08];
+  const offsetMean = rawOffsets.reduce((sum, value) => sum + value, 0) / rawOffsets.length;
+  const offsetSd = Math.sqrt(
+    rawOffsets.reduce((sum, value) => sum + (value - offsetMean) ** 2, 0) /
+      (rawOffsets.length - 1),
+  );
+  const offsets = rawOffsets.map((value) => (value - offsetMean) / offsetSd);
   const recoveries = offsets.map((offset) => 100 + offset * cv);
   const x = (recovery: number) => 45 + ((recovery - 40) / 120) * 430;
   const meets = concentration >= loq;
@@ -159,6 +165,7 @@ export function KvantifiseringsgrenseDemo() {
               cx={x(recovery)}
               cy={70 + (index % 3) * 24}
               r="7"
+              data-recovery={recovery}
               className={meets ? styles.point : styles.pointWarning}
             />
           ))}
@@ -577,6 +584,7 @@ export function MatrikstilpassetKalibreringDemo() {
   const sampleResponse = trueLevel * matrixSlope;
   const solventEstimate = sampleResponse;
   const matrixEstimate = sampleResponse / matrixSlope;
+  const projectionEnd = Math.max(solventEstimate, matrixEstimate);
   const x = (value: number) => 55 + (value / 12) * 420;
   const y = (value: number) => 205 - (value / 14) * 165;
   const suppressed = matrixEffect < 95;
@@ -595,8 +603,35 @@ export function MatrikstilpassetKalibreringDemo() {
           <line x1="55" y1="205" x2="55" y2="30" className={styles.axis} />
           <line x1={x(0)} y1={y(0)} x2={x(12)} y2={y(12)} className={styles.lineReference} />
           <line x1={x(0)} y1={y(0)} x2={x(12)} y2={y(12 * matrixSlope)} className={styles.lineAccent} />
-          <line x1="55" y1={y(sampleResponse)} x2={x(trueLevel)} y2={y(sampleResponse)} className={styles.projection} />
-          <circle cx={x(trueLevel)} cy={y(sampleResponse)} r="8" className={styles.point} />
+          <line x1="55" y1={y(sampleResponse)} x2={x(projectionEnd)} y2={y(sampleResponse)} className={styles.projection} />
+          <line
+            x1={x(solventEstimate)}
+            y1={y(sampleResponse)}
+            x2={x(solventEstimate)}
+            y2="205"
+            className={styles.projectionSecondary}
+          />
+          <line
+            x1={x(matrixEstimate)}
+            y1={y(sampleResponse)}
+            x2={x(matrixEstimate)}
+            y2="205"
+            className={styles.projection}
+          />
+          <circle
+            data-calibration-intersection="solvent"
+            cx={x(solventEstimate)}
+            cy={y(sampleResponse)}
+            r="8"
+            className={styles.pointWarning}
+          />
+          <circle
+            data-calibration-intersection="matrix"
+            cx={x(matrixEstimate)}
+            cy={y(sampleResponse)}
+            r="8"
+            className={styles.point}
+          />
         </svg>
         <div className={styles.legend}>
           <span className={styles.legendItem}><span className={styles.legendSwatchReference} />løsemiddelkalibrering</span>
