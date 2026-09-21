@@ -148,7 +148,8 @@ test.describe("direkte manipulasjon i demonstrasjoner", () => {
   test("headersøket annonserer hvor mange treff som vises", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("combobox", { name: "Søk etter begrep" }).fill("e");
-    await expect(page.getByRole("option")).toHaveCount(8);
+    const searchResults = page.getByRole("listbox", { name: "Søketreff" });
+    await expect(searchResults.getByRole("option")).toHaveCount(8);
     await expect(page.getByRole("status")).toHaveText(/treff — viser de 8 mest relevante/);
   });
 });

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import type { SearchEntry } from "@/lib/search";
 import { HeaderSearch } from "./HeaderSearch";
+import { ThemeSetting } from "./ThemeSetting";
 import styles from "./Header.module.css";
 
 /**
@@ -18,9 +19,12 @@ export function Header({
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.wordmark}>
-          Lableksion
-        </Link>
+        <div className={styles.brandRow}>
+          <Link href="/" className={styles.wordmark}>
+            Lableksion
+          </Link>
+          <ThemeSetting />
+        </div>
         <HeaderSearch entries={searchIndex} termCount={termCount} />
       </div>
     </header>

@@ -18,6 +18,14 @@
   flex-wrap: wrap;
 }
 
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
 .wordmark {
   font-family: var(--font-reading);
   font-size: 20px;

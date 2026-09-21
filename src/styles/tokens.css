@@ -5,6 +5,8 @@
  * handoffen oppdateres bevisst.
  */
 :root {
+  color-scheme: light;
+
   /* 1.2 Farger */
   --color-background: #faf8f4;
   --color-surface: #ffffff;
@@ -79,4 +81,34 @@
   --radius-pill: 24px;
   --shadow-pop: 0 12px 32px rgba(27, 26, 23, 0.18);
   --shadow-menu: 0 12px 30px rgba(27, 26, 23, 0.15);
+}
+
+
+/*
+ * Mørk variant av de samme semantiske tokenene. Ingen komponent skal velge
+ * egne mørke farger; hele grensesnittet følger tokenlaget.
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-background: #181714;
+  --color-surface: #211f1b;
+  --color-surface-muted: #292620;
+  --color-text-primary: #f4f0e8;
+  --color-text-body: #e6e0d4;
+  --color-text-secondary: #c7bfae;
+  --color-text-tertiary: #a79e8e;
+  --color-text-disabled: #70695e;
+  --color-border: #3c3830;
+  --color-border-strong: #4b453b;
+  --color-border-input: #5f5749;
+  --color-border-ink: #f4f0e8;
+  --color-accent: #71b7b1;
+  --color-accent-hover: #94ccc7;
+  --color-accent-soft: rgba(113, 183, 177, 0.24);
+  --color-warning: #e58b63;
+  --color-focus: #71b7b1;
+  --color-ink-invert: #181714;
+  --shadow-pop: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-menu: 0 12px 30px rgba(0, 0, 0, 0.42);
 }

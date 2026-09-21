@@ -12,9 +12,11 @@ test.describe("tastaturreise", () => {
     await expect(skipLink).toBeFocused();
     await expect(skipLink).toBeInViewport();
 
-    // Videre til ordmerket og headersøket.
+    // Videre til ordmerket, temainnstillingen og headersøket.
     await page.keyboard.press("Tab");
     await expect(page.getByRole("link", { name: "Lableksion" })).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("combobox", { name: "Utseende" })).toBeFocused();
     await page.keyboard.press("Tab");
     await expect(page.getByRole("combobox", { name: "Søk etter begrep" })).toBeFocused();
 
