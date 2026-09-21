@@ -163,8 +163,8 @@ export function KvantifiseringsgrenseDemo() {
             />
           ))}
           <text x={x(100) + 6} y="28" className={styles.svgText}>100 % recovery</text>
-          <text x="45" y="165" className={styles.svgText}>større relativ spredning</text>
-          <text x="360" y="165" className={styles.svgText}>tettere replikaer</text>
+          <text x="45" y="165" className={styles.svgText}>40 %</text>
+          <text x="405" y="165" className={styles.svgText}>målt recovery (%)</text>
         </svg>
         <div className={shared.row}>
           <Readout
@@ -345,7 +345,9 @@ export function VektetRegresjonDemo() {
   const lowResidual = firstPoint.y - (fit.intercept + fit.slope * firstPoint.x);
   const x = (value: number) => 55 + (value / 10) * 420;
   const y = (value: number) => 205 - (value / 30) * 165;
-  const label = weighting === "none" ? "uvektet" : weighting === "1/x" ? "1/x" : "1/x²";
+  const weightingLabel =
+    weighting === "none" ? "uvektet" : weighting === "1/x" ? "omvendt nivå" : "omvendt kvadrert nivå";
+  const weightingTex = weighting === "none" ? "w = 1" : weighting === "1/x" ? "w = \\frac{1}{x}" : "w = \\frac{1}{x^2}";
 
   return (
     <DemonstrationFrame
@@ -384,8 +386,8 @@ export function VektetRegresjonDemo() {
         </svg>
         <ChipGroup label="Vekting i regresjonen">
           <Chip variant="choice" pressed={weighting === "none"} onClick={() => setWeighting("none")}>Uvektet</Chip>
-          <Chip variant="choice" pressed={weighting === "1/x"} onClick={() => setWeighting("1/x")}>1/x</Chip>
-          <Chip variant="choice" pressed={weighting === "1/x2"} onClick={() => setWeighting("1/x2")}>1/x²</Chip>
+          <Chip variant="choice" pressed={weighting === "1/x"} onClick={() => setWeighting("1/x")}>Omvendt nivå</Chip>
+          <Chip variant="choice" pressed={weighting === "1/x2"} onClick={() => setWeighting("1/x2")}>Omvendt kvadrert nivå</Chip>
         </ChipGroup>
         <div className={shared.row}>
           <Readout
@@ -398,11 +400,12 @@ export function VektetRegresjonDemo() {
             value={<MathFormula tex={"e_1 = " + texNumber(lowResidual, 2)} />}
             size="small"
           />
+          <Readout label="Vektfunksjon" value={<MathFormula tex={weightingTex} />} size="small" />
         </div>
         <Verdict reserve={3.2}>
-          {label === "uvektet"
+          {weightingLabel === "uvektet"
             ? "Alle punktene teller likt i tapsfunksjonen, slik at de høye og mer variable nivåene kan få stor innflytelse på linjen."
-            : "Med " + label + " får lave nivåer større relativ vekt. Legg merke til at linjen og residualen ved laveste kalibrator endres."}
+            : "Med " + weightingLabel + " får lave nivåer større relativ vekt. Legg merke til at linjen og residualen ved laveste kalibrator endres."}
         </Verdict>
       </div>
     </DemonstrationFrame>
@@ -429,7 +432,7 @@ export function NullpunktDemo() {
           <line x1={x(0)} y1={y(0)} x2={x(10)} y2={y(100)} className={styles.lineReference} />
           <line x1={x(0)} y1={y(intercept)} x2={x(10)} y2={y(intercept + 100)} className={styles.lineAccent} />
           <circle cx={x(0)} cy={y(intercept)} r="8" className={styles.unknownPoint} />
-          <text x="67" y={y(intercept) - 10} className={styles.svgTextStrong}>a</text>
+          <text x="67" y={y(intercept) - 10} className={styles.svgTextStrong}>konstantledd</text>
         </svg>
         <div className={styles.legend}>
           <span className={styles.legendItem}><span className={styles.legendSwatch} />fri konstant</span>
