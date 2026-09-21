@@ -38,7 +38,7 @@ describe("interaktive prøve- og miljødemoer", () => {
 
   it("interferens: full overlap legger hele interferentsignalet til analyttens målepunkt", () => {
     const { container } = render(<InterferensDemo />);
-    const slider = screen.getByRole("slider", { name: "Overlap mellom interferent og analytt" });
+    const slider = screen.getByRole("slider", { name: "Overlapp mellom interferent og analytt" });
     fireEvent.change(slider, { target: { value: "100" } });
     expect(formulas(container)).toContain("I_{\\mathrm{int}} = 70{,}0");
     expect(formulas(container)).toContain("I_{\\mathrm{obs}} = 170{,}0");
