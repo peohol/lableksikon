@@ -191,7 +191,7 @@ export function RetensjonstidDemo() {
           <circle cx="55" cy="200" r="5" className={styles.injectionPoint} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Hold-up-tid" value={<MathFormula tex="t_M = 0{,}60\\,\\mathrm{min}" />} size="small" />
+          <Readout label="Hold-up-tid" value={<MathFormula tex={"t_M = 0{,}60\\,\\mathrm{min}"} />} size="small" />
           <Readout label="Retensjonstid" value={<MathFormula tex={"t_R = " + texNumber(retentionTime, 2) + "\\,\\mathrm{min}"} />} size="small" />
           <Readout label="Justert retensjonstid" value={<MathFormula tex={"t'_R = " + texNumber(adjusted, 2) + "\\,\\mathrm{min}"} />} size="small" />
         </div>
@@ -241,7 +241,7 @@ export function GradientDemo() {
           <path d={chromatogramPath(peaks, 300)} className={styles.chromatogram} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Start" value={<MathFormula tex="10\\,\\%" />} size="small" />
+          <Readout label="Start" value={<MathFormula tex={"10\\,\\%"} />} size="small" />
           <Readout label="Slutt" value={<MathFormula tex={texNumber(endStrong, 0) + "\\,\\%"} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
@@ -285,7 +285,7 @@ export function IsokratiskDemo() {
             className={styles.chromatogram}
           />
         </svg>
-        <Readout label="Mobilfasesammensetning" value={<MathFormula tex="A = 40\\,\\%,\\quad B = 60\\,\\%" />} size="small" />
+        <Readout label="Mobilfasesammensetning" value={<MathFormula tex={"A = 40\\,\\%,\\quad B = 60\\,\\%"} />} size="small" />
       </div>
     </DemonstrationFrame>
   );
@@ -444,7 +444,7 @@ export function PlatetallDemo() {
           <line x1={360 - fwhmPixels * 0.84932} y1="200" x2={360 + fwhmPixels * 0.84932} y2="200" className={styles.baselineMeasure} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Retensjonstid" value={<MathFormula tex="t_R = 5{,}0\\,\\mathrm{min}" />} size="small" />
+          <Readout label="Retensjonstid" value={<MathFormula tex={"t_R = 5{,}0\\,\\mathrm{min}"} />} size="small" />
           <Readout label="Basisbredde" value={<MathFormula tex={"w_b = " + texNumber(baseWidth, 2) + "\\,\\mathrm{min}"} />} size="small" />
           <Readout label="Platetall" value={<MathFormula tex={"N = 16(t_R/w_b)^2 = " + texNumber(plateCount, 0)} />} size="small" />
         </div>
