@@ -59,21 +59,21 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Kalibreringskurve | P0 | Klikk/slider for ukjent respons på y-aksen; projiser til kalibreringslinjen og ned til estimert konsentrasjon. Da ser brukeren hva kalibreringskurven faktisk gjør. |
+| Kalibreringskurve | P0 | ✅ **Implementert i PR #20.** Ukjent respons styres med slider og projiseres via kalibreringslinjen til estimert analyttnivå; modell og estimat oppdateres med MathJax. |
 | Linearitet | P2 | Behold dagens interaktive kurve der øvre punkt kan bøyes av. Dette er referanseeksemplet. |
-| Arbeidsområde | P0 | Konsentrasjonsakse med LLOQ og ULOQ og små ytelsesgrafer for presisjon/skjevhet. Slider for analyttnivå viser om alle krav er oppfylt akkurat der. |
+| Arbeidsområde | P0 | ✅ **Implementert i PR #20.** Nivåmarkør flyttes gjennom LLOQ–ULOQ mens illustrert presisjon/skjevhet og verdict viser når metodekravene er oppfylt. |
 | Deteksjonsgrense | P2 | Behold dagens støyinteraksjon. |
-| Kvantifiseringsgrense | P0 | Vis mange replika ved et lavt nivå som punktsky. Slider for konsentrasjon gjør CV/usikkerhet gradvis bedre; marker første nivå som oppfyller valgt krav som LOQ. |
-| Responsfaktor | P0 | To responslinjer for A og B. Slider for analyttmengde gir to signaler; stigning/response factor vises med MathJax. |
-| Vektet regresjon | P0 | Samme heteroskedastiske punkter med valg mellom uvektet, `1/x` og `1/x^2`. Linje og residualpanel endres; brukeren ser spesielt hva som skjer i lave nivåer. |
-| Nullpunkt / konstantledd | P0 | Kalibreringslinje med slider for intercept. Markér skjæring på y-aksen og vis forskjellen mellom fri intercept og tvunget gjennom null. |
+| Kvantifiseringsgrense | P0 | ✅ **Implementert i PR #20.** Replikaer samler seg rundt målverdien når nivået øker; illustrert CV sammenlignes eksplisitt med et definert LOQ-krav. |
+| Responsfaktor | P0 | ✅ **Implementert i PR #20.** To responslinjer viser ulike stigningstall; samme analyttmengde gir ulike signaler mens responsfaktorene og forholdet oppdateres. |
+| Vektet regresjon | P0 | ✅ **Implementert i PR #20.** Samme heteroskedastiske datasett kan tilpasses uvektet, med `1/x` eller `1/x^2`; linje og residualer endres synlig. |
+| Nullpunkt / konstantledd | P0 | ✅ **Implementert i PR #20.** Slider flytter konstantleddet med fast stigningstall; fri modell sammenlignes direkte med en stiplet modell tvunget gjennom null. |
 | Ettpunktskalibrering | P1 | Vis én kjent kalibrator og en antatt modellform. Toggle «modellform kjent»/«ukjent» illustrerer hva ett punkt kan og ikke kan fastsette. |
 | Ekstern kalibrering | P1 | To parallelle spor: separat kalibratorserie og prøve. Vis at prøveresponsen projiseres på kurven; en matriseeffekt-toggle kan demonstrere sårbarheten. |
-| Matrikstilpasset kalibrering | P0 | To kalibreringslinjer: løsemiddel og matriks. Slider for matriseeffekt flytter slope; matrikstilpasset standard følger prøvekurven. |
+| Matrikstilpasset kalibrering | P0 | ✅ **Implementert i PR #20.** Slider endrer matriseeffekten; løsemiddel- og matrikstilpasset kurve viser hvordan samme prøverespons gir skjev eller korrigert tolkning. |
 | Internstandard | P2 | Behold dagens før/etter-tap-demo der forholdet bevares bedre enn råsignal. |
 | Standardaddisjon | P2 | Behold dagens stegvis/interaktive demo. |
 | Blindprøve | P1 | Dagens tre blindprøvetyper er visuelt nyttige. Kan senere gjøres til en enkel prosesslinje der man velger hvor i arbeidsflyten «forurensningen» oppstår og ser hvilken blank som fanger den. |
-| Drift | P0 | Tidsserie med slider for driftshastighet. Kontrollprøver vandrer gradvis bort fra utgangspunktet; skille tydelig fra tilfeldig støy. |
+| Drift | P0 | ✅ **Implementert i PR #20.** Tidsserie med fast tilfeldig småstøy og slider for systematisk drift viser kontrollpunkter som gradvis vandrer mot faste grenser. |
 | Kontrollprøve | P1 | Vis prøveserie med innskutte kontrollpunkter på tidsakse. Én kontroll kan gå utenfor akseptgrensen og utløse verdict om serien. |
 
 ## Prøven og omgivelsene
