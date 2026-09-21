@@ -222,6 +222,7 @@
 
 .interferentCurve {
   stroke: var(--color-warning);
+  stroke-dasharray: 9 6;
 }
 
 .guideLine,
