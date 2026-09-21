@@ -191,8 +191,19 @@ export function InterferensDemo() {
         <svg viewBox="0 0 520 215" className={shared.svg} aria-hidden="true">
           <line x1="45" y1="185" x2="475" y2="185" className={styles.axis} />
           <path
+            d={signalPath(
+              (x) =>
+                gaussian(x, analyteCenter, 0.55, 100) +
+                gaussian(x, interferentCenter, 0.65, interferentAmplitude),
+              180,
+            )}
+            className={styles.traceAccent}
+            data-series="sum"
+          />
+          <path
             d={signalPath((x) => gaussian(x, analyteCenter, 0.55, 100), 180)}
             className={styles.traceReference}
+            data-series="analyte"
           />
           <path
             d={signalPath(
@@ -202,15 +213,6 @@ export function InterferensDemo() {
             className={styles.traceWarning}
             strokeDasharray="2 6"
             data-series="interferent"
-          />
-          <path
-            d={signalPath(
-              (x) =>
-                gaussian(x, analyteCenter, 0.55, 100) +
-                gaussian(x, interferentCenter, 0.65, interferentAmplitude),
-              180,
-            )}
-            className={styles.traceAccent}
           />
           <line x1="260" y1="28" x2="260" y2="185" className={styles.markerLine} />
           <text x="268" y="40" className={styles.svgText}>analyttens målepunkt</text>
@@ -487,8 +489,8 @@ export function ProvelagringDemo() {
         </svg>
         <div className={styles.legend}>
           <span className={styles.legendItem}><span className={styles.legendCold} />4 °C</span>
-          <span className={styles.legendItem}><span className={styles.legendRoom} />20 °C</span>
-          <span className={styles.legendItem}><span className={styles.legendWarm} />35 °C</span>
+          <span className={styles.legendItem}><span className={styles.legendRoom} data-line-pattern="dashed" />20 °C</span>
+          <span className={styles.legendItem}><span className={styles.legendWarm} data-line-pattern="dotted" />35 °C</span>
         </div>
         <ChipGroup label="Temperaturkurve for avlesning">
           {(Object.keys(STORAGE) as StorageTemperature[]).map((key) => (
