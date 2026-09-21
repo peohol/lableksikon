@@ -688,7 +688,7 @@ export function KontrollkortDemo() {
   const verdict =
     outside > 0
       ? outside + " kontrollpunkt ligger utenfor de faste kontrollgrensene i denne illustrasjonen."
-      : levelShift >= 1
+      : levelShift > 0
         ? "Kontrollpunktene etter måling 5 har flyttet seg oppover, selv om de fortsatt ligger innenfor grensene."
         : "Kontrollpunktene varierer rundt senterlinjen uten et påført nivåskift.";
 
