@@ -50,7 +50,7 @@ function asymmetricPeakPath(
     .join(" ");
 }
 
-function chromatogramPath(peaks: Array<{ center: number; fwhm: number; height: number }>) {
+function chromatogramPath(\n  peaks: Array<{ center: number; fwhm: number; height: number }>,\n  baseline = 200,\n) {
   const points = Array.from({ length: 181 }, (_, index) => {
     const x = 55 + (420 * index) / 180;
     const signal = peaks.reduce(
@@ -60,7 +60,7 @@ function chromatogramPath(peaks: Array<{ center: number; fwhm: number; height: n
           Math.exp(-4 * Math.log(2) * ((x - peak.center) / peak.fwhm) ** 2),
       0,
     );
-    return [x, 200 - signal] as const;
+    return [x, baseline - signal] as const;
   });
   return points
     .map(([x, y], index) => (index === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1))
@@ -233,7 +233,7 @@ export function GradientDemo() {
           <line x1="55" y1="130" x2="55" y2="25" className={styles.axis} />
           <line x1="55" y1={120 - startStrong} x2="475" y2={120 - endStrong} className={styles.gradientLine} />
           <line x1="55" y1="300" x2="475" y2="300" className={styles.axis} />
-          <path d={chromatogramPath(peaks).replaceAll("200", "300")} className={styles.chromatogram} />
+          <path d={chromatogramPath(peaks, 300)} className={styles.chromatogram} />
         </svg>
         <div className={shared.row}>
           <Readout label="Start" value={<MathFormula tex="10\,\%" />} size="small" />
@@ -276,7 +276,7 @@ export function IsokratiskDemo() {
               { center: 150, fwhm: 34, height: 60 },
               { center: 290, fwhm: 42, height: 90 },
               { center: 415, fwhm: 48, height: 105 },
-            ]).replaceAll("200", "270")}
+            ], 270)}
             className={styles.chromatogram}
           />
         </svg>
