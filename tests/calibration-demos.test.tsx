@@ -69,7 +69,9 @@ describe("interaktive kalibreringsdemoer", () => {
     const slider = screen.getByRole("slider", { name: "Analyttnivå i arbeidsområdet" });
     fireEvent.change(slider, { target: { value: "10" } });
     expect(screen.getByText(/under det illustrerte arbeidsområdet/)).toBeInTheDocument();
-    fireEvent.change(slider, { target: { value: "60" } });
+    fireEvent.change(slider, { target: { value: "20" } });
+    expect(screen.getByText(/ligger i det illustrerte arbeidsområdet/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "100" } });
     expect(screen.getByText(/ligger i det illustrerte arbeidsområdet/)).toBeInTheDocument();
     fireEvent.change(slider, { target: { value: "110" } });
     expect(screen.getByText(/over det illustrerte arbeidsområdet/)).toBeInTheDocument();
