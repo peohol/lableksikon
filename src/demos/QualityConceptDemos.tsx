@@ -299,7 +299,6 @@ export function GjenvinningDemo() {
   const before = 80;
   const spike = 20;
   const after = before + (spike * recovery) / 100;
-  const missing = 100 - recovery;
 
   const verdict =
     recovery < 80
@@ -353,7 +352,7 @@ export function GjenvinningDemo() {
         <Verdict reserve={3.2}>{verdict}</Verdict>
         <Slider
           label="Gjenfunnet andel av tilsetningen"
-          valueText={comma(recovery, 0) + " prosent gjenvinning; " + comma(missing, 0) + " prosent av tilsetningen mangler"}
+          valueText={recovery <= 100 ? comma(recovery, 0) + " prosent gjenvinning; " + comma(100 - recovery, 0) + " prosent av tilsetningen mangler" : comma(recovery, 0) + " prosent gjenvinning; " + comma(recovery - 100, 0) + " prosentpoeng over 100"}
           value={recovery}
           onChange={setRecovery}
           min={50}
