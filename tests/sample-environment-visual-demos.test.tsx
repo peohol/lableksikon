@@ -24,7 +24,7 @@ describe("interaktive prøve- og miljødemoer", () => {
     const slider = screen.getByRole("slider", { name: "Grad av ionesuppresjon" });
     fireEvent.change(slider, { target: { value: "60" } });
     expect(formulas(container)).toContain("I = 40");
-    expect(formulas(container)).toContain("\\mathrm{ME} = -60\\,\\%");
+    expect(formulas(container)).toContain("\\frac{\\Delta I}{I_0} = -60\\,\\%");
     expect(slider).toHaveAttribute("aria-valuetext", expect.stringContaining("matriserespons 40"));
   });
 
@@ -33,7 +33,7 @@ describe("interaktive prøve- og miljødemoer", () => {
     const slider = screen.getByRole("slider", { name: "Grad av ioneforsterkning" });
     fireEvent.change(slider, { target: { value: "50" } });
     expect(formulas(container)).toContain("I = 150");
-    expect(formulas(container)).toContain("\\mathrm{ME} = +50\\,\\%");
+    expect(formulas(container)).toContain("\\frac{\\Delta I}{I_0} = +50\\,\\%");
   });
 
   it("interferens: full overlap legger hele interferentsignalet til analyttens målepunkt", () => {
