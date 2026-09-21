@@ -6,26 +6,172 @@ import { DemonstrationFrame } from "@/components/DemonstrationFrame";
 import { MathFormula } from "@/components/MathFormula";
 import {
   comma,
+  fitLine,
   mean,
   median,
   sampleStandardDeviation,
   sampleVariance,
 } from "@/lib/statistics";
 import { PointRows } from "./PointRows";
-import { Readout, Slider, Verdict } from "./primitives";
+import { Chip, ChipGroup, Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./StatisticsConceptDemos.module.css";
 
-function ValueRows({ rows }: { rows: Array<{ label: string; values: string }> }) {
-  return <div className={styles.valueRows}>{rows.map((row) => <div key={row.label} className={styles.valueRow}><span className={styles.rowLabel}>{row.label}</span><span className={styles.rowValues}>{row.values}</span></div>)}</div>;
-}
-
-function Flow({ items }: { items: string[] }) {
-  return <ol className={styles.flow}>{items.map((item, index) => <li key={item} className={styles.flowItem}><span className={styles.flowNumber}>{index + 1}</span><span>{item}</span></li>)}</ol>;
-}
-
 const texNumber = (value: number, decimals: number) =>
   comma(value, decimals).replace(",", "{,}");
+
+function normalPdf(value: number, meanValue = 0, sd = 1) {
+  const z = (value - meanValue) / sd;
+  return Math.exp(-0.5 * z * z) / (sd * Math.sqrt(2 * Math.PI));
+}
+
+function erfApprox(value: number) {
+  const sign = value < 0 ? -1 : 1;
+  const x = Math.abs(value);
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+  const t = 1 / (1 + p * x);
+  const y =
+    1 -
+    (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) *
+      t *
+      Math.exp(-x * x);
+  return sign * y;
+}
+
+function normalCdf(value: number) {
+  return 0.5 * (1 + erfApprox(value / Math.sqrt(2)));
+}
+
+function inverseNormalCdf(probability: number) {
+  let low = -5;
+  let high = 5;
+  for (let index = 0; index < 60; index += 1) {
+    const middle = (low + high) / 2;
+    if (normalCdf(middle) < probability) low = middle;
+    else high = middle;
+  }
+  return (low + high) / 2;
+}
+
+function normalCurvePath(sd: number) {
+  return Array.from({ length: 121 }, (_, index) => {
+    const value = -6 + index * 0.1;
+    const x = 40 + ((value + 6) / 12) * 440;
+    const y = 180 - normalPdf(value, 0, sd) * 220;
+    return (index === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1);
+  }).join(" ");
+}
+
+function normalAreaPath(sd: number, multiple: number) {
+  const start = -multiple * sd;
+  const end = multiple * sd;
+  const points = Array.from({ length: 81 }, (_, index) => {
+    const value = start + (index / 80) * (end - start);
+    const x = 40 + ((value + 6) / 12) * 440;
+    const y = 180 - normalPdf(value, 0, sd) * 220;
+    return "L" + x.toFixed(1) + " " + y.toFixed(1);
+  }).join(" ");
+  const left = 40 + ((start + 6) / 12) * 440;
+  const right = 40 + ((end + 6) / 12) * 440;
+  return "M" + left.toFixed(1) + " 180 " + points + " L" + right.toFixed(1) + " 180 Z";
+}
+
+function standardNormalCurvePath() {
+  return Array.from({ length: 121 }, (_, index) => {
+    const value = -4 + index / 15;
+    const x = 40 + ((value + 4) / 8) * 440;
+    const y = 180 - normalPdf(value) * 300;
+    return (index === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1);
+  }).join(" ");
+}
+
+function standardNormalTailPath(critical: number, side: "left" | "right") {
+  const start = side === "left" ? -4 : critical;
+  const end = side === "left" ? -critical : 4;
+  const points = Array.from({ length: 61 }, (_, index) => {
+    const value = start + (index / 60) * (end - start);
+    const x = 40 + ((value + 4) / 8) * 440;
+    const y = 180 - normalPdf(value) * 300;
+    return "L" + x.toFixed(1) + " " + y.toFixed(1);
+  }).join(" ");
+  const left = 40 + ((start + 4) / 8) * 440;
+  const right = 40 + ((end + 4) / 8) * 440;
+  return "M" + left.toFixed(1) + " 180 " + points + " L" + right.toFixed(1) + " 180 Z";
+}
+
+function logGamma(value: number): number {
+  const coefficients = [
+    676.5203681218851,
+    -1259.1392167224028,
+    771.3234287776531,
+    -176.6150291621406,
+    12.507343278686905,
+    -0.13857109526572012,
+    0.000009984369578019572,
+    0.00000015056327351493116,
+  ];
+  if (value < 0.5) {
+    return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * value)) - logGamma(1 - value);
+  }
+  const z = value - 1;
+  let x = 0.9999999999998099;
+  coefficients.forEach((coefficient, index) => {
+    x += coefficient / (z + index + 1);
+  });
+  const t = z + coefficients.length - 0.5;
+  return (
+    0.5 * Math.log(2 * Math.PI) +
+    (z + 0.5) * Math.log(t) -
+    t +
+    Math.log(x)
+  );
+}
+
+function studentTPdf(value: number, degreesOfFreedom: number) {
+  const logCoefficient =
+    logGamma((degreesOfFreedom + 1) / 2) -
+    logGamma(degreesOfFreedom / 2) -
+    0.5 * Math.log(degreesOfFreedom * Math.PI);
+  return (
+    Math.exp(logCoefficient) *
+    (1 + (value * value) / degreesOfFreedom) ** (-(degreesOfFreedom + 1) / 2)
+  );
+}
+
+function twoSidedTPValue(tValue: number, degreesOfFreedom: number) {
+  const upper = Math.min(Math.abs(tValue), 12);
+  if (upper === 0) return 1;
+  const steps = 400;
+  const width = upper / steps;
+  let sum = studentTPdf(0, degreesOfFreedom) + studentTPdf(upper, degreesOfFreedom);
+  for (let index = 1; index < steps; index += 1) {
+    sum += (index % 2 === 0 ? 2 : 4) * studentTPdf(index * width, degreesOfFreedom);
+  }
+  const integral = (width / 3) * sum;
+  return Math.min(1, Math.max(0, 2 * (0.5 - integral)));
+}
+
+function pearsonCorrelation(xs: number[], ys: number[]) {
+  const meanX = mean(xs);
+  const meanY = mean(ys);
+  let numerator = 0;
+  let sumX = 0;
+  let sumY = 0;
+  xs.forEach((x, index) => {
+    const dx = x - meanX;
+    const dy = (ys[index] as number) - meanY;
+    numerator += dx * dy;
+    sumX += dx * dx;
+    sumY += dy * dy;
+  });
+  return numerator / Math.sqrt(sumX * sumY);
+}
+
 
 export function GjennomsnittDemo() {
   const [movingPoint, setMovingPoint] = useState(12);
