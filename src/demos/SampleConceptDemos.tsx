@@ -382,11 +382,23 @@ export function KrysskontamineringDemo() {
             <span className={styles.cardTitle}>Neste prøve</span>
             <svg viewBox="0 0 160 125" className={shared.svg} aria-hidden="true">
               <line x1="12" y1="112" x2="148" y2="112" className={styles.axis} />
-              <path d={miniPeakPath(nextTrueSignal, 110)} className={styles.traceReference} />
-              <path d={miniPeakPath(nextObserved, 110)} className={styles.traceAccent} />
+              <path
+                d={miniPeakPath(nextObserved, 110)}
+                className={styles.traceAccent}
+                data-carryover-series="observed"
+              />
+              <path
+                d={miniPeakPath(nextTrueSignal, 110)}
+                className={styles.traceReference}
+                data-carryover-series="true"
+              />
             </svg>
             <MathFormula tex={"I_{\\mathrm{obs}} = " + texNumber(nextObserved, 2)} />
           </div>
+        </div>
+        <div className={styles.legend}>
+          <span className={styles.legendItem}><span className={styles.legendReference} />uten carry-over</span>
+          <span className={styles.legendItem}><span className={styles.legendAccent} />observert signal</span>
         </div>
         <div className={shared.row}>
           <Readout
