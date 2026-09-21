@@ -160,3 +160,81 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.guideLine,
+.residualLine {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.pointWarning {
+  fill: var(--color-warning);
+}
+
+.lineWarningDashed {
+  fill: none;
+  stroke: var(--color-warning);
+  stroke-width: 3.5;
+  stroke-dasharray: 9 6;
+}
+
+.pointWarningOutline {
+  fill: var(--color-surface);
+  stroke: var(--color-warning);
+  stroke-width: 3;
+}
+
+.rangeBand {
+  fill: var(--color-accent);
+  opacity: 0.14;
+}
+
+.rangeBoundary {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+.levelPointer,
+.levelPointerWarning {
+  stroke-width: 3;
+}
+
+.levelPointer {
+  stroke: var(--color-accent);
+}
+
+.levelPointerWarning {
+  stroke: var(--color-warning);
+}
+
+.forcedZeroLine {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 3;
+  stroke-dasharray: 9 6;
+}
+
+.driftTrend {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 2.5;
+  stroke-dasharray: 8 5;
+}
+
+.animatedPoint {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+  transition:
+    cx 180ms ease-out,
+    cy 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animatedPoint {
+    transition: none;
+  }
+}
