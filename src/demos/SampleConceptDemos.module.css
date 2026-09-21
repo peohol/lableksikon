@@ -86,3 +86,143 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.axis {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.traceAccent,
+.traceWarning,
+.traceReference,
+.storageCold,
+.storageRoom,
+.storageWarm {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.traceAccent {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+}
+
+.traceWarning {
+  stroke: var(--color-warning);
+  stroke-width: 3;
+}
+
+.traceReference {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 2;
+  stroke-dasharray: 8 6;
+}
+
+.markerLine {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 2;
+  stroke-dasharray: 5 5;
+}
+
+.svgText {
+  fill: var(--color-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 12px;
+}
+
+.point {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendAccent,
+.legendWarning,
+.legendReference,
+.legendCold,
+.legendRoom,
+.legendWarm {
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+}
+
+.legendAccent,
+.legendCold {
+  background: var(--color-accent);
+}
+
+.legendWarning,
+.legendWarm {
+  background: var(--color-warning);
+}
+
+.legendReference {
+  height: 0;
+  border-top: 2px dashed var(--color-text-tertiary);
+}
+
+.legendRoom {
+  background: var(--color-text-secondary);
+}
+
+.peakPanels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: 12px;
+}
+
+.peakPanel {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  min-width: 0;
+}
+
+.peakPanel :global(.math-formula) {
+  min-height: 1.6em;
+}
+
+.storageCold {
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.storageRoom {
+  stroke: var(--color-text-secondary);
+  stroke-width: 3;
+  stroke-dasharray: 7 5;
+}
+
+.storageWarm {
+  stroke: var(--color-warning);
+  stroke-width: 3;
+  stroke-dasharray: 2 5;
+}
+
+@media (max-width: 520px) {
+  .svgText {
+    font-size: 10px;
+  }
+}
