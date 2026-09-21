@@ -10,19 +10,6 @@ import { Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./QualityConceptDemos.module.css";
 
-function ValueRows({ rows }: { rows: Array<{ label: string; values: string }> }) {
-  return (
-    <div className={styles.valueRows}>
-      {rows.map((row) => (
-        <div key={row.label} className={styles.valueRow}>
-          <span className={styles.rowLabel}>{row.label}</span>
-          <span className={styles.rowValues}>{row.values}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Flow({ items }: { items: string[] }) {
   return (
     <ol className={styles.flow}>
