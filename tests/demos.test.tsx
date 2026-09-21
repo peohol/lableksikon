@@ -15,10 +15,17 @@ import RiktighetSkiver from "@/demos/RiktighetSkiver";
 import StandardavvikFormel from "@/demos/StandardavvikFormel";
 import OpplosningTopper from "@/demos/OpplosningTopper";
 import {
+  DekningsfaktorDemo,
+  FolsomhetDemo,
+  GjenvinningDemo,
   IntermediarDemo,
+  KontrollkortDemo,
   RepeterbarhetDemo,
   ReproduserbarhetDemo,
+  RobusthetDemo,
+  SelektivitetDemo,
   SkjevhetDemo,
+  UtvidetUsikkerhetDemo,
 } from "@/demos/QualityConceptDemos";
 import {
   GjennomsnittDemo,
@@ -223,6 +230,78 @@ describe("interaktive demonstrasjoner", () => {
     expect(screen.getByText(/systematisk forskjøvet/)).toBeInTheDocument();
   });
 
+  it("gjenvinning: slideren endrer målt etter-verdi og recovery", () => {
+    const { container } = render(<GjenvinningDemo />);
+    const slider = screen.getByRole("slider", { name: "Gjenfunnet andel av tilsetningen" });
+    fireEvent.change(slider, { target: { value: "50" } });
+    expect(screen.getByText(/kommer ikke tilbake i måleresultatet/)).toBeInTheDocument();
+    const formulas = Array.from(container.querySelectorAll("[data-math-tex]")).map((node) =>
+      node.getAttribute("data-math-tex"),
+    );
+    expect(formulas).toContain("90{,}0");
+    expect(formulas.some((tex) => tex?.includes("50\\,\\%"))).toBe(true);
+    fireEvent.change(slider, { target: { value: "115" } });
+    expect(slider).toHaveAttribute("aria-valuetext", expect.stringContaining("15 prosentpoeng over 100"));
+  });
+
+  it("utvidet usikkerhet: k gjør intervallet bredere", () => {
+    const { container } = render(<UtvidetUsikkerhetDemo />);
+    const slider = screen.getByRole("slider", { name: "Dekningsfaktor for utvidet måleusikkerhet" });
+    fireEvent.change(slider, { target: { value: "3" } });
+    const formulas = Array.from(container.querySelectorAll("[data-math-tex]")).map((node) =>
+      node.getAttribute("data-math-tex"),
+    );
+    expect(formulas).toContain("U = 4{,}50");
+    expect(formulas.some((tex) => tex?.includes("95{,}50") && tex?.includes("104{,}50"))).toBe(true);
+  });
+
+  it("dekningsfaktor: større k øker dekningsarealet i normalillustrasjonen", () => {
+    render(<DekningsfaktorDemo />);
+    const slider = screen.getByRole("slider", { name: "Dekningsfaktor k" });
+    const before = slider.getAttribute("aria-valuetext");
+    fireEvent.change(slider, { target: { value: "3" } });
+    expect(slider.getAttribute("aria-valuetext")).not.toBe(before);
+    expect(slider.getAttribute("aria-valuetext")).toContain("99,7 prosent");
+  });
+
+  it("selektivitet: sterkere interferent flytter det tilsynelatende signalet", () => {
+    render(<SelektivitetDemo />);
+    const slider = screen.getByRole("slider", { name: "Styrke på interferentsignalet" });
+    fireEvent.change(slider, { target: { value: "0" } });
+    expect(screen.getByText(/bidrar lite/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "100" } });
+    expect(screen.getByText(/dominerer nå en betydelig del/)).toBeInTheDocument();
+  });
+
+  it("følsomhet: samme konsentrasjonsendring gir større signalendring når slope øker", () => {
+    const { container } = render(<FolsomhetDemo />);
+    const slider = screen.getByRole("slider", { name: "Stigningstall for kalibreringsresponsen" });
+    fireEvent.change(slider, { target: { value: "2.5" } });
+    const formulas = Array.from(container.querySelectorAll("[data-math-tex]")).map((node) =>
+      node.getAttribute("data-math-tex"),
+    );
+    expect(formulas).toContain("\\Delta y = 100{,}0");
+    expect(formulas.some((tex) => tex?.endsWith("= 2{,}50"))).toBe(true);
+  });
+
+  it("robusthet: større pH-avvik kan flytte ytelsen utenfor det definerte området", () => {
+    render(<RobusthetDemo />);
+    const slider = screen.getByRole("slider", { name: "pH i robusthetsillustrasjonen" });
+    fireEvent.change(slider, { target: { value: "7" } });
+    expect(screen.getByText(/holder den illustrerte ytelsen innenfor/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "7.5" } });
+    expect(screen.getByText(/ligger den illustrerte ytelsen utenfor/)).toBeInTheDocument();
+  });
+
+  it("kontrollkort: nivåskift flytter senere punkter mot og over faste grenser", () => {
+    render(<KontrollkortDemo />);
+    const slider = screen.getByRole("slider", { name: "Nivåskift fra måling 6" });
+    fireEvent.change(slider, { target: { value: "0.5" } });
+    expect(screen.getByText(/har flyttet seg oppover/)).toBeInTheDocument();
+    fireEvent.change(slider, { target: { value: "5" } });
+    expect(screen.getByText(/kontrollpunkt ligger utenfor/)).toBeInTheDocument();
+  });
+
   it("gjennomsnitt: balansepunktet følger et flyttet datapunkt", () => {
     render(<GjennomsnittDemo />);
     const slider = screen.getByRole("slider", { name: "Plassering av den femte observasjonen" });
@@ -334,6 +413,13 @@ describe("tilgjengelighet i demonstrasjoner", () => {
     ["intermediær presisjon", <IntermediarDemo key="m" />],
     ["reproduserbarhet", <ReproduserbarhetDemo key="n" />],
     ["skjevhet", <SkjevhetDemo key="o" />],
+    ["gjenvinning", <GjenvinningDemo key="o1" />],
+    ["utvidet måleusikkerhet", <UtvidetUsikkerhetDemo key="o2" />],
+    ["dekningsfaktor", <DekningsfaktorDemo key="o3" />],
+    ["selektivitet", <SelektivitetDemo key="o4" />],
+    ["følsomhet", <FolsomhetDemo key="o5" />],
+    ["robusthet", <RobusthetDemo key="o6" />],
+    ["kontrollkort", <KontrollkortDemo key="o7" />],
     ["gjennomsnitt", <GjennomsnittDemo key="p" />],
     ["median", <MedianDemo key="q" />],
     ["varians", <VariansDemo key="r" />],

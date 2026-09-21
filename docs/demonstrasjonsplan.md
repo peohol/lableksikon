@@ -41,18 +41,18 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Intermediær presisjon | P0 | ✅ **Implementert i PR #15.** Tre grupper for dag/operatør. Én kontroll for mellom-serie-variasjon som flytter gruppesentra uten å endre innen-serie-spredningen. Gjør skillet mot repeterbarhet visuelt. |
 | Reproduserbarhet | P0 | ✅ **Implementert i PR #15.** Samme idé på laboratorienivå: tre laboratorier med egne klynger. Slider for mellom-laboratorievariasjon. |
 | Skjevhet | P0 | ✅ **Implementert i PR #15.** Målepunkter mot en referanselinje/målskive. Slider flytter hele klyngen sideveis uten å endre spredningen; avlest skjevhet oppdateres. |
-| Gjenvinning | P0 | Tre søyler eller beholdere: før spike, tilsatt mengde, målt etter spike. Slider for faktisk gjenfunnet andel gjør recovery synlig og beregnes med MathJax. |
+| Gjenvinning | P0 | ✅ **Implementert i PR #17.** Tre søyler/beholdere viser før spike, tilsatt mengde og målt etter; slider endrer gjenfunnet andel og MathJax-beregningen følger. |
 | Måleusikkerhet | P2 | Behold dagens byggbare usikkerhetsbudsjett. Kan senere suppleres med en synlig usikkerhetsstolpe på sluttresultatet. |
-| Utvidet måleusikkerhet | P0 | Intervall rundt et måleresultat. Slider for dekningsfaktor gjør intervallet bredere/smalere mens `U = k u_c` og endepunktene oppdateres. |
-| Dekningsfaktor | P0 | Samme visuelle familie som utvidet usikkerhet, men fokuser på `k`: vis normal-/t-fordeling med markert dekningsareal og intervallets bredde. |
-| Selektivitet | P0 | To overlappende signaler/kromatografiske topper. Kontroll for interferentstyrke viser når analyttsignalet fortsatt kan bestemmes og når interferensen blir problematisk. |
+| Utvidet måleusikkerhet | P0 | ✅ **Implementert i PR #17.** Intervall rundt måleresultatet utvider og trekker seg sammen med dekningsfaktoren; `U = k u_c` og endepunktene oppdateres. |
+| Dekningsfaktor | P0 | ✅ **Implementert i PR #17.** Standard normalfordeling med dynamisk dekningsareal viser hvordan større `k` gir større illustrert dekning. |
+| Selektivitet | P0 | ✅ **Implementert i PR #17.** Overlappende analytt- og interferentsignal; slider for interferentstyrke viser bidraget ved analyttposisjonen og påvirkning på tilsynelatende signal. |
 | Spesifisitet | P2 | Begrepet er i stor grad terminologisk. Behold en ryddig sammenligning, eventuelt med et lite spekter fra lav til høy selektivitet i stedet for mer interaksjon. |
-| Følsomhet | P0 | Behold idéen med to kalibreringslinjer, men gjør stigningstallet interaktivt. Samme `Δx` markeres, mens `Δy` og slope endres. |
-| Robusthet | P0 | Ett metodeparameter om gangen (pH, flow eller temperatur) på slider. Resultat/retensjonstid/resolusjon vises som kurve rundt nominell innstilling og markert akseptområde. |
+| Følsomhet | P0 | ✅ **Implementert i PR #17.** Interaktiv kalibreringslinje med fast `Δx`; slider endrer stigningstall og synlig `Δy`. |
+| Robusthet | P0 | ✅ **Implementert i PR #17.** pH-slider flytter et punkt langs ytelseskurven rundt nominell innstilling med synlig forhåndsdefinert akseptområde. |
 | Sporbarhet | P1 | Behold kjeden, men visualiser hvert kalibreringsledd som noder med tilhørende usikkerhet. Klikk/valg av ledd viser hvordan kjeden knytter resultatet til referansen. Ikke lat som sporbarhet er «nærhet til sann verdi». |
 | Validering | P2 | Prosessbegrep. En visuell «krav → studie → evidens → konklusjon»-flyt er tilstrekkelig; interaksjon gir lite uten å gjøre demoen til et skjema. |
 | Verifisering | P2 | Prosessbegrep. Vis spesifiserte krav på venstre side og lokale resultater på høyre, med tydelig oppfylt/ikke oppfylt. Ingen sterk grunn til slider. |
-| Kontrollkort | P0 | Ekte kontrollkort med punkter over tid. Slider/toggle for nivåskift eller drift viser hvordan ikke-tilfeldige mønstre oppstår; kontrollgrenser forblir faste. |
+| Kontrollkort | P0 | ✅ **Implementert i PR #17.** Ekte kontrollkort med punkter over tid; slider påfører nivåskift fra måling 6 mens kontrollgrensene forblir faste. |
 | Nøyaktighet | P2 | Behold målskivevisualiseringen som skiller presisjon og riktighet/skjevhet. Den er visuelt sterk selv uten interaksjon. |
 
 ## Kalibrering og kontroll

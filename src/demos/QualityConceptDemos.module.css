@@ -162,3 +162,104 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.barMuted,
+.barSpike,
+.barAccent,
+.intervalBand,
+.coverageArea,
+.acceptanceBand {
+  transition: all 140ms ease-out;
+}
+
+.barMuted {
+  fill: var(--color-border-strong);
+}
+
+.barSpike {
+  fill: var(--color-warning);
+  opacity: 0.7;
+}
+
+.barAccent {
+  fill: var(--color-accent);
+}
+
+.intervalBand {
+  fill: var(--color-accent-soft);
+}
+
+.intervalCap {
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.intervalCenter {
+  stroke: var(--color-text-primary);
+  stroke-width: 2;
+}
+
+.coverageArea {
+  fill: var(--color-accent-soft);
+}
+
+.distributionCurve {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.analyteCurve,
+.interferentCurve {
+  fill: none;
+  stroke-width: 4;
+}
+
+.analyteCurve {
+  stroke: var(--color-accent);
+}
+
+.interferentCurve {
+  stroke: var(--color-warning);
+  stroke-dasharray: 9 6;
+}
+
+.guideLine,
+.deltaGuide {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+  stroke-dasharray: 5 5;
+}
+
+.acceptanceBand {
+  fill: var(--color-accent-soft);
+}
+
+.controlLimit {
+  stroke: var(--color-warning);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+}
+
+.controlCenter {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.controlSeries {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barMuted,
+  .barSpike,
+  .barAccent,
+  .intervalBand,
+  .coverageArea,
+  .acceptanceBand {
+    transition: none;
+  }
+}
