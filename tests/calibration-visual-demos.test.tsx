@@ -67,7 +67,7 @@ describe("interaktive kalibreringsdemoer", () => {
       .closest("div")
       ?.querySelector("[data-math-tex]")
       ?.getAttribute("data-math-tex");
-    await user.click(screen.getByRole("button", { name: "1/x²" }));
+    await user.click(screen.getByRole("button", { name: "Omvendt kvadrert nivå" }));
     const after = screen
       .getByText("Tilpasset modell")
       .closest("div")
