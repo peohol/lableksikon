@@ -131,11 +131,11 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Signal/støy | P0 | ✅ **Implementert i PR #24.** Reell signaltrace med én analytttopp og tilfeldig støy. Slider for støynivå; beregnet S/N og synlig oppdagbarhet endres. |
+| Signal/støy | P0 | ✅ **Implementert i PR #24.** Signaltrace med én analytttopp og stabilt generert bakgrunnsstøy. Slider for støynivå endrer beregnet S/N og hvor tydelig toppen fremstår. |
 | Massespektrometri | P1 | ✅ **Implementert i PR #24.** Vis instrumentkjeden som fysisk skisse: kilde → masseanalysator → detektor → spektrum. Hover/valg kan fremheve trinnet, men interaksjon er ikke nødvendig. |
 | Ionisering | P1 | ✅ **Implementert i PR #24.** Vis nøytralt molekyl som går inn i kilde og ioner ut. Valg positiv/negativ modus bytter typiske ionformer. |
 | Fragmentering | P0 | ✅ **Implementert i PR #24.** Forløperion → fragmenttre + produktspektrum. Slider for kollisjonsenergi kan gradvis endre hvilke produkt-ioner som dominerer. |
-| SIM-modus | P0 | ✅ **Implementert i PR #24.** Massespektrum med mange topper. Toggle full scan/SIM gjør bare valgte `m/z` synlige/monitorerte og viser høyere dwell/tydeligere målretting konseptuelt. |
+| SIM-modus | P0 | ✅ **Implementert i PR #24.** Massespektrum med mange topper. Toggle full scan/SIM fremhever de valgte `m/z`-signalene og gjør den målrettede innsamlingen konkret. |
 | MRM | P0 | ✅ **Implementert i PR #24.** To spektra/trinn: Q1 velger forløper, fragmentering, Q3 velger produkt. Ett valg av overgang fremheves gjennom hele kjeden. |
 | Masseoppløsning | P0 | ✅ **Implementert i PR #24.** To nærliggende massetopper. Slider for peak width/resolving power avgjør om de ses som én eller to. Vis `m/\Delta m`. |
 | LC-MS | P1 | ✅ **Implementert i PR #24.** Kromatogram øverst, massespektrum nederst. Valg av chromatografisk topp oppdaterer spekteret og illustrerer de to informasjonsdimensjonene. |
