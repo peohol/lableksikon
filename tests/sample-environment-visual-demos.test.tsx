@@ -38,6 +38,11 @@ describe("interaktive prøve- og miljødemoer", () => {
 
   it("interferens: full overlap legger hele interferentsignalet til analyttens målepunkt", () => {
     const { container } = render(<InterferensDemo />);
+    const series = Array.from(container.querySelectorAll("[data-series]")).map((node) =>
+      node.getAttribute("data-series"),
+    );
+    expect(series).toEqual(["sum", "analyte", "interferent"]);
+
     const interferentTrace = container.querySelector('[data-series="interferent"]');
     expect(interferentTrace).toHaveAttribute("stroke-dasharray", "2 6");
 
@@ -75,6 +80,8 @@ describe("interaktive prøve- og miljødemoer", () => {
   it("prøvelagring: temperaturvalg og tid følger valgt stabilitetskurve", async () => {
     const user = userEvent.setup();
     const { container } = render(<ProvelagringDemo />);
+    expect(container.querySelector('[data-line-pattern="dashed"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-line-pattern="dotted"]')).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "35 °C" }));
     const slider = screen.getByRole("slider", { name: "Lagringstid i stabilitetsillustrasjonen" });
     fireEvent.change(slider, { target: { value: "168" } });
