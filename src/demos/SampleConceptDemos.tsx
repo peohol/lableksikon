@@ -200,7 +200,7 @@ export function InterferensDemo() {
               180,
             )}
             className={styles.traceWarning}
-            strokeDasharray="4 6"
+            strokeDasharray="2 6"
             data-series="interferent"
           />
           <path
