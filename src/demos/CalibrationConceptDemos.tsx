@@ -414,7 +414,6 @@ export function VektetRegresjonDemo() {
 
 export function NullpunktDemo() {
   const [intercept, setIntercept] = useState(20);
-  const slope = 10;
   const x = (value: number) => 55 + (value / 10) * 420;
   const y = (value: number) => 205 - ((value + 40) / 200) * 165;
 
