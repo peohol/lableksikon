@@ -81,7 +81,7 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Begrep | Prioritet | Forslag |
 |---|---|---|
 | Matriseeffekt | P2 | Behold dagens matrisevelger og responskurver. |
-| Ionesuppresjon | P0 | ✅ **Implementert i PR #21.** Samme analyttmengde vises som kromatografiske signaler i ren løsning og matriks; slider reduserer matriseresponsen og oppdaterer matriseeffekten med MathJax. |
+| Ionesuppresjon | P0 | ✅ **Implementert i PR #21.** Samme analyttmengde vises som kromatografiske signaler i ren løsning og matriks; slider reduserer matriseresponsen og oppdaterer responsendringen med MathJax. |
 | Ioneforsterkning | P0 | ✅ **Implementert i PR #21.** Deler grafikkmotor med suppressjon, men slideren øker matriseresponsen ved uendret analyttmengde. |
 | Interferens | P0 | ✅ **Implementert i PR #21.** Interferentsignalet beveges inn mot analytten; separat analytt, interferent og observert sum viser hvordan overlapp gir systematisk overestimering. |
 | Bakgrunnssignal | P0 | ✅ **Implementert i PR #21.** Signaltrace med uavhengige slidere for bakgrunnsnivå og tilfeldig støy gjør skillet mellom nivå og variasjon synlig. |
