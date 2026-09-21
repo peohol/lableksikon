@@ -113,19 +113,19 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Mobilfase | P1 | Enkel kolonneskisse/animasjon der mobilfasen beveger analyttsoner gjennom systemet. Valg LC/GC/SFC endrer faseikon/etikett, ikke den grunnleggende mekanismen. |
-| Stasjonærfase | P0 | To analyttsoner beveger seg gjennom en kolonne; slider for relativ interaksjon med stasjonærfasen endrer hastighet/retensjon. |
-| Retensjonstid | P0 | Kromatogram med bevegelig topp. Marker injeksjon, `t_M`, `t_R` og justert retensjonstid direkte på tidsaksen. |
-| Gradient | P0 | Øvre panel: mobilfasesammensetning mot tid. Nedre panel: kromatogram. Slider for gradientbratthet viser hvordan sent eluerende topper flyttes sammen. |
-| Isokratisk | P1 | Samme todelte visualisering som gradient, men flat sammensetningslinje. Kan sammenlignes med gradient uten å bli en ren tekstrad. |
-| Elueringsrekkefølge | P0 | Tre topper/analyttsoner. Én kontroll for selektivitet/stasjonærfase gjør at B og C kan bytte rekkefølge; viser at rekkefølgen er metodeavhengig. |
-| Toppbredde | P0 | Én Gauss-lignende topp med slider for bredde. Vis både basisbredde og bredde ved halv høyde som målestreker. |
-| Haledannelse | P0 | Slider fra symmetrisk til halende topp. Vis asymmetri/tailing-mål der faglig passende og hvordan nabotopp påvirkes. |
-| Platetall | P0 | Hold `t_R` fast og endre toppbredde; kromatografisk topp blir smalere mens `N` øker. Dette bør være én av de mest direkte demoene. |
-| Selektivitetsfaktor | P0 | To retinerte topper med fast `t_M`. Slider endrer `k_2/k_1`; toppenes relative plassering og `\alpha` oppdateres. |
+| Mobilfase | P1 | ✅ **Implementert i PR #23.** Animert transport gjennom kolonne med valg mellom LC, GC og SFC; faseformen endres mens transportrollen bevares. |
+| Stasjonærfase | P0 | ✅ **Implementert i PR #23.** To analyttsoner beveger seg gjennom en kolonne; slider for relativ interaksjon med stasjonærfasen endrer hastighet/retensjon. |
+| Retensjonstid | P0 | ✅ **Implementert i PR #23.** Kromatogram med bevegelig topp. Marker injeksjon, `t_M`, `t_R` og justert retensjonstid direkte på tidsaksen. |
+| Gradient | P0 | ✅ **Implementert i PR #23.** Øvre panel: mobilfasesammensetning mot tid. Nedre panel: kromatogram. Slider for gradientbratthet viser hvordan sent eluerende topper flyttes sammen. |
+| Isokratisk | P1 | ✅ **Implementert i PR #23.** Samme todelte visualisering som gradient, men flat sammensetningslinje. Kan sammenlignes med gradient uten å bli en ren tekstrad. |
+| Elueringsrekkefølge | P0 | ✅ **Implementert i PR #23.** Tre topper/analyttsoner. Én kontroll for selektivitet/stasjonærfase gjør at B og C kan bytte rekkefølge; viser at rekkefølgen er metodeavhengig. |
+| Toppbredde | P0 | ✅ **Implementert i PR #23.** Én Gauss-lignende topp med slider for bredde. Vis både basisbredde og bredde ved halv høyde som målestreker. |
+| Haledannelse | P0 | ✅ **Implementert i PR #23.** Slider fra symmetrisk til halende topp. Vis asymmetri/tailing-mål der faglig passende og hvordan nabotopp påvirkes. |
+| Platetall | P0 | ✅ **Implementert i PR #23.** Hold `t_R` fast og endre toppbredde; kromatografisk topp blir smalere mens `N` øker. Dette bør være én av de mest direkte demoene. |
+| Selektivitetsfaktor | P0 | ✅ **Implementert i PR #23.** To retinerte topper med fast `t_M`. Slider endrer `k_2/k_1`; toppenes relative plassering og `\alpha` oppdateres. |
 | Oppløsning | P2 | Behold dagens interaktive toppseparasjon. |
-| Dødvolum | P1 | Skjematisk væskebane med kolonne og ekstrakolonnevolum markert. Toggle mellom hold-up-volum og ekstrakolonnevolum viser hvorfor «dødvolum» er tvetydig. |
-| Injeksjonsvolum | P0 | Slider for injeksjonsvolum. Prøveplugg og kromatografisk topp blir bredere/overlastet når volumet øker; signalmengde øker samtidig. |
+| Dødvolum | P1 | ✅ **Implementert i PR #23.** Skjematisk væskebane med kolonne og ekstrakolonnevolum markert. Toggle mellom hold-up-volum og ekstrakolonnevolum viser hvorfor «dødvolum» er tvetydig. |
+| Injeksjonsvolum | P0 | ✅ **Implementert i PR #23.** Slider for injeksjonsvolum. Prøveplugg og kromatografisk topp blir bredere/overlastet når volumet øker; signalmengde øker samtidig. |
 
 ## Deteksjon og måleprinsipp
 
