@@ -16,16 +16,20 @@ function mediaQueryList(): MediaQueryList {
     },
     media: DARK_MODE_QUERY,
     onchange: null,
-    addEventListener: (_type, listener) => {
-      listeners.add(listener as (event: MediaQueryListEvent) => void);
+    addEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => {
+      if (typeof listener === "function") {
+        listeners.add(listener as (event: MediaQueryListEvent) => void);
+      }
     },
-    removeEventListener: (_type, listener) => {
-      listeners.delete(listener as (event: MediaQueryListEvent) => void);
+    removeEventListener: (_type: string, listener: EventListenerOrEventListenerObject) => {
+      if (typeof listener === "function") {
+        listeners.delete(listener as (event: MediaQueryListEvent) => void);
+      }
     },
     addListener: () => {},
     removeListener: () => {},
     dispatchEvent: () => true,
-  };
+  } as MediaQueryList;
 }
 
 function setSystemTheme(dark: boolean) {
