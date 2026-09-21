@@ -609,7 +609,7 @@ export function MatrikstilpassetKalibreringDemo() {
             y1={y(sampleResponse)}
             x2={x(solventEstimate)}
             y2="205"
-            className={styles.projectionSecondary}
+            className={styles.lineReference}
           />
           <line
             x1={x(matrixEstimate)}
@@ -623,7 +623,7 @@ export function MatrikstilpassetKalibreringDemo() {
             cx={x(solventEstimate)}
             cy={y(sampleResponse)}
             r="8"
-            className={styles.pointWarning}
+            className={styles.pointSecondary}
           />
           <circle
             data-calibration-intersection="matrix"
