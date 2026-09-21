@@ -50,7 +50,10 @@ function asymmetricPeakPath(
     .join(" ");
 }
 
-function chromatogramPath(\n  peaks: Array<{ center: number; fwhm: number; height: number }>,\n  baseline = 200,\n) {
+function chromatogramPath(
+  peaks: Array<{ center: number; fwhm: number; height: number }>,
+  baseline = 200,
+) {
   const points = Array.from({ length: 181 }, (_, index) => {
     const x = 55 + (420 * index) / 180;
     const signal = peaks.reduce(
@@ -138,6 +141,8 @@ export function StasjonarfaseDemo() {
           <line x1="75" y1="92" x2="450" y2="92" className={styles.flowGuide} />
           <circle cx={positionA} cy="78" r="13" className={styles.zoneA} />
           <circle cx={positionB} cy="107" r="13" className={styles.zoneB} />
+          <text x={positionA - 4} y="82" className={styles.zoneLabel}>A</text>
+          <text x={positionB - 4} y="111" className={styles.zoneLabel}>B</text>
         </svg>
         <div className={shared.row}>
           <Readout label="Stoff A" value="svakere retinert" size="small" />
@@ -186,9 +191,9 @@ export function RetensjonstidDemo() {
           <circle cx="55" cy="200" r="5" className={styles.injectionPoint} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Hold-up-tid" value={<MathFormula tex="t_M = 0{,}60\,\mathrm{min}" />} size="small" />
-          <Readout label="Retensjonstid" value={<MathFormula tex={"t_R = " + texNumber(retentionTime, 2) + "\,\mathrm{min}"} />} size="small" />
-          <Readout label="Justert retensjonstid" value={<MathFormula tex={"t'_R = " + texNumber(adjusted, 2) + "\,\mathrm{min}"} />} size="small" />
+          <Readout label="Hold-up-tid" value={<MathFormula tex="t_M = 0{,}60\\,\\mathrm{min}" />} size="small" />
+          <Readout label="Retensjonstid" value={<MathFormula tex={"t_R = " + texNumber(retentionTime, 2) + "\\,\\mathrm{min}"} />} size="small" />
+          <Readout label="Justert retensjonstid" value={<MathFormula tex={"t'_R = " + texNumber(adjusted, 2) + "\\,\\mathrm{min}"} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
           Toppmaksimum definerer den illustrerte retensjonstiden; avstanden fra hold-up-markøren til toppmaksimum svarer til den justerte retensjonstiden.
@@ -236,8 +241,8 @@ export function GradientDemo() {
           <path d={chromatogramPath(peaks, 300)} className={styles.chromatogram} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Start" value={<MathFormula tex="10\,\%" />} size="small" />
-          <Readout label="Slutt" value={<MathFormula tex={texNumber(endStrong, 0) + "\,\%"} />} size="small" />
+          <Readout label="Start" value={<MathFormula tex="10\\,\\%" />} size="small" />
+          <Readout label="Slutt" value={<MathFormula tex={texNumber(endStrong, 0) + "\\,\\%"} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
           Når gradienten blir sterkere, flyttes den siste toppen mest mot kortere retensjon i denne illustrasjonen, mens den tidlige toppen endres lite.
@@ -280,7 +285,7 @@ export function IsokratiskDemo() {
             className={styles.chromatogram}
           />
         </svg>
-        <Readout label="Mobilfasesammensetning" value={<MathFormula tex="40\,\% + 60\,\%" />} size="small" />
+        <Readout label="Mobilfasesammensetning" value={<MathFormula tex="40\\,\\% + 60\\,\\%" />} size="small" />
       </div>
     </DemonstrationFrame>
   );
@@ -310,9 +315,9 @@ export function ElueringsrekkefolgeDemo() {
             ])}
             className={styles.chromatogram}
           />
-          <circle cx={145} cy={122} r="10" className={styles.labelPointA} />
-          <circle cx={centerB} cy={94} r="10" className={styles.labelPointB} />
-          <circle cx={centerC} cy={109} r="10" className={styles.labelPointC} />
+          <text x="140" y="118" className={styles.peakLabel}>A</text>
+          <text x={centerB - 5} y="90" className={styles.peakLabel}>B</text>
+          <text x={centerC - 5} y="105" className={styles.peakLabel}>C</text>
         </svg>
         <Readout label="Illustrert rekkefølge" value={order} size="small" />
         <Verdict reserve={2.8}>
@@ -356,8 +361,8 @@ export function ToppbreddeDemo() {
           <line x1={center - baselineWidth / 2} y1="205" x2={center + baselineWidth / 2} y2="205" className={styles.baselineMeasure} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Bredde ved halv høyde" value={<MathFormula tex={"w_h = " + texNumber(fwhm / 100, 2) + "\,\mathrm{min}"} />} size="small" />
-          <Readout label="Illustrert basisbredde" value={<MathFormula tex={"w_b \approx " + texNumber(baselineWidth / 100, 2) + "\,\mathrm{min}"} />} size="small" />
+          <Readout label="Bredde ved halv høyde" value={<MathFormula tex={"w_h = " + texNumber(fwhm / 100, 2) + "\\,\\mathrm{min}"} />} size="small" />
+          <Readout label="Illustrert basisbredde" value={<MathFormula tex={"w_b \\approx " + texNumber(baselineWidth / 100, 2) + "\\,\\mathrm{min}"} />} size="small" />
         </div>
         <Slider
           label="Bredde ved halv høyde for kromatografisk topp"
@@ -396,7 +401,7 @@ export function HaledannelseDemo() {
           <line x1={center} y1="55" x2={center} y2="205" className={styles.referenceLine} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Illustrert halegrad" value={<MathFormula tex={texNumber(tailing, 0) + "\,\%"} />} size="small" />
+          <Readout label="Illustrert halegrad" value={<MathFormula tex={texNumber(tailing, 0) + "\\,\\%"} />} size="small" />
           <Readout label="Ekstra utstrekning bakover" value={<MathFormula tex={texNumber(overlap, 1)} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
@@ -439,8 +444,8 @@ export function PlatetallDemo() {
           <line x1={360 - fwhmPixels * 0.84932} y1="200" x2={360 + fwhmPixels * 0.84932} y2="200" className={styles.baselineMeasure} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Retensjonstid" value={<MathFormula tex="t_R = 5{,}0\,\mathrm{min}" />} size="small" />
-          <Readout label="Basisbredde" value={<MathFormula tex={"w_b = " + texNumber(baseWidth, 2) + "\,\mathrm{min}"} />} size="small" />
+          <Readout label="Retensjonstid" value={<MathFormula tex="t_R = 5{,}0\\,\\mathrm{min}" />} size="small" />
+          <Readout label="Basisbredde" value={<MathFormula tex={"w_b = " + texNumber(baseWidth, 2) + "\\,\\mathrm{min}"} />} size="small" />
           <Readout label="Platetall" value={<MathFormula tex={"N = 16(t_R/w_b)^2 = " + texNumber(plateCount, 0)} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
@@ -487,7 +492,7 @@ export function SeparasjonsfaktorDemo() {
         <div className={shared.row}>
           <Readout label="Første retensjonsfaktor" value={<MathFormula tex="k_1 = 2{,}00" />} size="small" />
           <Readout label="Andre retensjonsfaktor" value={<MathFormula tex={"k_2 = " + texNumber(k2, 2)} />} size="small" />
-          <Readout label="Separasjonsfaktor" value={<MathFormula tex={"\alpha = k_2/k_1 = " + texNumber(alpha, 2)} />} size="small" />
+          <Readout label="Separasjonsfaktor" value={<MathFormula tex={"\\alpha = k_2/k_1 = " + texNumber(alpha, 2)} />} size="small" />
         </div>
         <Verdict reserve={2.8}>
           {alpha < 1.1
@@ -562,7 +567,7 @@ export function InjeksjonsvolumDemo() {
           <path d={gaussianPath(300, peakWidth, height, 270)} className={overloaded ? styles.warningPeak : styles.chromatogram} />
         </svg>
         <div className={shared.row}>
-          <Readout label="Illustrert injeksjonsvolum" value={<MathFormula tex={texNumber(volume, 0) + "\,\mu\mathrm{L}"} />} size="small" />
+          <Readout label="Illustrert injeksjonsvolum" value={<MathFormula tex={texNumber(volume, 0) + "\\,\\mu\\mathrm{L}"} />} size="small" />
           <Readout label="Relativ toppbredde" value={<MathFormula tex={texNumber(peakWidth, 0)} />} size="small" tone={overloaded ? "warning" : "normal"} />
         </div>
         <Verdict tone={overloaded ? "warning" : "normal"} reserve={3}>
