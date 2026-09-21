@@ -98,15 +98,15 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Median | P0 | ✅ **Implementert i PR #15.** Fem punkter på tallinje. Dra ekstremverdien langt ut og se medianen stå stille mens gjennomsnittet flytter seg. |
 | Varians | P0 | ✅ **Implementert i PR #15.** Punktdiagram med middelverdi og vertikale avstander. Dra ett punkt; vis avvik og kvadrerte bidrag som arealer/søyler. |
 | Standardavvik | P1 | Dagens formelforklaring er ryddig, men kan senere få samme punktdiagram som varians og vise `s` direkte når ett punkt flyttes. |
-| Normalfordeling | P0 | Klokkekurve med slider for `σ`; marker arealet innen `μ ± 1σ`, `2σ` og `3σ`. Gjør 68–95–99,7 visuelt. |
-| Frihetsgrader | P0 | Tre punkter/avvik med fast gjennomsnitt. La brukeren flytte to; det tredje må flytte seg automatisk slik at summen av avvik forblir null. |
-| Konfidensintervall | P0 | Simuler/vis 20–50 intervaller mot én sann parameterlinje. Knapp «nytt utvalg» eller slider for utvalgsstørrelse; enkelte intervaller bommer. |
-| Signifikansnivå | P0 | Nullfordeling med markerte haler. Slider for `α` flytter kritisk grense og endrer halearealet. |
-| t-test | P0 | To grupper med punkter. Slider for forskjell mellom gruppemidler eller støy viser `t` og p-verdi endre seg. |
-| F-test | P0 | To fordelinger/punktsett med ulik spredning. Slider for varians i gruppe B; `F=s_1^2/s_2^2` oppdateres. |
-| Regresjon | P0 | Punktdiagram med en linje. Brukeren flytter ett datapunkt eller slope; residualer tegnes som vertikale segmenter. |
-| Minste kvadrater | P0 | La brukeren dra regresjonslinjen. Vis residualkvadrater/total SSE og la minimum bli tydelig når linjen nærmer seg OLS-løsningen. |
-| Korrelasjon | P0 | Punktsky som morfer fra positiv via ikke-lineær/ingen lineær til negativ sammenheng. Vis `r`, men inkluder et U-formet datasett med `r\approx0` for å avlive feiltolkning. |
+| Normalfordeling | P0 | ✅ **Implementert i PR #19.** Klokkekurve med slider for standardavvik; arealene innen ett, to og tre standardavvik er markert direkte i figuren. |
+| Frihetsgrader | P0 | ✅ **Implementert i PR #19.** Tre observasjoner med fast gjennomsnitt; to avvik styres fritt og det tredje følger automatisk slik at avvikssummen forblir null. |
+| Konfidensintervall | P0 | ✅ **Implementert i PR #19.** Tjue intervaller vises mot én sann parameterlinje; utvalgsstørrelsen styrer bredden og ett intervall demonstrerer manglende dekning. |
+| Signifikansnivå | P0 | ✅ **Implementert i PR #19.** Nullfordeling med markerte tosidige haler; slider for signifikansnivå flytter kritiske grenser og endrer forkastningsarealet. |
+| t-test | P0 | ✅ **Implementert i PR #19.** To punktgrupper med konstant spredning; slider flytter gruppemiddel og oppdaterer Welch t-statistikk og tosidig p-verdi. |
+| F-test | P0 | ✅ **Implementert i PR #19.** To punktsett med samme middelverdi; slider endrer spredningen i gruppe B og variansforholdet oppdateres. |
+| Regresjon | P0 | ✅ **Implementert i PR #19.** Punktdiagram med OLS-linje; siste punkt kan flyttes og residualene vises som vertikale segmenter mens linje og forklaringsgrad oppdateres. |
+| Minste kvadrater | P0 | ✅ **Implementert i PR #19.** Kandidatlinjens stigningstall styres med slider; residualer og SSE endres mot en stiplet OLS-løsning og synlig minimum. |
+| Korrelasjon | P0 | ✅ **Implementert i PR #19.** Punktsky kan byttes mellom positiv lineær, U-formet og negativ lineær sammenheng; Pearsons r oppdateres og U-formen viser hvorfor r nær null ikke betyr «ingen sammenheng». |
 | Uteligger | P0 | ✅ **Implementert i PR #15.** Dra ett punkt bort fra resten og vis samtidig middelverdi, median, SD og eventuelt regresjonslinje. Poenget er påvirkning, ikke automatisk sletting. |
 
 ## Separasjon
