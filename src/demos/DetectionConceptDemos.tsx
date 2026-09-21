@@ -129,10 +129,10 @@ export function SignalStoyDemo() {
 
 export function MassespektrometriDemo() {
   const stages = [
-    { name: "Ionekilde", text: "Nøytrale eller allerede ladde arter omdannes til gassfaseioner som instrumentet kan styre." },
-    { name: "Masseanalysator", text: "Ioner separeres eller filtreres etter masse-til-ladning." },
-    { name: "Detektor", text: "Ioner som når detektoren omdannes til et målbart elektrisk signal." },
-    { name: "Spektrum", text: "Signalintensitet vises mot masse-til-ladning." },
+    { name: "Ionekilde", short: "Kilde", text: "Nøytrale eller allerede ladde arter omdannes til gassfaseioner som instrumentet kan styre." },
+    { name: "Masseanalysator", short: "Analysator", text: "Ioner separeres eller filtreres etter masse-til-ladning." },
+    { name: "Detektor", short: "Detektor", text: "Ioner som når detektoren omdannes til et målbart elektrisk signal." },
+    { name: "Spektrum", short: "Spektrum", text: "Signalintensitet vises mot masse-til-ladning." },
   ] as const;
   const [stage, setStage] = useState(0);
 
@@ -157,6 +157,9 @@ export function MassespektrometriDemo() {
                   rx="10"
                   className={index === stage ? styles.stageActive : styles.stageBox}
                 />
+                <text x={x + 59} y="98" className={styles.stageLabel}>
+                  {item.short}
+                </text>
                 {index < stages.length - 1 ? (
                   <path d={"M" + (x + 120) + " 93 L" + (x + 145) + " 93"} className={styles.flowArrow} />
                 ) : null}
