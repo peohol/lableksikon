@@ -108,8 +108,9 @@ describe("grafiske deteksjonsdemoer", () => {
   it("LC-MS: valgt kromatografisk topp oppdaterer spektral avlesning", async () => {
     const user = userEvent.setup();
     const { container } = render(<LcmsDemo />);
-    await user.click(screen.getByRole("button", { name: "Topp B" }));
-    expect(screen.getByText(/Topp B/)).toBeInTheDocument();
+    const choice = screen.getByRole("button", { name: "Topp B" });
+    await user.click(choice);
+    expect(choice).toHaveAttribute("aria-pressed", "true");
     expect(mathTex(container)).toContain("m/z = 356");
   });
 
