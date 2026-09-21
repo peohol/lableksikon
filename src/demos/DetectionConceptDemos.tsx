@@ -135,6 +135,7 @@ export function MassespektrometriDemo() {
     { name: "Spektrum", short: "Spektrum", text: "Signalintensitet vises mot masse-til-ladning." },
   ] as const;
   const [stage, setStage] = useState(0);
+  const selectedStage = stages[stage] ?? stages[0];
 
   return (
     <DemonstrationFrame
@@ -179,7 +180,7 @@ export function MassespektrometriDemo() {
             </Chip>
           ))}
         </ChipGroup>
-        <Readout label={stages[stage].name} value={stages[stage].text} size="small" />
+        <Readout label={selectedStage.name} value={selectedStage.text} size="small" />
       </div>
     </DemonstrationFrame>
   );
@@ -447,13 +448,14 @@ function CoupledMsDemo({ mode }: { mode: "lc" | "gc" }) {
   const basePeak = spectra.reduce((best, item) =>
     item.intensity > best.intensity ? item : best,
   );
+  const selectedChromatogramPeak = chromatogramPeaks[peak === "A" ? 0 : 1]!;
 
   return (
     <div className={shared.stack}>
       <svg viewBox="0 0 520 185" className={shared.svg} aria-hidden="true">
         <line x1="55" y1="150" x2="475" y2="150" className={styles.axis} />
         <path d={chromatogramPath(chromatogramPeaks, 150)} className={styles.signalTrace} />
-        <circle cx={peak === "A" ? chromatogramPeaks[0].center : chromatogramPeaks[1].center} cy="35" r="7" className={styles.selectionMarker} />
+        <circle cx={selectedChromatogramPeak.center} cy="35" r="7" className={styles.selectionMarker} />
       </svg>
       <ChipGroup label={isLc ? "Valgt LC-topp" : "Valgt GC-topp"}>
         <Chip variant="choice" pressed={peak === "A"} onClick={() => setPeak("A")}>Topp A</Chip>
