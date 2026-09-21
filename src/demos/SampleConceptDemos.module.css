@@ -176,7 +176,9 @@
 }
 
 .legendWarm {
-  background: var(--color-warning);
+  height: 0;
+  background: transparent;
+  border-top: 3px dotted var(--color-warning);
 }
 
 .legendReference {
@@ -185,7 +187,9 @@
 }
 
 .legendRoom {
-  background: var(--color-text-secondary);
+  height: 0;
+  background: transparent;
+  border-top: 3px dashed var(--color-text-secondary);
 }
 
 .peakPanels {
