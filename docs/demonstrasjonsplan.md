@@ -81,14 +81,14 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Begrep | Prioritet | Forslag |
 |---|---|---|
 | Matriseeffekt | P2 | Behold dagens matrisevelger og responskurver. |
-| Ionesuppresjon | P0 | Vis kromatografisk topp og/eller ionekildesignal for samme analyttmengde. Slider for suppressjon reduserer topparealet mens konsentrasjonen holdes fast. |
-| Ioneforsterkning | P0 | Samme komponentfamilie som suppressjon, men responsen øker. Kan dele kode, ikke pedagogisk tekst. |
-| Interferens | P0 | Overlay av analyttsignal og interferentsignal. Slider flytter interferenten eller endrer intensiteten, slik at summen/feilen i resultatet blir synlig. |
-| Bakgrunnssignal | P0 | Signaltrace med separat kontroll for baseline og støy. Gjør skillet mellom konstant bakgrunn og tilfeldig variasjon visuelt. |
+| Ionesuppresjon | P0 | ✅ **Implementert i PR #21.** Samme analyttmengde vises som kromatografiske signaler i ren løsning og matriks; slider reduserer matriseresponsen og oppdaterer matriseeffekten med MathJax. |
+| Ioneforsterkning | P0 | ✅ **Implementert i PR #21.** Deler grafikkmotor med suppressjon, men slideren øker matriseresponsen ved uendret analyttmengde. |
+| Interferens | P0 | ✅ **Implementert i PR #21.** Interferentsignalet beveges inn mot analytten; separat analytt, interferent og observert sum viser hvordan overlapp gir systematisk overestimering. |
+| Bakgrunnssignal | P0 | ✅ **Implementert i PR #21.** Signaltrace med uavhengige slidere for bakgrunnsnivå og tilfeldig støy gjør skillet mellom nivå og variasjon synlig. |
 | Matriksblank | P1 | Sammenlign tre mini-signaler: løsemiddelblank, matriksblank og prøve. Vis en matriksrelatert topp som bare dukker opp i de to siste. |
 | Kontaminering | P1 | Vis arbeidsflyt som rom/reagens/beholder/prøve/instrument. Valg av kontamineringskilde «farger» hvilke blanker/resultater som rammes. |
-| Krysskontaminering | P0 | Kromatogramsekvens høy prøve → blank → neste prøve. Slider for carry-over-andel viser avtakende resttopp. |
-| Prøvelagring | P0 | Stabilitetskurve over tid med temperaturvalg. Samme startverdi, ulik nedbrytning; etter valgt tid vises forventet gjenværende analytt. |
+| Krysskontaminering | P0 | ✅ **Implementert i PR #21.** Sekvensen høy prøve → blank → neste prøve viser avtakende carry-over; slider oppdaterer blanksignal og ekstra bidrag i neste prøve. |
+| Prøvelagring | P0 | ✅ **Implementert i PR #21.** Tre pedagogiske stabilitetskurver for temperatur kombineres med temperaturvalg og tidsslider; gjenværende analytt avleses med MathJax. |
 
 ## Statistikk og beregning
 
