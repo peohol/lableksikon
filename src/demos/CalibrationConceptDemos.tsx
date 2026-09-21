@@ -1,6 +1,37 @@
+"use client";
+
+import { useState } from "react";
+
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
+import { comma, relativeStandardDeviation, sampleStandardDeviation } from "@/lib/statistics";
+import { PointRows } from "./PointRows";
+import { Chip, ChipGroup, Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./CalibrationConceptDemos.module.css";
+
+const texNumber = (value: number, decimals: number) =>
+  comma(value, decimals).replace(",", "{,}");
+
+function weightedLineFit(xs: number[], ys: number[], weights: number[]) {
+  const weightSum = weights.reduce((sum, weight) => sum + weight, 0);
+  const meanX = xs.reduce((sum, value, index) => sum + value * (weights[index] as number), 0) / weightSum;
+  const meanY = ys.reduce((sum, value, index) => sum + value * (weights[index] as number), 0) / weightSum;
+  let numerator = 0;
+  let denominator = 0;
+  xs.forEach((value, index) => {
+    const weight = weights[index] as number;
+    numerator += weight * (value - meanX) * ((ys[index] as number) - meanY);
+    denominator += weight * (value - meanX) ** 2;
+  });
+  const slope = numerator / denominator;
+  const intercept = meanY - slope * meanX;
+  return {
+    slope,
+    intercept,
+    predicted: xs.map((value) => intercept + slope * value),
+  };
+}
 
 function ValueRows({ rows }: { rows: Array<{ label: string; values: string }> }) {
   return (
