@@ -359,7 +359,6 @@ export function MasseopplosningDemo() {
   const minMass = 499.95;
   const maxMass = 500.07;
   const xFor = (mass: number) => 55 + ((mass - minMass) / (maxMass - minMass)) * 420;
-  const widthPx = (width / (maxMass - minMass)) * 420;
   const resolvingPower = 500 / width;
   const combinedPath = tracePath(
     Array.from({ length: 181 }, (_, index) => {
