@@ -83,6 +83,14 @@ export function RingtestDemo() {
           <rect x={xFor(94)} y="42" width={xFor(96) - xFor(94)} height="150" className={styles.warningBand} />
           <rect x={xFor(104)} y="42" width={xFor(106) - xFor(104)} height="150" className={styles.warningBand} />
           <line x1={xFor(assigned)} y1="35" x2={xFor(assigned)} y2="205" className={styles.referenceLine} />
+          {[94, 96, 104, 106].map((value) => (
+            <line key={value} x1={xFor(value)} y1="42" x2={xFor(value)} y2="192" className={styles.zoneBoundary} />
+          ))}
+          <text x={xFor(94)} y="225" className={styles.axisLabel}>z = −3</text>
+          <text x={xFor(96)} y="225" className={styles.axisLabel}>−2</text>
+          <text x={xFor(100)} y="225" className={styles.axisLabel}>0</text>
+          <text x={xFor(104)} y="225" className={styles.axisLabel}>+2</text>
+          <text x={xFor(106)} y="225" className={styles.axisLabel}>+3</text>
           {peerResults.map((value, index) => (
             <circle key={index} cx={xFor(value)} cy={75 + (index % 4) * 28} r="7" className={styles.peerPoint} />
           ))}
@@ -194,7 +202,8 @@ export function AvviksbehandlingDemo() {
           <rect x="35" y="95" width="130" height="70" rx="14" className={styles.issueBox} />
           <path d="M175 130 L245 130" className={styles.arrow} />
           <rect x="255" y="95" width="130" height="70" rx="14" className={styles.correctionBox} />
-          <path d="M395 130 L465 130" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
+          <path d="M395 130 L445 130 L465 90" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
+          <path d="M445 130 L465 190" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
           <rect x="475" y="55" width="165" height="70" rx="14" className={mode === "cause" ? styles.causeBox : styles.processBoxMuted} />
           <rect x="475" y="155" width="165" height="70" rx="14" className={mode === "cause" ? styles.effectBox : styles.processBoxMuted} />
           <text x="100" y="134" className={styles.svgLabel}>Avvik</text>
@@ -271,9 +280,9 @@ export function RevisjonssporDemo() {
       afterword="Hva som må logges, og hvilke metadata som kreves, avhenger av system og regelverk. Hovedpoenget er at relevante endringer skal kunne rekonstrueres."
     >
       <div className={shared.stack}>
-        <div className={styles.auditTimeline} aria-hidden="true">
+        <div className={styles.auditTimeline} role="list" aria-label="Bevarte versjoner i revisjonssporet">
           {versions.slice(0, changes + 1).map((item, index) => (
-            <div key={item.version} className={styles.auditVersion}>
+            <div key={item.version} className={styles.auditVersion} role="listitem">
               <span className={styles.auditDot}>{index + 1}</span>
               <strong>{item.version}</strong>
               <span>{item.value}</span>
