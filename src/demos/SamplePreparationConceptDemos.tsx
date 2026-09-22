@@ -95,7 +95,7 @@ export function RepresentativDemo() {
           <Chip variant="choice" pressed={strategy === "distributed"} onClick={() => setStrategy("distributed")}>Fordelt uttak</Chip>
         </ChipGroup>
         <div className={shared.row}>
-          <Readout label="Sann middelverdi i illustrert parti" value={<MathFormula tex={texNumber(trueMean, 1)} />} size="small" />
+          <Readout label="Middelverdi i hele illustrerte partiet" value={<MathFormula tex={texNumber(trueMean, 1)} />} size="small" />
           <Readout label="Middelverdi i uttaket" value={<MathFormula tex={texNumber(sampleMean, 1)} />} size="small" />
           <Readout label="Avvik fra partiet" value={<MathFormula tex={texNumber(bias, 1)} />} size="small" tone={Math.abs(bias) > 2 ? "warning" : "normal"} />
         </div>
@@ -284,7 +284,7 @@ export function FortynningDemo() {
           {dots(10, styles.analyteDot, 215, Math.max(72, 216 - fillHeight), 5)}
         </svg>
         <div className={shared.row}>
-          <Readout label="Aliquot" value={<MathFormula tex={"1{,}0\\,\\mathrm{mL}\\ @\\ 100\\,\\mu\\mathrm{g/mL}"} />} size="small" />
+          <Readout label="Aliquot" value={<MathFormula tex={"1{,}0\\,\\mathrm{mL},\\quad 100\\,\\mu\\mathrm{g/mL}"} />} size="small" />
           <Readout label="Fortynningsfaktor" value={<MathFormula tex={"F = " + texNumber(dilutionFactor, 1)} />} size="small" />
           <Readout label="Ny konsentrasjon" value={<MathFormula tex={"c_2 = " + texNumber(newConcentration, 1) + "\\,\\mu\\mathrm{g/mL}"} />} size="small" />
         </div>
@@ -453,7 +453,7 @@ export function ProvemengdeDemo() {
           <Readout label="Partikler i uttaket" value={<MathFormula tex={String(sampleSize)} />} size="small" />
           <Readout label="Middel i uttaket" value={<MathFormula tex={texNumber(selectedMean, 1)} />} size="small" />
           <Readout label="Middel i hele partiet" value={<MathFormula tex={texNumber(trueMean, 1)} />} size="small" />
-          <Readout label="Illustrert 1/√n-skala" value={<MathFormula tex={texNumber(relativeSamplingUncertainty, 1) + "\\,\\%"} />} size="small" />
+          <Readout label="Illustrert 1/√n-skala" value={<MathFormula tex={"100/\\sqrt{n} = " + texNumber(relativeSamplingUncertainty, 1) + "\\,\\%"} />} size="small" />
         </div>
         <Slider
           label="Prøvemengde målt som antall illustrerte partikler"
