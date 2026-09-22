@@ -165,7 +165,7 @@
 }
 
 .statusOn {
-  color: var(--color-accent-strong);
+  color: var(--color-accent);
 }
 
 .statusOff {
@@ -232,4 +232,21 @@
     grid-template-columns: 1fr;
     gap: 4px;
   }
+}
+
+.svgLabel {
+  fill: var(--color-text-primary);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.certificateText {
+  fill: var(--color-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
 }
