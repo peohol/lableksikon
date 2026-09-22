@@ -26,7 +26,7 @@ function mean(values: number[]) {
 
 function dots(
   count: number,
-  className: string,
+  className: string | undefined,
   offsetX = 0,
   offsetY = 0,
   columns = 5,
