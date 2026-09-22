@@ -240,7 +240,7 @@ export function OppkonsentreringDemo() {
         <svg viewBox="0 0 520 260" className={shared.svg} aria-hidden="true">
           <path d="M185 35 L335 35 L315 225 L205 225 Z" className={styles.flaskOutline} />
           <rect x="208" y={225 - fillHeight} width="104" height={fillHeight} rx="8" className={styles.solutionFill} />
-          {dots(10, styles.analyteDot, 215, Math.max(78, 206 - fillHeight), 5)}
+          {dots(10, styles.analyteDot, 215, 219 - fillHeight, 5)}
         </svg>
         <div className={shared.row}>
           <Readout label="Analyttmengde" value={<MathFormula tex={"m = 10\\,\\mathrm{ng}"} />} size="small" />
@@ -281,7 +281,7 @@ export function FortynningDemo() {
         <svg viewBox="0 0 520 280" className={shared.svg} aria-hidden="true">
           <path d="M185 35 L335 35 L315 235 L205 235 Z" className={styles.flaskOutline} />
           <rect x="208" y={235 - fillHeight} width="104" height={fillHeight} rx="8" className={styles.solutionFill} />
-          {dots(10, styles.analyteDot, 215, Math.max(72, 216 - fillHeight), 5)}
+          {dots(10, styles.analyteDot, 215, 229 - fillHeight, 5)}
         </svg>
         <div className={shared.row}>
           <Readout label="Aliquot" value={<MathFormula tex={"1{,}0\\,\\mathrm{mL},\\quad 100\\,\\mu\\mathrm{g/mL}"} />} size="small" />
@@ -364,6 +364,11 @@ export function FiltreringDemo() {
           <path d="M175 130 L235 185" className={styles.arrow} />
           <rect x="200" y="180" width="160" height="12" rx="5" className={styles.filterMembrane} />
           {dots(6, styles.retainedParticle, 215, 145, 6)}
+          {analyteForm === "particle" ? (
+            <g data-testid="bound-analyte-retentate">
+              {dots(4, styles.analyteBound, 235, 145, 4)}
+            </g>
+          ) : null}
           {analyteForm === "dissolved" ? dots(8, styles.analyteDot, 225, 205, 4) : null}
           <path d="M215 200 L345 200 L330 275 L230 275 Z" className={styles.filtrateVessel} />
         </svg>
