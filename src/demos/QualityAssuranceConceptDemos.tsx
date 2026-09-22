@@ -29,6 +29,10 @@ export function AkkrediteringDemo() {
           <rect x="335" y="70" width="210" height="70" rx="12" className={styles.scopeBox} />
           <rect x="75" y="165" width="210" height="48" rx="12" className={styles.scopeBox} />
           <rect x="335" y="165" width="210" height="48" rx="12" className={styles.outsideBox} />
+          <text x="180" y="112" className={styles.svgLabel}>Analyse A · matriks X</text>
+          <text x="440" y="112" className={styles.svgLabel}>Analyse B · matriks Y</text>
+          <text x="180" y="195" className={styles.svgLabel}>Prøvetaking</text>
+          <text x="440" y="195" className={styles.svgLabel}>FoU-aktivitet</text>
           <rect
             x={activity === "scope" ? 67 : 327}
             y={activity === "scope" ? 62 : 157}
@@ -62,7 +66,7 @@ export function RingtestDemo() {
   const ptSd = 2;
   const z = (result - assigned) / ptSd;
   const absZ = Math.abs(z);
-  const tone = absZ > 3 ? "warning" : "normal";
+  const tone = absZ > 2 ? "warning" : "normal";
   const xFor = (value: number) => 70 + ((value - 92) / 16) * 470;
   const peerResults = [95.8, 97.5, 98.9, 99.6, 100.5, 101.2, 102.7, 104.1];
 
@@ -134,6 +138,10 @@ export function SrmDemo() {
           {[66, 116, 166, 216].map((y) => (
             <rect key={y} x="145" y={y} width="230" height="42" rx="7" className={styles.certificateLine} />
           ))}
+          <text x="165" y="92" className={styles.certificateText}>Sertifisert verdi</text>
+          <text x="165" y="142" className={styles.certificateText}>Måleusikkerhet</text>
+          <text x="165" y="192" className={styles.certificateText}>Metrologisk sporbarhet</text>
+          <text x="165" y="242" className={styles.certificateText}>Betingelser</text>
           <rect x="138" y={selected.y - 7} width="244" height={selected.height + 14} rx="10" className={styles.certificateHighlight} />
         </svg>
         <ChipGroup label="Del av CRM-sertifikatet">
@@ -163,6 +171,9 @@ export function StandardmetodeDemo() {
         <path d="M485 123 L535 123" className={styles.arrow} />
         <rect x="545" y="75" width="140" height="95" rx="16" className={styles.processBox} />
         <circle cx="385" cy="123" r="34" className={styles.verificationGauge} />
+        <text x="135" y="126" className={styles.svgLabel}>Publisert standard</text>
+        <text x="385" y="126" className={styles.svgLabel}>Lokal verifisering</text>
+        <text x="615" y="126" className={styles.svgLabel}>Autorisert rutine</text>
       </svg>
     </DemonstrationFrame>
   );
@@ -186,6 +197,10 @@ export function AvviksbehandlingDemo() {
           <path d="M395 130 L465 130" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
           <rect x="475" y="55" width="165" height="70" rx="14" className={mode === "cause" ? styles.causeBox : styles.processBoxMuted} />
           <rect x="475" y="155" width="165" height="70" rx="14" className={mode === "cause" ? styles.effectBox : styles.processBoxMuted} />
+          <text x="100" y="134" className={styles.svgLabel}>Avvik</text>
+          <text x="320" y="134" className={styles.svgLabel}>Korreksjon</text>
+          <text x="557" y="94" className={styles.svgLabel}>Årsak + tiltak</text>
+          <text x="557" y="194" className={styles.svgLabel}>Effektkontroll</text>
         </svg>
         <ChipGroup label="Hvor langt går oppfølgingen?">
           <Chip variant="choice" pressed={mode === "correction"} onClick={() => setMode("correction")}>Bare korreksjon</Chip>
