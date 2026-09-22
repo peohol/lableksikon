@@ -125,6 +125,7 @@ describe("grafiske demoer for prøvetaking og opparbeiding", () => {
     const choice = screen.getByRole("button", { name: "Partikkelbundet" });
     await user.click(choice);
     expect(choice).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByTestId("bound-analyte-retentate")).toBeInTheDocument();
     expect(screen.getByText(/holdes nå tilbake sammen med partiklene/)).toBeInTheDocument();
   });
 
