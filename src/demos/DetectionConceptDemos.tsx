@@ -359,17 +359,17 @@ export function MasseopplosningDemo() {
   const minMass = 499.95;
   const maxMass = 500.07;
   const xFor = (mass: number) => 55 + ((mass - minMass) / (maxMass - minMass)) * 420;
-  const widthPx = (width / (maxMass - minMass)) * 420;
   const resolvingPower = 500 / width;
-  const pathA = chromatogramPath(
-    [{ center: xFor(centerA), fwhm: widthPx, height: 115 }],
-    190,
+  const combinedPath = tracePath(
+    Array.from({ length: 181 }, (_, index) => {
+      const mass = minMass + ((maxMass - minMass) * index) / 180;
+      const signal =
+        gaussian(mass, centerA, width, 115) +
+        gaussian(mass, centerB, width, 100);
+      return { x: xFor(mass), y: 190 - signal };
+    }),
   );
-  const pathB = chromatogramPath(
-    [{ center: xFor(centerB), fwhm: widthPx, height: 100 }],
-    190,
-  );
-  const visiblyMerged = width >= 0.024;
+  const visiblyMerged = width >= centerB - centerA;
 
   return (
     <DemonstrationFrame
@@ -381,8 +381,9 @@ export function MasseopplosningDemo() {
       <div className={shared.stack}>
         <svg viewBox="0 0 520 225" className={shared.svg} aria-hidden="true">
           <line x1="55" y1="190" x2="475" y2="190" className={styles.axis} />
-          <path d={pathA} className={styles.massPeakA} />
-          <path d={pathB} className={styles.massPeakB} />
+          <line x1={xFor(centerA)} y1="54" x2={xFor(centerA)} y2="194" className={styles.massGuide} />
+          <line x1={xFor(centerB)} y1="54" x2={xFor(centerB)} y2="194" className={styles.massGuide} />
+          <path d={combinedPath} className={styles.massCombinedPeak} data-testid="mass-resolution-signal" />
         </svg>
         <div className={shared.row}>
           <Readout label="Toppbredde ved halv høyde" value={<MathFormula tex={"\\Delta m = " + texNumber(width, 3)} />} size="small" />
