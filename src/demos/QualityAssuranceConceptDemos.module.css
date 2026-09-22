@@ -1,0 +1,235 @@
+.labFrame {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.scopeBox,
+.outsideBox,
+.processBox,
+.processBoxStrong,
+.processBoxMuted,
+.issueBox,
+.correctionBox,
+.causeBox,
+.effectBox {
+  stroke-width: 2;
+}
+
+.scopeBox,
+.processBox,
+.issueBox,
+.correctionBox {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+}
+
+.outsideBox,
+.processBoxMuted {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border);
+}
+
+.processBoxStrong,
+.causeBox,
+.effectBox {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+}
+
+.scopeHighlight,
+.outsideHighlight {
+  fill: none;
+  stroke-width: 4;
+  stroke-dasharray: 9 5;
+}
+
+.scopeHighlight {
+  stroke: var(--color-accent);
+}
+
+.outsideHighlight {
+  stroke: var(--color-warning);
+}
+
+.acceptBand {
+  fill: var(--color-accent-soft);
+  opacity: 0.65;
+}
+
+.warningBand {
+  fill: color-mix(in srgb, var(--color-warning) 16%, transparent);
+}
+
+.referenceLine {
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+}
+
+.peerPoint {
+  fill: var(--color-text-tertiary);
+}
+
+.labPoint,
+.labPointWarning {
+  stroke: var(--color-surface);
+  stroke-width: 3;
+}
+
+.labPoint {
+  fill: var(--color-accent);
+}
+
+.labPointWarning {
+  fill: var(--color-warning);
+}
+
+.certificatePage {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.certificateLine {
+  fill: var(--color-surface-muted);
+}
+
+.certificateHighlight {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  stroke-dasharray: 8 4;
+  transition:
+    y 180ms ease-out,
+    height 180ms ease-out;
+}
+
+.arrow,
+.arrowMuted {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.arrow {
+  stroke: var(--color-text-secondary);
+}
+
+.arrowMuted {
+  stroke: var(--color-border);
+  stroke-dasharray: 6 6;
+}
+
+.verificationGauge {
+  fill: var(--color-surface);
+  stroke: var(--color-accent);
+  stroke-width: 8;
+  stroke-dasharray: 40 18;
+}
+
+.controlMatrix {
+  display: grid;
+  gap: 8px;
+}
+
+.controlRow,
+.controlRowActive {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 52px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  font-family: var(--font-ui);
+  transition:
+    background 160ms ease-out,
+    border-color 160ms ease-out;
+}
+
+.controlRow {
+  background: var(--color-surface-muted);
+}
+
+.controlRowActive {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+}
+
+.statusOn,
+.statusOff {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.statusOn {
+  color: var(--color-accent-strong);
+}
+
+.statusOff {
+  color: var(--color-text-tertiary);
+}
+
+.auditTimeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  overflow-x: auto;
+  padding: 12px 4px 20px;
+}
+
+.auditVersion {
+  position: relative;
+  min-width: 120px;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  font-family: var(--font-ui);
+}
+
+.auditVersion:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: calc(100% + 2px);
+  width: 16px;
+  border-top: 2px dashed var(--color-text-tertiary);
+}
+
+.auditVersion small {
+  color: var(--color-text-secondary);
+}
+
+.auditDot {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-ink-invert);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .certificateHighlight,
+  .controlRow,
+  .controlRowActive {
+    transition: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .controlRow,
+  .controlRowActive {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
