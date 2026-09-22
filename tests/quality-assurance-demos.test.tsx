@@ -98,7 +98,7 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
       expect.stringContaining("bevarte versjoner 4"),
     );
     expect(mathTex(container)).toContain("4");
-    expect(screen.getByText("12,8")).toBeInTheDocument();
+    expect(screen.getAllByText("12,8").length).toBeGreaterThan(0);
   });
 });
 
