@@ -13,8 +13,7 @@
 
 .signalTrace,
 .conductivityTrace,
-.massPeakA,
-.massPeakB {
+.massCombinedPeak {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -114,15 +113,15 @@
   stroke-dasharray: 6 4;
 }
 
-.massPeakA {
+.massCombinedPeak {
   stroke: var(--color-accent);
   stroke-width: 3.5;
 }
 
-.massPeakB {
-  stroke: var(--color-warning);
-  stroke-width: 3;
-  stroke-dasharray: 8 5;
+.massGuide {
+  stroke: var(--color-text-tertiary);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
 }
 
 .selectionMarker {
