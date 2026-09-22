@@ -265,7 +265,7 @@ export function OppkonsentreringDemo() {
 export function FortynningDemo() {
   const [finalVolume, setFinalVolume] = useState(10);
   const startConcentration = 100;
-  const amount = 100;
+  const amount = startConcentration * 1;
   const newConcentration = amount / finalVolume;
   const dilutionFactor = finalVolume;
   const fillHeight = 45 + finalVolume * 7;
