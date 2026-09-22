@@ -148,16 +148,16 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Representativ prøve | P0 | ✅ **Implementert i PR #26.** Heterogent rutenett/parti med ulike konsentrasjoner. Brukeren velger ett lokalt eller flere fordelte uttak; estimatet sammenlignes med sann middelverdi i hele partiet. |
-| Delprøve | P1 | ✅ **Implementert i PR #26.** Vis fysisk reduksjon fra laboratorieprøve til testportion med animert deling. En «skjev deling» kan vise tap av representativitet. |
+| Representativ prøve | P0 | ✅ **Implementert i PR #26.** Heterogent rutenett med ulike nivåer. Brukeren velger lokalt eller fordelt uttak; uttakets middelverdi sammenlignes med middelverdien i hele det illustrerte partiet. |
+| Delprøve | P1 | ✅ **Implementert i PR #26.** Grafisk reduksjonskjede fra laboratorieprøve via testprøve til testportion, med synlig mindre prøvemengde for hvert trinn. |
 | Homogenisering | P0 | ✅ **Implementert i PR #26.** Partikler/fargefelt før og etter blanding. Slider for homogeniseringsgrad reduserer forskjellen mellom flere små uttak. |
 | Ekstraksjon | P0 | ✅ **Implementert i PR #26.** To væskefaser/beholdere med analyttprikker. Slider for fordelingsforhold eller ekstraksjonstrinn flytter analytten mellom fasene; recovery vises. |
 | Oppkonsentrering | P0 | ✅ **Implementert i PR #26.** Beholder med samme analyttmengde og synkende volum. Slider for sluttvolum øker konsentrasjonen visuelt og numerisk. |
-| Fortynning | P0 | ✅ **Implementert i PR #26.** Motsatt av oppkonsentrering: samme analyttmengde, økende sluttvolum. Konsentrasjon og fargeintensitet faller. |
+| Fortynning | P0 | ✅ **Implementert i PR #26.** Samme analyttmengde i økende sluttvolum; beholderfylling og partikkeltetthet visualiserer at konsentrasjonen faller, samtidig som MathJax viser fortynningsfaktor og ny konsentrasjon. |
 | Fortynningsfaktor | P1 | ✅ **Implementert i PR #26.** Koble fortynningsgrafikken til en enkel interaktiv aliquot/sluttvolum-kontroll. Vis faktor og tilbakeberegnet originalkonsentrasjon med MathJax. |
 | Filtrering | P1 | ✅ **Implementert i PR #26.** Partikler og oppløst analytt gjennom filtermembran. Toggle «analytt oppløst»/«partikkelbundet» viser hvorfor filtrering kan endre målestørrelsen. |
 | Oppslutning | P1 | ✅ **Implementert i PR #26.** Vis kompleks fast matriks som gradvis brytes ned til måleløsning. Interaksjon er valgfri; en sekvensillustrasjon kan være nok. |
-| Prøvemengde | P0 | ✅ **Implementert i PR #26.** Heterogent partikkelsett. Slider for prøvemasse trekker flere/færre partikler og viser hvordan sampling variance typisk faller når flere partikler inngår. |
+| Prøvemengde | P0 | ✅ **Implementert i PR #26.** Heterogent partikkelsett med slider for antall partikler i uttaket. Flere partikler visualiseres samtidig som en eksplisitt pedagogisk `1/√n`-skala faller; teksten presiserer at virkelig prøvetakingsusikkerhet avhenger av materialet og designet. |
 
 ## Kvalitetssikring
 
