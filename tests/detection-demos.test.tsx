@@ -103,6 +103,8 @@ describe("grafiske deteksjonsdemoer", () => {
     );
     expect(mathTex(container)).toContain("\\Delta m = 0{,}010");
     expect(mathTex(container)).toContain("m/\\Delta m \\approx 50000");
+    expect(screen.getByTestId("mass-resolution-signal")).toBeInTheDocument();
+    expect(container.querySelectorAll("[data-testid='mass-resolution-signal']")).toHaveLength(1);
   });
 
   it("LC-MS: valgt kromatografisk topp oppdaterer spektral avlesning", async () => {
