@@ -49,6 +49,16 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
     expect(screen.getByText(/utenfor \|z\| = 3/)).toBeInTheDocument();
   });
 
+  it("ringtest: grenseverdien z = 3 krever oppfølging og deltakerfordelingen er tilgjengelig", () => {
+    render(<RingtestDemo />);
+    const slider = screen.getByRole("slider", {
+      name: "Laboratoriets resultat i kompetanseprøvingen",
+    });
+    fireEvent.change(slider, { target: { value: "106" } });
+    expect(screen.getByText(/ved eller utenfor \|z\| = 3/)).toBeInTheDocument();
+    expect(screen.getByText("95,8 · 97,5 · 98,9 · 99,6 · 100,5 · 101,2 · 102,7 · 104,1")).toBeInTheDocument();
+  });
+
   it("CRM: sporbarhetsfeltet forklarer referansen til sertifisert verdi", async () => {
     const user = userEvent.setup();
     render(<SrmDemo />);
