@@ -50,7 +50,7 @@ export function SiSystemDemo() {
           {bases.map((base) => (
             <div
               key={base}
-              className={selected.active.includes(base as never) ? styles.baseTileActive : styles.baseTile}
+              className={selected.active.some((active) => active === base) ? styles.baseTileActive : styles.baseTile}
             >
               <MathFormula tex={"\\mathrm{" + base + "}"} label={base} />
             </div>
@@ -83,7 +83,7 @@ export function MolmasseDemo() {
       kind="interaktiv"
       instruction="Endre stoffmengden mens molmassen holdes fast og se massen følge direkte."
       label="Molmasse kobler stoffmengde til masse"
-      afterword="Molmasse er masse delt på stoffmengde. Når molmassen er kjent, følger massen lineært av stoffmengden gjennom m = nM."
+      afterword="Molmasse er masse delt på stoffmengde. Når molmassen er kjent, følger massen lineært av stoffmengden."
     >
       <div className={shared.stack}>
         <svg viewBox="0 0 520 230" className={shared.svg} aria-hidden="true">
@@ -180,7 +180,7 @@ export function MasseprosentDemo() {
       kind="interaktiv"
       instruction="Endre analyttmassen mens løsemiddelmassen holdes fast, og følg både teller og total masse."
       label="Masseprosent bruker total blandingsmasse som nevner"
-      afterword="Hvis 5 g analytt tilsettes 100 g løsemiddel, blir totalmassen 105 g. Det gir 4,76 masseprosent — ikke 5 prosent."
+      afterword="Når analytt tilsettes løsemiddel, er nevneren summen av begge massene; den er ikke lik løsemiddelmassen alene."
     >
       <div className={shared.stack}>
         <div className={styles.compositionBar} aria-hidden="true">
@@ -220,7 +220,7 @@ export function PpmDemo() {
       kind="illustrasjon"
       instruction="Følg tre påfølgende hundregangers zoomnivåer til én milliondel."
       label="ppm er en dimensjonsløs relativ størrelse på én milliondel"
-      afterword="1 ppm betyr 10⁻⁶ av den angitte dimensjonsløse fraksjonen. Derfor kan 1 mg/kg være 1 ppm som massefraksjon, mens 1 mg/L er en massekonsentrasjon og er ikke generelt ppm."
+      afterword="ppm angir én milliondel av den aktuelle dimensjonsløse fraksjonen. Massekonsentrasjon i milligram per liter er derimot ikke generelt det samme."
     >
       <div className={styles.zoomLadder} role="img" aria-label="Tre zoomnivåer fra én av hundre til én av én million">
         {levels.map((level) => (
