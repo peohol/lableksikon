@@ -9,19 +9,6 @@ import { Chip, ChipGroup, Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./SampleConceptDemos.module.css";
 
-function Flow({ items }: { items: string[] }) {
-  return (
-    <ol className={styles.flow}>
-      {items.map((item, index) => (
-        <li key={item} className={styles.flowItem}>
-          <span className={styles.flowNumber}>{index + 1}</span>
-          <span>{item}</span>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
 function texNumber(value: number, digits = 1) {
   return comma(value, digits).replace(",", "{,}");
 }
