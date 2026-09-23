@@ -82,7 +82,10 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
     const user = userEvent.setup();
     render(<InternkontrollDemo />);
     await user.click(screen.getByRole("button", { name: "Kontaminering" }));
-    const blank = screen.getByText("Blank").parentElement;
+    const matrix = screen.getByRole("list", {
+      name: "Kontrolltyper og respons på valgt feilscenario",
+    });
+    const blank = within(matrix).getByText("Blank").parentElement;
     expect(blank).not.toBeNull();
     expect(within(blank as HTMLElement).getByText("treffer")).toBeInTheDocument();
   });
@@ -98,6 +101,10 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
       expect.stringContaining("bevarte versjoner 4"),
     );
     expect(mathTex(container)).toContain("4");
+    const history = screen.getByRole("list", { name: "Bevarte versjoner i revisjonssporet" });
+    expect(within(history).getAllByRole("listitem")).toHaveLength(4);
+    expect(within(history).getByText("v1")).toBeInTheDocument();
+    expect(within(history).getByText("v4")).toBeInTheDocument();
     expect(screen.getAllByText("12,8").length).toBeGreaterThan(0);
   });
 });
