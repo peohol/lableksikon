@@ -242,11 +242,11 @@ export function InternkontrollDemo() {
       afterword="Dette er en pedagogisk matrise, ikke en komplett regelbok. Egnet kontrollopplegg må bygges rundt metode, matriks, risiko og hvilke feil som faktisk kan påvirke resultatene."
     >
       <div className={shared.stack}>
-        <div className={styles.controlMatrix} role="img" aria-label="Matrise som viser hvilke kontrolltyper som reagerer på valgt feilscenario">
+        <div className={styles.controlMatrix} role="list" aria-label="Kontrolltyper og respons på valgt feilscenario">
           {rows.map((row) => {
             const active = row[scenario];
             return (
-              <div key={row.key} className={active ? styles.controlRowActive : styles.controlRow}>
+              <div key={row.key} className={active ? styles.controlRowActive : styles.controlRow} role="listitem">
                 <span>{row.label}</span>
                 <span className={active ? styles.statusOn : styles.statusOff}>{active ? "treffer" : "ikke primær"}</span>
               </div>
