@@ -263,3 +263,153 @@
     transition: none;
   }
 }
+
+
+.traceChain {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.traceNode,
+.traceNodeActive {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  align-content: center;
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface-muted);
+  transition:
+    background 160ms ease-out,
+    border-color 160ms ease-out,
+    transform 160ms ease-out;
+}
+
+.traceNodeActive {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.traceArrow {
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  font-size: 20px;
+}
+
+.validationFlow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.validationStep {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-width: 0;
+  min-height: 128px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  font-family: var(--font-ui);
+}
+
+.validationStep small {
+  color: var(--color-text-secondary);
+  line-height: 1.35;
+}
+
+.validationNumber {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-ink-invert);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.validationArrow {
+  position: absolute;
+  right: -18px;
+  top: 48%;
+  z-index: 2;
+  color: var(--color-text-secondary);
+  font-size: 22px;
+}
+
+.verificationRows {
+  display: grid;
+  gap: 10px;
+}
+
+.verificationRow {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.7fr) auto minmax(0, 1.4fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  font-family: var(--font-ui);
+}
+
+.verificationConnector {
+  color: var(--color-text-tertiary);
+}
+
+.verificationPass,
+.verificationFail {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.verificationPass {
+  color: var(--color-text-primary);
+}
+
+.verificationFail {
+  color: var(--color-warning);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .traceNode,
+  .traceNodeActive {
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .traceChain,
+  .validationFlow {
+    grid-template-columns: 1fr;
+  }
+
+  .traceArrow,
+  .validationArrow {
+    display: none;
+  }
+
+  .verificationRow {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .verificationConnector {
+    display: none;
+  }
+}
