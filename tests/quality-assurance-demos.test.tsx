@@ -105,6 +105,8 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
     expect(within(history).getAllByRole("listitem")).toHaveLength(4);
     expect(within(history).getByText("v1")).toBeInTheDocument();
     expect(within(history).getByText("v4")).toBeInTheDocument();
+    expect(within(history).getByText("Analytiker A · 09:14")).toBeInTheDocument();
+    expect(within(history).getByText("Fagansvarlig · 10:21")).toBeInTheDocument();
     expect(screen.getAllByText("12,8").length).toBeGreaterThan(0);
   });
 });
