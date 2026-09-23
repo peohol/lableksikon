@@ -100,13 +100,18 @@ export function RingtestDemo() {
           <Readout label="Tildelt verdi" value={<MathFormula tex="100" />} size="small" />
           <Readout label="σ for vurdering" value={<MathFormula tex="2{,}0" />} size="small" />
           <Readout label="z-skår" value={<MathFormula tex={"z = (x-x_a)/\\sigma_{pt} = " + texNumber(z, 2)} />} size="small" tone={tone} />
+          <Readout
+            label="Andre deltakerresultater"
+            value={peerResults.map((value) => comma(value, 1)).join(" · ")}
+            size="small"
+          />
         </div>
         <Verdict tone={tone} reserve={3}>
           {absZ <= 2
             ? "Resultatet ligger innenfor den sentrale illustrerte sonen (|z| ≤ 2)."
-            : absZ <= 3
+            : absZ < 3
               ? "Resultatet ligger i den illustrerte varslingssonen mellom |z| = 2 og 3."
-              : "Resultatet ligger utenfor |z| = 3 i denne illustrasjonen og krever oppfølging etter PT-ordningens kriterier."}
+              : "Resultatet ligger ved eller utenfor |z| = 3 i denne illustrasjonen og krever oppfølging etter PT-ordningens kriterier."}
         </Verdict>
         <Slider
           label="Laboratoriets resultat i kompetanseprøvingen"
