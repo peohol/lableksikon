@@ -320,19 +320,69 @@ export function ArbeidsomradeDemo() {
 }
 
 export function EttpunktskalibreringDemo() {
+  const [knownModel, setKnownModel] = useState(true);
+  const calX = 40;
+  const calY = 100;
+  const x = (level: number) => 55 + (level / 100) * 420;
+  const y = (response: number) => 205 - (response / 220) * 160;
+  const family = [1.5, 2.5, 3.5];
+
   return (
     <DemonstrationFrame
-      kind="sammenligning"
-      instruction="Sammenlign hva ett kalibreringspunkt kan fastsette med hva en flerpunktserie kan undersøke."
-      label="Ettpunktskalibrering mot flerpunktkalibrering"
-      afterword="Ett punkt kan være tilstrekkelig når kalibreringsfunksjonens form og stabilitet er dokumentert på annen måte; det betyr ikke automatisk at linjen skal tvinges gjennom null."
+      kind="interaktiv"
+      instruction="Bytt mellom dokumentert modellform og ukjent modellform, men behold samme ene kalibratorpunkt."
+      label="Ett kalibreringspunkt kan bare fastsette det modellen allerede har gjort entydig"
+      afterword="Ettpunktskalibrering krever at relevante modellforutsetninger og stabilitet er dokumentert på annen måte. Ett punkt alene begrunner ikke at konstantleddet settes til null."
     >
-      <ValueRows
-        rows={[
-          { label: "Ett punkt", values: "forankrer responsen ved ett kjent nivå" },
-          { label: "Flere punkter", values: "viser også modellatferd og avvik gjennom området" },
-        ]}
-      />
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 235" className={shared.svg} aria-hidden="true">
+          <line x1="55" y1="205" x2="475" y2="205" className={styles.axis} />
+          <line x1="55" y1="205" x2="55" y2="35" className={styles.axis} />
+          {knownModel ? (
+            <line x1={x(0)} y1={y(0)} x2={x(88)} y2={y(220)} className={styles.lineAccent} />
+          ) : (
+            family.map((slope) => {
+              const intercept = calY - slope * calX;
+              return (
+                <line
+                  key={slope}
+                  x1={x(15)}
+                  y1={y(intercept + slope * 15)}
+                  x2={x(75)}
+                  y2={y(intercept + slope * 75)}
+                  className={styles.modelFamilyLine}
+                />
+              );
+            })
+          )}
+          <circle cx={x(calX)} cy={y(calY)} r="8" className={styles.calibratorPoint} />
+        </svg>
+        <ChipGroup label="Kunnskap om kalibreringsmodellen">
+          <Chip variant="choice" pressed={knownModel} onClick={() => setKnownModel(true)}>
+            Modellform dokumentert
+          </Chip>
+          <Chip variant="choice" pressed={!knownModel} onClick={() => setKnownModel(false)}>
+            Modellform ikke fastlagt
+          </Chip>
+        </ChipGroup>
+        <div className={shared.row}>
+          <Readout label="Kjent kalibrator" value={<MathFormula tex="x_c = 40,\quad y_c = 100" />} size="small" />
+          <Readout
+            label="Hva punktet bestemmer"
+            value={
+              knownModel
+                ? <MathFormula tex="y = bx,\quad b = 2{,}50" />
+                : <MathFormula tex="y = a + bx\;:\; \text{mange }(a,b)\text{-par passer}" />
+            }
+            size="small"
+          />
+        </div>
+        <Verdict reserve={3}>
+          {knownModel
+            ? "Når en proporsjonal modell allerede er faglig dokumentert, kan det ene punktet bestemme skalaen i denne illustrasjonen."
+            : "Uten fastlagt modellform finnes flere linjer gjennom samme punkt. Ett punkt kan derfor ikke alene fastsette både stigningstall og konstantledd."}
+        </Verdict>
+      </div>
     </DemonstrationFrame>
   );
 }
@@ -538,41 +588,109 @@ export function DriftDemo() {
 }
 
 export function KontrollproveDemo() {
+  const [controlShift, setControlShift] = useState(0);
+  const lower = 97;
+  const upper = 103;
+  const firstControl = 100.5;
+  const secondControl = 100 + controlShift;
+  const accepted = secondControl >= lower && secondControl <= upper;
+  const x = (index: number) => 55 + index * 52;
+  const y = (value: number) => 205 - ((value - 94) / 12) * 160;
+  const sampleValues = [99.4, 100.8, 101.1, 99.7, 100.3, 99.9, 100.6, 100.2];
+
   return (
     <DemonstrationFrame
-      kind="stegvis"
-      instruction="Følg hvordan en uavhengig kontrollprøve brukes til å overvåke en analyseserie."
-      label="Kontrollprøve brukt som uavhengig kvalitetskontroll"
-      afterword="Kontrollprøven bør gi informasjon som ikke bare gjentar kalibreringsinformasjonen; den brukes til å oppdage om systemet har endret seg."
+      kind="interaktiv"
+      instruction="Flytt den siste kontrollprøven mens prøveresultatene ellers holdes uendret."
+      label="Kontrollprøver overvåker analyseserien uavhengig av selve kalibratorene"
+      afterword="Akseptgrensene er illustrative. Reelle kontrollregler må være forhåndsdefinerte og tilpasset metoden, kontrollmaterialet og risikoen."
     >
-      <Flow
-        items={[
-          "Kalibrer serien",
-          "Analyser kontrollprøven",
-          "Sammenlign med kontrollkrav",
-          "Godta, undersøk eller stopp serien",
-        ]}
-      />
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 245" className={shared.svg} aria-hidden="true">
+          <rect x="45" y={y(upper)} width="440" height={y(lower) - y(upper)} className={styles.controlBand} />
+          <line x1="45" y1={y(lower)} x2="485" y2={y(lower)} className={styles.guideLine} />
+          <line x1="45" y1={y(upper)} x2="485" y2={y(upper)} className={styles.guideLine} />
+          {sampleValues.map((value, index) => (
+            <circle key={index} cx={x(index)} cy={y(value)} r="5" className={styles.sampleSeriesPoint} />
+          ))}
+          <circle cx={x(2)} cy={y(firstControl)} r="9" className={styles.controlPoint} />
+          <circle cx={x(7)} cy={y(secondControl)} r="9" className={accepted ? styles.controlPoint : styles.controlPointWarning} />
+        </svg>
+        <div className={shared.row}>
+          <Readout label="Illustrert akseptområde" value={<MathFormula tex="97 \le x_{QC} \le 103" />} size="small" />
+          <Readout label="Siste kontrollprøve" value={<MathFormula tex={"x_{QC} = " + texNumber(secondControl, 1)} />} size="small" tone={accepted ? "normal" : "warning"} />
+        </div>
+        <Verdict tone={accepted ? "normal" : "warning"} reserve={3}>
+          {accepted
+            ? "Den siste kontrollprøven ligger innenfor det illustrerte kontrollkravet; serien har ingen kontrollprøvealarm i denne enkle modellen."
+            : "Den siste kontrollprøven ligger utenfor det illustrerte kontrollkravet. Serien bør ikke ukritisk godtas før avviket er undersøkt."}
+        </Verdict>
+        <Slider
+          label="Forskyvning av siste kontrollprøve"
+          valueText={"siste kontrollprøve " + comma(secondControl, 1) + (accepted ? "; innenfor kontrollkravet" : "; utenfor kontrollkravet")}
+          value={controlShift}
+          onChange={setControlShift}
+          min={-6}
+          max={6}
+          step={0.5}
+          ends={["lav kontroll", "høy kontroll"]}
+        />
+      </div>
     </DemonstrationFrame>
   );
 }
 
 export function EksternKalibreringDemo() {
+  const [matrixResponse, setMatrixResponse] = useState(100);
+  const trueLevel = 60;
+  const response = 2 * trueLevel * (matrixResponse / 100);
+  const estimate = response / 2;
+  const relativeBias = ((estimate - trueLevel) / trueLevel) * 100;
+  const x = (level: number) => 55 + (level / 100) * 420;
+  const y = (signal: number) => 205 - (signal / 220) * 160;
+  const calibrators = [20, 40, 60, 80];
+
   return (
     <DemonstrationFrame
-      kind="stegvis"
-      instruction="Se at kalibratorene tilberedes og måles separat fra den ukjente prøven."
-      label="Ekstern kalibrering med separat kalibratorserie"
-      afterword="Ekstern kalibrering forutsetter at kalibratorenes responsforhold er representativt for prøvene; matriseeffekter kan bryte denne forutsetningen."
+      kind="interaktiv"
+      instruction="Endre prøvens respons relativt til de separate kalibratorene og se tilbakeberegningen flytte seg."
+      label="Ekstern kalibrering bruker en separat kalibratorserie — og forutsetter sammenlignbar respons"
+      afterword="Matriseeffekt er bare én grunn til at prøven kan avvike fra kalibratorenes responsforhold. Demoen viser sårbarheten, ikke et universelt krav om matrikstilpasset kalibrering."
     >
-      <Flow
-        items={[
-          "Lag separate kalibratorer",
-          "Mål kalibratorserien",
-          "Etabler kalibreringsrelasjonen",
-          "Bruk relasjonen på prøveresponsen",
-        ]}
-      />
+      <div className={shared.stack}>
+        <svg viewBox="0 0 520 240" className={shared.svg} aria-hidden="true">
+          <line x1="55" y1="205" x2="475" y2="205" className={styles.axis} />
+          <line x1="55" y1="205" x2="55" y2="35" className={styles.axis} />
+          <line x1={x(0)} y1={y(0)} x2={x(100)} y2={y(200)} className={styles.lineAccent} />
+          {calibrators.map((level) => (
+            <circle key={level} cx={x(level)} cy={y(level * 2)} r="6" className={styles.point} />
+          ))}
+          <line x1={x(estimate)} y1={y(response)} x2={x(estimate)} y2="205" className={styles.sampleProjection} />
+          <line x1="55" y1={y(response)} x2={x(estimate)} y2={y(response)} className={styles.sampleProjection} />
+          <circle cx={x(estimate)} cy={y(response)} r="9" className={matrixResponse === 100 ? styles.calibratorPoint : styles.samplePointWarning} />
+        </svg>
+        <div className={shared.row}>
+          <Readout label="Sant nivå i illustrasjonen" value={<MathFormula tex="x_{\mathrm{true}} = 60" />} size="small" />
+          <Readout label="Prøverespons" value={<MathFormula tex={"y_s = " + texNumber(response, 1)} />} size="small" />
+          <Readout label="Estimert med ekstern kurve" value={<MathFormula tex={"\hat{x} = " + texNumber(estimate, 1)} />} size="small" tone={matrixResponse === 100 ? "normal" : "warning"} />
+          <Readout label="Relativ skjevhet" value={<MathFormula tex={texNumber(relativeBias, 1) + "\,\%"} />} size="small" tone={matrixResponse === 100 ? "normal" : "warning"} />
+        </div>
+        <Verdict tone={matrixResponse === 100 ? "normal" : "warning"} reserve={3}>
+          {matrixResponse === 100
+            ? "Prøven følger samme responsforhold som de separate kalibratorene, så tilbakeberegningen treffer det illustrerte sanne nivået."
+            : "Prøven responderer annerledes enn kalibratorserien. Den eksterne kurven tolker derfor signalet som et annet nivå enn det illustrerte sanne nivået."}
+        </Verdict>
+        <Slider
+          label="Prøverespons relativt til ekstern kalibrator"
+          valueText={"prøverespons " + comma(matrixResponse, 0) + " prosent; estimert nivå " + comma(estimate, 1)}
+          value={matrixResponse}
+          onChange={setMatrixResponse}
+          min={60}
+          max={110}
+          step={5}
+          ends={["lavere prøverespons", "høyere prøverespons"]}
+        />
+      </div>
     </DemonstrationFrame>
   );
 }
