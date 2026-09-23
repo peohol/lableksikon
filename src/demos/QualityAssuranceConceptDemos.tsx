@@ -42,6 +42,19 @@ export function AkkrediteringDemo() {
             className={activity === "scope" ? styles.scopeHighlight : styles.outsideHighlight}
           />
         </svg>
+        <div className={styles.scopeSummary} role="list" aria-label="Aktiviteter og akkrediteringsomfang i illustrasjonen">
+          {[
+            ["Analyse A · matriks X", "innenfor omfanget"],
+            ["Analyse B · matriks Y", "innenfor omfanget"],
+            ["Prøvetaking", "innenfor omfanget"],
+            ["FoU-aktivitet", "utenfor omfanget"],
+          ].map(([name, status]) => (
+            <div key={name} className={styles.scopeSummaryRow} role="listitem">
+              <span>{name}</span>
+              <strong>{status}</strong>
+            </div>
+          ))}
+        </div>
         <ChipGroup label="Aktivitet som undersøkes">
           <Chip variant="choice" pressed={activity === "scope"} onClick={() => setActivity("scope")}>
             I akkrediteringsomfanget
@@ -198,32 +211,38 @@ export function AvviksbehandlingDemo() {
   return (
     <DemonstrationFrame
       kind="interaktiv"
-      instruction="Velg om håndteringen stopper etter å rette den konkrete situasjonen, eller går videre til årsak og effektkontroll."
-      label="Korreksjon retter hendelsen; korrigerende tiltak skal redusere risikoen for gjentakelse"
-      afterword="Ikke alle avvik krever samme nivå av årsaksanalyse. Omfanget må stå i forhold til konsekvens, gjentakelsesrisiko og kravene i styringssystemet."
+      instruction="Følg først vurderingen av påvirket arbeid, og velg deretter om oppfølgingen stopper etter korreksjon eller går videre til årsak, korrigerende tiltak og effektkontroll."
+      label="Avviksbehandling må både håndtere konsekvensen og vurdere behovet for å hindre gjentakelse"
+      afterword="Påvirket arbeid og tidligere rapporterte resultater må vurderes før saken kan lukkes. Omfanget av årsaksanalyse og korrigerende tiltak må stå i forhold til konsekvens, gjentakelsesrisiko og styringssystemets krav."
     >
       <div className={shared.stack}>
-        <svg viewBox="0 0 680 280" className={shared.svg} aria-hidden="true">
-          <rect x="35" y="95" width="130" height="70" rx="14" className={styles.issueBox} />
-          <path d="M175 130 L245 130" className={styles.arrow} />
-          <rect x="255" y="95" width="130" height="70" rx="14" className={styles.correctionBox} />
-          <path d="M395 130 L445 130 L465 90" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
-          <path d="M445 130 L465 190" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
-          <rect x="475" y="55" width="165" height="70" rx="14" className={mode === "cause" ? styles.causeBox : styles.processBoxMuted} />
-          <rect x="475" y="155" width="165" height="70" rx="14" className={mode === "cause" ? styles.effectBox : styles.processBoxMuted} />
-          <text x="100" y="134" className={styles.svgLabel}>Avvik</text>
-          <text x="320" y="134" className={styles.svgLabel}>Korreksjon</text>
-          <text x="557" y="94" className={styles.svgLabel}>Årsak + tiltak</text>
-          <text x="557" y="194" className={styles.svgLabel}>Effektkontroll</text>
+        <svg viewBox="0 0 920 250" className={shared.svg} aria-hidden="true">
+          <rect x="25" y="85" width="120" height="70" rx="14" className={styles.issueBox} />
+          <path d="M155 120 L205 120" className={styles.arrow} />
+          <rect x="215" y="75" width="150" height="90" rx="14" className={styles.impactBox} />
+          <path d="M375 120 L425 120" className={styles.arrow} />
+          <rect x="435" y="85" width="120" height="70" rx="14" className={styles.correctionBox} />
+          <path d="M565 120 L615 120" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
+          <rect x="625" y="75" width="130" height="90" rx="14" className={mode === "cause" ? styles.causeBox : styles.processBoxMuted} />
+          <path d="M765 120 L805 120" className={mode === "cause" ? styles.arrow : styles.arrowMuted} />
+          <rect x="815" y="75" width="85" height="90" rx="14" className={mode === "cause" ? styles.effectBox : styles.processBoxMuted} />
+          <text x="85" y="124" className={styles.svgLabel}>Avvik</text>
+          <text x="290" y="108" className={styles.svgLabel}>Vurder påvirket</text>
+          <text x="290" y="128" className={styles.svgLabel}>arbeid/resultater</text>
+          <text x="495" y="124" className={styles.svgLabel}>Korreksjon</text>
+          <text x="690" y="108" className={styles.svgLabel}>Årsak +</text>
+          <text x="690" y="128" className={styles.svgLabel}>tiltak</text>
+          <text x="858" y="108" className={styles.svgLabel}>Effekt-</text>
+          <text x="858" y="128" className={styles.svgLabel}>kontroll</text>
         </svg>
         <ChipGroup label="Hvor langt går oppfølgingen?">
-          <Chip variant="choice" pressed={mode === "correction"} onClick={() => setMode("correction")}>Bare korreksjon</Chip>
-          <Chip variant="choice" pressed={mode === "cause"} onClick={() => setMode("cause")}>Årsak + tiltak + effektkontroll</Chip>
+          <Chip variant="choice" pressed={mode === "correction"} onClick={() => setMode("correction")}>Vurder påvirkning + korreksjon</Chip>
+          <Chip variant="choice" pressed={mode === "cause"} onClick={() => setMode("cause")}>Full årsaksrettet oppfølging</Chip>
         </ChipGroup>
         <Verdict tone={mode === "correction" ? "warning" : "normal"} reserve={3}>
           {mode === "correction"
-            ? "Den konkrete feilen er rettet, men en eventuell underliggende årsak er ikke undersøkt i denne banen."
-            : "Oppfølgingen går videre fra hendelsen til årsak, korrigerende tiltak og kontroll av om tiltaket faktisk virker."}
+            ? "Påvirket arbeid og rapporterte resultater vurderes, og den konkrete feilen rettes. En eventuell underliggende årsak er ikke undersøkt i denne banen."
+            : "Etter vurdering av påvirket arbeid og korreksjon går oppfølgingen videre til årsak, korrigerende tiltak og deretter kontroll av om tiltaket faktisk virker."}
         </Verdict>
       </div>
     </DemonstrationFrame>
