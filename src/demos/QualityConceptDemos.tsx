@@ -10,19 +10,6 @@ import { Chip, ChipGroup, Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./QualityConceptDemos.module.css";
 
-function Flow({ items }: { items: string[] }) {
-  return (
-    <ol className={styles.flow}>
-      {items.map((item, index) => (
-        <li key={item} className={styles.flowItem}>
-          <span className={styles.flowNumber}>{index + 1}</span>
-          <span>{item}</span>
-        </li>
-      ))}
-    </ol>
-  );
-}
-
 const OFFSETS = [-1, -0.6, -0.2, 0.2, 0.6, 1] as const;
 const SMALL_OFFSETS = [-1, 0, 1] as const;
 
