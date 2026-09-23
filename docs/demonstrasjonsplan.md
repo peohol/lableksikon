@@ -1,6 +1,6 @@
 # Plan for mer pedagogiske demonstrasjoner
 
-Dette dokumentet er en redaksjonell og pedagogisk gjennomgang av alle publiserte begreper per 20. september 2026. Det beskriver **ideer**, ikke ferdige spesifikasjoner. Nye demonstrasjoner skal ikke implementeres som del av denne gjennomgangen.
+Dette dokumentet startet som en redaksjonell og pedagogisk gjennomgang av alle publiserte begreper per 20. september 2026 og brukes nå også til å spore implementeringen. Rader merket **Implementert** er bygget i den angitte PR-en; rader merket **Beholdt** er vurdert på nytt og beholdes fordi dagens løsning allerede er visuelt sterk eller fordi mer interaksjon ville gitt liten faglig gevinst.
 
 ## Mål
 
@@ -36,57 +36,57 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Presisjon | P2 | Behold dagens interaktive spredningsdemo. Den er et godt mønster for resten. |
+| Presisjon | P2 | ✅ **Beholdt.** Dagens interaktive spredningsdemo er visuelt sterk og fungerer som mønster for resten. |
 | Repeterbarhet | P0 | ✅ **Implementert i PR #15.** Vis seks–åtte målepunkter som punktsky/strip-plot rundt et nivå. Slider for tilfeldig variasjon; RSD/SD oppdateres samtidig. Brukeren ser direkte hva «tett serie» betyr. |
 | Intermediær presisjon | P0 | ✅ **Implementert i PR #15.** Tre grupper for dag/operatør. Én kontroll for mellom-serie-variasjon som flytter gruppesentra uten å endre innen-serie-spredningen. Gjør skillet mot repeterbarhet visuelt. |
 | Reproduserbarhet | P0 | ✅ **Implementert i PR #15.** Samme idé på laboratorienivå: tre laboratorier med egne klynger. Slider for mellom-laboratorievariasjon. |
 | Skjevhet | P0 | ✅ **Implementert i PR #15.** Målepunkter mot en referanselinje/målskive. Slider flytter hele klyngen sideveis uten å endre spredningen; avlest skjevhet oppdateres. |
 | Gjenvinning | P0 | ✅ **Implementert i PR #17.** Tre søyler/beholdere viser før spike, tilsatt mengde og målt etter; slider endrer gjenfunnet andel og MathJax-beregningen følger. |
-| Måleusikkerhet | P2 | Behold dagens byggbare usikkerhetsbudsjett. Kan senere suppleres med en synlig usikkerhetsstolpe på sluttresultatet. |
+| Måleusikkerhet | P2 | ✅ **Beholdt.** Det byggbare usikkerhetsbudsjettet er allerede interaktivt og visuelt; ytterligere mekanikk er ikke nødvendig i denne runden. |
 | Utvidet måleusikkerhet | P0 | ✅ **Implementert i PR #17.** Intervall rundt måleresultatet utvider og trekker seg sammen med dekningsfaktoren; `U = k u_c` og endepunktene oppdateres. |
 | Dekningsfaktor | P0 | ✅ **Implementert i PR #17.** Standard normalfordeling med dynamisk dekningsareal viser hvordan større `k` gir større illustrert dekning. |
 | Selektivitet | P0 | ✅ **Implementert i PR #17.** Overlappende analytt- og interferentsignal; slider for interferentstyrke viser bidraget ved analyttposisjonen og påvirkning på tilsynelatende signal. |
-| Spesifisitet | P2 | Begrepet er i stor grad terminologisk. Behold en ryddig sammenligning, eventuelt med et lite spekter fra lav til høy selektivitet i stedet for mer interaksjon. |
+| Spesifisitet | P2 | ✅ **Beholdt som terminologisk sammenligning.** Begrepet brukes ulikt mellom fagområder; en tvungen grafisk skala ville lett antyde en entydig definisjon som ikke finnes. |
 | Følsomhet | P0 | ✅ **Implementert i PR #17.** Interaktiv kalibreringslinje med fast `Δx`; slider endrer stigningstall og synlig `Δy`. |
 | Robusthet | P0 | ✅ **Implementert i PR #17.** pH-slider flytter et punkt langs ytelseskurven rundt nominell innstilling med synlig forhåndsdefinert akseptområde. |
-| Sporbarhet | P1 | Behold kjeden, men visualiser hvert kalibreringsledd som noder med tilhørende usikkerhet. Klikk/valg av ledd viser hvordan kjeden knytter resultatet til referansen. Ikke lat som sporbarhet er «nærhet til sann verdi». |
-| Validering | P2 | Prosessbegrep. En visuell «krav → studie → evidens → konklusjon»-flyt er tilstrekkelig; interaksjon gir lite uten å gjøre demoen til et skjema. |
-| Verifisering | P2 | Prosessbegrep. Vis spesifiserte krav på venstre side og lokale resultater på høyre, med tydelig oppfylt/ikke oppfylt. Ingen sterk grunn til slider. |
+| Sporbarhet | P1 | ✅ **Implementert i PR #29.** Interaktiv kjede viser prøveresultat, arbeidsstandard, referansestandard og definert referanse som egne noder med usikkerhetsledd og forklaring av valgt ledd. |
+| Validering | P2 | ✅ **Implementert i PR #29.** Grafisk flyt viser tiltenkt bruk → ytelseskrav → evidens → konklusjon uten å gjøre prosessbegrepet kunstig interaktivt. |
+| Verifisering | P2 | ✅ **Implementert i PR #29.** Strukturert grafisk sammenligning kobler spesifiserte krav til lokale resultater og viser tydelig oppfylt/ikke oppfylt. |
 | Kontrollkort | P0 | ✅ **Implementert i PR #17.** Ekte kontrollkort med punkter over tid; slider påfører nivåskift fra måling 6 mens kontrollgrensene forblir faste. |
-| Nøyaktighet | P2 | Behold målskivevisualiseringen som skiller presisjon og riktighet/skjevhet. Den er visuelt sterk selv uten interaksjon. |
+| Nøyaktighet | P2 | ✅ **Beholdt.** Målskivevisualiseringen skiller presisjon og riktighet/skjevhet tydelig og trenger ikke mer interaksjon. |
 
 ## Kalibrering og kontroll
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
 | Kalibreringskurve | P0 | ✅ **Implementert i PR #20.** Ukjent respons styres med slider og projiseres via kalibreringslinjen til estimert analyttnivå; modell og estimat oppdateres med MathJax. |
-| Linearitet | P2 | Behold dagens interaktive kurve der øvre punkt kan bøyes av. Dette er referanseeksemplet. |
+| Linearitet | P2 | ✅ **Beholdt.** Dagens interaktive kurve der øvre punkt kan bøyes av er allerede et referanseeksempel. |
 | Arbeidsområde | P0 | ✅ **Implementert i PR #20.** Nivåmarkør flyttes gjennom LLOQ–ULOQ mens illustrert presisjon/skjevhet og verdict viser når metodekravene er oppfylt. |
-| Deteksjonsgrense | P2 | Behold dagens støyinteraksjon. |
+| Deteksjonsgrense | P2 | ✅ **Beholdt.** Dagens støyinteraksjon viser mekanismen direkte. |
 | Kvantifiseringsgrense | P0 | ✅ **Implementert i PR #20.** Replikaer samler seg rundt målverdien når nivået øker; illustrert CV sammenlignes eksplisitt med et definert LOQ-krav. |
 | Responsfaktor | P0 | ✅ **Implementert i PR #20.** To responslinjer viser ulike stigningstall; samme analyttmengde gir ulike signaler mens responsfaktorene og forholdet oppdateres. |
 | Vektet regresjon | P0 | ✅ **Implementert i PR #20.** Samme heteroskedastiske datasett kan tilpasses uvektet, med `1/x` eller `1/x^2`; linje og residualer endres synlig. |
 | Nullpunkt / konstantledd | P0 | ✅ **Implementert i PR #20.** Slider flytter konstantleddet med fast stigningstall; fri modell sammenlignes direkte med en stiplet modell tvunget gjennom null. |
-| Ettpunktskalibrering | P1 | Vis én kjent kalibrator og en antatt modellform. Toggle «modellform kjent»/«ukjent» illustrerer hva ett punkt kan og ikke kan fastsette. |
-| Ekstern kalibrering | P1 | To parallelle spor: separat kalibratorserie og prøve. Vis at prøveresponsen projiseres på kurven; en matriseeffekt-toggle kan demonstrere sårbarheten. |
+| Ettpunktskalibrering | P1 | ✅ **Implementert i PR #29.** Toggle mellom dokumentert modellform og ikke fastlagt modell viser én entydig proporsjonal modell versus flere mulige linjer gjennom samme kalibratorpunkt. |
+| Ekstern kalibrering | P1 | ✅ **Implementert i PR #29.** Separat kalibratorserie og prøve vises i samme plot; slider endrer prøvens relative respons og viser projisert estimat og skjevhet. |
 | Matrikstilpasset kalibrering | P0 | ✅ **Implementert i PR #20.** Slider endrer matriseeffekten; løsemiddel- og matrikstilpasset kurve viser hvordan samme prøverespons gir skjev eller korrigert tolkning. |
-| Internstandard | P2 | Behold dagens før/etter-tap-demo der forholdet bevares bedre enn råsignal. |
-| Standardaddisjon | P2 | Behold dagens stegvis/interaktive demo. |
-| Blindprøve | P1 | Dagens tre blindprøvetyper er visuelt nyttige. Kan senere gjøres til en enkel prosesslinje der man velger hvor i arbeidsflyten «forurensningen» oppstår og ser hvilken blank som fanger den. |
+| Internstandard | P2 | ✅ **Beholdt.** Før/etter-tap-demoen viser visuelt hvorfor forholdet kan være mer robust enn råsignal. |
+| Standardaddisjon | P2 | ✅ **Beholdt.** Dagens stegvis/interaktive demo er allerede visuell og pedagogisk. |
+| Blindprøve | P1 | ✅ **Beholdt.** De tre eksisterende blindprøveillustrasjonene er visuelt nyttige; kontamineringsdemoen i PR #29 dekker i tillegg interaktiv lokalisering av kilde via blankmønster. |
 | Drift | P0 | ✅ **Implementert i PR #20.** Tidsserie med fast tilfeldig småstøy og slider for systematisk drift viser kontrollpunkter som gradvis vandrer mot faste grenser. |
-| Kontrollprøve | P1 | Vis prøveserie med innskutte kontrollpunkter på tidsakse. Én kontroll kan gå utenfor akseptgrensen og utløse verdict om serien. |
+| Kontrollprøve | P1 | ✅ **Implementert i PR #29.** Egne kontrollpunkter er innskutt i analyseserien; slider flytter siste kontroll utenfor faste illustrative grenser og oppdaterer vurderingen. |
 
 ## Prøven og omgivelsene
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Matriseeffekt | P2 | Behold dagens matrisevelger og responskurver. |
+| Matriseeffekt | P2 | ✅ **Beholdt.** Dagens matrisevelger og responskurver er allerede interaktive og visuelt informative. |
 | Ionesuppresjon | P0 | ✅ **Implementert i PR #21.** Samme analyttmengde vises som kromatografiske signaler i ren løsning og matriks; slider reduserer matriseresponsen og oppdaterer responsendringen med MathJax. |
 | Ioneforsterkning | P0 | ✅ **Implementert i PR #21.** Deler grafikkmotor med suppressjon, men slideren øker matriseresponsen ved uendret analyttmengde. |
 | Interferens | P0 | ✅ **Implementert i PR #21.** Interferentsignalet beveges inn mot analytten; separat analytt, interferent og observert sum viser hvordan overlapp gir systematisk overestimering. |
 | Bakgrunnssignal | P0 | ✅ **Implementert i PR #21.** Signaltrace med uavhengige slidere for bakgrunnsnivå og tilfeldig støy gjør skillet mellom nivå og variasjon synlig. |
-| Matriksblank | P1 | Sammenlign tre mini-signaler: løsemiddelblank, matriksblank og prøve. Vis en matriksrelatert topp som bare dukker opp i de to siste. |
-| Kontaminering | P1 | Vis arbeidsflyt som rom/reagens/beholder/prøve/instrument. Valg av kontamineringskilde «farger» hvilke blanker/resultater som rammes. |
+| Matriksblank | P1 | ✅ **Implementert i PR #29.** Tre signalspor for løsemiddelblank, matriksblank og prøve viser matriksrelatert topp i de to sistnevnte og analyttbidrag bare i prøven. |
+| Kontaminering | P1 | ✅ **Implementert i PR #29.** Valg av kontamineringskilde i arbeidsflyten oppdaterer en matrise som viser hvilke blanker og prøver som får signal. |
 | Krysskontaminering | P0 | ✅ **Implementert i PR #21.** Sekvensen høy prøve → blank → neste prøve viser avtakende carry-over; slider oppdaterer blanksignal og ekstra bidrag i neste prøve. |
 | Prøvelagring | P0 | ✅ **Implementert i PR #21.** Tre pedagogiske stabilitetskurver for temperatur kombineres med temperaturvalg og tidsslider; gjenværende analytt avleses med MathJax. |
 
@@ -97,7 +97,7 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Gjennomsnitt | P0 | ✅ **Implementert i PR #15.** «Balansepunkt» på tallinje. Dra ett datapunkt; gjennomsnittet flytter seg som tyngdepunkt. Dette viser mer enn et enkelt summeringsregnestykke. |
 | Median | P0 | ✅ **Implementert i PR #15.** Fem punkter på tallinje. Dra ekstremverdien langt ut og se medianen stå stille mens gjennomsnittet flytter seg. |
 | Varians | P0 | ✅ **Implementert i PR #15.** Punktdiagram med middelverdi og vertikale avstander. Dra ett punkt; vis avvik og kvadrerte bidrag som arealer/søyler. |
-| Standardavvik | P1 | Dagens formelforklaring er ryddig, men kan senere få samme punktdiagram som varians og vise `s` direkte når ett punkt flyttes. |
+| Standardavvik | P1 | ✅ **Beholdt.** Dagens MathJax-formel kombineres allerede med et grafisk søylediagram av måleserien og beregnet `s`; variansdemoen dekker den dynamiske punktpåvirkningen. |
 | Normalfordeling | P0 | ✅ **Implementert i PR #19.** Klokkekurve med slider for standardavvik; arealene innen ett, to og tre standardavvik er markert direkte i figuren. |
 | Frihetsgrader | P0 | ✅ **Implementert i PR #19.** Tre observasjoner med fast gjennomsnitt; to avvik styres fritt og det tredje følger automatisk slik at avvikssummen forblir null. |
 | Konfidensintervall | P0 | ✅ **Implementert i PR #19.** Tjue intervaller vises mot én sann parameterlinje; utvalgsstørrelsen styrer bredden og ett intervall demonstrerer manglende dekning. |
@@ -123,7 +123,7 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Haledannelse | P0 | ✅ **Implementert i PR #23.** Slider fra symmetrisk til halende topp. Vis asymmetri/tailing-mål der faglig passende og hvordan nabotopp påvirkes. |
 | Platetall | P0 | ✅ **Implementert i PR #23.** Hold `t_R` fast og endre toppbredde; kromatografisk topp blir smalere mens `N` øker. Dette bør være én av de mest direkte demoene. |
 | Selektivitetsfaktor | P0 | ✅ **Implementert i PR #23.** To retinerte topper med fast `t_M`. Slider endrer `k_2/k_1`; toppenes relative plassering og `\alpha` oppdateres. |
-| Oppløsning | P2 | Behold dagens interaktive toppseparasjon. |
+| Oppløsning | P2 | ✅ **Beholdt.** Dagens interaktive toppseparasjon viser mekanismen direkte. |
 | Dødvolum | P1 | ✅ **Implementert i PR #23.** Skjematisk væskebane med kolonne og ekstrakolonnevolum markert. Toggle mellom hold-up-volum og ekstrakolonnevolum viser hvorfor «dødvolum» er tvetydig. |
 | Injeksjonsvolum | P0 | ✅ **Implementert i PR #23.** Slider for injeksjonsvolum. Prøveplugg og kromatografisk topp blir bredere/overlastet når volumet øker; signalmengde øker samtidig. |
 
@@ -167,36 +167,32 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 | Ringtest / kompetanseprøving | P0 | ✅ **Implementert i PR #27.** Punktplot viser andre laboratorier, tildelt verdi, z-soner og eget resultat; slider oppdaterer z-skår og vurdering. |
 | Sertifisert referansemateriale | P1 | ✅ **Implementert i PR #27.** Interaktiv sertifikatanatomi fremhever sertifisert verdi, måleusikkerhet, metrologisk sporbarhet og betingelser. |
 | Standardmetode | P2 | ✅ **Implementert i PR #27.** Grafisk flyt viser publisert standard → lokal verifisering → autorisert rutine. |
-| Avviksbehandling | P2 | ✅ **Implementert i PR #27.** Interaktiv flyt skiller ren korreksjon fra årsaksanalyse, korrigerende tiltak og effektkontroll. |
+| Avviksbehandling | P2 | ✅ **Implementert i PR #27.** Flyten viser avvik → vurdering av påvirket arbeid/resultater → korreksjon og, ved behov, årsak/korrigerende tiltak → etterfølgende effektkontroll. |
 | Intern kvalitetskontroll | P0 | ✅ **Implementert i PR #27.** Feilmodus–kontroll-matrise viser hvilke interne kontrolltyper som er mest direkte informative ved drift, kontaminering og økt variasjon. |
-| Revisjonsspor | P1 | ✅ **Implementert i PR #27.** Versjonstidslinje bevarer tidligere verdier og aktør/status mens slider legger til dokumenterte endringer. |
+| Revisjonsspor | P1 | ✅ **Implementert i PR #27.** Versjonstidslinjen bevarer verdi, status, aktør, tidspunkt og begrunnelse for hver dokumenterte endring. |
 
 ## Enheter og referansemateriale
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| SI-enheter | P1 | Vis baseenhetene som byggesteiner som kombineres til én avledet enhet. Eksempelvis kan Pa bygges visuelt fra `kg\,m^{-1}\,s^{-2}`. |
-| Molmasse | P0 | Tre koblede størrelser `m`, `n` og `M`. Slider for stoffmengde eller masse oppdaterer den tredje og en enkel «mengde stoff ↔ masse»-visualisering. |
-| Molaritet / stoffmengdekonsentrasjon | P0 | Beholder med volum og stoffmengde. Slider for sluttvolum eller stoffmengde endrer konsentrasjonen visuelt og i `c=n/V`. |
-| Masseprosent | P0 | To komponenter i en blanding som stablet søyle. Slider for analyttmasse eller løsemiddelmasse viser at nevneren er total masse. |
-| ppm | P1 | Bruk en skala som zoomer fra 1 av 100 til 1 av 10 000 til 1 av 1 000 000, og koble dette til `10^{-6}`. Unngå å tegne en million prikker. |
+| SI-enheter | P1 | ✅ **Implementert i PR #28.** Baseenhetene vises som byggesteiner; valg av Pa, J eller C fremhever hvilke baseenheter som inngår og viser uttrykket med MathJax. |
+| Molmasse | P0 | ✅ **Implementert i PR #28.** Stoffmengdeslider oppdaterer masse ved fast molmasse, med koblet balanse-/mengdevisualisering og MathJax-avlesninger. |
+| Molaritet / stoffmengdekonsentrasjon | P0 | ✅ **Implementert i PR #28.** Sluttvolumslider endrer væskevolum og konsentrasjon ved fast stoffmengde; 12 separate soluttsymboler bevares gjennom hele området. |
+| Masseprosent | P0 | ✅ **Implementert i PR #28.** Dynamisk stablet blandingssøyle og analyttslider viser at nevneren er total masse, med oppdatert masseprosent. |
+| ppm | P1 | ✅ **Implementert i PR #28.** Tre grafiske zoomnivåer går fra 1 av 100 via 1 av 10 000 til 1 av 1 000 000 og kobles eksplisitt til `10^{-6}`. |
 
 ## Feilkilder
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Grov feil | P1 | Vis samme datasett med ett ekstremt punkt. Toggle mellom «ukjent årsak» og «dokumentert forbytting/feilregistrering» viser hvorfor et avvikende punkt først blir grov feil når hendelsen faktisk er identifisert. |
+| Grov feil | P1 | ✅ **Implementert i PR #28.** Samme ekstreme datapunkt beholdes mens årsaken toggles mellom ukjent og dokumentert prøveforbytting, slik at skillet mellom uteligger og grov feil blir synlig. |
 
 ---
 
-## Foreslått implementeringsrekkefølge senere
+## Status etter visualiseringsrunden
 
-Når demoene faktisk skal bygges, bør de tas som noen få sammenhengende familier i stedet for 105 enkeltstående småoppgaver:
+Den planlagte visualiseringsrunden er gjennomført på tvers av statistikk, kvalitet i måling, kalibrering, prøvematriks, separasjon, deteksjon, prøvetaking/opparbeiding, kvalitetssikring, enheter og feilkilder.
 
-1. **Statistikk + kvalitet i måling**: punktskyer, fordelinger, intervaller og kontrollkort kan dele mye visualiseringslogikk.
-2. **Kalibrering + prøvematriks**: kurver, residualer, arbeidsområde, respons og matriseeffekt.
-3. **Separasjon + deteksjon**: kromatogrammer, topper, spektra og instrumentflyt.
-4. **Prøvetaking/opparbeiding + enheter**: beholdere, partikler, volum og mengdeforhold.
-5. **Kvalitetssikring og øvrige prosessbegreper**: hovedsakelig statiske, men tydeligere visuelle forklaringer.
+Noen demoer er bevisst beholdt uten ny interaksjon fordi de allerede kommuniserer mekanismen visuelt, eller fordi begrepet er så terminologisk/prosessuelt at ekstra grafikk ville risikert å gjøre forklaringen mer misvisende enn pedagogisk.
 
-Målet bør ikke være «interaktivitet overalt». Målet er at brukeren, der det er faglig mulig, kan endre én relevant årsak og **se virkningen** uten å måtte lese seg til den.
+Målet er fortsatt ikke «interaktivitet overalt». Målet er at brukeren, der det er faglig mulig, kan endre én relevant årsak og **se virkningen** uten å måtte lese seg til den.
