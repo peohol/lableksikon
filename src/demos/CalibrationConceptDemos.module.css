@@ -350,3 +350,10 @@
 .sampleSeriesPoint {
   fill: var(--color-text-tertiary);
 }
+
+
+.guideLine {
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+}
