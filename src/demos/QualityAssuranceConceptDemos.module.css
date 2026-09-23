@@ -165,7 +165,7 @@
 }
 
 .statusOn {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
 }
 
 .statusOff {
@@ -231,6 +231,25 @@
   .controlRowActive {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+
+  .auditTimeline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    overflow: visible;
+    width: 100%;
+    padding-inline: 0;
+  }
+
+  .auditVersion {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .auditVersion:not(:last-child)::after {
+    display: none;
   }
 }
 
