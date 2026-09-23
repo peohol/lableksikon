@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
+import { MathFormula } from "@/components/MathFormula";
 import { Chip, ChipGroup, Readout, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./ErrorSourceConceptDemos.module.css";
@@ -42,8 +43,8 @@ export function GrovfeilDemo() {
           </Chip>
         </ChipGroup>
         <div className={shared.row}>
-          <Readout label="Ekstremt resultat" value="135" size="small" />
-          <Readout label="Resten av serien" value="omtrent 100" size="small" />
+          <Readout label="Ekstremt resultat" value={<MathFormula tex="135" />} size="small" />
+          <Readout label="Resten av serien" value={<MathFormula tex="\\approx 100" />} size="small" />
         </div>
         <Verdict tone={cause === "documented" ? "warning" : "normal"} reserve={3.2}>
           {cause === "unknown"
