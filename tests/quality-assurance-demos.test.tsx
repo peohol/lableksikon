@@ -36,6 +36,13 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
     await user.click(choice);
     expect(choice).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByText(/kan derfor ikke uten videre brukes som påstand/)).toBeInTheDocument();
+    const scopeList = screen.getByRole("list", {
+      name: "Aktiviteter og akkrediteringsomfang i illustrasjonen",
+    });
+    expect(within(scopeList).getByText("Analyse A · matriks X")).toBeInTheDocument();
+    const research = within(scopeList).getByText("FoU-aktivitet").parentElement;
+    expect(research).not.toBeNull();
+    expect(within(research as HTMLElement).getByText("utenfor omfanget")).toBeInTheDocument();
   });
 
   it("ringtest: resultat 108 gir z = 4", () => {
@@ -77,15 +84,18 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
     ).toBeInTheDocument();
   });
 
-  it("avviksbehandling: årsaksrettet spor inkluderer effektkontroll", async () => {
+  it("avviksbehandling: påvirket arbeid vurderes før sekvensiell årsaksrettet oppfølging", async () => {
     const user = userEvent.setup();
     render(<AvviksbehandlingDemo />);
+    expect(screen.getByText(/Påvirket arbeid og rapporterte resultater vurderes/)).toBeInTheDocument();
     const choice = screen.getByRole("button", {
-      name: "Årsak + tiltak + effektkontroll",
+      name: "Full årsaksrettet oppfølging",
     });
     await user.click(choice);
     expect(choice).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByText(/kontroll av om tiltaket faktisk virker/)).toBeInTheDocument();
+    expect(
+      screen.getByText(/årsak, korrigerende tiltak og deretter kontroll av om tiltaket faktisk virker/),
+    ).toBeInTheDocument();
   });
 
   it("internkontroll: blank er direkte relevant i kontamineringsscenarioet", async () => {
