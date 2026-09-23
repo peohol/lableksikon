@@ -1,1 +1,183 @@
-.rows{display:grid;gap:10px}.row{display:grid;grid-template-columns:minmax(9rem,.45fr) minmax(0,1fr);gap:12px;align-items:baseline;padding:10px 12px;border:1px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface)}.label{font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--color-text-primary)}.value{min-width:0;overflow-wrap:anywhere;font-family:var(--font-reading);color:var(--color-text-body)}.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:10px}.flow li{display:flex;gap:9px;align-items:flex-start;min-width:0;padding:12px;border:1px solid var(--color-border);border-radius:var(--radius-sm);font-family:var(--font-ui);font-size:14px;line-height:1.4;overflow-wrap:anywhere}.flow li>span{flex:0 0 22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--color-accent);color:var(--color-ink-invert);font-size:11px;font-weight:600}@media(max-width:520px){.row{grid-template-columns:1fr}}
+.richCell,
+.leanCell,
+.sampleContainer,
+.extractionVessel,
+.flaskOutline,
+.sourceVessel,
+.filtrateVessel,
+.digestionVessel {
+  stroke-width: 2;
+}
+
+.leanCell {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border);
+}
+
+.richCell {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+}
+
+.sampleOutline {
+  fill: none;
+  stroke: var(--color-warning);
+  stroke-width: 3;
+  stroke-dasharray: 7 4;
+}
+
+.sampleContainer,
+.flaskOutline,
+.sourceVessel,
+.filtrateVessel,
+.digestionVessel,
+.extractionVessel {
+  fill: none;
+  stroke: var(--color-border-strong);
+}
+
+.sampleParticle,
+.richParticle,
+.analyteDot,
+.analyteExtracted,
+.analyteRemaining,
+.analyteBound,
+.largeParticle,
+.retainedParticle,
+.solidChunk,
+.dissolvedIon {
+  stroke: var(--color-surface);
+  stroke-width: 1.5;
+}
+
+.sampleParticle {
+  fill: var(--color-accent);
+}
+
+.richParticle {
+  fill: var(--color-warning);
+}
+
+.arrow {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 8 5;
+}
+
+.stageLabels {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr;
+  gap: 16px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.barChart {
+  min-height: 180px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 24px;
+  padding: 18px 24px 0;
+  border-bottom: 2px solid var(--color-border-strong);
+}
+
+.barColumn {
+  min-width: 46px;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.sampleBar {
+  width: 38px;
+  min-height: 24px;
+  border-radius: 7px 7px 0 0;
+  background: var(--color-accent);
+  transition: height 180ms ease-out;
+}
+
+.organicPhase {
+  fill: var(--color-accent-soft);
+  opacity: 0.72;
+}
+
+.matrixPhase,
+.solutionFill,
+.digestSolution {
+  fill: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+}
+
+.phaseBoundary {
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.analyteExtracted,
+.analyteDot,
+.dissolvedIon {
+  fill: var(--color-accent);
+}
+
+.analyteRemaining,
+.analyteBound {
+  fill: var(--color-warning);
+}
+
+.solutionFill {
+  transition:
+    y 180ms ease-out,
+    height 180ms ease-out;
+}
+
+.aliquotBlock {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  transition: width 180ms ease-out;
+}
+
+.largeParticle,
+.retainedParticle,
+.solidChunk {
+  fill: var(--color-text-tertiary);
+}
+
+.filterMembrane {
+  fill: var(--color-border-strong);
+}
+
+.digestSolution {
+  opacity: 0.85;
+}
+
+.dissolvedIon {
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sampleBar,
+  .solutionFill,
+  .aliquotBlock {
+    transition: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .stageLabels {
+    font-size: 11px;
+  }
+
+  .barChart {
+    gap: 12px;
+    padding-inline: 10px;
+  }
+}
