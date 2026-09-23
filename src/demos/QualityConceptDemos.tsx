@@ -667,9 +667,9 @@ export function SporbarhetDemo() {
       afterword="Hvert ledd har egen usikkerhet og dokumentasjon. Bidragene må kombineres etter målemodellen; de skal ikke bare summeres som vanlige tall."
     >
       <div className={shared.stack}>
-        <div className={styles.traceChain} aria-label="Metrologisk sporbarhetskjede">
+        <div className={styles.traceChain} role="list" aria-label="Metrologisk sporbarhetskjede">
           {steps.map((step, index) => (
-            <div key={step.label} className={index === selectedStep ? styles.traceNodeActive : styles.traceNode}>
+            <div key={step.label} className={index === selectedStep ? styles.traceNodeActive : styles.traceNode} role="listitem">
               <strong>{step.label}</strong>
               <MathFormula tex={step.uncertainty} />
               {index < steps.length - 1 ? <span className={styles.traceArrow} aria-hidden="true">→</span> : null}
@@ -684,7 +684,7 @@ export function SporbarhetDemo() {
               pressed={selectedStep === index}
               onClick={() => setSelectedStep(index)}
             >
-              {index + 1}
+              {step.label}
             </Chip>
           ))}
         </ChipGroup>
