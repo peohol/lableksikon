@@ -596,7 +596,15 @@ export function KontrollproveDemo() {
   const accepted = secondControl >= lower && secondControl <= upper;
   const x = (index: number) => 55 + index * 52;
   const y = (value: number) => 205 - ((value - 94) / 12) * 160;
-  const sampleValues = [99.4, 100.8, 101.1, 99.7, 100.3, 99.9, 100.6, 100.2];
+  const sampleValues = [
+    { index: 0, value: 99.4 },
+    { index: 1, value: 100.8 },
+    { index: 3, value: 99.7 },
+    { index: 4, value: 100.3 },
+    { index: 5, value: 99.9 },
+    { index: 6, value: 100.6 },
+    { index: 8, value: 100.2 },
+  ];
 
   return (
     <DemonstrationFrame
@@ -610,8 +618,8 @@ export function KontrollproveDemo() {
           <rect x="45" y={y(upper)} width="440" height={y(lower) - y(upper)} className={styles.controlBand} />
           <line x1="45" y1={y(lower)} x2="485" y2={y(lower)} className={styles.guideLine} />
           <line x1="45" y1={y(upper)} x2="485" y2={y(upper)} className={styles.guideLine} />
-          {sampleValues.map((value, index) => (
-            <circle key={index} cx={x(index)} cy={y(value)} r="5" className={styles.sampleSeriesPoint} />
+          {sampleValues.map((sample) => (
+            <circle key={sample.index} cx={x(sample.index)} cy={y(sample.value)} r="5" className={styles.sampleSeriesPoint} />
           ))}
           <circle cx={x(2)} cy={y(firstControl)} r="9" className={styles.controlPoint} />
           <circle cx={x(7)} cy={y(secondControl)} r="9" className={accepted ? styles.controlPoint : styles.controlPointWarning} />
