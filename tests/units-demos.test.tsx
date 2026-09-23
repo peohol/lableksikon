@@ -62,6 +62,27 @@ describe("grafiske enhetsdemonstrasjoner", () => {
     expect(mathTex(container)).toContain("c = n/V = 0{,}100\\,\\mathrm{mol/L}");
   });
 
+  it("molaritet: fast stoffmengde beholder 12 synlige, separate partikler ved ulike volum", () => {
+    const { container } = render(<MolaritetDemo />);
+    const slider = screen.getByRole("slider", {
+      name: "Sluttvolum for stoffmengdekonsentrasjon",
+    });
+    const assertDistinctDots = () => {
+      const dots = Array.from(
+        container.querySelectorAll('[data-testid="molarity-solute-dots"] circle'),
+      );
+      expect(dots).toHaveLength(12);
+      const positions = new Set(
+        dots.map((dot) => dot.getAttribute("cx") + "," + dot.getAttribute("cy")),
+      );
+      expect(positions.size).toBe(12);
+    };
+    fireEvent.change(slider, { target: { value: "0.25" } });
+    assertDistinctDots();
+    fireEvent.change(slider, { target: { value: "1.05" } });
+    assertDistinctDots();
+  });
+
   it("masseprosent: nevneren følger totalmassen", () => {
     const { container } = render(<MasseprosentDemo />);
     const slider = screen.getByRole("slider", {
