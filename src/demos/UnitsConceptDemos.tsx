@@ -140,15 +140,21 @@ export function MolaritetDemo() {
         <svg viewBox="0 0 520 280" className={shared.svg} aria-hidden="true">
           <path d="M185 35 L335 35 L315 235 L205 235 Z" className={styles.beakerOutline} />
           <rect x="210" y={232 - liquidHeight} width="100" height={liquidHeight} rx="8" className={styles.solution} />
-          {Array.from({ length: 12 }, (_, index) => (
-            <circle
-              key={index}
-              cx={223 + (index % 4) * 24}
-              cy={220 - (index % Math.max(1, Math.floor(liquidHeight / 28))) * 24}
-              r="5"
-              className={styles.soluteDot}
-            />
-          ))}
+          <g data-testid="molarity-solute-dots">
+            {Array.from({ length: 12 }, (_, index) => {
+              const row = Math.floor(index / 4);
+              const liquidTop = 232 - liquidHeight;
+              return (
+                <circle
+                  key={index}
+                  cx={223 + (index % 4) * 24}
+                  cy={liquidTop + ((row + 1) / 4) * liquidHeight}
+                  r="5"
+                  className={styles.soluteDot}
+                />
+              );
+            })}
+          </g>
         </svg>
         <div className={shared.row}>
           <Readout label="Stoffmengde" value={<MathFormula tex={"n = 0{,}100\\,\\mathrm{mol}"} />} size="small" />
