@@ -1,0 +1,160 @@
+.baseGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.baseTile,
+.baseTileActive {
+  min-height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+  transition:
+    background 160ms ease-out,
+    border-color 160ms ease-out,
+    transform 160ms ease-out;
+}
+
+.baseTileActive {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.compositionArrow {
+  text-align: center;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--color-text-secondary);
+}
+
+.balanceBeam {
+  fill: var(--color-border-strong);
+}
+
+.molePan,
+.massPan {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.amountDot {
+  fill: var(--color-accent);
+}
+
+.massBlock {
+  fill: var(--color-warning);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+  transition:
+    y 180ms ease-out,
+    height 180ms ease-out;
+}
+
+.beakerOutline {
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 2.5;
+}
+
+.solution {
+  fill: var(--color-accent-soft);
+  transition:
+    y 180ms ease-out,
+    height 180ms ease-out;
+}
+
+.soluteDot {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 1.5;
+}
+
+.compositionBar {
+  display: flex;
+  height: 72px;
+  overflow: hidden;
+  border: 2px solid var(--color-border-strong);
+  border-radius: 14px;
+  background: var(--color-surface-muted);
+}
+
+.analyteSegment,
+.solventSegment {
+  transition: width 180ms ease-out;
+}
+
+.analyteSegment {
+  min-width: 3px;
+  background: var(--color-warning);
+}
+
+.solventSegment {
+  background: var(--color-accent-soft);
+}
+
+.zoomLadder {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.zoomLevel {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  font-family: var(--font-ui);
+  color: var(--color-text-secondary);
+}
+
+.miniGrid {
+  width: min(100%, 150px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface-muted);
+}
+
+.zoomCell,
+.zoomCellActive {
+  border-radius: 1px;
+}
+
+.zoomCell {
+  background: var(--color-border);
+}
+
+.zoomCellActive {
+  background: var(--color-warning);
+  outline: 2px solid var(--color-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .baseTile,
+  .baseTileActive,
+  .massBlock,
+  .solution,
+  .analyteSegment,
+  .solventSegment {
+    transition: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .baseGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .zoomLadder {
+    grid-template-columns: 1fr;
+  }
+}
