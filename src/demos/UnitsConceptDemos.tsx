@@ -50,9 +50,11 @@ export function SiSystemDemo() {
           {bases.map((base) => (
             <div
               key={base}
+              role="group"
+              aria-label={base + (selected.active.some((active) => active === base) ? " brukes i valgt avledet enhet" : " brukes ikke i valgt avledet enhet")}
               className={selected.active.some((active) => active === base) ? styles.baseTileActive : styles.baseTile}
             >
-              <MathFormula tex={"\\mathrm{" + base + "}"} label={base} />
+              <MathFormula tex={"\\mathrm{" + base + "}"} />
             </div>
           ))}
         </div>
