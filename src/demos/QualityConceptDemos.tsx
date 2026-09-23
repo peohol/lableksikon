@@ -6,7 +6,7 @@ import { DemonstrationFrame } from "@/components/DemonstrationFrame";
 import { MathFormula } from "@/components/MathFormula";
 import { comma, mean, relativeStandardDeviation, sampleStandardDeviation } from "@/lib/statistics";
 import { PointRows } from "./PointRows";
-import { Readout, Slider, Verdict } from "./primitives";
+import { Chip, ChipGroup, Readout, Slider, Verdict } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./QualityConceptDemos.module.css";
 
@@ -635,40 +635,120 @@ export function RobusthetDemo() {
 }
 
 export function SporbarhetDemo() {
+  const [selectedStep, setSelectedStep] = useState(0);
+  const steps = [
+    {
+      label: "Prøveresultat",
+      uncertainty: "u_1 = 0{,}40",
+      detail: "Resultatet er koblet til kalibreringen som ble brukt i den konkrete målingen.",
+    },
+    {
+      label: "Arbeidsstandard",
+      uncertainty: "u_2 = 0{,}25",
+      detail: "Arbeidsstandarden er selv kalibrert mot en høyere referanse i kjeden.",
+    },
+    {
+      label: "Referansestandard",
+      uncertainty: "u_3 = 0{,}15",
+      detail: "Referansestandarden gir neste dokumenterte kobling mot den definerte referansen.",
+    },
+    {
+      label: "Definert referanse",
+      uncertainty: "u_4 = 0{,}10",
+      detail: "Kjeden ender i en angitt metrologisk referanse, for eksempel en SI-realisering der det er relevant.",
+    },
+  ] as const;
+
   return (
     <DemonstrationFrame
-      kind="stegvis"
-      instruction="Følg den dokumenterte kjeden bak resultatet."
-      label="Metrologisk sporbarhetskjede"
-      afterword="Hvert ledd bidrar med måleusikkerhet; en ubrutt kjede gjør ikke i seg selv resultatet feilfritt eller egnet til formålet."
+      kind="interaktiv"
+      instruction="Velg et ledd i kjeden og se hvordan resultatet kobles bakover til referansen."
+      label="Metrologisk sporbarhet som dokumentert kalibreringskjede"
+      afterword="Hvert ledd har egen usikkerhet og dokumentasjon. Bidragene må kombineres etter målemodellen; de skal ikke bare summeres som vanlige tall."
     >
-      <Flow items={["Prøveresultat", "Kalibreringsstandard", "Referansemateriale / referanse", "Definert referanse eller SI-enhet"]} />
+      <div className={shared.stack}>
+        <div className={styles.traceChain} aria-label="Metrologisk sporbarhetskjede">
+          {steps.map((step, index) => (
+            <div key={step.label} className={index === selectedStep ? styles.traceNodeActive : styles.traceNode}>
+              <strong>{step.label}</strong>
+              <MathFormula tex={step.uncertainty} />
+              {index < steps.length - 1 ? <span className={styles.traceArrow} aria-hidden="true">→</span> : null}
+            </div>
+          ))}
+        </div>
+        <ChipGroup label="Ledd i sporbarhetskjeden">
+          {steps.map((step, index) => (
+            <Chip
+              key={step.label}
+              variant="choice"
+              pressed={selectedStep === index}
+              onClick={() => setSelectedStep(index)}
+            >
+              {index + 1}
+            </Chip>
+          ))}
+        </ChipGroup>
+        <Readout label={steps[selectedStep]!.label} value={steps[selectedStep]!.detail} size="small" />
+      </div>
     </DemonstrationFrame>
   );
 }
 
 export function ValideringDemo() {
+  const steps = [
+    { label: "Tiltenkt bruk", detail: "Hva skal metoden brukes til?" },
+    { label: "Ytelseskrav", detail: "Hva må den klare for denne bruken?" },
+    { label: "Evidens", detail: "Studier dokumenterer relevante egenskaper." },
+    { label: "Konklusjon", detail: "Er metoden egnet til formålet?" },
+  ];
+
   return (
     <DemonstrationFrame
-      kind="stegvis"
-      instruction="Start med bruken metoden skal ha — ikke med testene."
-      label="Validering fra tiltenkt bruk til dokumentert egnethet"
-      afterword="Validering er formålsstyrt: kravene må både være passende for bruken og dokumentert oppfylt."
+      kind="illustrasjon"
+      instruction="Les flyten fra formål til dokumentert konklusjon."
+      label="Validering starter med tiltenkt bruk, ikke med en løs testliste"
+      afterword="Validering er formålsstyrt: både kravene og evidensen må være relevante for det metoden faktisk skal brukes til."
     >
-      <Flow items={["Definer tiltenkt bruk", "Sett relevante ytelseskrav", "Samle objektiv evidens", "Konkluder om metoden er egnet"]} />
+      <div className={styles.validationFlow} role="img" aria-label="Valideringsflyt fra tiltenkt bruk via ytelseskrav og evidens til konklusjon">
+        {steps.map((step, index) => (
+          <div key={step.label} className={styles.validationStep}>
+            <span className={styles.validationNumber}>{index + 1}</span>
+            <strong>{step.label}</strong>
+            <small>{step.detail}</small>
+            {index < steps.length - 1 ? <span className={styles.validationArrow} aria-hidden="true">→</span> : null}
+          </div>
+        ))}
+      </div>
     </DemonstrationFrame>
   );
 }
 
 export function VerifiseringDemo() {
+  const checks = [
+    { requirement: "Presisjon", result: "Lokalt resultat oppfyller kravet", ok: true },
+    { requirement: "Skjevhet", result: "Lokalt resultat oppfyller kravet", ok: true },
+    { requirement: "Arbeidsområde", result: "Øvre nivå faller utenfor kravet", ok: false },
+  ];
+
   return (
     <DemonstrationFrame
-      kind="stegvis"
-      instruction="Kontroller at spesifiserte krav faktisk oppfylles i den aktuelle situasjonen."
-      label="Verifisering av spesifiserte krav"
-      afterword="Verifisering spør om krav er oppfylt; validering spør i tillegg om kravene er riktige for den tiltenkte bruken."
+      kind="illustrasjon"
+      instruction="Sammenlign spesifiserte krav med lokale resultater rad for rad."
+      label="Verifisering viser om gitte krav faktisk oppfylles lokalt"
+      afterword="Verifisering vurderer oppfyllelse av spesifiserte krav. Den fastsetter ikke i seg selv om kravene er de riktige for en ny tiltenkt bruk."
     >
-      <Flow items={["Spesifiserte krav", "Lokal gjennomføring og data", "Sammenlign med krav", "Dokumenter oppfylt / ikke oppfylt"]} />
+      <div className={styles.verificationRows} aria-label="Lokale resultater sammenlignet med spesifiserte krav">
+        {checks.map((check) => (
+          <div key={check.requirement} className={styles.verificationRow}>
+            <strong>{check.requirement}</strong>
+            <span className={styles.verificationConnector} aria-hidden="true">→</span>
+            <span>{check.result}</span>
+            <span className={check.ok ? styles.verificationPass : styles.verificationFail}>
+              {check.ok ? "oppfylt" : "ikke oppfylt"}
+            </span>
+          </div>
+        ))}
+      </div>
     </DemonstrationFrame>
   );
 }
