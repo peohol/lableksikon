@@ -5,7 +5,7 @@ import { useState } from "react";
 import { DemonstrationFrame } from "@/components/DemonstrationFrame";
 import { MathFormula } from "@/components/MathFormula";
 import { comma } from "@/lib/statistics";
-import { Chip, ChipGroup, Readout, Slider, Verdict } from "./primitives";
+import { Chip, ChipGroup, Readout, Slider } from "./primitives";
 import shared from "./demos.module.css";
 import styles from "./UnitsConceptDemos.module.css";
 
