@@ -341,13 +341,13 @@ export function KontamineringDemo() {
       afterword="Mønsteret er pedagogisk og forutsetter at blankene faktisk følger de viste delene av arbeidsflyten. Reelle kontamineringskilder må undersøkes mot den konkrete prosedyren."
     >
       <div className={shared.stack}>
-        <div className={styles.contaminationFlow} aria-label="Arbeidsflyt med valgt kontamineringskilde">
+        <div className={styles.contaminationFlow} role="list" aria-label="Arbeidsflyt med valgt kontamineringskilde">
           {[
             { key: "sample", label: "Prøve før laboratoriet" },
             { key: "reagent", label: "Reagens" },
             { key: "prep", label: "Opparbeiding" },
           ].map((step, index) => (
-            <div key={step.key} className={source === step.key ? styles.contaminationNodeActive : styles.contaminationNode}>
+            <div key={step.key} className={source === step.key ? styles.contaminationNodeActive : styles.contaminationNode} role="listitem">
               <strong>{step.label}</strong>
               {source === step.key ? <span>kontamineringskilde</span> : <span>ingen valgt kilde</span>}
               {index < 2 ? <span className={styles.contaminationArrow} aria-hidden="true">→</span> : null}
