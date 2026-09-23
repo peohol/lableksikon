@@ -307,3 +307,46 @@
     font-size: 11px;
   }
 }
+
+
+.modelFamilyLine {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 2.5;
+  stroke-dasharray: 7 5;
+  opacity: 0.8;
+}
+
+.calibratorPoint,
+.controlPoint,
+.controlPointWarning,
+.samplePointWarning,
+.sampleSeriesPoint {
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.calibratorPoint,
+.controlPoint {
+  fill: var(--color-accent);
+}
+
+.samplePointWarning,
+.controlPointWarning {
+  fill: var(--color-warning);
+}
+
+.sampleProjection {
+  stroke: var(--color-warning);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+
+.controlBand {
+  fill: var(--color-accent-soft);
+  opacity: 0.55;
+}
+
+.sampleSeriesPoint {
+  fill: var(--color-text-tertiary);
+}
