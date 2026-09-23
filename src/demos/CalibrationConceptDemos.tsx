@@ -672,8 +672,8 @@ export function EksternKalibreringDemo() {
         <div className={shared.row}>
           <Readout label="Sant nivå i illustrasjonen" value={<MathFormula tex="x_{\mathrm{true}} = 60" />} size="small" />
           <Readout label="Prøverespons" value={<MathFormula tex={"y_s = " + texNumber(response, 1)} />} size="small" />
-          <Readout label="Estimert med ekstern kurve" value={<MathFormula tex={"\hat{x} = " + texNumber(estimate, 1)} />} size="small" tone={matrixResponse === 100 ? "normal" : "warning"} />
-          <Readout label="Relativ skjevhet" value={<MathFormula tex={texNumber(relativeBias, 1) + "\,\%"} />} size="small" tone={matrixResponse === 100 ? "normal" : "warning"} />
+          <Readout label="Estimert med ekstern kurve" value={<MathFormula tex={"\\hat{x} = " + texNumber(estimate, 1)} />} size="small" tone={matrixResponse === 100 ? "normal" : "warning"} />
+          <Readout label="Relativ skjevhet" value={<MathFormula tex={texNumber(relativeBias, 1) + "\\,\\%"} />} size="small" tone={matrixResponse === 100 ? "normal" : "warning"} />
         </div>
         <Verdict tone={matrixResponse === 100 ? "normal" : "warning"} reserve={3}>
           {matrixResponse === 100
