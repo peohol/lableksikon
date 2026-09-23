@@ -724,9 +724,9 @@ export function VerifiseringDemo() {
       label="Verifisering viser om gitte krav faktisk oppfylles lokalt"
       afterword="Verifisering vurderer oppfyllelse av spesifiserte krav. Den fastsetter ikke i seg selv om kravene er de riktige for en ny tiltenkt bruk."
     >
-      <div className={styles.verificationRows} aria-label="Lokale resultater sammenlignet med spesifiserte krav">
+      <div className={styles.verificationRows} role="list" aria-label="Lokale resultater sammenlignet med spesifiserte krav">
         {checks.map((check) => (
-          <div key={check.requirement} className={styles.verificationRow}>
+          <div key={check.requirement} className={styles.verificationRow} role="listitem">
             <strong>{check.requirement}</strong>
             <span className={styles.verificationConnector} aria-hidden="true">→</span>
             <span>{check.result}</span>
