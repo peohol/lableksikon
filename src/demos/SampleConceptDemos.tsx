@@ -338,9 +338,60 @@ export function BakgrunnssignalDemo() {
 }
 
 export function KontamineringDemo() {
+  const [source, setSource] = useState<"sample" | "reagent" | "prep">("reagent");
+  const affected = {
+    sample: { reagent: false, method: false, sample: true },
+    reagent: { reagent: true, method: true, sample: true },
+    prep: { reagent: false, method: true, sample: true },
+  } as const;
+  const current = affected[source];
+
   return (
-    <DemonstrationFrame kind="stegvis" instruction="Følg mulige steder uønsket materiale kan komme inn i prøven." label="Mulige kilder til kontaminering" afterword="Blanktyper og arbeidsflyt brukes til å lokalisere hvor et uventet bidrag kommer inn.">
-      <Flow items={["Reagens eller beholder", "Prøveopparbeiding", "Instrument eller miljø", "Uventet signal i prøve eller blank"]} />
+    <DemonstrationFrame
+      kind="interaktiv"
+      instruction="Flytt kontamineringskilden og se hvilke kontrollmaterialer som får med seg det uønskede bidraget."
+      label="Blankmønsteret kan hjelpe med å lokalisere hvor kontaminering oppstår"
+      afterword="Mønsteret er pedagogisk og forutsetter at blankene faktisk følger de viste delene av arbeidsflyten. Reelle kontamineringskilder må undersøkes mot den konkrete prosedyren."
+    >
+      <div className={shared.stack}>
+        <div className={styles.contaminationFlow} aria-label="Arbeidsflyt med valgt kontamineringskilde">
+          {[
+            { key: "sample", label: "Prøve før laboratoriet" },
+            { key: "reagent", label: "Reagens" },
+            { key: "prep", label: "Opparbeiding" },
+          ].map((step, index) => (
+            <div key={step.key} className={source === step.key ? styles.contaminationNodeActive : styles.contaminationNode}>
+              <strong>{step.label}</strong>
+              {source === step.key ? <span>kontamineringskilde</span> : <span>ingen valgt kilde</span>}
+              {index < 2 ? <span className={styles.contaminationArrow} aria-hidden="true">→</span> : null}
+            </div>
+          ))}
+        </div>
+        <ChipGroup label="Hvor oppstår kontamineringen?">
+          <Chip variant="choice" pressed={source === "sample"} onClick={() => setSource("sample")}>Før laboratoriet</Chip>
+          <Chip variant="choice" pressed={source === "reagent"} onClick={() => setSource("reagent")}>I reagens</Chip>
+          <Chip variant="choice" pressed={source === "prep"} onClick={() => setSource("prep")}>Under opparbeiding</Chip>
+        </ChipGroup>
+        <div className={styles.contaminationMatrix} role="list" aria-label="Hvilke materialer som viser kontamineringssignalet">
+          {[
+            { label: "Reagensblank", hit: current.reagent },
+            { label: "Metodeblank", hit: current.method },
+            { label: "Prøve", hit: current.sample },
+          ].map((row) => (
+            <div key={row.label} className={row.hit ? styles.contaminationRowActive : styles.contaminationRow} role="listitem">
+              <span>{row.label}</span>
+              <strong>{row.hit ? "signal" : "ingen bidrag"}</strong>
+            </div>
+          ))}
+        </div>
+        <Verdict reserve={3}>
+          {source === "sample"
+            ? "Bare prøven bærer bidraget i denne modellen; blankene peker derfor ikke mot laboratoriets reagens eller opparbeiding."
+            : source === "reagent"
+              ? "Reagensblank, metodeblank og prøve påvirkes. Det peker mot en kilde som følger med allerede fra reagensleddet."
+              : "Metodeblank og prøve påvirkes, mens reagensblanken er ren. Det peker mot en kilde som kommer inn under opparbeidingen."}
+        </Verdict>
+      </div>
     </DemonstrationFrame>
   );
 }
@@ -439,11 +490,42 @@ export function KrysskontamineringDemo() {
 }
 
 export function MatriksblankDemo() {
+  const traces = [
+    {
+      label: "Løsemiddelblank",
+      path: "M35 112 C80 110 120 114 165 112 C205 110 250 113 295 112",
+      note: "Ingen matrikstopp i illustrasjonen",
+    },
+    {
+      label: "Matriksblank",
+      path: "M35 112 C80 111 105 111 125 110 C145 108 150 55 170 52 C190 55 195 108 215 110 C245 112 270 112 295 112",
+      note: "Matriksrelatert topp",
+    },
+    {
+      label: "Prøve",
+      path: "M35 112 C80 111 105 111 125 110 C145 108 150 55 170 52 C190 55 195 108 215 110 C230 108 238 40 255 36 C272 40 280 108 295 112",
+      note: "Matriks + analytt",
+    },
+  ];
+
   return (
-    <DemonstrationFrame kind="sammenligning" instruction="Sammenlign hva en løsemiddelblank og en matriksblank kan avsløre." label="Matriksblank fanger bidrag som ikke finnes i ren løsning" afterword="En matriksblank inkluderer prøvens øvrige komponenter og kan derfor avdekke bakgrunn eller interferens som en løsemiddelblank overser.">
-      <div className={styles.columns}>
-        <div><span className={styles.cardTitle}>Løsemiddelblank</span><p className={shared.note}>Fanger bidrag fra løsemiddel og instrument.</p></div>
-        <div><span className={styles.cardTitle}>Matriksblank</span><p className={shared.note}>Fanger i tillegg relevante matriksbidrag.</p></div>
+    <DemonstrationFrame
+      kind="illustrasjon"
+      instruction="Sammenlign de tre signalsporene og se hvilket bidrag som følger selve matrisen."
+      label="Matriksblank skiller matriksbidrag fra analyttbidrag"
+      afterword="En matriksblank inneholder relevante matrikskomponenter, men ingen eller så lite som mulig av analytten. Derfor kan den vise bakgrunn eller interferens som ikke finnes i en ren løsemiddelblank."
+    >
+      <div className={styles.blankSignalGrid}>
+        {traces.map((trace) => (
+          <div key={trace.label} className={styles.blankSignalCard}>
+            <strong>{trace.label}</strong>
+            <svg viewBox="0 0 330 140" className={styles.blankSignalSvg} aria-hidden="true">
+              <line x1="30" y1="112" x2="300" y2="112" className={styles.signalAxis} />
+              <path d={trace.path} className={styles.blankSignalTrace} />
+            </svg>
+            <span>{trace.note}</span>
+          </div>
+        ))}
       </div>
     </DemonstrationFrame>
   );
