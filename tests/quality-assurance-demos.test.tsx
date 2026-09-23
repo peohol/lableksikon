@@ -127,6 +127,8 @@ describe("grafiske kvalitetssikringsdemonstrasjoner", () => {
     expect(within(history).getByText("v4")).toBeInTheDocument();
     expect(within(history).getByText("Analytiker A · 09:14")).toBeInTheDocument();
     expect(within(history).getByText("Fagansvarlig · 10:21")).toBeInTheDocument();
+    expect(within(history).getByText("Begrunnelse: Feil desimalføring rettet")).toBeInTheDocument();
+    expect(within(history).getByText("Begrunnelse: Faglig gjennomgang fullført")).toBeInTheDocument();
     expect(screen.getAllByText("12,8").length).toBeGreaterThan(0);
   });
 });
