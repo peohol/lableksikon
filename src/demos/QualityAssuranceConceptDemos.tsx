@@ -266,10 +266,10 @@ export function InternkontrollDemo() {
 export function RevisjonssporDemo() {
   const [changes, setChanges] = useState(2);
   const versions = [
-    { version: "v1", value: "12,4", actor: "Original" },
-    { version: "v2", value: "12,9", actor: "Korrigert" },
-    { version: "v3", value: "12,7", actor: "Revidert" },
-    { version: "v4", value: "12,8", actor: "Godkjent" },
+    { version: "v1", value: "12,4", status: "Original", actor: "Analytiker A", time: "09:14" },
+    { version: "v2", value: "12,9", status: "Korrigert", actor: "Analytiker A", time: "09:32" },
+    { version: "v3", value: "12,7", status: "Revidert", actor: "Analytiker B", time: "10:06" },
+    { version: "v4", value: "12,8", status: "Godkjent", actor: "Fagansvarlig", time: "10:21" },
   ];
 
   return (
@@ -286,7 +286,8 @@ export function RevisjonssporDemo() {
               <span className={styles.auditDot}>{index + 1}</span>
               <strong>{item.version}</strong>
               <span>{item.value}</span>
-              <small>{item.actor}</small>
+              <small>{item.status}</small>
+              <small>{item.actor} · {item.time}</small>
             </div>
           ))}
         </div>
