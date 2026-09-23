@@ -709,9 +709,9 @@ export function ValideringDemo() {
       label="Validering starter med tiltenkt bruk, ikke med en løs testliste"
       afterword="Validering er formålsstyrt: både kravene og evidensen må være relevante for det metoden faktisk skal brukes til."
     >
-      <div className={styles.validationFlow} role="img" aria-label="Valideringsflyt fra tiltenkt bruk via ytelseskrav og evidens til konklusjon">
+      <div className={styles.validationFlow} role="list" aria-label="Valideringsflyt fra tiltenkt bruk via ytelseskrav og evidens til konklusjon">
         {steps.map((step, index) => (
-          <div key={step.label} className={styles.validationStep}>
+          <div key={step.label} className={styles.validationStep} role="listitem">
             <span className={styles.validationNumber}>{index + 1}</span>
             <strong>{step.label}</strong>
             <small>{step.detail}</small>
