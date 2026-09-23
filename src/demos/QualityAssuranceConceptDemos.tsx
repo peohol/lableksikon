@@ -290,10 +290,10 @@ export function InternkontrollDemo() {
 export function RevisjonssporDemo() {
   const [changes, setChanges] = useState(2);
   const versions = [
-    { version: "v1", value: "12,4", status: "Original", actor: "Analytiker A", time: "09:14" },
-    { version: "v2", value: "12,9", status: "Korrigert", actor: "Analytiker A", time: "09:32" },
-    { version: "v3", value: "12,7", status: "Revidert", actor: "Analytiker B", time: "10:06" },
-    { version: "v4", value: "12,8", status: "Godkjent", actor: "Fagansvarlig", time: "10:21" },
+    { version: "v1", value: "12,4", status: "Original", actor: "Analytiker A", time: "09:14", reason: "Første registrering" },
+    { version: "v2", value: "12,9", status: "Korrigert", actor: "Analytiker A", time: "09:32", reason: "Feil desimalføring rettet" },
+    { version: "v3", value: "12,7", status: "Revidert", actor: "Analytiker B", time: "10:06", reason: "Ny integrering etter kontroll" },
+    { version: "v4", value: "12,8", status: "Godkjent", actor: "Fagansvarlig", time: "10:21", reason: "Faglig gjennomgang fullført" },
   ];
 
   return (
@@ -312,6 +312,7 @@ export function RevisjonssporDemo() {
               <span>{item.value}</span>
               <small>{item.status}</small>
               <small>{item.actor} · {item.time}</small>
+              <small>Begrunnelse: {item.reason}</small>
             </div>
           ))}
         </div>
