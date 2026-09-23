@@ -32,6 +32,8 @@ describe("grafiske enhetsdemonstrasjoner", () => {
     await user.click(choice);
     expect(choice).toHaveAttribute("aria-pressed", "true");
     expect(mathTex(container)).toContain("\\mathrm{C} = \\mathrm{A}\\,\\mathrm{s}");
+    expect(screen.getByRole("group", { name: "A brukes i valgt avledet enhet" })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "kg brukes ikke i valgt avledet enhet" })).toBeInTheDocument();
   });
 
   it("molmasse: 0,50 mol ved 40 g/mol gir 20 g", () => {
