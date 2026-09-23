@@ -163,13 +163,13 @@ Alle matematiske uttrykk skal skrives som TeX og rendres med **MathJax**.
 
 | Begrep | Prioritet | Forslag |
 |---|---|---|
-| Akkreditering | P1 | Vis laboratoriets aktiviteter som et «kart» der bare noen felt ligger innenfor akkrediteringsomfanget. Det gjør omfangsbegrepet mer konkret enn en prosessliste. |
-| Ringtest / kompetanseprøving | P0 | Punktplot med resultater fra mange laboratorier rundt assigned value. Marker eget laboratorium; valg/slider for eget resultat viser z-score/avvik og hvor det ligger i gruppen. |
-| Sertifisert referansemateriale | P1 | Tegn et sertifikat med callouts til sertifisert verdi, usikkerhet, sporbarhet og gyldighetsbetingelser. Dette er bedre som visuell dokumentanatomi enn som tabell. |
-| Standardmetode | P2 | Prosessbegrep. En tydelig «publisert metode → lokal verifisering → autorisert bruk»-flyt er tilstrekkelig. |
-| Avviksbehandling | P2 | Prosessbegrep. Dagens flyt kan forbedres visuelt med tydelig skille mellom korreksjon og korrigerende tiltak, men trenger ikke interaksjon. |
-| Intern kvalitetskontroll | P0 | Samle kontrollmateriale, blank og duplikat i en liten prøveserie; vis hvordan de avdekker ulike feil. Kontrollkortet kan reagere på valgt feilkilde. |
-| Revisjonsspor | P1 | Vis en tidslinje for én verdi med versjoner, hvem, når og begrunnelse. Klikk på et trinn kan vise før/etter uten å gjøre dette til en ren tekstliste. |
+| Akkreditering | P1 | ✅ **Implementert i PR #27.** Aktivitetskart viser hvilke laboratorieaktiviteter som ligger innenfor og utenfor et definert akkrediteringsomfang. |
+| Ringtest / kompetanseprøving | P0 | ✅ **Implementert i PR #27.** Punktplot viser andre laboratorier, tildelt verdi, z-soner og eget resultat; slider oppdaterer z-skår og vurdering. |
+| Sertifisert referansemateriale | P1 | ✅ **Implementert i PR #27.** Interaktiv sertifikatanatomi fremhever sertifisert verdi, måleusikkerhet, metrologisk sporbarhet og betingelser. |
+| Standardmetode | P2 | ✅ **Implementert i PR #27.** Grafisk flyt viser publisert standard → lokal verifisering → autorisert rutine. |
+| Avviksbehandling | P2 | ✅ **Implementert i PR #27.** Interaktiv flyt skiller ren korreksjon fra årsaksanalyse, korrigerende tiltak og effektkontroll. |
+| Intern kvalitetskontroll | P0 | ✅ **Implementert i PR #27.** Feilmodus–kontroll-matrise viser hvilke interne kontrolltyper som er mest direkte informative ved drift, kontaminering og økt variasjon. |
+| Revisjonsspor | P1 | ✅ **Implementert i PR #27.** Versjonstidslinje bevarer tidligere verdier og aktør/status mens slider legger til dokumenterte endringer. |
 
 ## Enheter og referansemateriale
 
