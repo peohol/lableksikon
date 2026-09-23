@@ -60,6 +60,10 @@ describe("gjenværende grafiske demonstrasjoner", () => {
 
   it("verifisering: lokale resultater viser både oppfylt og ikke oppfylt", () => {
     render(<VerifiseringDemo />);
+    const checks = screen.getByRole("list", {
+      name: "Lokale resultater sammenlignet med spesifiserte krav",
+    });
+    expect(within(checks).getAllByRole("listitem")).toHaveLength(3);
     expect(screen.getAllByText("oppfylt")).toHaveLength(2);
     expect(screen.getByText("ikke oppfylt")).toBeInTheDocument();
     expect(screen.getByText(/Øvre nivå faller utenfor kravet/)).toBeInTheDocument();
@@ -115,6 +119,8 @@ describe("gjenværende grafiske demonstrasjoner", () => {
     const user = userEvent.setup();
     render(<KontamineringDemo />);
     await user.click(screen.getByRole("button", { name: "Under opparbeiding" }));
+    const flow = screen.getByRole("list", { name: "Arbeidsflyt med valgt kontamineringskilde" });
+    expect(within(flow).getAllByRole("listitem")).toHaveLength(3);
     const matrix = screen.getByRole("list", {
       name: "Hvilke materialer som viser kontamineringssignalet",
     });
