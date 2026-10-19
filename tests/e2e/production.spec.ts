@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 
-const EXPECTED_PUBLIC_URLS = 117;
+const EXPECTED_PUBLIC_URLS = 118;
 
 async function columnCount(page: Page, selector: string) {
   return page.locator(selector).evaluate((node) => {
@@ -20,6 +20,7 @@ test.describe("produksjonskontrakt", () => {
 
     expect(locations).toHaveLength(EXPECTED_PUBLIC_URLS);
     expect(locations.some((url) => new URL(url).pathname === "/a-aa")).toBe(true);
+    expect(locations.some((url) => new URL(url).pathname === "/kom-i-gang")).toBe(true);
     expect(locations.some((url) => new URL(url).pathname === "/kategori/feilkilder")).toBe(true);
     expect(locations.some((url) => new URL(url).pathname === "/begrep/grovfeil")).toBe(true);
     expect(new Set(locations).size).toBe(locations.length);
@@ -37,6 +38,7 @@ test.describe("produksjonskontrakt", () => {
       ["/", "Lableksion — begrepene i analytisk kjemi, forklart"],
       ["/kategori/kvalitet", "Kvalitet i måling — Lableksion"],
       ["/a-aa", "Alle begreper A–Å — Lableksion"],
+      ["/kom-i-gang", "Lag din første nettapp — Lableksion"],
     ] as const;
 
     for (const [path, title] of pages) {
