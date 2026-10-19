@@ -41,6 +41,17 @@ export default function HomePage() {
           </div>
         </HomeSearch>
       </Suspense>
+      <section className={styles.guideRow} aria-labelledby="guide-title">
+        <p className={styles.guideLabel}>NYBEGYNNERGUIDE</p>
+        <h2 id="guide-title" className={styles.guideTitle}>Vil du lage din egen nettapp?</h2>
+        <p className={styles.guideText}>
+          En enkel veiledning fra idé til fungerende nettside med GitHub,
+          Vercel og Claude Code eller Codex. Du trenger ikke kunne programmere.
+        </p>
+        <Link href="/kom-i-gang" className={`text-link ${styles.guideLink}`}>
+          Slik kommer du i gang →
+        </Link>
+      </section>
     </div>
   );
 }
