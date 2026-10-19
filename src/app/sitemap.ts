@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: baseUrl, priority: 1 },
     { url: `${baseUrl}/a-aa`, priority: 0.6 },
+    { url: `${baseUrl}/kom-i-gang`, priority: 0.5 },
     ...publishedCategories.map((category) => ({
       url: `${baseUrl}/kategori/${category.slug}`,
       priority: 0.7,
