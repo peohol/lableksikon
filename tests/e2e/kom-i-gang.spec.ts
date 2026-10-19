@@ -18,7 +18,7 @@ test.describe("Nybegynnerguide for nettapp", () => {
     );
     await expect(page.getByRole("link", { name: /Offisiell veiledning for Codex Cloud/ })).toHaveAttribute(
       "href",
-      "https://developers.openai.com/codex/environments/cloud-environments",
+      "https://learn.chatgpt.com/docs/environments/cloud-environments",
     );
   });
 
