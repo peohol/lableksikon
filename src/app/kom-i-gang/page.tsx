@@ -281,7 +281,9 @@ export default function GettingStartedPage() {
               </li>
               <li>
                 Åpne <ExternalLink href="https://claude.ai/code">claude.ai/code</ExternalLink>.
-                Velg <strong>Sign in with GitHub</strong> når du blir bedt om det, og godkjenn
+                Hvis startsiden foreslår å laste ned et program, velg
+                <strong> Continue on web</strong> nederst på skjermen. Velg deretter
+                <strong> Sign in with GitHub</strong> når du blir bedt om det, og godkjenn
                 tilkoblingen.
               </li>
               <li>
@@ -338,7 +340,7 @@ export default function GettingStartedPage() {
                 ikke det samme som at nettstedet er oppdatert.
               </li>
             </ol>
-            <ExternalLink href="https://developers.openai.com/codex/environments/cloud-environments">
+            <ExternalLink href="https://learn.chatgpt.com/docs/environments/cloud-environments">
               Offisiell veiledning for Codex Cloud
             </ExternalLink>
           </article>
@@ -411,10 +413,11 @@ export default function GettingStartedPage() {
           <details>
             <summary>Jeg finner ikke repoet mitt i Vercel eller språkmodellen.</summary>
             <p>
-              Kontroller at du er logget inn på riktig GitHub-konto. Gå gjennom
-              tilgangstillatelsene du ga til tjenesten. For private repoer kan Claude Code
-              kreve at <strong>Claude GitHub App</strong> installeres med tilgang til akkurat
-              dette repoet. Vercel må også ha tilgang til repoet.
+              Kontroller at du er logget inn på riktig GitHub-konto, og at den har
+              tilgang til repoet. Claude Code i nettleseren kan arbeide med både åpne og
+              private repoer du har tilgang til. En ekstra GitHub-app for Claude er valgfri
+              for automatisk oppfølging av endringsforslag, ikke nødvendig for å starte en
+              vanlig skyøkt. Vercel trenger sin egen tilgang til repoet.
             </p>
           </details>
           <details>
@@ -462,7 +465,7 @@ export default function GettingStartedPage() {
           <li><ExternalLink href="https://vercel.com/docs/git">Vercel: koble GitHub-repo til et prosjekt</ExternalLink></li>
           <li><ExternalLink href="https://vercel.com/docs/builds/configure-a-build">Vercel: publisere en enkel HTML-side</ExternalLink></li>
           <li><ExternalLink href="https://code.claude.com/docs/en/web-quickstart">Anthropic: Claude Code i skyen</ExternalLink></li>
-          <li><ExternalLink href="https://developers.openai.com/codex/environments/cloud-environments">OpenAI: Codex Cloud og arbeidsmiljøer</ExternalLink></li>
+          <li><ExternalLink href="https://learn.chatgpt.com/docs/environments/cloud-environments">OpenAI: Codex Cloud og arbeidsmiljøer</ExternalLink></li>
           <li><ExternalLink href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">OpenAI: hvem kan bruke Codex Cloud</ExternalLink></li>
         </ul>
         <Link href="/" className={styles.homeLink}>← Tilbake til Lableksion</Link>
